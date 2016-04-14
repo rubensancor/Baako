@@ -1,4 +1,4 @@
-package baako.authserver.remote;
+package baako.authServer.remote;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -12,13 +12,12 @@ public class AuthServer extends UnicastRemoteObject implements IAuthServer{
 
 
 	private static final long serialVersionUID = 7355838780317203327L;
-	public HashMap<String, String> users = new HashMap<>();
+	public HashMap<String, String> users = new HashMap<String, String>();
 
 	public AuthServer() throws RemoteException{
 		super();
 	}
 
-	@Override
 	public boolean checkUserInfo(String username, String password) throws RemoteException {
 		if(users.get(username)==null || users.get(password)==null){
 			System.out.println("Error in the login");
@@ -35,7 +34,6 @@ public class AuthServer extends UnicastRemoteObject implements IAuthServer{
 		}
 	}
 
-	@Override
 	public boolean register(String username, String password) throws RemoteException {
 		if(!users.containsValue(username)){
 			users.put(username, password);
