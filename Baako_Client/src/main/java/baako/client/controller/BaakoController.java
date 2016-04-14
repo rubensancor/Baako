@@ -8,6 +8,4 @@ package baako.client.controller;
  *
  */
 public class BaakoController {
-
-	p
 }

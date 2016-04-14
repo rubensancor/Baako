@@ -1,6 +1,8 @@
-package baako.authserver.main;
+package baako.authServer;
 
 import java.rmi.Naming;
+
+import baako.authServer.remote.AuthServer;
 
 
 public class Main {
@@ -13,7 +15,7 @@ public class Main {
 		String serverName = "//"+args[0]+":"+args[1]+"/"+args[2];
 		
 		try{
-			baako.authserver.remote.AuthServer a = new AuthServer();
+			AuthServer a = new AuthServer();
 			Naming.rebind(serverName, a);
 			a.register("Gaizka","1234");
 			a.register("ruben","asdf");			

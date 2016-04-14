@@ -1,4 +1,4 @@
-package baako.authserver.remote;
+package baako.authServer.remote;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

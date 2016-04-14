@@ -3,7 +3,6 @@
  */
 package baako.client.remote;
 
-import tralala.remote.interf.ITralalaManager;
 
 /**
  * @author gusy
