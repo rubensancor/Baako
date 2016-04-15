@@ -7,11 +7,11 @@ import javax.jdo.annotations.Join;
 //@PersistenceCapable(detachable="true")
 public abstract class User {
 
-//	@PrimaryKey
-	private int userId;
 
+//	@PrimaryKey
+	private String username;
+	
 	private String email;
-	private String name;
 	private Date birthdate;
 	private String password;
 
@@ -23,19 +23,13 @@ public abstract class User {
 
 	}
 
-	public User(int userId, String email, String name, Date birthdate){
+	public User(String email, String name, String password,  Date birthdate){
 		super();
 		this.email = email;
-		this.name = name;
+		this.username = name;
+		this.password = password;
 		this.birthdate = birthdate;
 		
-	}
-
-	/**
-	 * @return the userId
-	 */
-	public int getUserId() {
-		return userId;
 	}
 
 	/**
@@ -49,7 +43,7 @@ public abstract class User {
 	 * @return the name
 	 */
 	public String getName() {
-		return name;
+		return username;
 	}
 
 	/**

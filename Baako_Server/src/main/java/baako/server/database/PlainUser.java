@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.jdo.annotations.Join;
+
 /**
  * @author gusy
  *
@@ -16,13 +18,13 @@ public class PlainUser extends User {
 	@Join
 	private Set<PlainUser> friends;
 	
-	/* (non-Javadoc)
-	 * @see baako.server.database.User#getUserId()
+	
+	 /**
+	 * 
 	 */
-	@Override
-	public int getUserId() {
-		// TODO Auto-generated method stub
-		return super.getUserId();
+	public PlainUser(String email, String name, String password,  Date birthdate) {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/* (non-Javadoc)
@@ -123,4 +125,9 @@ public class PlainUser extends User {
 		return friends;
 	}
 
+	public boolean buyGame(Game game){
+		//Code for buying a game
+		System.out.println(game+" purchased");
+		return true;
+	}
 }
