@@ -24,7 +24,6 @@ public class PlainUserAssambler {
 	}
 	
 	/*
-	 * 
 	 * 	private String email;
 	private String name;
 	private Date birthdate;
