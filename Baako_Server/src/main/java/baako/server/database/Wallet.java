@@ -12,20 +12,12 @@ import javax.jdo.annotations.PrimaryKey;
  */
 public class Wallet {
 	@PrimaryKey
-	private int walletId;
-	
 	private int cardNumb;
+	
 	private CardType type;
 	
 	@Element(column="USER_ID")
 	private User user;
-
-	/**
-	 * @return the walletId
-	 */
-	public int getWalletId() {
-		return walletId;
-	}
 
 	/**
 	 * @return the cardNumb

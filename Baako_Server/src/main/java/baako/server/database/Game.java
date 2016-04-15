@@ -13,9 +13,9 @@ import javax.jdo.annotations.PrimaryKey;
 public class Game {
 
 	@PrimaryKey
-	private int gameId;
-	
 	private String name;
+	
+	
 	private float price;
 	private String description;
 	private int PEGI;
@@ -34,10 +34,9 @@ public class Game {
 	List<Designer> designers;
 	
 	/**
-	 * @return the gameId
+	 * 
 	 */
-	public int getGameId() {
-		return gameId;
+	public Game(String name, float price, String description, int PEGI) {
 	}
 	/**
 	 * @return the name

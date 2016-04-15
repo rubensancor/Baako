@@ -12,14 +12,6 @@ import java.util.List;
  */
 public class AdminUser extends User {
 
-	/* (non-Javadoc)
-	 * @see baako.server.database.User#getUserId()
-	 */
-	@Override
-	public int getUserId() {
-		// TODO Auto-generated method stub
-		return super.getUserId();
-	}
 
 	/* (non-Javadoc)
 	 * @see baako.server.database.User#getEmail()

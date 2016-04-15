@@ -9,18 +9,10 @@ import javax.jdo.annotations.PrimaryKey;
 public class Designer {
 	
 	@PrimaryKey
-	private int designerId;
-	
 	private String name;
 
 	@Persistent(mappedBy="designers")
 	List<Game> games;
-	/**
-	 * @return the designerId
-	 */
-	public int getDesignerId() {
-		return designerId;
-	}
 
 	/**
 	 * @return the name

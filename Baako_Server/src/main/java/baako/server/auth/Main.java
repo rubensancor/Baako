@@ -1,8 +1,7 @@
-package baako.authServer;
+package baako.server.auth;
 
 import java.rmi.Naming;
 
-import baako.authServer.remote.AuthServer;
 
 
 public class Main {

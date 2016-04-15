@@ -8,20 +8,12 @@ import javax.jdo.annotations.PrimaryKey;
 @PersistenceCapable
 public class Category {
 
-	@PrimaryKey
-	private int categoryId;
 	
+	@PrimaryKey
 	private String name;
 	
 	@Persistent(mappedBy="categories")
 	List<Game> games;
-
-	/**
-	 * @return the categoryId
-	 */
-	public int getCategoryId() {
-		return categoryId;
-	}
 
 	/**
 	 * @return the name
