@@ -17,7 +17,6 @@ public class Game {
 	
 	private String name;
 	private float price;
-	private String genre;
 	private String description;
 	private int PEGI;
 	
@@ -28,6 +27,11 @@ public class Game {
 	@Join(column="gameId")
 	@Element(column="gameId")
 	List<Category> categories;
+	
+	@Persistent(table= "GAME_DESIGNERS")
+	@Join(column="gameId")
+	@Element(column="gameId")
+	List<Designer> designers;
 	
 	/**
 	 * @return the gameId
@@ -48,16 +52,34 @@ public class Game {
 		return price;
 	}
 	/**
-	 * @return the genre
-	 */
-	public String getGenre() {
-		return genre;
-	}
-	/**
 	 * @return the description
 	 */
 	public String getDescription() {
 		return description;
+	}
+	/**
+	 * @return the pEGI
+	 */
+	public int getPEGI() {
+		return PEGI;
+	}
+	/**
+	 * @return the users
+	 */
+	public List<User> getUsers() {
+		return users;
+	}
+	/**
+	 * @return the categories
+	 */
+	public List<Category> getCategories() {
+		return categories;
+	}
+	/**
+	 * @return the designers
+	 */
+	public List<Designer> getDesigners() {
+		return designers;
 	}
 	
 	
