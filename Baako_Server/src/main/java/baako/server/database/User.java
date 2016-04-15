@@ -1,6 +1,8 @@
 package baako.server.database;
 
 import java.util.Date;
+import java.util.List;
+import javax.jdo.annotations.Join;
 
 //@PersistenceCapable(detachable="true")
 public class User {
@@ -12,8 +14,10 @@ public class User {
 	private String email;
 	private String name;
 	private Date birthdate;
-	private UserType type;
+	private UserType type;    //admin or plain user
 
+	@Join
+	private List<Game> games;
 
 
 	public User(){
