@@ -9792,3 +9792,889 @@ org.datanucleus.store.rdbms.exceptions.DuplicateColumnException: Duplicate colum
 12:37:27,893 (main) DEBUG [DataNucleus.Connection] - Closing Connection Pool tx
 12:37:27,893 (main) DEBUG [DataNucleus.Connection] - Closing Connection Pool nontx
 12:37:27,894 (main) DEBUG [DataNucleus.Persistence] - Unmanaging Persistence of all classes
+18:42:55,062 (main) DEBUG [DataNucleus.General] - Using PluginRegistry org.datanucleus.plugin.NonManagedPluginRegistry
+18:42:55,106 (main) DEBUG [DataNucleus.General] - Registering bundle org.sonatype.inject version 2.3.0 at URL file:/home/gusy/.m2/repository/org/sonatype/sisu/sisu-inject-bean/2.3.0/sisu-inject-bean-2.3.0.jar.
+18:42:55,138 (main) DEBUG [DataNucleus.General] - Loading extension points from plug-in file jar:file:/home/gusy/.m2/repository/org/sonatype/sisu/sisu-inject-bean/2.3.0/sisu-inject-bean-2.3.0.jar!/plugin.xml.
+18:42:55,141 (main) DEBUG [DataNucleus.General] - Loading extensions from plug-in file jar:file:/home/gusy/.m2/repository/org/sonatype/sisu/sisu-inject-bean/2.3.0/sisu-inject-bean-2.3.0.jar!/plugin.xml.
+18:42:55,146 (main) DEBUG [DataNucleus.General] - Registering bundle org.datanucleus version 4.1.10 at URL file:/home/gusy/.m2/repository/org/datanucleus/datanucleus-core/4.1.10/datanucleus-core-4.1.10.jar.
+18:42:55,172 (main) DEBUG [DataNucleus.General] - Loading extension points from plug-in file jar:file:/home/gusy/.m2/repository/org/datanucleus/datanucleus-core/4.1.10/datanucleus-core-4.1.10.jar!/plugin.xml.
+18:42:55,207 (main) DEBUG [DataNucleus.General] - Loading extensions from plug-in file jar:file:/home/gusy/.m2/repository/org/datanucleus/datanucleus-core/4.1.10/datanucleus-core-4.1.10.jar!/plugin.xml.
+18:42:55,218 (main) DEBUG [DataNucleus.General] - Registering bundle org.datanucleus.api.jdo version 4.1.1 at URL file:/home/gusy/.m2/repository/org/datanucleus/datanucleus-api-jdo/4.1.1/datanucleus-api-jdo-4.1.1.jar.
+18:42:55,225 (main) DEBUG [DataNucleus.General] - Loading extension points from plug-in file jar:file:/home/gusy/.m2/repository/org/datanucleus/datanucleus-api-jdo/4.1.1/datanucleus-api-jdo-4.1.1.jar!/plugin.xml.
+18:42:55,228 (main) DEBUG [DataNucleus.General] - Loading extensions from plug-in file jar:file:/home/gusy/.m2/repository/org/datanucleus/datanucleus-api-jdo/4.1.1/datanucleus-api-jdo-4.1.1.jar!/plugin.xml.
+18:42:55,235 (main) DEBUG [DataNucleus.General] - Registering bundle org.datanucleus.store.rdbms version 4.1.12 at URL file:/home/gusy/.m2/repository/org/datanucleus/datanucleus-rdbms/4.1.12/datanucleus-rdbms-4.1.12.jar.
+18:42:55,268 (main) DEBUG [DataNucleus.General] - Loading extension points from plug-in file jar:file:/home/gusy/.m2/repository/org/datanucleus/datanucleus-rdbms/4.1.12/datanucleus-rdbms-4.1.12.jar!/plugin.xml.
+18:42:55,293 (main) DEBUG [DataNucleus.General] - Loading extensions from plug-in file jar:file:/home/gusy/.m2/repository/org/datanucleus/datanucleus-rdbms/4.1.12/datanucleus-rdbms-4.1.12.jar!/plugin.xml.
+18:42:55,353 (main) DEBUG [DataNucleus.Persistence] - Java types support initialising ...
+18:42:55,447 (main) DEBUG [DataNucleus.Persistence] - Java types support loaded : supported java types=[B, [C, [D, [F, [I, [J, [Ljava.lang.Boolean;, [Ljava.lang.Byte;, [Ljava.lang.Character;, [Ljava.lang.Double;, [Ljava.lang.Enum;, [Ljava.lang.Float;, [Ljava.lang.Integer;, [Ljava.lang.Long;, [Ljava.lang.Number;, [Ljava.lang.Short;, [Ljava.lang.String;, [Ljava.math.BigDecimal;, [Ljava.math.BigInteger;, [Ljava.util.Date;, [Ljava.util.Locale;, [S, [Z, boolean, byte, char, double, float, int, java.awt.Color, java.awt.image.BufferedImage, java.lang.Boolean, java.lang.Byte, java.lang.Character, java.lang.Class, java.lang.Double, java.lang.Enum, java.lang.Float, java.lang.Integer, java.lang.Long, java.lang.Number, java.lang.Short, java.lang.String, java.lang.StringBuffer, java.lang.StringBuilder, java.math.BigDecimal, java.math.BigInteger, java.net.URI, java.net.URL, java.sql.Date, java.sql.Time, java.sql.Timestamp, java.util.ArrayList, java.util.Arrays$ArrayList, java.util.BitSet, java.util.Calendar, java.util.Collection, java.util.Currency, java.util.Date, java.util.GregorianCalendar, java.util.HashMap, java.util.HashSet, java.util.Hashtable, java.util.LinkedHashMap, java.util.LinkedHashSet, java.util.LinkedList, java.util.List, java.util.Locale, java.util.Map, java.util.PriorityQueue, java.util.Properties, java.util.Queue, java.util.Set, java.util.SortedMap, java.util.SortedSet, java.util.Stack, java.util.TimeZone, java.util.TreeMap, java.util.TreeSet, java.util.UUID, java.util.Vector, long, short
+18:42:55,447 (main) DEBUG [DataNucleus.Persistence] - Type converter support initialising ...
+18:42:55,524 (main) DEBUG [DataNucleus.Persistence] - Type converter support loaded
+18:42:55,524 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for byte[] to : java.nio.ByteBuffer
+18:42:55,525 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for char[] to : java.nio.ByteBuffer
+18:42:55,525 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for double[] to : java.nio.ByteBuffer
+18:42:55,525 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for float[] to : java.nio.ByteBuffer
+18:42:55,525 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for int[] to : java.nio.ByteBuffer
+18:42:55,525 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for long[] to : java.nio.ByteBuffer
+18:42:55,526 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for short[] to : java.nio.ByteBuffer
+18:42:55,526 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for boolean[] to : java.nio.ByteBuffer
+18:42:55,526 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.awt.Color to : int[],java.lang.String
+18:42:55,526 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.io.Serializable to : java.nio.ByteBuffer,byte[],java.lang.String
+18:42:55,526 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.lang.Boolean to : java.lang.Character,java.lang.Integer
+18:42:55,526 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.lang.Character to : java.lang.String
+18:42:55,526 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.lang.Class to : java.lang.String
+18:42:55,527 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.lang.Integer to : java.lang.String
+18:42:55,527 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.lang.Long to : java.lang.String
+18:42:55,527 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.lang.StringBuffer to : java.lang.String
+18:42:55,527 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.lang.StringBuilder to : java.lang.String
+18:42:55,527 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.math.BigDecimal to : java.nio.ByteBuffer,java.lang.Double,java.lang.String
+18:42:55,527 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.math.BigInteger to : java.nio.ByteBuffer,java.lang.Long,java.lang.String
+18:42:55,527 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.net.URI to : java.lang.String
+18:42:55,527 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.net.URL to : java.lang.String
+18:42:55,527 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.sql.Date to : java.util.Date,java.lang.Long,java.lang.String
+18:42:55,528 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.sql.Time to : java.util.Date,java.lang.Long,java.lang.String
+18:42:55,528 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.sql.Timestamp to : java.util.Date,java.lang.Long,java.lang.String
+18:42:55,528 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.util.BitSet to : java.lang.String
+18:42:55,528 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.util.Calendar to : java.util.Date,[Ljava.lang.Object;,java.sql.Timestamp,java.lang.String
+18:42:55,528 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.util.Currency to : java.lang.String
+18:42:55,528 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.util.Date to : java.lang.Long,java.lang.String
+18:42:55,529 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.util.Locale to : java.lang.String
+18:42:55,529 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.util.TimeZone to : java.lang.String
+18:42:55,529 (main) DEBUG [DataNucleus.Persistence] - TypeConverter(s) available for java.util.UUID to : java.lang.String
+18:42:55,532 (main) DEBUG [DataNucleus.MetaData] - MetaDataManager : Input=(XML,Annotations), XML-Validation=false, XML-Suffices=(persistence=*.jdo, orm=orm, query=*.jdoquery), JDO-listener=false
+18:42:55,533 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 4.1.10) for API "JDO"
+18:42:55,534 (main) DEBUG [DataNucleus.Enhancer] - DataNucleus Enhancer : Classpath
+18:42:55,534 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/datanucleus/datanucleus-maven-plugin/4.0.0-release/datanucleus-maven-plugin-4.0.0-release.jar
+18:42:55,534 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.8/plexus-utils-3.0.8.jar
+18:42:55,535 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/apache/maven/maven-artifact/3.0.4/maven-artifact-3.0.4.jar
+18:42:55,535 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/apache/maven/maven-plugin-api/3.0.4/maven-plugin-api-3.0.4.jar
+18:42:55,535 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/apache/maven/maven-model/3.0.4/maven-model-3.0.4.jar
+18:42:55,535 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/sonatype/sisu/sisu-inject-plexus/2.3.0/sisu-inject-plexus-2.3.0.jar
+18:42:55,535 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar
+18:42:55,536 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/sonatype/sisu/sisu-inject-bean/2.3.0/sisu-inject-bean-2.3.0.jar
+18:42:55,536 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/sonatype/sisu/sisu-guice/3.1.0/sisu-guice-3.1.0-no_aop.jar
+18:42:55,536 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/sonatype/sisu/sisu-guava/0.9.9/sisu-guava-0.9.9.jar
+18:42:55,537 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/codehaus/plexus/plexus-container-default/1.5.5/plexus-container-default-1.5.5.jar
+18:42:55,537 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/codehaus/plexus/plexus-classworlds/2.2.2/plexus-classworlds-2.2.2.jar
+18:42:55,537 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/apache/xbean/xbean-reflect/3.4/xbean-reflect-3.4.jar
+18:42:55,537 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/log4j/log4j/1.2.12/log4j-1.2.12.jar
+18:42:55,538 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/commons-logging/commons-logging-api/1.1/commons-logging-api-1.1.jar
+18:42:55,538 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/com/google/collections/google-collections/1.0/google-collections-1.0.jar
+18:42:55,538 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/junit/junit/3.8.2/junit-3.8.2.jar
+18:42:55,539 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/git/Baako/Baako_Server/target/classes
+18:42:55,540 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/datanucleus/datanucleus-core/4.1.10/datanucleus-core-4.1.10.jar
+18:42:55,540 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/datanucleus/datanucleus-api-jdo/4.1.1/datanucleus-api-jdo-4.1.1.jar
+18:42:55,540 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/javax/jdo/jdo-api/3.1/jdo-api-3.1.jar
+18:42:55,540 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/javax/transaction/transaction-api/1.1/transaction-api-1.1.jar
+18:42:55,540 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar
+18:42:55,541 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/org/datanucleus/datanucleus-rdbms/4.1.12/datanucleus-rdbms-4.1.12.jar
+18:42:55,541 (main) DEBUG [DataNucleus.Enhancer] - >>  /home/gusy/.m2/repository/mysql/mysql-connector-java/5.1.17/mysql-connector-java-5.1.17.jar
+18:42:55,541 (main) DEBUG [DataNucleus.Enhancer] - Enhancing classes
+18:42:55,566 (main) DEBUG [DataNucleus.MetaData] - MetaData Management : Loading Metadata for classes "[baako.server.auth.IAuth, baako.server.auth.Main, baako.server.auth.Auth, baako.server.assemblers.PlainUserAssambler, baako.server.assemblers.GameAssembler, baako.server.database.PlainUser, baako.server.database.Wallet, baako.server.database.Designer, baako.server.database.Category, baako.server.database.Game, baako.server.database.User, baako.server.database.CardType, baako.server.database.AdminUser, baako.server.database.Main, baako.server.Server, baako.server.dto.PlainUserDTO, baako.server.dto.GameDTO]" ...
+18:42:55,575 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.auth.IAuth" has no MetaData or annotations.
+18:42:55,576 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Main" NOT found at /META-INF/package.jdo
+18:42:55,577 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Main" NOT found at /WEB-INF/package.jdo
+18:42:55,577 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Main" NOT found at /package.jdo
+18:42:55,578 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Main" NOT found at /baako/package.jdo
+18:42:55,578 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Main" NOT found at /baako.jdo
+18:42:55,578 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Main" NOT found at /baako/server/package.jdo
+18:42:55,579 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Main" NOT found at /baako/server.jdo
+18:42:55,579 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Main" NOT found at /baako/server/auth/package.jdo
+18:42:55,580 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Main" NOT found at /baako/server/auth.jdo
+18:42:55,580 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Main" NOT found at /baako/server/auth/Main.jdo
+18:42:55,580 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Main" not found
+18:42:55,580 (main) DEBUG [DataNucleus.MetaData] - Registering class "baako.server.auth.Main" as not having MetaData.
+18:42:55,581 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.auth.Main" has no MetaData or annotations.
+18:42:55,582 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Auth" NOT found at /META-INF/package.jdo
+18:42:55,583 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Auth" NOT found at /WEB-INF/package.jdo
+18:42:55,583 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Auth" NOT found at /package.jdo
+18:42:55,583 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Auth" NOT found at /baako/package.jdo
+18:42:55,584 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Auth" NOT found at /baako.jdo
+18:42:55,587 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Auth" NOT found at /baako/server/package.jdo
+18:42:55,587 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Auth" NOT found at /baako/server.jdo
+18:42:55,588 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Auth" NOT found at /baako/server/auth/package.jdo
+18:42:55,590 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Auth" NOT found at /baako/server/auth.jdo
+18:42:55,591 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Auth" NOT found at /baako/server/auth/Auth.jdo
+18:42:55,591 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.auth.Auth" not found
+18:42:55,591 (main) DEBUG [DataNucleus.MetaData] - Registering class "baako.server.auth.Auth" as not having MetaData.
+18:42:55,591 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.auth.Auth" has no MetaData or annotations.
+18:42:55,592 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.PlainUserAssambler" NOT found at /META-INF/package.jdo
+18:42:55,593 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.PlainUserAssambler" NOT found at /WEB-INF/package.jdo
+18:42:55,593 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.PlainUserAssambler" NOT found at /package.jdo
+18:42:55,593 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.PlainUserAssambler" NOT found at /baako/package.jdo
+18:42:55,594 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.PlainUserAssambler" NOT found at /baako.jdo
+18:42:55,594 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.PlainUserAssambler" NOT found at /baako/server/package.jdo
+18:42:55,595 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.PlainUserAssambler" NOT found at /baako/server.jdo
+18:42:55,595 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.PlainUserAssambler" NOT found at /baako/server/assemblers/package.jdo
+18:42:55,595 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.PlainUserAssambler" NOT found at /baako/server/assemblers.jdo
+18:42:55,596 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.PlainUserAssambler" NOT found at /baako/server/assemblers/PlainUserAssambler.jdo
+18:42:55,596 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.PlainUserAssambler" not found
+18:42:55,596 (main) DEBUG [DataNucleus.MetaData] - Registering class "baako.server.assemblers.PlainUserAssambler" as not having MetaData.
+18:42:55,596 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.assemblers.PlainUserAssambler" has no MetaData or annotations.
+18:42:55,597 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.GameAssembler" NOT found at /META-INF/package.jdo
+18:42:55,597 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.GameAssembler" NOT found at /WEB-INF/package.jdo
+18:42:55,598 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.GameAssembler" NOT found at /package.jdo
+18:42:55,605 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.GameAssembler" NOT found at /baako/package.jdo
+18:42:55,605 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.GameAssembler" NOT found at /baako.jdo
+18:42:55,606 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.GameAssembler" NOT found at /baako/server/package.jdo
+18:42:55,606 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.GameAssembler" NOT found at /baako/server.jdo
+18:42:55,607 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.GameAssembler" NOT found at /baako/server/assemblers/package.jdo
+18:42:55,607 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.GameAssembler" NOT found at /baako/server/assemblers.jdo
+18:42:55,609 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.GameAssembler" NOT found at /baako/server/assemblers/GameAssembler.jdo
+18:42:55,611 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.assemblers.GameAssembler" not found
+18:42:55,611 (main) DEBUG [DataNucleus.MetaData] - Registering class "baako.server.assemblers.GameAssembler" as not having MetaData.
+18:42:55,611 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.assemblers.GameAssembler" has no MetaData or annotations.
+18:42:55,701 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.PlainUser" has been specified with JDO annotations so using those.
+18:42:55,717 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Wallet" has been specified with JDO annotations so using those.
+18:42:55,728 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Designer" has been specified with JDO annotations so using those.
+18:42:55,736 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Category" has been specified with JDO annotations so using those.
+18:42:55,737 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Game" has been specified with JDO annotations so using those.
+18:42:55,741 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.User" has been specified with JDO annotations so using those.
+18:42:55,742 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.CardType" NOT found at /META-INF/package.jdo
+18:42:55,742 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.CardType" NOT found at /WEB-INF/package.jdo
+18:42:55,743 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.CardType" NOT found at /package.jdo
+18:42:55,743 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.CardType" NOT found at /baako/package.jdo
+18:42:55,743 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.CardType" NOT found at /baako.jdo
+18:42:55,743 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.CardType" NOT found at /baako/server/package.jdo
+18:42:55,744 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.CardType" NOT found at /baako/server.jdo
+18:42:55,744 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.CardType" NOT found at /baako/server/database/package.jdo
+18:42:55,744 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.CardType" NOT found at /baako/server/database.jdo
+18:42:55,744 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.CardType" NOT found at /baako/server/database/CardType.jdo
+18:42:55,744 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.CardType" not found
+18:42:55,744 (main) DEBUG [DataNucleus.MetaData] - Registering class "baako.server.database.CardType" as not having MetaData.
+18:42:55,744 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.CardType" has no MetaData or annotations.
+18:42:55,745 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.AdminUser" has been specified with JDO annotations so using those.
+18:42:55,746 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.Main" NOT found at /META-INF/package.jdo
+18:42:55,746 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.Main" NOT found at /WEB-INF/package.jdo
+18:42:55,746 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.Main" NOT found at /package.jdo
+18:42:55,747 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.Main" NOT found at /baako/package.jdo
+18:42:55,747 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.Main" NOT found at /baako.jdo
+18:42:55,747 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.Main" NOT found at /baako/server/package.jdo
+18:42:55,747 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.Main" NOT found at /baako/server.jdo
+18:42:55,747 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.Main" NOT found at /baako/server/database/package.jdo
+18:42:55,748 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.Main" NOT found at /baako/server/database.jdo
+18:42:55,748 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.Main" NOT found at /baako/server/database/Main.jdo
+18:42:55,748 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.database.Main" not found
+18:42:55,748 (main) DEBUG [DataNucleus.MetaData] - Registering class "baako.server.database.Main" as not having MetaData.
+18:42:55,748 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Main" has no MetaData or annotations.
+18:42:55,749 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.Server" NOT found at /META-INF/package.jdo
+18:42:55,749 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.Server" NOT found at /WEB-INF/package.jdo
+18:42:55,750 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.Server" NOT found at /package.jdo
+18:42:55,750 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.Server" NOT found at /baako/package.jdo
+18:42:55,750 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.Server" NOT found at /baako.jdo
+18:42:55,750 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.Server" NOT found at /baako/server/package.jdo
+18:42:55,750 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.Server" NOT found at /baako/server.jdo
+18:42:55,751 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.Server" NOT found at /baako/server/Server.jdo
+18:42:55,751 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.Server" not found
+18:42:55,751 (main) DEBUG [DataNucleus.MetaData] - Registering class "baako.server.Server" as not having MetaData.
+18:42:55,751 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.Server" has no MetaData or annotations.
+18:42:55,751 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.PlainUserDTO" NOT found at /META-INF/package.jdo
+18:42:55,752 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.PlainUserDTO" NOT found at /WEB-INF/package.jdo
+18:42:55,752 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.PlainUserDTO" NOT found at /package.jdo
+18:42:55,752 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.PlainUserDTO" NOT found at /baako/package.jdo
+18:42:55,752 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.PlainUserDTO" NOT found at /baako.jdo
+18:42:55,752 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.PlainUserDTO" NOT found at /baako/server/package.jdo
+18:42:55,753 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.PlainUserDTO" NOT found at /baako/server.jdo
+18:42:55,753 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.PlainUserDTO" NOT found at /baako/server/dto/package.jdo
+18:42:55,753 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.PlainUserDTO" NOT found at /baako/server/dto.jdo
+18:42:55,753 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.PlainUserDTO" NOT found at /baako/server/dto/PlainUserDTO.jdo
+18:42:55,753 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.PlainUserDTO" not found
+18:42:55,753 (main) DEBUG [DataNucleus.MetaData] - Registering class "baako.server.dto.PlainUserDTO" as not having MetaData.
+18:42:55,753 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.dto.PlainUserDTO" has no MetaData or annotations.
+18:42:55,754 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.GameDTO" NOT found at /META-INF/package.jdo
+18:42:55,754 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.GameDTO" NOT found at /WEB-INF/package.jdo
+18:42:55,754 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.GameDTO" NOT found at /package.jdo
+18:42:55,754 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.GameDTO" NOT found at /baako/package.jdo
+18:42:55,755 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.GameDTO" NOT found at /baako.jdo
+18:42:55,755 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.GameDTO" NOT found at /baako/server/package.jdo
+18:42:55,755 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.GameDTO" NOT found at /baako/server.jdo
+18:42:55,755 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.GameDTO" NOT found at /baako/server/dto/package.jdo
+18:42:55,755 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.GameDTO" NOT found at /baako/server/dto.jdo
+18:42:55,755 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.GameDTO" NOT found at /baako/server/dto/GameDTO.jdo
+18:42:55,756 (main) DEBUG [DataNucleus.MetaData] - MetaData of type "jdo" for class "baako.server.dto.GameDTO" not found
+18:42:55,756 (main) DEBUG [DataNucleus.MetaData] - Registering class "baako.server.dto.GameDTO" as not having MetaData.
+18:42:55,756 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.dto.GameDTO" has no MetaData or annotations.
+18:42:55,756 (main) DEBUG [DataNucleus.MetaData] - Populating all MetaData ...
+18:42:55,757 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.PlainUser" : Populating Meta-Data
+18:42:55,757 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.User" : Populating Meta-Data
+18:42:55,757 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.User" field "email" : Adding Meta-Data for field since it didnt appear in the Meta-Data definition.
+18:42:55,757 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.User" field "birthdate" : Adding Meta-Data for field since it didnt appear in the Meta-Data definition.
+18:42:55,758 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.User" field "password" : Adding Meta-Data for field since it didnt appear in the Meta-Data definition.
+18:42:55,760 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Wallet" : Populating Meta-Data
+18:42:55,760 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Wallet" field "type" : Adding Meta-Data for field since it didnt appear in the Meta-Data definition.
+18:42:55,761 (main) DEBUG [DataNucleus.Persistence] - Java type baako.server.database.CardType using the support for java.lang.Enum
+18:42:55,761 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Designer" : Populating Meta-Data
+18:42:55,761 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Category" : Populating Meta-Data
+18:42:55,762 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Game" : Populating Meta-Data
+18:42:55,762 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Game" field "price" : Adding Meta-Data for field since it didnt appear in the Meta-Data definition.
+18:42:55,762 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Game" field "description" : Adding Meta-Data for field since it didnt appear in the Meta-Data definition.
+18:42:55,762 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Game" field "PEGI" : Adding Meta-Data for field since it didnt appear in the Meta-Data definition.
+18:42:55,763 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.AdminUser" : Populating Meta-Data
+18:42:55,764 (main) DEBUG [DataNucleus.MetaData] - Initialising all MetaData ...
+18:42:55,765 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.User" : Initialising Meta-Data
+18:42:55,767 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.PlainUser" : Initialising Meta-Data
+18:42:55,768 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Wallet" : Initialising Meta-Data
+18:42:55,768 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Designer" : Initialising Meta-Data
+18:42:55,768 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Category" : Initialising Meta-Data
+18:42:55,768 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.Game" : Initialising Meta-Data
+18:42:55,769 (main) DEBUG [DataNucleus.MetaData] - Class "baako.server.database.AdminUser" : Initialising Meta-Data
+18:42:55,769 (main) DEBUG [DataNucleus.MetaData] - MetaData Management : Load of Metadata complete
+18:42:55,772 (main) DEBUG [DataNucleus.Enhancer] - Enhance of class "baako.server.database.PlainUser" starting ...
+18:42:55,781 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt implement the interface "org.datanucleus.enhancement.Persistable" but is required
+18:42:55,781 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt implement the interface "org.datanucleus.enhancement.Detachable" but is required
+18:42:55,781 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have field "dnInheritedFieldCount" but is required
+18:42:55,781 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have field "dnFieldTypes" but is required
+18:42:55,781 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have field "dnFieldNames" but is required
+18:42:55,781 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have field "dnFieldFlags" but is required
+18:42:55,781 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have field "dnPersistableSuperclass" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "dnReplaceField" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "dnNewInstance" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "dnNewInstance" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "dnSuperClone" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "___dn$loadClass" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "dnGetManagedFieldCount" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "dnIsDetached" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "dnCopyField" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "dnMakeDirty" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "dnCopyFields" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "__dnGetInheritedFieldCount" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "__dnPersistableSuperclassInit" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "__dnFieldFlagsInit" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "__dnFieldTypesInit" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "dnProvideField" but is required
+18:42:55,782 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.PlainUser" doesnt have method "__dnFieldNamesInit" but is required
+18:42:55,791 (main) DEBUG [DataNucleus.Enhancer] - Adding interface: org.datanucleus.enhancement.Detachable
+18:42:55,791 (main) DEBUG [DataNucleus.Enhancer] - Adding interface: org.datanucleus.enhancement.Persistable
+18:42:55,796 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.PlainUser.getGames changing field "baako.server.database.PlainUser.games" for call to "dnGetgames()"
+18:42:55,797 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.PlainUser.getFriends changing field "baako.server.database.PlainUser.friends" for call to "dnGetfriends()"
+18:42:55,798 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[B dnFieldFlags"
+18:42:55,798 (main) DEBUG [DataNucleus.Enhancer] - Adding field "java.lang.Class dnPersistableSuperclass"
+18:42:55,798 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.Class; dnFieldTypes"
+18:42:55,798 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.String; dnFieldNames"
+18:42:55,798 (main) DEBUG [DataNucleus.Enhancer] - Adding field "int dnInheritedFieldCount"
+18:42:55,799 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void <clinit>()"
+18:42:55,800 (main) DEBUG [DataNucleus.Enhancer] - Adding constructor "baako.server.database.PlainUser()"
+18:42:55,801 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnMakeDirty(java.lang.String fieldName)"
+18:42:55,802 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDetached()"
+18:42:55,802 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.Persistable dnNewInstance(org.datanucleus.enhancement.StateManager sm)"
+18:42:55,803 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.Persistable dnNewInstance(org.datanucleus.enhancement.StateManager sm, java.lang.Object obj)"
+18:42:55,803 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceField(int index)"
+18:42:55,804 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnProvideField(int index)"
+18:42:55,804 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyField(baako.server.database.PlainUser obj, int index)"
+18:42:55,805 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyFields(java.lang.Object obj, [I indices)"
+18:42:55,805 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[Ljava.lang.String; __dnFieldNamesInit()"
+18:42:55,805 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[Ljava.lang.Class; __dnFieldTypesInit()"
+18:42:55,805 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[B __dnFieldFlagsInit()"
+18:42:55,805 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int __dnGetInheritedFieldCount()"
+18:42:55,805 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int dnGetManagedFieldCount()"
+18:42:55,805 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Class __dnPersistableSuperclassInit()"
+18:42:55,806 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Class ___dn$loadClass(java.lang.String className)"
+18:42:55,807 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnSuperClone()"
+18:42:55,809 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.util.Set dnGetfriends(baako.server.database.PlainUser objPC)"
+18:42:55,809 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetfriends(baako.server.database.PlainUser objPC, java.util.Set val)"
+18:42:55,810 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.util.Set dnGetgames(baako.server.database.PlainUser objPC)"
+18:42:55,810 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetgames(baako.server.database.PlainUser objPC, java.util.Set val)"
+18:42:55,811 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/gusy/git/Baako/Baako_Server/target/classes/baako/server/database/PlainUser.class" with enhanced definition
+18:42:55,811 (main) INFO  [DataNucleus.Enhancer] - ENHANCED (Persistable) : baako.server.database.PlainUser
+18:42:55,812 (main) DEBUG [DataNucleus.Enhancer] - Enhance of class "baako.server.database.PlainUser" completed
+18:42:55,812 (main) DEBUG [DataNucleus.Enhancer] - Enhance of class "baako.server.database.Wallet" starting ...
+18:42:55,824 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt implement the interface "org.datanucleus.enhancement.Persistable" but is required
+18:42:55,824 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt implement the interface "org.datanucleus.enhancement.Detachable" but is required
+18:42:55,824 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have field "dnStateManager" but is required
+18:42:55,824 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have field "dnDetachedState" but is required
+18:42:55,824 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have field "dnInheritedFieldCount" but is required
+18:42:55,824 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have field "dnFlags" but is required
+18:42:55,824 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have field "dnFieldTypes" but is required
+18:42:55,824 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have field "dnFieldNames" but is required
+18:42:55,824 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have field "dnFieldFlags" but is required
+18:42:55,824 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have field "dnPersistableSuperclass" but is required
+18:42:55,830 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnReplaceField" but is required
+18:42:55,830 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnIsTransactional" but is required
+18:42:55,830 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnNewInstance" but is required
+18:42:55,830 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnNewInstance" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnSuperClone" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnProvideFields" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "___dn$loadClass" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnGetManagedFieldCount" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnIsDirty" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnReplaceStateManager" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnReplaceFlags" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnIsDetached" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnMakeDirty" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "__dnPersistableSuperclassInit" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnIsDeleted" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "__dnFieldFlagsInit" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "__dnFieldTypesInit" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnProvideField" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnPreSerialize" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnGetObjectId" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnGetVersion" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnGetTransactionalObjectId" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnIsNew" but is required
+18:42:55,831 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnCopyKeyFieldsToObjectId" but is required
+18:42:55,832 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnCopyKeyFieldsToObjectId" but is required
+18:42:55,832 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnCopyField" but is required
+18:42:55,832 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnCopyKeyFieldsFromObjectId" but is required
+18:42:55,832 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnCopyKeyFieldsFromObjectId" but is required
+18:42:55,832 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnGetExecutionContext" but is required
+18:42:55,832 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnCopyFields" but is required
+18:42:55,832 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "__dnGetInheritedFieldCount" but is required
+18:42:55,832 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnNewObjectIdInstance" but is required
+18:42:55,832 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnNewObjectIdInstance" but is required
+18:42:55,832 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnReplaceDetachedState" but is required
+18:42:55,832 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnIsPersistent" but is required
+18:42:55,832 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "dnReplaceFields" but is required
+18:42:55,832 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Wallet" doesnt have method "__dnFieldNamesInit" but is required
+18:42:55,833 (main) DEBUG [DataNucleus.Enhancer] - Adding interface: org.datanucleus.enhancement.Detachable
+18:42:55,833 (main) DEBUG [DataNucleus.Enhancer] - Adding interface: org.datanucleus.enhancement.Persistable
+18:42:55,833 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.Wallet.getCardNumb changing field "baako.server.database.Wallet.cardNumb" for call to "dnGetcardNumb()"
+18:42:55,833 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.Wallet.getType changing field "baako.server.database.Wallet.type" for call to "dnGettype()"
+18:42:55,834 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.Wallet.getUser changing field "baako.server.database.Wallet.user" for call to "dnGetuser()"
+18:42:55,834 (main) DEBUG [DataNucleus.Enhancer] - Adding field "org.datanucleus.enhancement.StateManager dnStateManager"
+18:42:55,834 (main) DEBUG [DataNucleus.Enhancer] - Adding field "byte dnFlags"
+18:42:55,834 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.Object; dnDetachedState"
+18:42:55,834 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[B dnFieldFlags"
+18:42:55,834 (main) DEBUG [DataNucleus.Enhancer] - Adding field "java.lang.Class dnPersistableSuperclass"
+18:42:55,834 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.Class; dnFieldTypes"
+18:42:55,834 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.String; dnFieldNames"
+18:42:55,834 (main) DEBUG [DataNucleus.Enhancer] - Adding field "int dnInheritedFieldCount"
+18:42:55,835 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void <clinit>()"
+18:42:55,835 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsFromObjectId(org.datanucleus.enhancement.Persistable$ObjectIdFieldConsumer fc, java.lang.Object oid)"
+18:42:55,836 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsFromObjectId(java.lang.Object oid)"
+18:42:55,836 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsToObjectId(java.lang.Object oid)"
+18:42:55,836 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsToObjectId(org.datanucleus.enhancement.Persistable$ObjectIdFieldSupplier fs, java.lang.Object oid)"
+18:42:55,837 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnGetObjectId()"
+18:42:55,837 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnGetVersion()"
+18:42:55,837 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnPreSerialize()"
+18:42:55,838 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.ExecutionContextReference dnGetExecutionContext()"
+18:42:55,838 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnGetTransactionalObjectId()"
+18:42:55,838 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDeleted()"
+18:42:55,839 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDirty()"
+18:42:55,839 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsNew()"
+18:42:55,839 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsPersistent()"
+18:42:55,839 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsTransactional()"
+18:42:55,840 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnMakeDirty(java.lang.String fieldName)"
+18:42:55,840 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnNewObjectIdInstance()"
+18:42:55,840 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnNewObjectIdInstance(java.lang.Object key)"
+18:42:55,841 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnProvideFields([I indices)"
+18:42:55,841 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceFields([I indices)"
+18:42:55,841 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceFlags()"
+18:42:55,842 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceStateManager(org.datanucleus.enhancement.StateManager sm)"
+18:42:55,842 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceDetachedState()"
+18:42:55,842 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDetached()"
+18:42:55,842 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.Persistable dnNewInstance(org.datanucleus.enhancement.StateManager sm)"
+18:42:55,842 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.Persistable dnNewInstance(org.datanucleus.enhancement.StateManager sm, java.lang.Object obj)"
+18:42:55,843 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceField(int index)"
+18:42:55,843 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnProvideField(int index)"
+18:42:55,843 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyField(baako.server.database.Wallet obj, int index)"
+18:42:55,844 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyFields(java.lang.Object obj, [I indices)"
+18:42:55,844 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[Ljava.lang.String; __dnFieldNamesInit()"
+18:42:55,844 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[Ljava.lang.Class; __dnFieldTypesInit()"
+18:42:55,844 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[B __dnFieldFlagsInit()"
+18:42:55,844 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int __dnGetInheritedFieldCount()"
+18:42:55,844 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int dnGetManagedFieldCount()"
+18:42:55,844 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Class __dnPersistableSuperclassInit()"
+18:42:55,844 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Class ___dn$loadClass(java.lang.String className)"
+18:42:55,844 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnSuperClone()"
+18:42:55,845 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int dnGetcardNumb(baako.server.database.Wallet objPC)"
+18:42:55,845 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetcardNumb(baako.server.database.Wallet objPC, int val)"
+18:42:55,847 (main) DEBUG [DataNucleus.Enhancer] - Adding method "baako.server.database.CardType dnGettype(baako.server.database.Wallet objPC)"
+18:42:55,848 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSettype(baako.server.database.Wallet objPC, baako.server.database.CardType val)"
+18:42:55,848 (main) DEBUG [DataNucleus.Enhancer] - Adding method "baako.server.database.User dnGetuser(baako.server.database.Wallet objPC)"
+18:42:55,848 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetuser(baako.server.database.Wallet objPC, baako.server.database.User val)"
+18:42:55,849 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/gusy/git/Baako/Baako_Server/target/classes/baako/server/database/Wallet.class" with enhanced definition
+18:42:55,849 (main) INFO  [DataNucleus.Enhancer] - ENHANCED (Persistable) : baako.server.database.Wallet
+18:42:55,849 (main) DEBUG [DataNucleus.Enhancer] - Enhance of class "baako.server.database.Wallet" completed
+18:42:55,849 (main) DEBUG [DataNucleus.Enhancer] - Enhance of class "baako.server.database.Designer" starting ...
+18:42:55,850 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt implement the interface "org.datanucleus.enhancement.Persistable" but is required
+18:42:55,850 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt implement the interface "org.datanucleus.enhancement.Detachable" but is required
+18:42:55,850 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have field "dnStateManager" but is required
+18:42:55,850 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have field "dnDetachedState" but is required
+18:42:55,850 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have field "dnInheritedFieldCount" but is required
+18:42:55,850 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have field "dnFlags" but is required
+18:42:55,850 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have field "dnFieldTypes" but is required
+18:42:55,850 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have field "dnFieldNames" but is required
+18:42:55,850 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have field "dnFieldFlags" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have field "dnPersistableSuperclass" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnReplaceField" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnIsTransactional" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnNewInstance" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnNewInstance" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnSuperClone" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnProvideFields" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "___dn$loadClass" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnGetManagedFieldCount" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnIsDirty" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnReplaceStateManager" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnReplaceFlags" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnIsDetached" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnMakeDirty" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "__dnPersistableSuperclassInit" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnIsDeleted" but is required
+18:42:55,851 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "__dnFieldFlagsInit" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "__dnFieldTypesInit" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnProvideField" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnPreSerialize" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnGetObjectId" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnGetVersion" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnGetTransactionalObjectId" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnIsNew" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnCopyKeyFieldsToObjectId" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnCopyKeyFieldsToObjectId" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnCopyField" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnCopyKeyFieldsFromObjectId" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnCopyKeyFieldsFromObjectId" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnGetExecutionContext" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnCopyFields" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "__dnGetInheritedFieldCount" but is required
+18:42:55,852 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnNewObjectIdInstance" but is required
+18:42:55,853 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnNewObjectIdInstance" but is required
+18:42:55,853 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnReplaceDetachedState" but is required
+18:42:55,853 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnIsPersistent" but is required
+18:42:55,853 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "dnReplaceFields" but is required
+18:42:55,853 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Designer" doesnt have method "__dnFieldNamesInit" but is required
+18:42:55,853 (main) DEBUG [DataNucleus.Enhancer] - Adding interface: org.datanucleus.enhancement.Detachable
+18:42:55,853 (main) DEBUG [DataNucleus.Enhancer] - Adding interface: org.datanucleus.enhancement.Persistable
+18:42:55,853 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.Designer.getName changing field "baako.server.database.Designer.name" for call to "dnGetname()"
+18:42:55,854 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.Designer.getGames changing field "baako.server.database.Designer.games" for call to "dnGetgames()"
+18:42:55,854 (main) DEBUG [DataNucleus.Enhancer] - Adding field "org.datanucleus.enhancement.StateManager dnStateManager"
+18:42:55,854 (main) DEBUG [DataNucleus.Enhancer] - Adding field "byte dnFlags"
+18:42:55,854 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.Object; dnDetachedState"
+18:42:55,854 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[B dnFieldFlags"
+18:42:55,854 (main) DEBUG [DataNucleus.Enhancer] - Adding field "java.lang.Class dnPersistableSuperclass"
+18:42:55,854 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.Class; dnFieldTypes"
+18:42:55,854 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.String; dnFieldNames"
+18:42:55,854 (main) DEBUG [DataNucleus.Enhancer] - Adding field "int dnInheritedFieldCount"
+18:42:55,854 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void <clinit>()"
+18:42:55,855 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsFromObjectId(org.datanucleus.enhancement.Persistable$ObjectIdFieldConsumer fc, java.lang.Object oid)"
+18:42:55,855 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsFromObjectId(java.lang.Object oid)"
+18:42:55,855 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsToObjectId(java.lang.Object oid)"
+18:42:55,855 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsToObjectId(org.datanucleus.enhancement.Persistable$ObjectIdFieldSupplier fs, java.lang.Object oid)"
+18:42:55,855 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnGetObjectId()"
+18:42:55,856 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnGetVersion()"
+18:42:55,856 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnPreSerialize()"
+18:42:55,856 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.ExecutionContextReference dnGetExecutionContext()"
+18:42:55,856 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnGetTransactionalObjectId()"
+18:42:55,856 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDeleted()"
+18:42:55,856 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDirty()"
+18:42:55,856 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsNew()"
+18:42:55,856 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsPersistent()"
+18:42:55,857 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsTransactional()"
+18:42:55,857 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnMakeDirty(java.lang.String fieldName)"
+18:42:55,857 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnNewObjectIdInstance()"
+18:42:55,857 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnNewObjectIdInstance(java.lang.Object key)"
+18:42:55,857 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnProvideFields([I indices)"
+18:42:55,858 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceFields([I indices)"
+18:42:55,858 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceFlags()"
+18:42:55,858 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceStateManager(org.datanucleus.enhancement.StateManager sm)"
+18:42:55,858 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceDetachedState()"
+18:42:55,858 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDetached()"
+18:42:55,858 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.Persistable dnNewInstance(org.datanucleus.enhancement.StateManager sm)"
+18:42:55,858 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.Persistable dnNewInstance(org.datanucleus.enhancement.StateManager sm, java.lang.Object obj)"
+18:42:55,859 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceField(int index)"
+18:42:55,859 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnProvideField(int index)"
+18:42:55,859 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyField(baako.server.database.Designer obj, int index)"
+18:42:55,859 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyFields(java.lang.Object obj, [I indices)"
+18:42:55,859 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[Ljava.lang.String; __dnFieldNamesInit()"
+18:42:55,860 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[Ljava.lang.Class; __dnFieldTypesInit()"
+18:42:55,860 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[B __dnFieldFlagsInit()"
+18:42:55,860 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int __dnGetInheritedFieldCount()"
+18:42:55,860 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int dnGetManagedFieldCount()"
+18:42:55,860 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Class __dnPersistableSuperclassInit()"
+18:42:55,860 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Class ___dn$loadClass(java.lang.String className)"
+18:42:55,860 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnSuperClone()"
+18:42:55,860 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.util.Set dnGetgames(baako.server.database.Designer objPC)"
+18:42:55,860 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetgames(baako.server.database.Designer objPC, java.util.Set val)"
+18:42:55,861 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.String dnGetname(baako.server.database.Designer objPC)"
+18:42:55,861 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetname(baako.server.database.Designer objPC, java.lang.String val)"
+18:42:55,861 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/gusy/git/Baako/Baako_Server/target/classes/baako/server/database/Designer.class" with enhanced definition
+18:42:55,861 (main) INFO  [DataNucleus.Enhancer] - ENHANCED (Persistable) : baako.server.database.Designer
+18:42:55,861 (main) DEBUG [DataNucleus.Enhancer] - Enhance of class "baako.server.database.Designer" completed
+18:42:55,862 (main) DEBUG [DataNucleus.Enhancer] - Enhance of class "baako.server.database.Category" starting ...
+18:42:55,862 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt implement the interface "org.datanucleus.enhancement.Persistable" but is required
+18:42:55,862 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt implement the interface "org.datanucleus.enhancement.Detachable" but is required
+18:42:55,862 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have field "dnStateManager" but is required
+18:42:55,862 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have field "dnDetachedState" but is required
+18:42:55,862 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have field "dnInheritedFieldCount" but is required
+18:42:55,862 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have field "dnFlags" but is required
+18:42:55,862 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have field "dnFieldTypes" but is required
+18:42:55,862 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have field "dnFieldNames" but is required
+18:42:55,862 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have field "dnFieldFlags" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have field "dnPersistableSuperclass" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnReplaceField" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnIsTransactional" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnNewInstance" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnNewInstance" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnSuperClone" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnProvideFields" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "___dn$loadClass" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnGetManagedFieldCount" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnIsDirty" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnReplaceStateManager" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnReplaceFlags" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnIsDetached" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnMakeDirty" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "__dnPersistableSuperclassInit" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnIsDeleted" but is required
+18:42:55,863 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "__dnFieldFlagsInit" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "__dnFieldTypesInit" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnProvideField" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnPreSerialize" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnGetObjectId" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnGetVersion" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnGetTransactionalObjectId" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnIsNew" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnCopyKeyFieldsToObjectId" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnCopyKeyFieldsToObjectId" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnCopyField" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnCopyKeyFieldsFromObjectId" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnCopyKeyFieldsFromObjectId" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnGetExecutionContext" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnCopyFields" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "__dnGetInheritedFieldCount" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnNewObjectIdInstance" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnNewObjectIdInstance" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnReplaceDetachedState" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnIsPersistent" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "dnReplaceFields" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Category" doesnt have method "__dnFieldNamesInit" but is required
+18:42:55,864 (main) DEBUG [DataNucleus.Enhancer] - Adding interface: org.datanucleus.enhancement.Detachable
+18:42:55,865 (main) DEBUG [DataNucleus.Enhancer] - Adding interface: org.datanucleus.enhancement.Persistable
+18:42:55,865 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.Category.getName changing field "baako.server.database.Category.name" for call to "dnGetname()"
+18:42:55,865 (main) DEBUG [DataNucleus.Enhancer] - Adding field "org.datanucleus.enhancement.StateManager dnStateManager"
+18:42:55,865 (main) DEBUG [DataNucleus.Enhancer] - Adding field "byte dnFlags"
+18:42:55,865 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.Object; dnDetachedState"
+18:42:55,865 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[B dnFieldFlags"
+18:42:55,865 (main) DEBUG [DataNucleus.Enhancer] - Adding field "java.lang.Class dnPersistableSuperclass"
+18:42:55,865 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.Class; dnFieldTypes"
+18:42:55,865 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.String; dnFieldNames"
+18:42:55,865 (main) DEBUG [DataNucleus.Enhancer] - Adding field "int dnInheritedFieldCount"
+18:42:55,865 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void <clinit>()"
+18:42:55,865 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsFromObjectId(org.datanucleus.enhancement.Persistable$ObjectIdFieldConsumer fc, java.lang.Object oid)"
+18:42:55,866 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsFromObjectId(java.lang.Object oid)"
+18:42:55,866 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsToObjectId(java.lang.Object oid)"
+18:42:55,866 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsToObjectId(org.datanucleus.enhancement.Persistable$ObjectIdFieldSupplier fs, java.lang.Object oid)"
+18:42:55,866 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnGetObjectId()"
+18:42:55,866 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnGetVersion()"
+18:42:55,866 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnPreSerialize()"
+18:42:55,866 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.ExecutionContextReference dnGetExecutionContext()"
+18:42:55,866 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnGetTransactionalObjectId()"
+18:42:55,866 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDeleted()"
+18:42:55,867 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDirty()"
+18:42:55,867 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsNew()"
+18:42:55,867 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsPersistent()"
+18:42:55,867 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsTransactional()"
+18:42:55,867 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnMakeDirty(java.lang.String fieldName)"
+18:42:55,867 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnNewObjectIdInstance()"
+18:42:55,868 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnNewObjectIdInstance(java.lang.Object key)"
+18:42:55,868 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnProvideFields([I indices)"
+18:42:55,868 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceFields([I indices)"
+18:42:55,868 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceFlags()"
+18:42:55,868 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceStateManager(org.datanucleus.enhancement.StateManager sm)"
+18:42:55,868 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceDetachedState()"
+18:42:55,868 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDetached()"
+18:42:55,869 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.Persistable dnNewInstance(org.datanucleus.enhancement.StateManager sm)"
+18:42:55,869 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.Persistable dnNewInstance(org.datanucleus.enhancement.StateManager sm, java.lang.Object obj)"
+18:42:55,869 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceField(int index)"
+18:42:55,869 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnProvideField(int index)"
+18:42:55,869 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyField(baako.server.database.Category obj, int index)"
+18:42:55,870 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyFields(java.lang.Object obj, [I indices)"
+18:42:55,870 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[Ljava.lang.String; __dnFieldNamesInit()"
+18:42:55,870 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[Ljava.lang.Class; __dnFieldTypesInit()"
+18:42:55,870 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[B __dnFieldFlagsInit()"
+18:42:55,870 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int __dnGetInheritedFieldCount()"
+18:42:55,870 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int dnGetManagedFieldCount()"
+18:42:55,870 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Class __dnPersistableSuperclassInit()"
+18:42:55,870 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Class ___dn$loadClass(java.lang.String className)"
+18:42:55,870 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnSuperClone()"
+18:42:55,871 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.util.Set dnGetgames(baako.server.database.Category objPC)"
+18:42:55,871 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetgames(baako.server.database.Category objPC, java.util.Set val)"
+18:42:55,871 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.String dnGetname(baako.server.database.Category objPC)"
+18:42:55,871 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetname(baako.server.database.Category objPC, java.lang.String val)"
+18:42:55,872 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/gusy/git/Baako/Baako_Server/target/classes/baako/server/database/Category.class" with enhanced definition
+18:42:55,872 (main) INFO  [DataNucleus.Enhancer] - ENHANCED (Persistable) : baako.server.database.Category
+18:42:55,872 (main) DEBUG [DataNucleus.Enhancer] - Enhance of class "baako.server.database.Category" completed
+18:42:55,872 (main) DEBUG [DataNucleus.Enhancer] - Enhance of class "baako.server.database.Game" starting ...
+18:42:55,873 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt implement the interface "org.datanucleus.enhancement.Persistable" but is required
+18:42:55,873 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt implement the interface "org.datanucleus.enhancement.Detachable" but is required
+18:42:55,873 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have field "dnStateManager" but is required
+18:42:55,873 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have field "dnDetachedState" but is required
+18:42:55,873 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have field "dnInheritedFieldCount" but is required
+18:42:55,873 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have field "dnFlags" but is required
+18:42:55,873 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have field "dnFieldTypes" but is required
+18:42:55,873 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have field "dnFieldNames" but is required
+18:42:55,873 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have field "dnFieldFlags" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have field "dnPersistableSuperclass" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnReplaceField" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnIsTransactional" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnNewInstance" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnNewInstance" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnSuperClone" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnProvideFields" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "___dn$loadClass" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnGetManagedFieldCount" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnIsDirty" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnReplaceStateManager" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnReplaceFlags" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnIsDetached" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnMakeDirty" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "__dnPersistableSuperclassInit" but is required
+18:42:55,874 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnIsDeleted" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "__dnFieldFlagsInit" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "__dnFieldTypesInit" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnProvideField" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnPreSerialize" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnGetObjectId" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnGetVersion" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnGetTransactionalObjectId" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnIsNew" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnCopyKeyFieldsToObjectId" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnCopyKeyFieldsToObjectId" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnCopyField" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnCopyKeyFieldsFromObjectId" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnCopyKeyFieldsFromObjectId" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnGetExecutionContext" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnCopyFields" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "__dnGetInheritedFieldCount" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnNewObjectIdInstance" but is required
+18:42:55,875 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnNewObjectIdInstance" but is required
+18:42:55,876 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnReplaceDetachedState" but is required
+18:42:55,876 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnIsPersistent" but is required
+18:42:55,876 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "dnReplaceFields" but is required
+18:42:55,876 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.Game" doesnt have method "__dnFieldNamesInit" but is required
+18:42:55,876 (main) DEBUG [DataNucleus.Enhancer] - Adding interface: org.datanucleus.enhancement.Detachable
+18:42:55,876 (main) DEBUG [DataNucleus.Enhancer] - Adding interface: org.datanucleus.enhancement.Persistable
+18:42:55,876 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.Game.getName changing field "baako.server.database.Game.name" for call to "dnGetname()"
+18:42:55,877 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.Game.getPrice changing field "baako.server.database.Game.price" for call to "dnGetprice()"
+18:42:55,877 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.Game.getDescription changing field "baako.server.database.Game.description" for call to "dnGetdescription()"
+18:42:55,877 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.Game.getPEGI changing field "baako.server.database.Game.PEGI" for call to "dnGetPEGI()"
+18:42:55,877 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.Game.getCategories changing field "baako.server.database.Game.categories" for call to "dnGetcategories()"
+18:42:55,877 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.Game.getDesigners changing field "baako.server.database.Game.designers" for call to "dnGetdesigners()"
+18:42:55,877 (main) DEBUG [DataNucleus.Enhancer] - Adding field "org.datanucleus.enhancement.StateManager dnStateManager"
+18:42:55,877 (main) DEBUG [DataNucleus.Enhancer] - Adding field "byte dnFlags"
+18:42:55,877 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.Object; dnDetachedState"
+18:42:55,877 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[B dnFieldFlags"
+18:42:55,877 (main) DEBUG [DataNucleus.Enhancer] - Adding field "java.lang.Class dnPersistableSuperclass"
+18:42:55,877 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.Class; dnFieldTypes"
+18:42:55,877 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.String; dnFieldNames"
+18:42:55,878 (main) DEBUG [DataNucleus.Enhancer] - Adding field "int dnInheritedFieldCount"
+18:42:55,878 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void <clinit>()"
+18:42:55,878 (main) DEBUG [DataNucleus.Enhancer] - Adding constructor "baako.server.database.Game()"
+18:42:55,878 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsFromObjectId(org.datanucleus.enhancement.Persistable$ObjectIdFieldConsumer fc, java.lang.Object oid)"
+18:42:55,878 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsFromObjectId(java.lang.Object oid)"
+18:42:55,878 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsToObjectId(java.lang.Object oid)"
+18:42:55,878 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsToObjectId(org.datanucleus.enhancement.Persistable$ObjectIdFieldSupplier fs, java.lang.Object oid)"
+18:42:55,879 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnGetObjectId()"
+18:42:55,879 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnGetVersion()"
+18:42:55,879 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnPreSerialize()"
+18:42:55,879 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.ExecutionContextReference dnGetExecutionContext()"
+18:42:55,879 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnGetTransactionalObjectId()"
+18:42:55,879 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDeleted()"
+18:42:55,879 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDirty()"
+18:42:55,879 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsNew()"
+18:42:55,879 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsPersistent()"
+18:42:55,879 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsTransactional()"
+18:42:55,879 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnMakeDirty(java.lang.String fieldName)"
+18:42:55,879 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnNewObjectIdInstance()"
+18:42:55,880 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnNewObjectIdInstance(java.lang.Object key)"
+18:42:55,880 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnProvideFields([I indices)"
+18:42:55,880 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceFields([I indices)"
+18:42:55,880 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceFlags()"
+18:42:55,880 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceStateManager(org.datanucleus.enhancement.StateManager sm)"
+18:42:55,880 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceDetachedState()"
+18:42:55,880 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDetached()"
+18:42:55,880 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.Persistable dnNewInstance(org.datanucleus.enhancement.StateManager sm)"
+18:42:55,880 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.Persistable dnNewInstance(org.datanucleus.enhancement.StateManager sm, java.lang.Object obj)"
+18:42:55,880 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceField(int index)"
+18:42:55,881 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnProvideField(int index)"
+18:42:55,881 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyField(baako.server.database.Game obj, int index)"
+18:42:55,881 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyFields(java.lang.Object obj, [I indices)"
+18:42:55,881 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[Ljava.lang.String; __dnFieldNamesInit()"
+18:42:55,881 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[Ljava.lang.Class; __dnFieldTypesInit()"
+18:42:55,881 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[B __dnFieldFlagsInit()"
+18:42:55,881 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int __dnGetInheritedFieldCount()"
+18:42:55,881 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int dnGetManagedFieldCount()"
+18:42:55,881 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Class __dnPersistableSuperclassInit()"
+18:42:55,881 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Class ___dn$loadClass(java.lang.String className)"
+18:42:55,881 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnSuperClone()"
+18:42:55,882 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int dnGetPEGI(baako.server.database.Game objPC)"
+18:42:55,882 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetPEGI(baako.server.database.Game objPC, int val)"
+18:42:55,882 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.util.Set dnGetcategories(baako.server.database.Game objPC)"
+18:42:55,882 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetcategories(baako.server.database.Game objPC, java.util.Set val)"
+18:42:55,882 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.String dnGetdescription(baako.server.database.Game objPC)"
+18:42:55,882 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetdescription(baako.server.database.Game objPC, java.lang.String val)"
+18:42:55,882 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.util.Set dnGetdesigners(baako.server.database.Game objPC)"
+18:42:55,882 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetdesigners(baako.server.database.Game objPC, java.util.Set val)"
+18:42:55,882 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.String dnGetname(baako.server.database.Game objPC)"
+18:42:55,883 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetname(baako.server.database.Game objPC, java.lang.String val)"
+18:42:55,883 (main) DEBUG [DataNucleus.Enhancer] - Adding method "float dnGetprice(baako.server.database.Game objPC)"
+18:42:55,883 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetprice(baako.server.database.Game objPC, float val)"
+18:42:55,883 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/gusy/git/Baako/Baako_Server/target/classes/baako/server/database/Game.class" with enhanced definition
+18:42:55,884 (main) INFO  [DataNucleus.Enhancer] - ENHANCED (Persistable) : baako.server.database.Game
+18:42:55,884 (main) DEBUG [DataNucleus.Enhancer] - Enhance of class "baako.server.database.Game" completed
+18:42:55,884 (main) DEBUG [DataNucleus.Enhancer] - Enhance of class "baako.server.database.User" starting ...
+18:42:55,884 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt implement the interface "org.datanucleus.enhancement.Persistable" but is required
+18:42:55,884 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt implement the interface "org.datanucleus.enhancement.Detachable" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have field "dnStateManager" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have field "dnDetachedState" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have field "dnInheritedFieldCount" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have field "dnFlags" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have field "dnFieldTypes" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have field "dnFieldNames" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have field "dnFieldFlags" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have field "dnPersistableSuperclass" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnReplaceField" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnIsTransactional" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnNewInstance" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnNewInstance" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnSuperClone" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnProvideFields" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "___dn$loadClass" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnGetManagedFieldCount" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnIsDirty" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnReplaceStateManager" but is required
+18:42:55,885 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnReplaceFlags" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnIsDetached" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnMakeDirty" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "__dnPersistableSuperclassInit" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnIsDeleted" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "__dnFieldFlagsInit" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "__dnFieldTypesInit" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnProvideField" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnPreSerialize" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnGetObjectId" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnGetVersion" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnGetTransactionalObjectId" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnIsNew" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnCopyKeyFieldsToObjectId" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnCopyKeyFieldsToObjectId" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnCopyField" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnCopyKeyFieldsFromObjectId" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnCopyKeyFieldsFromObjectId" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnGetExecutionContext" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnCopyFields" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "__dnGetInheritedFieldCount" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnNewObjectIdInstance" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnNewObjectIdInstance" but is required
+18:42:55,886 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnReplaceDetachedState" but is required
+18:42:55,887 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnIsPersistent" but is required
+18:42:55,887 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "dnReplaceFields" but is required
+18:42:55,887 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.User" doesnt have method "__dnFieldNamesInit" but is required
+18:42:55,887 (main) DEBUG [DataNucleus.Enhancer] - Adding interface: org.datanucleus.enhancement.Detachable
+18:42:55,887 (main) DEBUG [DataNucleus.Enhancer] - Adding interface: org.datanucleus.enhancement.Persistable
+18:42:55,887 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.User.<init> : omitting enhance of set of field "baako.server.database.User.email"
+18:42:55,888 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.User.<init> : omitting enhance of set of field "baako.server.database.User.username"
+18:42:55,888 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.User.<init> : omitting enhance of set of field "baako.server.database.User.password"
+18:42:55,888 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.User.<init> : omitting enhance of set of field "baako.server.database.User.birthdate"
+18:42:55,888 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.User.getEmail changing field "baako.server.database.User.email" for call to "dnGetemail()"
+18:42:55,888 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.User.getName changing field "baako.server.database.User.username" for call to "dnGetusername()"
+18:42:55,888 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.User.getBirthdate changing field "baako.server.database.User.birthdate" for call to "dnGetbirthdate()"
+18:42:55,888 (main) DEBUG [DataNucleus.Enhancer] - Enhancing original method baako.server.database.User.getPassword changing field "baako.server.database.User.password" for call to "dnGetpassword()"
+18:42:55,888 (main) DEBUG [DataNucleus.Enhancer] - Adding field "org.datanucleus.enhancement.StateManager dnStateManager"
+18:42:55,888 (main) DEBUG [DataNucleus.Enhancer] - Adding field "byte dnFlags"
+18:42:55,888 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.Object; dnDetachedState"
+18:42:55,888 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[B dnFieldFlags"
+18:42:55,888 (main) DEBUG [DataNucleus.Enhancer] - Adding field "java.lang.Class dnPersistableSuperclass"
+18:42:55,888 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.Class; dnFieldTypes"
+18:42:55,888 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.String; dnFieldNames"
+18:42:55,889 (main) DEBUG [DataNucleus.Enhancer] - Adding field "int dnInheritedFieldCount"
+18:42:55,889 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void <clinit>()"
+18:42:55,889 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsFromObjectId(org.datanucleus.enhancement.Persistable$ObjectIdFieldConsumer fc, java.lang.Object oid)"
+18:42:55,889 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsFromObjectId(java.lang.Object oid)"
+18:42:55,889 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsToObjectId(java.lang.Object oid)"
+18:42:55,889 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyKeyFieldsToObjectId(org.datanucleus.enhancement.Persistable$ObjectIdFieldSupplier fs, java.lang.Object oid)"
+18:42:55,889 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnGetObjectId()"
+18:42:55,889 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnGetVersion()"
+18:42:55,889 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnPreSerialize()"
+18:42:55,889 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.ExecutionContextReference dnGetExecutionContext()"
+18:42:55,890 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnGetTransactionalObjectId()"
+18:42:55,890 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDeleted()"
+18:42:55,890 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDirty()"
+18:42:55,890 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsNew()"
+18:42:55,890 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsPersistent()"
+18:42:55,890 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsTransactional()"
+18:42:55,890 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnMakeDirty(java.lang.String fieldName)"
+18:42:55,890 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnNewObjectIdInstance()"
+18:42:55,891 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnNewObjectIdInstance(java.lang.Object key)"
+18:42:55,891 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnProvideFields([I indices)"
+18:42:55,891 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceFields([I indices)"
+18:42:55,891 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceFlags()"
+18:42:55,891 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceStateManager(org.datanucleus.enhancement.StateManager sm)"
+18:42:55,891 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceDetachedState()"
+18:42:55,891 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDetached()"
+18:42:55,891 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.Persistable dnNewInstance(org.datanucleus.enhancement.StateManager sm)"
+18:42:55,892 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.Persistable dnNewInstance(org.datanucleus.enhancement.StateManager sm, java.lang.Object obj)"
+18:42:55,892 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceField(int index)"
+18:42:55,892 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnProvideField(int index)"
+18:42:55,892 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyField(baako.server.database.User obj, int index)"
+18:42:55,892 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyFields(java.lang.Object obj, [I indices)"
+18:42:55,892 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[Ljava.lang.String; __dnFieldNamesInit()"
+18:42:55,893 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[Ljava.lang.Class; __dnFieldTypesInit()"
+18:42:55,893 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[B __dnFieldFlagsInit()"
+18:42:55,893 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int __dnGetInheritedFieldCount()"
+18:42:55,893 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int dnGetManagedFieldCount()"
+18:42:55,893 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Class __dnPersistableSuperclassInit()"
+18:42:55,893 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Class ___dn$loadClass(java.lang.String className)"
+18:42:55,893 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnSuperClone()"
+18:42:55,893 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.util.Date dnGetbirthdate(baako.server.database.User objPC)"
+18:42:55,894 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetbirthdate(baako.server.database.User objPC, java.util.Date val)"
+18:42:55,894 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.String dnGetemail(baako.server.database.User objPC)"
+18:42:55,894 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetemail(baako.server.database.User objPC, java.lang.String val)"
+18:42:55,894 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.String dnGetpassword(baako.server.database.User objPC)"
+18:42:55,894 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetpassword(baako.server.database.User objPC, java.lang.String val)"
+18:42:55,894 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.String dnGetusername(baako.server.database.User objPC)"
+18:42:55,894 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnSetusername(baako.server.database.User objPC, java.lang.String val)"
+18:42:55,895 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/gusy/git/Baako/Baako_Server/target/classes/baako/server/database/User.class" with enhanced definition
+18:42:55,895 (main) INFO  [DataNucleus.Enhancer] - ENHANCED (Persistable) : baako.server.database.User
+18:42:55,895 (main) DEBUG [DataNucleus.Enhancer] - Enhance of class "baako.server.database.User" completed
+18:42:55,895 (main) DEBUG [DataNucleus.Enhancer] - Enhance of class "baako.server.database.AdminUser" starting ...
+18:42:55,896 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt implement the interface "org.datanucleus.enhancement.Persistable" but is required
+18:42:55,896 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt implement the interface "org.datanucleus.enhancement.Detachable" but is required
+18:42:55,896 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have field "dnInheritedFieldCount" but is required
+18:42:55,896 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have field "dnFieldTypes" but is required
+18:42:55,896 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have field "dnFieldNames" but is required
+18:42:55,896 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have field "dnFieldFlags" but is required
+18:42:55,896 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have field "dnPersistableSuperclass" but is required
+18:42:55,896 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "dnReplaceField" but is required
+18:42:55,896 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "dnNewInstance" but is required
+18:42:55,896 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "dnNewInstance" but is required
+18:42:55,896 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "dnSuperClone" but is required
+18:42:55,896 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "___dn$loadClass" but is required
+18:42:55,897 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "dnGetManagedFieldCount" but is required
+18:42:55,897 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "dnIsDetached" but is required
+18:42:55,897 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "dnCopyField" but is required
+18:42:55,897 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "dnMakeDirty" but is required
+18:42:55,897 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "dnCopyFields" but is required
+18:42:55,897 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "__dnGetInheritedFieldCount" but is required
+18:42:55,897 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "__dnPersistableSuperclassInit" but is required
+18:42:55,897 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "__dnFieldFlagsInit" but is required
+18:42:55,897 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "__dnFieldTypesInit" but is required
+18:42:55,897 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "dnProvideField" but is required
+18:42:55,897 (main) DEBUG [DataNucleus.Enhancer] - Class "baako.server.database.AdminUser" doesnt have method "__dnFieldNamesInit" but is required
+18:42:55,897 (main) DEBUG [DataNucleus.Enhancer] - Adding interface: org.datanucleus.enhancement.Detachable
+18:42:55,897 (main) DEBUG [DataNucleus.Enhancer] - Adding interface: org.datanucleus.enhancement.Persistable
+18:42:55,898 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[B dnFieldFlags"
+18:42:55,898 (main) DEBUG [DataNucleus.Enhancer] - Adding field "java.lang.Class dnPersistableSuperclass"
+18:42:55,898 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.Class; dnFieldTypes"
+18:42:55,898 (main) DEBUG [DataNucleus.Enhancer] - Adding field "[Ljava.lang.String; dnFieldNames"
+18:42:55,898 (main) DEBUG [DataNucleus.Enhancer] - Adding field "int dnInheritedFieldCount"
+18:42:55,898 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void <clinit>()"
+18:42:55,899 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnMakeDirty(java.lang.String fieldName)"
+18:42:55,899 (main) DEBUG [DataNucleus.Enhancer] - Adding method "boolean dnIsDetached()"
+18:42:55,899 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.Persistable dnNewInstance(org.datanucleus.enhancement.StateManager sm)"
+18:42:55,899 (main) DEBUG [DataNucleus.Enhancer] - Adding method "org.datanucleus.enhancement.Persistable dnNewInstance(org.datanucleus.enhancement.StateManager sm, java.lang.Object obj)"
+18:42:55,899 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnReplaceField(int index)"
+18:42:55,899 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnProvideField(int index)"
+18:42:55,899 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyField(baako.server.database.AdminUser obj, int index)"
+18:42:55,900 (main) DEBUG [DataNucleus.Enhancer] - Adding method "void dnCopyFields(java.lang.Object obj, [I indices)"
+18:42:55,900 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[Ljava.lang.String; __dnFieldNamesInit()"
+18:42:55,900 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[Ljava.lang.Class; __dnFieldTypesInit()"
+18:42:55,900 (main) DEBUG [DataNucleus.Enhancer] - Adding method "[B __dnFieldFlagsInit()"
+18:42:55,900 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int __dnGetInheritedFieldCount()"
+18:42:55,900 (main) DEBUG [DataNucleus.Enhancer] - Adding method "int dnGetManagedFieldCount()"
+18:42:55,900 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Class __dnPersistableSuperclassInit()"
+18:42:55,900 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Class ___dn$loadClass(java.lang.String className)"
+18:42:55,900 (main) DEBUG [DataNucleus.Enhancer] - Adding method "java.lang.Object dnSuperClone()"
+18:42:55,901 (main) INFO  [DataNucleus.Enhancer] - Writing class file "/home/gusy/git/Baako/Baako_Server/target/classes/baako/server/database/AdminUser.class" with enhanced definition
+18:42:55,901 (main) INFO  [DataNucleus.Enhancer] - ENHANCED (Persistable) : baako.server.database.AdminUser
+18:42:55,901 (main) DEBUG [DataNucleus.Enhancer] - Enhance of class "baako.server.database.AdminUser" completed
+18:42:55,902 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 7 classes. Timings : input=227 ms, enhance=132 ms, total=359 ms. Consult the log for full details

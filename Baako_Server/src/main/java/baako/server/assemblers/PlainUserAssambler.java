@@ -19,7 +19,7 @@ public class PlainUserAssambler {
 	}
 	
 	public PlainUserDTO getGameDTO(PlainUser plainUser){
-		PlainUserDTO dto= new PlainUserDTO(plainUser.getEmail(),plainUser.getName(),plainUser.getFriends());
+		PlainUserDTO dto= new PlainUserDTO(plainUser.getEmail(),plainUser.getName(),null, plainUser.getFriends());
 		return dto;
 	}
 	

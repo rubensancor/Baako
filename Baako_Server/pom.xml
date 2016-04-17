@@ -14,6 +14,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
 		<policy.file>${basedir}/src/main/resources/security/java.policy</policy.file>
+		<server.IP>127.0.0.1</server.IP>
+		<server.port>1099</server.port>
+		<server.name>BaakoServer</server.name>
 	</properties>
 
 	<dependencies>
@@ -64,7 +67,7 @@
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>[1.2, )</version>
+			<version>1.2</version>
 		</dependency>
 	</dependencies>
 
@@ -99,4 +102,71 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<!-- run as 'mvn exec:java -Pserver' -->
+		<profile>
+			<id>server</id>
+			<build>
+				<resources>
+					<resource>
+						<directory>${config.files.dir}</directory>
+						<includes>
+							<include>**/*.jdo</include>
+							<include>**/*.orm</include>
+							<include>**/*.properties</include>
+						</includes>
+					</resource>
+				</resources>
+
+				<plugins>
+					<plugin>
+						<artifactId>maven-clean-plugin</artifactId>
+						<version>2.5</version>
+						<configuration>
+							<filesets>
+								<fileset>
+									<directory>${basedir}</directory>
+									<includes>
+										<include>*.log</include>
+										<include>*.ods</include>
+									</includes>
+								</fileset>
+							</filesets>
+						</configuration>
+					</plugin>
+
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.1</version>
+						<configuration>
+							<mainClass>baako.server.Server</mainClass>
+							<systemProperties>
+
+								<systemProperty>
+									<key>java.security.manager</key>
+									<value>java.rmi.RMISecurityManager</value>
+								</systemProperty>
+								<systemProperty>
+									<key>java.rmi.server.codebase</key>
+									<value>file:${basedir}/target/classes/</value>
+								</systemProperty>
+								<systemProperty>
+									<key>java.security.policy</key>
+									<value>${policy.file}</value>
+								</systemProperty>
+							</systemProperties>
+							<arguments>
+								<argument>${server.IP}</argument>
+								<argument>${server.port}</argument>
+								<argument>${server.Name}</argument>
+							</arguments>
+						</configuration>
+					</plugin>
+
+
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
