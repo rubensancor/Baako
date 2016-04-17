@@ -4,12 +4,14 @@
 package baako.server.database;
 
 import javax.jdo.annotations.Element;
+import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.PrimaryKey;
-
+import baako.server.database.*;
 /**
  * @author gusy
  *
  */
+@PersistenceCapable(detachable="true")
 public class Wallet {
 	@PrimaryKey
 	private int cardNumb;

@@ -20,18 +20,18 @@ public class Game {
 	private String description;
 	private int PEGI;
 	
-	@Element(column="USERS_ID")
-	private List<User> users;
+//	@Element(column="USERS_ID")
+//	private List<User> users;
 	
 	@Persistent(table= "GAME_CATEGORIES")
-	@Join(column="gameId")
-	@Element(column="gameId")
-	List<Category> categories;
+	@Join(column="GAME_ID")
+	@Element(column="CATEGORY_ID")
+	private Set<Category> categories;
 	
 	@Persistent(table= "GAME_DESIGNERS")
-	@Join(column="gameId")
-	@Element(column="gameId")
-	List<Designer> designers;
+	@Join(column="GAME_ID")
+	@Element(column="DESIGNER_ID")
+	private Set<Designer> designers;
 	
 	/**
 	 * 
@@ -62,22 +62,22 @@ public class Game {
 	public int getPEGI() {
 		return PEGI;
 	}
-	/**
-	 * @return the users
-	 */
-	public List<User> getUsers() {
-		return users;
-	}
+//	/**
+//	 * @return the users
+//	 */
+//	public Set<User> getUsers() {
+//		return users;
+//	}
 	/**
 	 * @return the categories
 	 */
-	public List<Category> getCategories() {
+	public Set<Category> getCategories() {
 		return categories;
 	}
 	/**
 	 * @return the designers
 	 */
-	public List<Designer> getDesigners() {
+	public Set<Designer> getDesigners() {
 		return designers;
 	}
 	

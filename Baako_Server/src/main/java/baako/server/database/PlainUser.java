@@ -8,16 +8,20 @@ import java.util.List;
 import java.util.Set;
 
 import javax.jdo.annotations.Join;
+import javax.jdo.annotations.PersistenceCapable;
 
 /**
  * @author gusy
  *
  */
+@PersistenceCapable(detachable="true")
 public class PlainUser extends User {
 
 	@Join
 	private Set<PlainUser> friends;
 	
+	@Join
+	private Set<Game> games;
 	
 	 /**
 	 * 
@@ -64,13 +68,9 @@ public class PlainUser extends User {
 	}
 
 
-	/* (non-Javadoc)
-	 * @see baako.server.database.User#getGames()
-	 */
-	@Override
-	public List<Game> getGames() {
+	public Set<Game> getGames() {
 		// TODO Auto-generated method stub
-		return super.getGames();
+		return games;
 	}
 
 	/* (non-Javadoc)

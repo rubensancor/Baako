@@ -1,11 +1,13 @@
 package baako.server.database;
 
 import java.util.List;
+import java.util.Set;
+
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-@PersistenceCapable
+@PersistenceCapable(detachable="true")
 public class Category {
 
 	
@@ -13,7 +15,7 @@ public class Category {
 	private String name;
 	
 	@Persistent(mappedBy="categories")
-	List<Game> games;
+	private Set<Game> games;
 
 	/**
 	 * @return the name
