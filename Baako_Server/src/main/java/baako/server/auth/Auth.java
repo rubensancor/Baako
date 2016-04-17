@@ -8,13 +8,13 @@ import java.util.HashMap;
  * @author Gusy
  *
  */
-public class AuthServer extends UnicastRemoteObject implements IAuthServer{
+public class Auth extends UnicastRemoteObject implements IAuth{
 
 
 	private static final long serialVersionUID = 7355838780317203327L;
 	public HashMap<String, String> users = new HashMap<String, String>();
 
-	public AuthServer() throws RemoteException{
+	public Auth() throws RemoteException{
 		super();
 	}
 
