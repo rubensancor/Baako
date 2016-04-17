@@ -6,10 +6,13 @@ package baako.server.database;
 import java.util.Date;
 import java.util.List;
 
+import javax.jdo.annotations.PersistenceCapable;
+
 /**
  * @author gusy
  *
  */
+@PersistenceCapable(detachable="true")
 public class AdminUser extends User {
 
 
