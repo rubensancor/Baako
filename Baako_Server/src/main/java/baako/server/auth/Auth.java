@@ -36,6 +36,7 @@ public class Auth extends UnicastRemoteObject implements IAuth{
 
 	public boolean register(String username, String password) throws RemoteException {
 		if(!users.containsValue(username)){
+			System.out.println("Registrado");
 			users.put(username, password);
 			return true;
 		}

@@ -1,7 +1,8 @@
 package baako.client.gui;
 
 import java.awt.EventQueue;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -42,6 +43,8 @@ public class LoginWindow {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
+		frame.setTitle("Baako");
 		frame.setBounds(100, 100, 349, 228);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -70,5 +73,32 @@ public class LoginWindow {
 		JButton btnLogIn = new JButton("Log In");
 		btnLogIn.setBounds(183, 131, 89, 23);
 		frame.getContentPane().add(btnLogIn);
+		
+		btnLogIn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(logIn(usernameField.getText(), new String(passwordField.getPassword())))
+					System.out.println("GO");
+//					frame.dispose();
+			}
+		});
+		
+		btnRegister.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(register(usernameField.getText(), new String(passwordField.getPassword())))
+					System.out.println("REGISTERED");
+			}
+		});
+		
+		frame.setVisible(true);
+	}
+	public boolean register(String username, String password){
+		return true;
+	}
+	public boolean logIn(String username, String password){
+		return true;
 	}
 }

@@ -3,12 +3,15 @@
  */
 package baako.client.remote;
 
+import baako.server.auth.IAuth;
 
 /**
  * @author gusy
  *
  */
 public class RMIServiceLocator {
+
+	private IAuth manager;
 
 	public RMIServiceLocator(String IP, String port, String name){
 		this.setManager(IP,port,name);
@@ -19,15 +22,15 @@ public class RMIServiceLocator {
 		String serverName="//"+ IP +":"+ port +"/"+ name ;
 		try{
 			System.out.println("Estoy RMI");
-//			this.manager = (ITralalaManager) java.rmi.Naming.lookup(serverName);
+			this.manager = (IAuth) java.rmi.Naming.lookup(serverName);
 			System.out.println("He conectado");
 		}catch(Exception e) {
 			System.err.println("- Exception running the client: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
-	
-//	public ITralalaManager getService(){
-//		return manager;
-//	}
+
+	public IAuth getService(){
+		return manager;
+	}
 }
