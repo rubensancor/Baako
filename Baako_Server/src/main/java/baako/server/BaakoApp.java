@@ -8,12 +8,16 @@ import java.rmi.registry.Registry;
 
 import baako.server.auth.Auth;
 import baako.server.auth.IAuth;
+import baako.server.dao.BaakoDAO;
+import baako.server.dao.IBaakoDAO;
 
 /**
  *
  */
-public class Server {
+public class BaakoApp {
 
+	private static  IBaakoDAO dao;
+	
 	public static void main( String[] args ){
 		if (args.length != 3) {
 			System.out.println("How to invoke: java [policy] [codebase] Server.Server [host] [port] [server]");
@@ -28,6 +32,8 @@ public class Server {
 
 		try{
 			IAuth auth = new Auth();
+			dao = new BaakoDAO();
+			System.out.println("Email ----> "dao.getUser("Ruben").getEmail());
 			Naming.rebind(serverName, auth);
 			System.out.println("Auth Server "+ serverName+ " active and waiting...");
 			java.io.InputStreamReader inputStreamReader = new java.io.InputStreamReader ( System.in );
