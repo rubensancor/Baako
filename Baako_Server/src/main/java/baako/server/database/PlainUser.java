@@ -31,6 +31,12 @@ public class PlainUser extends User {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * 
+	 */
+	public PlainUser() {
+	}
+
 	/* (non-Javadoc)
 	 * @see baako.server.database.User#getEmail()
 	 */

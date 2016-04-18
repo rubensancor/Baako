@@ -151,7 +151,7 @@
 						<artifactId>exec-maven-plugin</artifactId>
 						<version>1.1</version>
 						<configuration>
-							<mainClass>baako.server.Server</mainClass>
+							<mainClass>baako.server.BaakoApp</mainClass>
 							<systemProperties>
 
 								<systemProperty>
