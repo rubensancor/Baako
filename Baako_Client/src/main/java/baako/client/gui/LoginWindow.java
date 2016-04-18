@@ -70,5 +70,7 @@ public class LoginWindow {
 		JButton btnLogIn = new JButton("Log In");
 		btnLogIn.setBounds(183, 131, 89, 23);
 		frame.getContentPane().add(btnLogIn);
+		
+		frame.setVisible(true);
 	}
 }
