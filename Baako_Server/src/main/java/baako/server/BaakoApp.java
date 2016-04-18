@@ -31,9 +31,9 @@ public class BaakoApp {
 		String serverName = "//"+args[0]+":"+args[1]+"/"+args[2];
 
 		try{
-			IAuth auth = new Auth();
 			dao = new BaakoDAO();
-			System.out.println("Email ----> "dao.getUser("Ruben").getEmail());
+			IAuth auth = new Auth(dao);
+//			System.out.println("Email ----> "+dao.getUser("Ruben").getEmail());
 			Naming.rebind(serverName, auth);
 			System.out.println("Auth Server "+ serverName+ " active and waiting...");
 			java.io.InputStreamReader inputStreamReader = new java.io.InputStreamReader ( System.in );

@@ -28,10 +28,10 @@ public abstract class User {
 
 	}
 
-	public User(String email, String name, String password,  Date birthdate){
+	public User(String email, String username, String password,  Date birthdate){
 		super();
 		this.email = email;
-		this.username = name;
+		this.username = username;
 		this.password = password;
 		this.birthdate = birthdate;
 		
@@ -47,7 +47,7 @@ public abstract class User {
 	/**
 	 * @return the name
 	 */
-	public String getName() {
+	public String getUsername() {
 		return username;
 	}
 

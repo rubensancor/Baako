@@ -50,9 +50,9 @@ public class PlainUser extends User {
 	 * @see baako.server.database.User#getName()
 	 */
 	@Override
-	public String getName() {
+	public String getUsername() {
 		// TODO Auto-generated method stub
-		return super.getName();
+		return super.getUsername();
 	}
 
 	/* (non-Javadoc)
