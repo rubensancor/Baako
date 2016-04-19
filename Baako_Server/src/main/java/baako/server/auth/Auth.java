@@ -26,9 +26,9 @@ public class Auth extends UnicastRemoteObject implements IAuth{
 
 	public boolean checkUserInfo(String username, String password) throws RemoteException {
 		User u = dao.getUser(username);
-		System.out.println("Intentando logear a ---->"+u.getUsername());
+		System.out.println("Intentando logear a ---->"+u.getName());
 		if(u.getPassword()==password){
-			System.out.println("Logged as"+ u.getUsername());
+			System.out.println("Logged as"+ u.getName());
 			return true;
 		}else{
 			System.out.println("Error in the login");
