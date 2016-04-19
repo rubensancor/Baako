@@ -18,10 +18,10 @@ public class PlainUserAssambler {
 		return instance;
 	}
 	
-	public PlainUserDTO getGameDTO(PlainUser plainUser){
-		PlainUserDTO dto= new PlainUserDTO(plainUser.getEmail(),plainUser.getName(),null, plainUser.getFriends());
-		return dto;
-	}
+//	public PlainUserDTO getGameDTO(PlainUser plainUser){
+//		PlainUserDTO dto= new PlainUserDTO(plainUser.getEmail(),plainUser.getName(),null, plainUser.getFriends());
+//		return dto;
+//	}
 	
 	/*
 	 * 
