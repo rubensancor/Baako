@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import baako.server.dao.BaakoDAO;
 import baako.server.dao.IBaakoDAO;
+import baako.server.database.PlainUser;
 import baako.server.database.User;
 
 /**
@@ -15,7 +16,7 @@ import baako.server.database.User;
 public class Auth extends UnicastRemoteObject implements IAuth{
 
 	private BaakoDAO dao;
-	
+
 	private static final long serialVersionUID = 7355838780317203327L;
 	public HashMap<String, String> users = new HashMap<String, String>();
 
@@ -26,39 +27,44 @@ public class Auth extends UnicastRemoteObject implements IAuth{
 
 	public boolean checkUserInfo(String username, String password) throws RemoteException {
 		User u = dao.getUser(username);
-		System.out.println("Intentando logear a ---->"+u.getName());
-		if(u.getPassword()==password){
-			System.out.println("Logged as"+ u.getName());
+		System.out.println(u.getName()+" is trying to log in");
+		System.out.println(u.getPassword());
+		if(u.getPassword().equals(password)){
+			System.out.println("Logged as "+ u.getName());
 			return true;
 		}else{
 			System.out.println("Error in the login");
 			return false;
 		}
-//		if(users.get(username)==null || users.get(password)==null){
-//			System.out.println("Error in the login");
-//			return false;
-//		}
-//		else if(users.get(username).equals(password)){
-//			System.out.println("Username: "+username);
-//			System.out.println("Password: "+password);
-//			return true;			
-//		}
-//		else{
-//			System.out.println("Error in the login");
-//			return false;
-//		}
+		//		if(users.get(username)==null || users.get(password)==null){
+		//			System.out.println("Error in the login");
+		//			return false;
+		//		}
+		//		else if(users.get(username).equals(password)){
+		//			System.out.println("Username: "+username);
+		//			System.out.println("Password: "+password);
+		//			return true;			
+		//		}
+		//		else{
+		//			System.out.println("Error in the login");
+		//			return false;
+		//		}
 	}
 
-	public boolean register(String username, String password) throws RemoteException {
-		if(!users.containsValue(username)){
-			System.out.println("Registrado");
-			users.put(username, password);
-			return true;
+	public boolean register(PlainUser user) throws RemoteException {
+		User u = dao.getUser(user.getName());
+		if(u == null){
+			dao.addUser(user);
 		}
-		else{
-			return false;
-		}
+		//		if(!users.containsValue(username)){
+		//			System.out.println("Registrado");
+		//			users.put(username, password);
+		//			return true;
+		//		}
+		//		else{
+		//			return false;
+		//		}
+		//	}
+		return true;
 	}
-
-
 }

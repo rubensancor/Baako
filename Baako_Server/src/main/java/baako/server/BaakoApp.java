@@ -5,11 +5,15 @@ import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.time.Month;
+import java.util.Date;
 
 import baako.server.auth.Auth;
 import baako.server.auth.IAuth;
 import baako.server.dao.BaakoDAO;
 import baako.server.dao.IBaakoDAO;
+import baako.server.database.PlainUser;
+import baako.server.database.User;
 
 /**
  *
@@ -33,7 +37,12 @@ public class BaakoApp {
 		try{
 			dao = new BaakoDAO();
 			IAuth auth = new Auth(dao);
-//			System.out.println("Email ----> "+dao.getUser("Ruben").getEmail());
+			
+//			u = new PlainUser("gvirum@gmail.com","virum","asd",new Date(95,9, 03));
+//			System.out.println(u.getEmail());
+//			dao.addUser(u);
+			
+//			System.out.println("Email ----> "+dao.getUser("ruben").getEmail());
 			Naming.rebind(serverName, auth);
 			System.out.println("Auth Server "+ serverName+ " active and waiting...");
 			java.io.InputStreamReader inputStreamReader = new java.io.InputStreamReader ( System.in );

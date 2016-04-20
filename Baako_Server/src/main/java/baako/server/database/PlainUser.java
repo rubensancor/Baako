@@ -27,7 +27,7 @@ public class PlainUser extends User {
 	 * 
 	 */
 	public PlainUser(String email, String name, String password,  Date birthdate) {
-		super();
+		super(email,name,password,birthdate);
 		// TODO Auto-generated constructor stub
 	}
 
