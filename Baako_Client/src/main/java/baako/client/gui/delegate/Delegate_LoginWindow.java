@@ -24,8 +24,7 @@ public class Delegate_LoginWindow  extends LoginWindow{
 	
 	public boolean logIn(String username, String password){
 		if(controller.logIn(username, password)){
-			
-			new MainWindow();
+			new Delegate_MainWindow();
 			return true;
 		}else{
 			new JOptionPane("LOGIN FAILED");
@@ -33,13 +32,15 @@ public class Delegate_LoginWindow  extends LoginWindow{
 		}
 	}
 	
-	public boolean register(String username, String password){
-		if(controller.register(username, password)){
-			return true;
-		}else{
-			new JOptionPane("YOU ARE ALREADY REGISTERED");
-			return false;
-		}
+	public void register(){
+		new Delegate_RegisterWindow(controller);
+//		controller.register();
+//		if(controller.register(username, password)){
+//			return true;
+//		}else{
+//			new JOptionPane("YOU ARE ALREADY REGISTERED");
+//			return false;
+//		}
 	}
 
 }

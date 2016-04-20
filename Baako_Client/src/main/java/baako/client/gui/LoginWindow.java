@@ -80,7 +80,7 @@ public class LoginWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(logIn(usernameField.getText(), new String(passwordField.getPassword()))){
-					System.out.println("GO");
+//					System.out.println("GO");
 					frame.dispose();
 				}
 			}
@@ -90,15 +90,13 @@ public class LoginWindow {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(register(usernameField.getText(), new String(passwordField.getPassword())))
-					System.out.println("REGISTERED");
+				register();
 			}
 		});
 		
 		
 	}
-	public boolean register(String username, String password){
-		return true;
+	public void register(){
 	}
 	public boolean logIn(String username, String password){
 		return true;
