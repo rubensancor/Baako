@@ -3,11 +3,14 @@
  */
 package baako.client.gui.delegate;
 
+import java.awt.TrayIcon.MessageType;
+
 import javax.swing.JOptionPane;
 
 import baako.client.controller.BaakoController;
 import baako.client.gui.LoginWindow;
 import baako.client.gui.MainWindow;
+import baako.server.database.PlainUser;
 
 /**
  * @author gusy
@@ -27,13 +30,14 @@ public class Delegate_LoginWindow  extends LoginWindow{
 			new Delegate_MainWindow();
 			return true;
 		}else{
-			new JOptionPane("LOGIN FAILED");
+			new JOptionPane("ERROR IN THE LOGIN",1);
 			return false;
 		}
 	}
 	
-	public void register(){
-		new Delegate_RegisterWindow(controller);
+	public void register(PlainUser u){
+		System.out.println("VAMOS A REGISTRAR");
+		System.out.println(u.getEmail());
 //		controller.register();
 //		if(controller.register(username, password)){
 //			return true;
@@ -41,6 +45,10 @@ public class Delegate_LoginWindow  extends LoginWindow{
 //			new JOptionPane("YOU ARE ALREADY REGISTERED");
 //			return false;
 //		}
+	}
+	
+	public void newRegister(){
+		new Delegate_RegisterWindow(this);
 	}
 
 }

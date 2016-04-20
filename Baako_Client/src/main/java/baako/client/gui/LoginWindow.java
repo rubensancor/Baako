@@ -6,6 +6,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import baako.client.gui.delegate.Delegate_RegisterWindow;
+import baako.server.database.PlainUser;
+
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
@@ -90,15 +94,19 @@ public class LoginWindow {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				register();
+				newRegister();
+				frame.dispose();
 			}
 		});
 		
 		
 	}
-	public void register(){
+	public void register(PlainUser u){
 	}
 	public boolean logIn(String username, String password){
 		return true;
+	}
+	public void newRegister(){
+		
 	}
 }

@@ -6,6 +6,7 @@ package baako.client.gui.delegate;
 import java.util.Date;
 
 import baako.client.controller.BaakoController;
+import baako.client.gui.LoginWindow;
 import baako.client.gui.RegisterWindow;
 import baako.server.database.PlainUser;
 
@@ -15,19 +16,19 @@ import baako.server.database.PlainUser;
  */
 public class Delegate_RegisterWindow extends RegisterWindow{
 
-	private BaakoController controller;
-
-	public Delegate_RegisterWindow(BaakoController controller){
-		super();
-		this.controller = controller;
-	}
+	private LoginWindow log;
 	
+	public Delegate_RegisterWindow(LoginWindow log){
+		super();
+		this.log = log;
+	}
+
 	public void  register(Date birthdate){
 		String password = new String(passwordField.getPassword().toString());
+		System.out.println(tfEmail.getText());
 		PlainUser aux = new PlainUser(tfEmail.getText(), tfUsername.getText(), password, birthdate);
 		System.out.println("DELEGATE RW");
 		System.out.println(aux.getName());
-		controller.register(aux);
-		
+		log.register(aux);
 	}
 }
