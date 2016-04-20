@@ -48,6 +48,7 @@ public class LoginWindow {
 		frame.setBounds(100, 100, 349, 228);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
 		
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setBounds(28, 33, 67, 14);
@@ -94,7 +95,7 @@ public class LoginWindow {
 			}
 		});
 		
-		frame.setVisible(true);
+		
 	}
 	public boolean register(String username, String password){
 		return true;
