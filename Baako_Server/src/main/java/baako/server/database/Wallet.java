@@ -11,7 +11,7 @@ import baako.server.database.*;
  * @author gusy
  *
  */
-@PersistenceCapable(detachable="true")
+@PersistenceCapable
 public class Wallet {
 	@PrimaryKey
 	private int cardNumb;

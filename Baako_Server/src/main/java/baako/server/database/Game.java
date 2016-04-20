@@ -9,7 +9,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-@PersistenceCapable(detachable="true")
+@PersistenceCapable
 public class Game {
 
 	@PrimaryKey
@@ -37,6 +37,10 @@ public class Game {
 	 * 
 	 */
 	public Game(String name, float price, String description, int PEGI) {
+		this.name = name;
+		this.price = price;
+		this.description = description;
+		this.PEGI = PEGI;
 	}
 	/**
 	 * @return the name
