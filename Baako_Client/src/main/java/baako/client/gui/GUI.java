@@ -10,7 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import baako.server.database.PlainUser;
@@ -22,6 +26,7 @@ import java.awt.Insets;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.GridLayout;
+import javax.swing.JDesktopPane;
 
 public class GUI {
 
@@ -47,9 +52,102 @@ public class GUI {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		registerview();
+		frame.setVisible(true);
+		loginview();
+		
 	}
 	
+	public void mainview(){
+		
+	frame.setSize(741, 581);
+	frame.getContentPane().setLayout(null);
+	
+	JPanel mainPanel_1 = new JPanel();
+	mainPanel_1.setBounds(0, 0, 725, 542);
+	frame.getContentPane().add(mainPanel_1);
+	mainPanel_1.setLayout(null);
+	
+	JMenuBar menuBar = new JMenuBar();
+	menuBar.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+	menuBar.setBounds(0, 0, 574, 50);
+	mainPanel_1.add(menuBar);
+	menuBar.setForeground(new Color(255, 255, 255));
+	menuBar.setBackground(new Color(105, 105, 105));
+	
+	JMenu libraryMenu = new JMenu("Library");
+	libraryMenu.setForeground(new Color(255, 255, 255));
+	libraryMenu.setFont(new Font("Segoe UI", Font.BOLD, 15));
+	menuBar.add(libraryMenu);
+	
+	JMenuItem mntmLibraryOption = new JMenuItem("Library option 1");
+	libraryMenu.add(mntmLibraryOption);
+	
+	JMenu mnMarket = new JMenu("Market");
+	mnMarket.setForeground(new Color(255, 255, 255));
+	mnMarket.setFont(new Font("Segoe UI", Font.BOLD, 14));
+	menuBar.add(mnMarket);
+	
+	JMenuItem mntmAllGames = new JMenuItem("All Games");
+	mnMarket.add(mntmAllGames);
+	
+	JMenu mnGenre = new JMenu("Genre");
+	mnMarket.add(mnGenre);
+	
+	JMenu mnStudio = new JMenu("Studio");
+	mnMarket.add(mnStudio);
+	
+	JMenu mnNews = new JMenu("News");
+	mnNews.setForeground(new Color(255, 255, 255));
+	mnNews.setFont(new Font("Segoe UI", Font.BOLD, 14));
+	menuBar.add(mnNews);
+	
+	JMenu mnCommunity = new JMenu("Community");
+	mnCommunity.setForeground(new Color(255, 255, 255));
+	mnCommunity.setFont(new Font("Segoe UI", Font.BOLD, 14));
+	menuBar.add(mnCommunity);
+	
+	JMenuItem mntmSeeFriends = new JMenuItem("See Friends");
+	mnCommunity.add(mntmSeeFriends);
+	
+	JMenuItem mntmFindFriends = new JMenuItem("Find Friends");
+	mnCommunity.add(mntmFindFriends);
+	JScrollPane mainPanel = new JScrollPane();
+	mainPanel.setBounds(0, 48, 574, 494);
+	mainPanel_1.add(mainPanel);
+	
+	JPanel logoutPanel = new JPanel();
+	logoutPanel.setBounds(573, 0, 152, 49);
+	mainPanel_1.add(logoutPanel);
+	logoutPanel.setBackground(new Color(105, 105, 105));
+	logoutPanel.setLayout(null);
+	
+	JButton btnNewButton = new JButton("LOGOUT");
+	btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
+	btnNewButton.setBackground(new Color(255, 51, 0));
+	btnNewButton.setForeground(new Color(255, 255, 255));
+	btnNewButton.setBounds(0, 0, 152, 50);
+	logoutPanel.add(btnNewButton);
+	
+	JPanel optionPanel = new JPanel();
+	optionPanel.setBackground(new Color(105, 105, 105));
+	optionPanel.setBounds(574, 49, 151, 493);
+	mainPanel_1.add(optionPanel);
+}
+
+	public void logOut(){
+		JButton btnLogin = new JButton("LOGIN");
+		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnLogin.setForeground(new Color(255, 255, 255));
+		btnLogin.setBackground(new Color(0, 128, 0));
+		btnLogin.setBounds(10, 0, 102, 27);
+	//	LogPanel.add(btnLogin);
+		
+		JLabel lblLogged = new JLabel("Log Status");
+		lblLogged.setForeground(new Color(255, 255, 255));
+		lblLogged.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblLogged.setBounds(124, 0, 119, 27);
+	//	LogPanel.add(lblLogged);
+	}
 	
 	/**
 	 * Changes to login view.
@@ -355,6 +453,8 @@ public class GUI {
 	});
 
 	}
+
+	
 	
 	
 	public void register(PlainUser u){
