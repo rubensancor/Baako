@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import baako.client.controller.BaakoController;
 import baako.client.gui.LoginWindow;
+import baako.client.gui.MainWindow;
 
 /**
  * @author gusy
@@ -23,7 +24,8 @@ public class Delegate_LoginWindow  extends LoginWindow{
 	
 	public boolean logIn(String username, String password){
 		if(controller.logIn(username, password)){
-			// new Main window
+			
+			new MainWindow();
 			return true;
 		}else{
 			new JOptionPane("LOGIN FAILED");

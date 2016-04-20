@@ -78,9 +78,10 @@ public class LoginWindow {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(logIn(usernameField.getText(), new String(passwordField.getPassword())))
+				if(logIn(usernameField.getText(), new String(passwordField.getPassword()))){
 					System.out.println("GO");
-//					frame.dispose();
+					frame.dispose();
+				}
 			}
 		});
 		

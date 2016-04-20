@@ -27,7 +27,7 @@ public class PlainUser extends User {
 	 * 
 	 */
 	public PlainUser(String email, String name, String password,  Date birthdate) {
-		super();
+		super(email,name,password,birthdate);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -50,9 +50,9 @@ public class PlainUser extends User {
 	 * @see baako.server.database.User#getName()
 	 */
 	@Override
-	public String getUsername() {
+	public String getName() {
 		// TODO Auto-generated method stub
-		return super.getUsername();
+		return super.getName();
 	}
 
 	/* (non-Javadoc)

@@ -29,9 +29,9 @@ public class AdminUser extends User {
 	 * @see baako.server.database.User#getName()
 	 */
 	@Override
-	public String getUsername() {
+	public String getName() {
 		// TODO Auto-generated method stub
-		return super.getUsername();
+		return super.getName();
 	}
 
 	/* (non-Javadoc)

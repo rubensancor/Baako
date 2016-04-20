@@ -55,6 +55,7 @@ public class MainWindow {
 		frmBaako.setBounds(100, 100, 1000, 650);
 		frmBaako.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmBaako.getContentPane().setLayout(null);
+		frmBaako.setVisible(true);
 		
 		frameComposing();
 		
