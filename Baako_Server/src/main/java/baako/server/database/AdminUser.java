@@ -12,7 +12,7 @@ import javax.jdo.annotations.PersistenceCapable;
  * @author gusy
  *
  */
-@PersistenceCapable(detachable="true")
+@PersistenceCapable
 public class AdminUser extends User {
 
 
