@@ -12,6 +12,7 @@ import baako.server.auth.Auth;
 import baako.server.auth.IAuth;
 import baako.server.dao.BaakoDAO;
 import baako.server.dao.IBaakoDAO;
+import baako.server.database.Game;
 import baako.server.database.PlainUser;
 import baako.server.database.User;
 
@@ -38,9 +39,16 @@ public class BaakoApp {
 			dao = new BaakoDAO();
 			IAuth auth = new Auth(dao);
 			
-//			u = new PlainUser("gvirum@gmail.com","virum","asd",new Date(95,9, 03));
+			//Add a user
+//			PlainUser u = new PlainUser("gvirum@gmail.com","virum","asd",new Date(95,9, 03));
 //			System.out.println(u.getEmail());
 //			dao.addUser(u);
+			//Add a game
+			Game game = new Game("Through the Doors", 15, "FPS", 13);
+//			System.out.println(game.getName());
+//			dao.addGame(game);
+			
+			dao.deleteGame("kdk");
 			
 //			System.out.println("Email ----> "+dao.getUser("ruben").getEmail());
 			Naming.rebind(serverName, auth);
