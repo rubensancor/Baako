@@ -6,6 +6,7 @@ package baako.client.controller;
 import java.rmi.RemoteException;
 
 import baako.client.remote.RMIServiceLocator;
+import baako.server.database.PlainUser;
 import baako.server.dto.UserDTO;
 
 /**
@@ -42,12 +43,12 @@ public class BaakoController {
 		}
 	}
 	
-	public boolean register(String username, String password){
+	public boolean register(PlainUser u){
 		try{
 			System.out.println("Register");
-			System.out.println("Username---> "+username);
-			System.out.println("Password---> "+password);
-			if(rmi.getService().register(username, password)){
+			System.out.println("Username---> "+u.getName());
+			System.out.println("Password---> "+u.getPassword());
+			if(rmi.getService().register(u)){
 				return true;
 			}else{
 				return false;

@@ -3,11 +3,14 @@
  */
 package baako.client.gui.delegate;
 
+import java.awt.TrayIcon.MessageType;
+
 import javax.swing.JOptionPane;
 
 import baako.client.controller.BaakoController;
 import baako.client.gui.LoginWindow;
 import baako.client.gui.MainWindow;
+import baako.server.database.PlainUser;
 
 /**
  * @author gusy
@@ -24,22 +27,28 @@ public class Delegate_LoginWindow  extends LoginWindow{
 	
 	public boolean logIn(String username, String password){
 		if(controller.logIn(username, password)){
-			
-			new MainWindow();
+			new Delegate_MainWindow();
 			return true;
 		}else{
-			new JOptionPane("LOGIN FAILED");
+			new JOptionPane("ERROR IN THE LOGIN",1);
 			return false;
 		}
 	}
 	
-	public boolean register(String username, String password){
-		if(controller.register(username, password)){
-			return true;
-		}else{
-			new JOptionPane("YOU ARE ALREADY REGISTERED");
-			return false;
-		}
+	public void register(PlainUser u){
+		System.out.println("VAMOS A REGISTRAR");
+		System.out.println(u.getEmail());
+//		controller.register();
+//		if(controller.register(username, password)){
+//			return true;
+//		}else{
+//			new JOptionPane("YOU ARE ALREADY REGISTERED");
+//			return false;
+//		}
+	}
+	
+	public void newRegister(){
+		new Delegate_RegisterWindow(this);
 	}
 
 }
