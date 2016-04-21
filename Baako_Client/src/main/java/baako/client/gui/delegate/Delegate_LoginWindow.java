@@ -26,6 +26,7 @@ public class Delegate_LoginWindow  extends LoginWindow{
 	}
 	
 	public boolean logIn(String username, String password){
+		System.out.println("asdfasdf");
 		if(controller.logIn(username, password)){
 			new Delegate_MainWindow();
 			return true;

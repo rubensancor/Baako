@@ -46,7 +46,7 @@ public class BaakoDAO implements IBaakoDAO {
 			query.setFilter("username == usernameParam ");
 			query.declareParameters("String usernameParam");
 			query.setUnique(true);
-			System.out.println(username);
+			
 			aux = (User) query.execute(username);
 
 			Query query2 = pm.newQuery(PlainUser.class);
@@ -66,11 +66,14 @@ public class BaakoDAO implements IBaakoDAO {
 				tx.rollback();
 			}
 			if (pm != null && !pm.isClosed()) {
+				System.out.println("CERRANDO");
 				pm.close();
 			}
 			if(aux == null){
+				System.out.println("DEVUELVO");
 				return aux2;
 			}else{
+				System.out.println("DEVUELVO");
 				return aux;
 			}
 		}

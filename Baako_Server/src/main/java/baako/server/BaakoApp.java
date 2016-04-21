@@ -44,11 +44,11 @@ public class BaakoApp {
 //			System.out.println(u.getEmail());
 //			dao.addUser(u);
 			//Add a game
-			Game game = new Game("Through the Doors", 15, "FPS", 13);
+//			Game game = new Game("Through the Doors", 15, "FPS", 13);
 //			System.out.println(game.getName());
 //			dao.addGame(game);
 			
-			dao.deleteGame("kdk");
+//			dao.deleteGame("kdk");
 			
 //			System.out.println("Email ----> "+dao.getUser("ruben").getEmail());
 			Naming.rebind(serverName, auth);
