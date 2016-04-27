@@ -6,7 +6,9 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import baako.server.auth.Auth;
 import baako.server.auth.IAuth;
@@ -39,17 +41,8 @@ public class BaakoApp {
 			dao = new BaakoDAO();
 			IAuth auth = new Auth(dao);
 			
-			//Add a user
-//			PlainUser u = new PlainUser("gvirum@gmail.com","virum","asd",new Date(95,9, 03));
-//			System.out.println(u.getEmail());
-//			dao.addUser(u);
-			//Add a game
-//			Game game = new Game("Through the Doors", 15, "FPS", 13);
-//			System.out.println(game.getName());
-//			dao.addGame(game);
-			
-//			dao.deleteGame("kdk");
-			
+//		    ArrayList<Game> games = (ArrayList<Game>) dao.getAllGames();
+//		    System.out.println(games);
 //			System.out.println("Email ----> "+dao.getUser("ruben").getEmail());
 			Naming.rebind(serverName, auth);
 			System.out.println("Auth Server "+ serverName+ " active and waiting...");

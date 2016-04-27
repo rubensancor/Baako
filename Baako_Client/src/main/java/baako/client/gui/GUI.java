@@ -36,19 +36,23 @@ public class GUI {
 	/**
 	 * Create the application.
 	 */
-	public GUI() {
-		initialize();
+	public GUI(int type) {
+		initialize(type);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(int type) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		loginview();
+		if(type==1){
+			loginview();			
+		}else{
+			registerview();
+		}
 	}
 	
 	
@@ -59,16 +63,16 @@ public class GUI {
 		frame.setSize(450, 300);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel logiPanel = new JPanel();
-		logiPanel.setBackground(new Color(105, 105, 105));
-		logiPanel.setBounds(0, 0, 434, 261);
-		frame.getContentPane().add(logiPanel);
-		GridBagLayout gbl_logiPanel = new GridBagLayout();
-		gbl_logiPanel.columnWidths = new int[]{37, 81, 16, 164, 6, 63, 0};
-		gbl_logiPanel.rowHeights = new int[]{60, 47, 68, 65, 0};
-		gbl_logiPanel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_logiPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		logiPanel.setLayout(gbl_logiPanel);
+		JPanel loginPanel = new JPanel();
+		loginPanel.setBackground(new Color(105, 105, 105));
+		loginPanel.setBounds(0, 0, 434, 261);
+		frame.getContentPane().add(loginPanel);
+		GridBagLayout gbl_loginPanel = new GridBagLayout();
+		gbl_loginPanel.columnWidths = new int[]{37, 81, 16, 164, 6, 63, 0};
+		gbl_loginPanel.rowHeights = new int[]{60, 47, 68, 65, 0};
+		gbl_loginPanel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_loginPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		loginPanel.setLayout(gbl_loginPanel);
 		
 		
 		JLabel lblUsername = new JLabel("Username:");
@@ -78,7 +82,7 @@ public class GUI {
 		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
 		gbc_lblUsername.gridx = 1;
 		gbc_lblUsername.gridy = 1;
-		logiPanel.add(lblUsername, gbc_lblUsername);
+		loginPanel.add(lblUsername, gbc_lblUsername);
 		lblUsername.setBounds(28, 33, 67, 14);
 		
 		usernameField = new JTextField();
@@ -87,7 +91,7 @@ public class GUI {
 		gbc_usernameField.insets = new Insets(0, 0, 5, 5);
 		gbc_usernameField.gridx = 3;
 		gbc_usernameField.gridy = 1;
-		logiPanel.add(usernameField, gbc_usernameField);
+		loginPanel.add(usernameField, gbc_usernameField);
 		usernameField.setBounds(127, 30, 155, 20);
 		usernameField.setColumns(10);
 		
@@ -98,7 +102,7 @@ public class GUI {
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPassword.gridx = 1;
 		gbc_lblPassword.gridy = 2;
-		logiPanel.add(lblPassword, gbc_lblPassword);
+		loginPanel.add(lblPassword, gbc_lblPassword);
 		lblPassword.setBounds(28, 71, 67, 14);
 		
 		passwordField = new JPasswordField();
@@ -107,7 +111,7 @@ public class GUI {
 		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
 		gbc_passwordField.gridx = 3;
 		gbc_passwordField.gridy = 2;
-		logiPanel.add(passwordField, gbc_passwordField);
+		loginPanel.add(passwordField, gbc_passwordField);
 		passwordField.setBounds(127, 68, 155, 20);
 		
 		JPanel panel_2 = new JPanel();
@@ -118,7 +122,7 @@ public class GUI {
 		gbc_panel_2.fill = GridBagConstraints.BOTH;
 		gbc_panel_2.gridx = 1;
 		gbc_panel_2.gridy = 3;
-		logiPanel.add(panel_2, gbc_panel_2);
+		loginPanel.add(panel_2, gbc_panel_2);
 		
 		JButton btnRegister = new JButton("Register");
 		panel_2.add(btnRegister);
@@ -128,8 +132,10 @@ public class GUI {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				newRegister();
-				frame.dispose();
+//				newRegister();
+//				frame.dispose();
+				loginPanel.setVisible(false);
+				registerview();
 			}
 		});
 		
@@ -141,7 +147,7 @@ public class GUI {
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 3;
 		gbc_panel_1.gridy = 3;
-		logiPanel.add(panel_1, gbc_panel_1);
+		loginPanel.add(panel_1, gbc_panel_1);
 		
 		JButton btnLogIn = new JButton("Log In");
 		panel_1.add(btnLogIn);
@@ -261,14 +267,14 @@ public class GUI {
 	panel_2.add(lblDay, gbc_lblDay);
 	lblDay.setBounds(91, 302, 55, 16);
 	
-	JComboBox comboDay = new JComboBox();
+	JComboBox<String> comboDay = new JComboBox<String>();
 	GridBagConstraints gbc_comboDay = new GridBagConstraints();
 	gbc_comboDay.anchor = GridBagConstraints.NORTHWEST;
 	gbc_comboDay.insets = new Insets(0, 0, 5, 5);
 	gbc_comboDay.gridx = 3;
 	gbc_comboDay.gridy = 1;
 	panel_2.add(comboDay, gbc_comboDay);
-	comboDay.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
+	comboDay.setModel(new DefaultComboBoxModel<String>(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 	comboDay.setBounds(231, 297, 62, 26);
 	
 	JLabel lblMonth = new JLabel("Month");
@@ -280,14 +286,14 @@ public class GUI {
 	panel_2.add(lblMonth, gbc_lblMonth);
 	lblMonth.setBounds(91, 263, 55, 16);
 	
-	JComboBox comboYear = new JComboBox();
+	JComboBox<String> comboYear = new JComboBox<String>();
 	GridBagConstraints gbc_comboYear = new GridBagConstraints();
 	gbc_comboYear.anchor = GridBagConstraints.NORTHWEST;
 	gbc_comboYear.insets = new Insets(0, 0, 5, 5);
 	gbc_comboYear.gridx = 3;
 	gbc_comboYear.gridy = 2;
 	panel_2.add(comboYear, gbc_comboYear);
-	comboYear.setModel(new DefaultComboBoxModel(new String[] {"2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900"}));
+	comboYear.setModel(new DefaultComboBoxModel<String>(new String[] {"2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900"}));
 	comboYear.setBounds(210, 219, 83, 26);
 	
 	JLabel lblYear = new JLabel("Year");
@@ -299,14 +305,14 @@ public class GUI {
 	panel_2.add(lblYear, gbc_lblYear);
 	lblYear.setBounds(91, 224, 55, 16);
 	
-	JComboBox comboMonth = new JComboBox();
+	JComboBox<String> comboMonth = new JComboBox<String>();
 	GridBagConstraints gbc_comboMonth = new GridBagConstraints();
 	gbc_comboMonth.anchor = GridBagConstraints.NORTHWEST;
 	gbc_comboMonth.insets = new Insets(0, 0, 0, 5);
 	gbc_comboMonth.gridx = 3;
 	gbc_comboMonth.gridy = 3;
 	panel_2.add(comboMonth, gbc_comboMonth);
-	comboMonth.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
+	comboMonth.setModel(new DefaultComboBoxModel<String>(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
 	comboMonth.setBounds(188, 258, 105, 26);
 	
 	JPanel panel_3 = new JPanel();
@@ -325,17 +331,11 @@ public class GUI {
 	panel_3.add(btnCancel, gbc_btnCancel);
 	btnCancel.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
+		
 		}
 	});
 	btnCancel.setBounds(62, 366, 95, 28);
 	
-	
-	btnCancel.addActionListener(new ActionListener() {
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-		}
-	});
 	
 	JButton btnSend = new JButton("Send");
 	GridBagConstraints gbc_btnSend = new GridBagConstraints();
@@ -366,21 +366,9 @@ public class GUI {
 	public void newRegister(){
 		
 	}
-	
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI window = new GUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public void cancel(){
+		
 	}
+	
+	
 }

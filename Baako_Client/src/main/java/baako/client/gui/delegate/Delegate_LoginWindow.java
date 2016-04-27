@@ -3,30 +3,26 @@
  */
 package baako.client.gui.delegate;
 
-import java.awt.TrayIcon.MessageType;
-
 import javax.swing.JOptionPane;
-
 import baako.client.controller.BaakoController;
+import baako.client.gui.GUI;
 import baako.client.gui.LoginWindow;
-import baako.client.gui.MainWindow;
 import baako.server.database.PlainUser;
 
 /**
  * @author gusy
  *
  */
-public class Delegate_LoginWindow  extends LoginWindow{
+public class Delegate_LoginWindow  extends GUI{
 
 	private BaakoController controller;
 
 	public Delegate_LoginWindow(BaakoController controller){
-			super();
+			super(1);
 			this.controller = controller;
 	}
 	
 	public boolean logIn(String username, String password){
-		System.out.println("asdfasdf");
 		if(controller.logIn(username, password)){
 			new Delegate_MainWindow();
 			return true;
@@ -49,7 +45,11 @@ public class Delegate_LoginWindow  extends LoginWindow{
 	}
 	
 	public void newRegister(){
-		new Delegate_RegisterWindow(this);
+		new GUI(0);
+	}
+	
+	public void cancel(){
+			new GUI(1);
 	}
 
 }

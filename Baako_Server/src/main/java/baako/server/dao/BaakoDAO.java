@@ -3,6 +3,11 @@
  */
 package baako.server.dao;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.jdo.*;
 import baako.server.database.AdminUser;
 import baako.server.database.Game;
@@ -46,7 +51,7 @@ public class BaakoDAO implements IBaakoDAO {
 			query.setFilter("username == usernameParam ");
 			query.declareParameters("String usernameParam");
 			query.setUnique(true);
-			
+
 			aux = (User) query.execute(username);
 
 			Query query2 = pm.newQuery(PlainUser.class);
@@ -70,10 +75,9 @@ public class BaakoDAO implements IBaakoDAO {
 				pm.close();
 			}
 			if(aux == null){
-				System.out.println("DEVUELVO");
 				return aux2;
 			}else{
-				System.out.println("DEVUELVO");
+				System.out.println(aux.getEmail());
 				return aux;
 			}
 		}
@@ -132,6 +136,32 @@ public class BaakoDAO implements IBaakoDAO {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#getAllGames()
+	 */
+	@Override
+	public ArrayList<Game> getAllGames() {
+		pm = pmf.getPersistenceManager();
+		tx = pm.currentTransaction();
+		ArrayList<Game> games= new ArrayList<>();
+		try{
+			tx.begin();
 
+			Extent<Game> e = pm.getExtent(Game.class,true);
+			Iterator<Game> iter = e.iterator();
+			while (iter.hasNext())
+			{
+				Game aux = (Game) iter.next();
+				games.add(aux);
+			}
+			tx.commit();
+			return games;
 
+		}finally{
+			if(tx.isActive()){
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 }
