@@ -5,6 +5,7 @@ package baako.client.gui.delegate;
 
 import javax.swing.JOptionPane;
 import baako.client.controller.BaakoController;
+import baako.client.gui.GUI;
 import baako.client.gui.LoginWindow;
 import baako.server.database.PlainUser;
 
@@ -12,12 +13,11 @@ import baako.server.database.PlainUser;
  * @author gusy
  *
  */
-public class Delegate_LoginWindow  extends LoginWindow{
+public class Delegate_LoginWindow  extends GUI{
 
 	private BaakoController controller;
 
 	public Delegate_LoginWindow(BaakoController controller){
-			super();
 			this.controller = controller;
 	}
 	
@@ -44,7 +44,7 @@ public class Delegate_LoginWindow  extends LoginWindow{
 	}
 	
 	public void newRegister(){
-		new Delegate_RegisterWindow(this);
 	}
+	
 
 }
