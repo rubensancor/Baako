@@ -18,7 +18,6 @@ public class Delegate_LoginWindow  extends GUI{
 	private BaakoController controller;
 
 	public Delegate_LoginWindow(BaakoController controller){
-			super(1);
 			this.controller = controller;
 	}
 	
@@ -45,11 +44,7 @@ public class Delegate_LoginWindow  extends GUI{
 	}
 	
 	public void newRegister(){
-		new GUI(0);
 	}
 	
-	public void cancel(){
-			new GUI(1);
-	}
 
 }
