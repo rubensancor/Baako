@@ -3,13 +3,9 @@
  */
 package baako.client.gui.delegate;
 
-import java.awt.TrayIcon.MessageType;
-
 import javax.swing.JOptionPane;
-
 import baako.client.controller.BaakoController;
 import baako.client.gui.LoginWindow;
-import baako.client.gui.MainWindow;
 import baako.server.database.PlainUser;
 
 /**
