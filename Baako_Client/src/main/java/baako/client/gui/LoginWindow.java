@@ -1,10 +1,12 @@
 package baako.client.gui;
 
 import java.awt.EventQueue;
+import java.awt.TrayIcon.MessageType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import baako.client.gui.delegate.Delegate_RegisterWindow;
@@ -53,60 +55,68 @@ public class LoginWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
-		
+
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setBounds(28, 33, 67, 14);
 		frame.getContentPane().add(lblUsername);
-		
+
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setBounds(28, 71, 67, 14);
 		frame.getContentPane().add(lblPassword);
-		
+
 		usernameField = new JTextField();
 		usernameField.setBounds(127, 30, 155, 20);
 		frame.getContentPane().add(usernameField);
 		usernameField.setColumns(10);
-		
+
 		passwordField = new JPasswordField();
 		passwordField.setBounds(127, 68, 155, 20);
 		frame.getContentPane().add(passwordField);
-		
+
 		JButton btnRegister = new JButton("Register");
 		btnRegister.setBounds(61, 131, 89, 23);
 		frame.getContentPane().add(btnRegister);
-		
+
 		JButton btnLogIn = new JButton("Log In");
 		btnLogIn.setBounds(183, 131, 89, 23);
 		frame.getContentPane().add(btnLogIn);
-		
+
 		btnLogIn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(logIn(usernameField.getText(), new String(passwordField.getPassword()))){
-//					System.out.println("GO");
+				if(usernameField.getText().equals("")){
+					JOptionPane.showMessageDialog(frame, "The field 'Username' cannot be empty.");
+					usernameField.requestFocus();
+				} else if(passwordField.getPassword().length == 0){
+					JOptionPane.showMessageDialog(frame, "The field 'password' cannot be empty.");
+					passwordField.requestFocus();
+				}else if(!logIn(usernameField.getText(), new String(passwordField.getPassword()))){
+					JOptionPane.showMessageDialog(frame, "The login credentials are incorrect. Please, revise them");
+				} else {
+					//					System.out.println("GO");
 					frame.dispose();
-				}
+				}			
 			}
 		});
-		
+
 		btnRegister.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				newRegister();
 				frame.dispose();
 			}
 		});
-		
-		
+
+
 	}
 	public void register(PlainUser u){
 	}
 	public boolean logIn(String username, String password){
-		return true;
+		return (username.equals("susan"));
 	}
 	public void newRegister(){
-		
+
 	}
 }
