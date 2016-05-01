@@ -164,4 +164,47 @@ public class BaakoDAO implements IBaakoDAO {
 			pm.close();
 		}
 	}
+	
+
+
+
+	public Game searchGame(String name){
+
+		PersistenceManagerFactory pmf = JDOHelper
+				.getPersistenceManagerFactory("Baako");
+		// Persistence Manager
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		List<Game> games = new ArrayList<Game>();
+
+		try{
+			System.out.println("....Searching game....");
+			tx.begin();
+			Extent<Game> extent = pm.getExtent(Game.class, true);	
+			for(Game game: extent){
+				if(game.getName().equals(name)){
+					games.add(game);
+
+				}
+			}		
+			tx.commit();
+
+
+		}catch(Exception ex){
+			System.out.println("   $ Error retreiving an extent: " + ex.getMessage());
+			System.out.println("ERROR QUERY GAME DATABASE");
+
+		}finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();    		
+		}
+
+		return games.get(0);
+	}
+
+	
+	
 }
