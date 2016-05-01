@@ -19,90 +19,90 @@
 	</properties>
 
 	<dependencies>
-	<dependency>
-            <groupId>org.datanucleus</groupId>
-            <artifactId>datanucleus-core</artifactId>
-            <version>[4.0.0-release, 4.9)</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.datanucleus</groupId>
-            <artifactId>datanucleus-api-jdo</artifactId>
-            <version>[4.0.0-release, 4.1.99)</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>javax.jdo</groupId>
-            <artifactId>jdo-api</artifactId>
-            <version>3.1</version>
-        </dependency>
-		
 		<dependency>
-            <groupId>org.datanucleus</groupId>
-            <artifactId>datanucleus-rdbms</artifactId>
-            <version>[4.0.0-release, 4.9)</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.17</version>
-        </dependency>
-		
-		
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>[1.2, )</version>
-        </dependency>
-        
-          <dependency>
-            <groupId>baako</groupId>
-            <artifactId>server</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        
-		
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-core</artifactId>
+			<version>[4.0.0-release, 4.9)</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-api-jdo</artifactId>
+			<version>[4.0.0-release, 4.1.99)</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.jdo</groupId>
+			<artifactId>jdo-api</artifactId>
+			<version>3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-rdbms</artifactId>
+			<version>[4.0.0-release, 4.9)</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.17</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>[1.2, )</version>
+		</dependency>
+
+		<dependency>
+			<groupId>baako</groupId>
+			<artifactId>server</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<profiles>
-	<!-- run as 'mvn exec:java -Pclient' -->
-		<profile>  
-			<id>client</id>  
-			<build>  
-				<plugins>  
-					<plugin>  
-						<groupId>org.codehaus.mojo</groupId>  
-						<artifactId>exec-maven-plugin</artifactId>  
-						<version>1.1</version>  
-						<configuration>  
-									<mainClass>baako.client.App</mainClass>
-									<systemProperties>
-										<systemProperty>
-											<key>java.security.manager</key>
-											<value>java.rmi.RMISecurityManager</value>
-										</systemProperty>
-										<systemProperty>
-											<key>java.security.policy</key>
-											<value>${policy.file}</value>
-										</systemProperty>
-									</systemProperties>
-									<arguments>  
-										<argument>${server.IP}</argument>  
-										<argument>${server.port}</argument>  
-										<argument>${server.Name}</argument>  
-									</arguments>  
-						</configuration>  
-					</plugin>  
-				</plugins>  
-			</build>  
-		</profile>  
-		</profiles>
-	
+		<!-- run as 'mvn exec:java -Pclient' -->
+		<profile>
+			<id>client</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.1</version>
+						<configuration>
+							<mainClass>baako.client.App</mainClass>
+							<systemProperties>
+								<systemProperty>
+									<key>java.security.manager</key>
+									<value>java.rmi.RMISecurityManager</value>
+								</systemProperty>
+								<systemProperty>
+									<key>java.security.policy</key>
+									<value>${policy.file}</value>
+								</systemProperty>
+							</systemProperties>
+							<arguments>
+								<argument>${server.IP}</argument>
+								<argument>${server.port}</argument>
+								<argument>${server.Name}</argument>
+							</arguments>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 </project>
