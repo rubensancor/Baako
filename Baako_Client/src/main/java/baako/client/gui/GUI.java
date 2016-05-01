@@ -3,30 +3,32 @@ package baako.client.gui;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
-
-import javax.swing.DefaultComboBoxModel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Properties;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-
+import javax.swing.JFormattedTextField.AbstractFormatter;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 import baako.server.database.PlainUser;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.GridLayout;
-import javax.swing.JDesktopPane;
 
 public class GUI {
 
@@ -250,10 +252,19 @@ public class GUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(logIn(usernameField.getText(), new String(passwordField.getPassword()))){
+				if(usernameField.getText().equals("")){
+					JOptionPane.showMessageDialog(frame, "The field 'Username' cannot be empty.");
+					usernameField.requestFocus();
+				} else if(passwordField.getPassword().length == 0){
+					JOptionPane.showMessageDialog(frame, "The field 'password' cannot be empty.");
+					passwordField.requestFocus();
+				}else if(!logIn(usernameField.getText(), new String(passwordField.getPassword()))){
+					JOptionPane.showMessageDialog(frame, "The login credentials are incorrect. Please, revise them");
+				} else {
+					//					System.out.println("GO");
 					frame.dispose();
 				}
-			}
+			}			
 		});
 	}
 
@@ -351,63 +362,73 @@ public class GUI {
 		panel_2.add(lblDate, gbc_lblDate);
 		lblDate.setBounds(23, 197, 72, 16);
 
-		JLabel lblDay = new JLabel("Day");
-		GridBagConstraints gbc_lblDay = new GridBagConstraints();
-		gbc_lblDay.anchor = GridBagConstraints.WEST;
-		gbc_lblDay.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDay.gridx = 2;
-		gbc_lblDay.gridy = 1;
-		panel_2.add(lblDay, gbc_lblDay);
-		lblDay.setBounds(91, 302, 55, 16);
+		//		JLabel lblDay = new JLabel("Day");
+		//		GridBagConstraints gbc_lblDay = new GridBagConstraints();
+		//		gbc_lblDay.anchor = GridBagConstraints.WEST;
+		//		gbc_lblDay.insets = new Insets(0, 0, 5, 5);
+		//		gbc_lblDay.gridx = 2;
+		//		gbc_lblDay.gridy = 1;
+		//		panel_2.add(lblDay, gbc_lblDay);
+		//		lblDay.setBounds(91, 302, 55, 16);
+		//
+		//		JComboBox comboDay = new JComboBox();
+		//		GridBagConstraints gbc_comboDay = new GridBagConstraints();
+		//		gbc_comboDay.anchor = GridBagConstraints.NORTHWEST;
+		//		gbc_comboDay.insets = new Insets(0, 0, 5, 5);
+		//		gbc_comboDay.gridx = 3;
+		//		gbc_comboDay.gridy = 1;
+		//		panel_2.add(comboDay, gbc_comboDay);
+		//		comboDay.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
+		//		comboDay.setBounds(231, 297, 62, 26);
+		//
+		//		JLabel lblMonth = new JLabel("Month");
+		//		GridBagConstraints gbc_lblMonth = new GridBagConstraints();
+		//		gbc_lblMonth.anchor = GridBagConstraints.WEST;
+		//		gbc_lblMonth.insets = new Insets(0, 0, 5, 5);
+		//		gbc_lblMonth.gridx = 2;
+		//		gbc_lblMonth.gridy = 2;
+		//		panel_2.add(lblMonth, gbc_lblMonth);
+		//		lblMonth.setBounds(91, 263, 55, 16);
+		//
+		//		JComboBox comboYear = new JComboBox();
+		//		GridBagConstraints gbc_comboYear = new GridBagConstraints();
+		//		gbc_comboYear.anchor = GridBagConstraints.NORTHWEST;
+		//		gbc_comboYear.insets = new Insets(0, 0, 5, 5);
+		//		gbc_comboYear.gridx = 3;
+		//		gbc_comboYear.gridy = 2;
+		//		panel_2.add(comboYear, gbc_comboYear);
+		//		comboYear.setModel(new DefaultComboBoxModel(new String[] {"2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900"}));
+		//		comboYear.setBounds(210, 219, 83, 26);
+		//
+		//		JLabel lblYear = new JLabel("Year");
+		//		GridBagConstraints gbc_lblYear = new GridBagConstraints();
+		//		gbc_lblYear.anchor = GridBagConstraints.WEST;
+		//		gbc_lblYear.insets = new Insets(0, 0, 0, 5);
+		//		gbc_lblYear.gridx = 2;
+		//		gbc_lblYear.gridy = 3;
+		//		panel_2.add(lblYear, gbc_lblYear);
+		//		lblYear.setBounds(91, 224, 55, 16);
+		//
+		//		JComboBox comboMonth = new JComboBox();
+		//		GridBagConstraints gbc_comboMonth = new GridBagConstraints();
+		//		gbc_comboMonth.anchor = GridBagConstraints.NORTHWEST;
+		//		gbc_comboMonth.insets = new Insets(0, 0, 0, 5);
+		//		gbc_comboMonth.gridx = 3;
+		//		gbc_comboMonth.gridy = 3;
+		//		panel_2.add(comboMonth, gbc_comboMonth);
+		//		comboMonth.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
+		//		comboMonth.setBounds(188, 258, 105, 26);
 
-		JComboBox comboDay = new JComboBox();
-		GridBagConstraints gbc_comboDay = new GridBagConstraints();
-		gbc_comboDay.anchor = GridBagConstraints.NORTHWEST;
-		gbc_comboDay.insets = new Insets(0, 0, 5, 5);
-		gbc_comboDay.gridx = 3;
-		gbc_comboDay.gridy = 1;
-		panel_2.add(comboDay, gbc_comboDay);
-		comboDay.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
-		comboDay.setBounds(231, 297, 62, 26);
 
-		JLabel lblMonth = new JLabel("Month");
-		GridBagConstraints gbc_lblMonth = new GridBagConstraints();
-		gbc_lblMonth.anchor = GridBagConstraints.WEST;
-		gbc_lblMonth.insets = new Insets(0, 0, 5, 5);
-		gbc_lblMonth.gridx = 2;
-		gbc_lblMonth.gridy = 2;
-		panel_2.add(lblMonth, gbc_lblMonth);
-		lblMonth.setBounds(91, 263, 55, 16);
 
-		JComboBox comboYear = new JComboBox();
-		GridBagConstraints gbc_comboYear = new GridBagConstraints();
-		gbc_comboYear.anchor = GridBagConstraints.NORTHWEST;
-		gbc_comboYear.insets = new Insets(0, 0, 5, 5);
-		gbc_comboYear.gridx = 3;
-		gbc_comboYear.gridy = 2;
-		panel_2.add(comboYear, gbc_comboYear);
-		comboYear.setModel(new DefaultComboBoxModel(new String[] {"2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900"}));
-		comboYear.setBounds(210, 219, 83, 26);
+		UtilDateModel model = new UtilDateModel();
+		Properties p = new Properties();
+		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		datePicker.setBounds(128, 197, 208, 28);
+		panel_2.add(datePicker);
 
-		JLabel lblYear = new JLabel("Year");
-		GridBagConstraints gbc_lblYear = new GridBagConstraints();
-		gbc_lblYear.anchor = GridBagConstraints.WEST;
-		gbc_lblYear.insets = new Insets(0, 0, 0, 5);
-		gbc_lblYear.gridx = 2;
-		gbc_lblYear.gridy = 3;
-		panel_2.add(lblYear, gbc_lblYear);
-		lblYear.setBounds(91, 224, 55, 16);
-
-		JComboBox comboMonth = new JComboBox();
-		GridBagConstraints gbc_comboMonth = new GridBagConstraints();
-		gbc_comboMonth.anchor = GridBagConstraints.NORTHWEST;
-		gbc_comboMonth.insets = new Insets(0, 0, 0, 5);
-		gbc_comboMonth.gridx = 3;
-		gbc_comboMonth.gridy = 3;
-		panel_2.add(comboMonth, gbc_comboMonth);
-		comboMonth.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
-		comboMonth.setBounds(188, 258, 105, 26);
-
+		
 		JPanel panel_3 = new JPanel();
 		registerPanel.add(panel_3);
 		GridBagLayout gbl_panel_3 = new GridBagLayout();
@@ -442,10 +463,8 @@ public class GUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int year = Integer.valueOf((String)comboYear.getSelectedItem()) - 1900; 
-				int month = Integer.valueOf((String)comboMonth.getSelectedItem()) - 1;
-				int day = Integer.valueOf((String)comboDay.getSelectedItem());
-				//	register(new Date(year, month, day));
+					PlainUser user = new PlainUser(tfEmail.getText(), tfUsername.getText(), pfpassField.getPassword().toString(), model.getValue());
+					
 			}
 		});
 
@@ -480,3 +499,26 @@ public class GUI {
 		});
 	}
 }
+
+class DateLabelFormatter extends AbstractFormatter {
+
+	private static final long serialVersionUID = 1L;
+	private String datePattern = "yyyy-MM-dd";
+	private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+
+	@Override
+	public Object stringToValue(String text) throws ParseException {
+		return dateFormatter.parseObject(text);
+	}
+
+	@Override
+	public String valueToString(Object value) throws ParseException {
+		if (value != null) {
+			Calendar cal = (Calendar) value;
+			return dateFormatter.format(cal.getTime());
+		}
+
+		return "";
+	}
+}
+
