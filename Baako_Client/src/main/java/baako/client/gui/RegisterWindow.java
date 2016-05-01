@@ -202,7 +202,7 @@ public class RegisterWindow {
 	}
 }
 
-class DateLabelFormatter extends AbstractFormatter {
+class DateLabelFormattedr extends AbstractFormatter {
 
 	private static final long serialVersionUID = 1L;
 	private String datePattern = "yyyy-MM-dd";
