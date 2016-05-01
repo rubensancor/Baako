@@ -42,6 +42,20 @@ public class Game {
 		this.description = description;
 		this.PEGI = PEGI;
 	}
+	
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setPrice(float price) {
+		this.price = price;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public void setPEGI(int pEGI) {
+		PEGI = pEGI;
+	}
 	/**
 	 * @return the name
 	 */
