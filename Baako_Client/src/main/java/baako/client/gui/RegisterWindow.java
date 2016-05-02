@@ -199,6 +199,7 @@ public class RegisterWindow {
 		});
 	}
 	public void register(Date birthdate){
+		
 	}
 }
 

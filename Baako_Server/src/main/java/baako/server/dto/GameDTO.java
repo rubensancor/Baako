@@ -1,5 +1,7 @@
 package baako.server.dto;
 
+import baako.server.database.Game;
+
 public class GameDTO {
 	
 	private String name;
@@ -16,6 +18,12 @@ public class GameDTO {
 		this.price = price;
 		this.description = description;
 		PEGI = pEGI;
+	}
+	public GameDTO(Game game) {
+		this.name = game.getName();
+		this.price = game.getPrice();
+		this.description = game.getDescription();
+		this.PEGI = game.getPEGI();
 	}
 	public String getName() {
 		return name;
@@ -40,6 +48,15 @@ public class GameDTO {
 	}
 	public void setPEGI(int pEGI) {
 		PEGI = pEGI;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		GameDTO eq;
+		if(obj instanceof GameDTO)eq = (GameDTO)obj; 
+		else return false;
+		if(!eq.getName().equals(name)) return false;
+		else return true;
 	}
 
 }

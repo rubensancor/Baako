@@ -143,10 +143,9 @@ public class BaakoDAO implements IBaakoDAO {
 	public ArrayList<Game> getAllGames() {
 		pm = pmf.getPersistenceManager();
 		tx = pm.currentTransaction();
-		ArrayList<Game> games= new ArrayList<>();
+		ArrayList<Game> games= new ArrayList<Game>();
 		try{
 			tx.begin();
-
 			Extent<Game> e = pm.getExtent(Game.class,true);
 			Iterator<Game> iter = e.iterator();
 			while (iter.hasNext())
