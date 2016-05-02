@@ -146,7 +146,6 @@ public class BaakoDAO implements IBaakoDAO {
 		ArrayList<Game> games= new ArrayList<Game>();
 		try{
 			tx.begin();
-
 			Extent<Game> e = pm.getExtent(Game.class,true);
 			Iterator<Game> iter = e.iterator();
 			while (iter.hasNext())

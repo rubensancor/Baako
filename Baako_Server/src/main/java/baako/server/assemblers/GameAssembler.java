@@ -13,10 +13,16 @@ public class GameAssembler {
 		return instance;
 	}
 	
-	public GameDTO getGameDTO(Game game){
-		GameDTO dto= new GameDTO(game.getName(),game.getPrice(),game.getDescription(),game.getPEGI());
+
+	public GameDTO assemble(Game game) {
+		GameDTO dto= new GameDTO(game);
 		return dto;
 	}
+	
+	public Game disassemble(GameDTO game) {
+		Game normal = new Game(game);
+		return normal;
 
+	}
 	
 }
