@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -425,7 +426,7 @@ public class GUI {
 		Properties p = new Properties();
 		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-		datePicker.setBounds(128, 197, 208, 28);
+		datePanel.setBounds(128, 107, 208, 28);
 		panel_2.add(datePicker);
 
 		
@@ -463,7 +464,33 @@ public class GUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
+				//	Validations for the input of text in the registration
+				if(tfUsername.getText().equals("")){
+					JOptionPane.showMessageDialog(frame, "The field 'Username' cannot be empty.");
+					tfUsername.requestFocus();
+				} else if(tfUsername.getText().length() < 3){
+					JOptionPane.showMessageDialog(frame, "The username has to be at least 3 characters long.");
+					tfUsername.requestFocus();
+				} else if(passwordField.getPassword().length == 0){
+					JOptionPane.showMessageDialog(frame, "The field 'password' cannot be empty.");
+					passwordField.requestFocus();
+				} else if(passwordField.getPassword().length < 6){
+					JOptionPane.showMessageDialog(frame, "The password has to be at least 6 characters long.");
+					passwordField.requestFocus();
+				} else if(tfEmail.getText().equals("")){
+					JOptionPane.showMessageDialog(frame, "The field 'email' cannot be empty.");
+					tfEmail.requestFocus();
+				} else if(!tfEmail.getText().contains("@") || !tfEmail.getText().contains(".") || tfEmail.getText().length() < 5){
+					JOptionPane.showMessageDialog(frame, "Insert a valid email.");
+					tfEmail.requestFocus();
+				} else if(datePicker.getModel().getValue() == null){
+					JOptionPane.showMessageDialog(frame, "The field 'Birthdate' cannot be empty.");
+				} else {
 					PlainUser user = new PlainUser(tfEmail.getText(), tfUsername.getText(), pfpassField.getPassword().toString(), model.getValue());
+					frame.dispose();
+				}
+
 					
 			}
 		});
