@@ -27,6 +27,9 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JDesktopPane;
+import javax.swing.JEditorPane;
+import javax.swing.SwingConstants;
+import javax.swing.JTextArea;
 
 public class GUI {
 
@@ -36,6 +39,8 @@ public class GUI {
 	protected JTextField tfUsername;
 	protected JTextField tfEmail;
 	protected JPasswordField pfpassField;
+	private JTextField nameField;
+	private JTextField priceField;
 
 
 	/**
@@ -52,11 +57,13 @@ public class GUI {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
 		frame.setVisible(true);
-		loginview();
-
+		//loginview();
+		addgameview();
 	}
-
+/**
 	public void mainview(){
 
 		frame.setSize(741, 581);
@@ -133,25 +140,12 @@ public class GUI {
 		optionPanel.setBounds(574, 49, 151, 493);
 		mainPanel_1.add(optionPanel);
 	}
-
-	public void logOut(){
-		JButton btnLogin = new JButton("LOGIN");
-		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnLogin.setForeground(new Color(255, 255, 255));
-		btnLogin.setBackground(new Color(0, 128, 0));
-		btnLogin.setBounds(10, 0, 102, 27);
-		//	LogPanel.add(btnLogin);
-
-		JLabel lblLogged = new JLabel("Log Status");
-		lblLogged.setForeground(new Color(255, 255, 255));
-		lblLogged.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblLogged.setBounds(124, 0, 119, 27);
-		//	LogPanel.add(lblLogged);
-	}
+**/
 
 	/**
 	 * Changes to login view.
 	 */
+	/**
 	private void loginview() {
 		frame.setSize(450, 300);
 		frame.getContentPane().setLayout(null);
@@ -449,9 +443,106 @@ public class GUI {
 			}
 		});
 
+	}**/
+
+	public void addgameview(){
+		frame.setSize(450, 600);
+		frame.getContentPane().setLayout(null);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(105, 105, 105));
+		panel.setBounds(0, 0, 434, 561);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblName = new JLabel("NAME");
+		lblName.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblName.setForeground(new Color(255, 255, 255));
+		lblName.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblName.setBounds(93, 23, 46, 14);
+		panel.add(lblName);
+		
+		JLabel lblPrice = new JLabel("PRICE");
+		lblPrice.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPrice.setForeground(new Color(255, 255, 255));
+		lblPrice.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPrice.setBounds(93, 75, 46, 14);
+		panel.add(lblPrice);
+		
+		JLabel lblDescription = new JLabel("DESCRIPTION");
+		lblDescription.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDescription.setForeground(new Color(255, 255, 255));
+		lblDescription.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblDescription.setBounds(39, 123, 100, 14);
+		panel.add(lblDescription);
+		
+		JLabel lblCategory = new JLabel("CATEGORY");
+		lblCategory.setForeground(new Color(255, 255, 255));
+		lblCategory.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblCategory.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCategory.setBounds(62, 255, 77, 14);
+		panel.add(lblCategory);
+		
+		JLabel lblDesigner = new JLabel("DESIGNER");
+		lblDesigner.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDesigner.setForeground(new Color(255, 255, 255));
+		lblDesigner.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblDesigner.setBounds(62, 363, 77, 22);
+		panel.add(lblDesigner);
+		
+		nameField = new JTextField();
+		nameField.setBounds(164, 22, 134, 17);
+		panel.add(nameField);
+		nameField.setColumns(10);
+		
+		priceField = new JTextField();
+		priceField.setBounds(164, 73, 134, 20);
+		panel.add(priceField);
+		priceField.setColumns(10);
+		
+		JComboBox categoryCBox = new JComboBox();
+		categoryCBox.setBounds(164, 252, 100, 20);
+		panel.add(categoryCBox);
+		
+		JComboBox designerCBox = new JComboBox();
+		designerCBox.setBounds(164, 364, 100, 20);
+		panel.add(designerCBox);
+		
+		JComboBox categoryCBoxOpt1 = new JComboBox();
+		categoryCBoxOpt1.setBounds(294, 316, 100, 20);
+		panel.add(categoryCBoxOpt1);
+		
+		JComboBox categoryCBoxOpt2 = new JComboBox();
+		categoryCBoxOpt2.setBounds(164, 281, 100, 22);
+		panel.add(categoryCBoxOpt2);
+		
+		JComboBox categoryCBoxOpt3 = new JComboBox();
+		categoryCBoxOpt3.setBounds(164, 314, 100, 24);
+		panel.add(categoryCBoxOpt3);
+		
+		JComboBox categoryCBoxOpt4 = new JComboBox();
+		categoryCBoxOpt4.setBounds(294, 252, 100, 22);
+		panel.add(categoryCBoxOpt4);
+		
+		JComboBox categoryCBoxOpt5 = new JComboBox();
+		categoryCBoxOpt5.setBounds(294, 282, 100, 20);
+		panel.add(categoryCBoxOpt5);
+		
+		JComboBox designerCBoxOpt1 = new JComboBox();
+		designerCBoxOpt1.setBounds(294, 364, 100, 20);
+		panel.add(designerCBoxOpt1);
+		
+		JComboBox designerCBoxOpt2 = new JComboBox();
+		designerCBoxOpt2.setBounds(164, 395, 100, 20);
+		panel.add(designerCBoxOpt2);
+		
+		JComboBox designerCBoxOpt3 = new JComboBox();
+		designerCBoxOpt3.setBounds(294, 395, 100, 20);
+		panel.add(designerCBoxOpt3);
+		
+		JTextArea descTArea = new JTextArea();
+		descTArea.setBounds(164, 119, 230, 122);
+		panel.add(descTArea);
 	}
-
-
 
 
 	public void register(PlainUser u){
