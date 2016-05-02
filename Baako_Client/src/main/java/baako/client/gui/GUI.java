@@ -135,6 +135,9 @@ public class GUI {
 		optionPanel.setBackground(new Color(105, 105, 105));
 		optionPanel.setBounds(574, 49, 151, 493);
 		mainPanel_1.add(optionPanel);
+		if(){
+			//no changes
+		}
 	}
 
 	public void logOut(){
