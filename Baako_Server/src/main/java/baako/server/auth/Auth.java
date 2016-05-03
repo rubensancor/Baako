@@ -34,10 +34,8 @@ public class Auth {
 			PlainUserDTO user = Assembler.getInstance().assemble(u);
 			//			logger.info(user);
 			return user;
-		}else{
-			logger.error("Error in the login");
-			return null;
-		}
+
+		}else return null;
 	}
 
 	public boolean register(PlainUser user) throws RemoteException {
