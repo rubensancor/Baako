@@ -33,6 +33,8 @@ import javax.swing.JDesktopPane;
 import javax.swing.JEditorPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class GUI {
 
@@ -60,12 +62,13 @@ public class GUI {
 	private void initialize() {
 		this.state=null;
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\eclipse\\git\\Baako\\Baako_Server\\src\\main\\images\\bakologo.png"));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		frame.setVisible(true);
-		loginview();
+		mainview();
 		//addgameview();
 		//mainview();
 		//mainview();
@@ -143,7 +146,7 @@ public class GUI {
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mainPanel_1.setVisible(false);
-				loginview();
+				//loginview();
 				frame.repaint();
 			}
 		});
@@ -154,11 +157,19 @@ public class GUI {
 		optionPanel.setBounds(574, 49, 151, 493);
 		mainPanel_1.add(optionPanel);
 		GridBagLayout gbl_optionPanel = new GridBagLayout();
-		gbl_optionPanel.columnWidths = new int[]{0, 0, 0};
-		gbl_optionPanel.rowHeights = new int[]{117, 42, 42, 0, 0, 0, 0, 0, 0};
-		gbl_optionPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gbl_optionPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_optionPanel.columnWidths = new int[]{0, 0, 0, 0};
+		gbl_optionPanel.rowHeights = new int[]{117, 42, 42, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_optionPanel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_optionPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		optionPanel.setLayout(gbl_optionPanel);
+		
+		JLabel iconlabel = new JLabel("");
+		iconlabel.setIcon(new ImageIcon("C:\\eclipse\\git\\Baako\\Baako_Server\\src\\main\\images\\bakologo.ico"));
+		GridBagConstraints gbc_iconlabel = new GridBagConstraints();
+		gbc_iconlabel.insets = new Insets(60, 0, 5, 0);
+		gbc_iconlabel.gridx = 1;
+		gbc_iconlabel.gridy = 10;
+		optionPanel.add(iconlabel, gbc_iconlabel);
 		
 		JButton btninfo = new JButton("+INFO");
 		GridBagConstraints gbc_btninfo = new GridBagConstraints();
@@ -319,7 +330,7 @@ public class GUI {
 	}
 
 	
-	
+
 	
 	private void loginview() {
 		frame.setSize(450, 300);
@@ -437,6 +448,7 @@ public class GUI {
 	}
 
 	
+		
 	public void registerview(){
 		frame.setSize(376, 455);
 		frame.getContentPane().setLayout(null);
