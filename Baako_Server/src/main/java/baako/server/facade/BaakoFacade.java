@@ -10,9 +10,11 @@ import baako.server.assemblers.Assembler;
 import baako.server.auth.Auth;
 import baako.server.dao.BaakoDAO;
 import baako.server.dao.IBaakoDAO;
-import baako.server.database.PlainUser;
 import baako.server.dto.PlainUserDTO;
 import baako.server.manager.IBaakoManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory; 
+
 /**
  * @author gusy
  *
@@ -22,6 +24,7 @@ public class BaakoFacade extends UnicastRemoteObject implements IBaakoManager{
 	private static final long serialVersionUID = -1814339868463815707L;
 
 
+	Logger logger = LoggerFactory.getLogger(BaakoFacade.class);
 	private Auth auth;
 	private BaakoDAO dao;
 	/**
@@ -33,7 +36,7 @@ public class BaakoFacade extends UnicastRemoteObject implements IBaakoManager{
 	}
 
 	public PlainUserDTO checkUserInfo(String username, String password) throws RemoteException {
-		System.out.println("FACADE-> CHECK USER INFO");
+		logger.info("FACADE-> CHECK USER INFO");
 		return auth.checkUserInfo(username, password);
 	}
 

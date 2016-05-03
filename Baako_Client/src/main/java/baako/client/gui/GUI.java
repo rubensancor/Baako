@@ -27,9 +27,13 @@ import java.awt.Insets;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.GridLayout;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory; 
+
 
 public class GUI {
 
+	protected Logger logger = LoggerFactory.getLogger(GUI.class);
 	private JFrame frame;
 	private JTextField usernameField;
 	private JPasswordField passwordField;

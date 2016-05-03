@@ -4,9 +4,11 @@
 package baako.server.dao;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory; 
 
 import javax.jdo.*;
 import baako.server.database.Game;
@@ -24,6 +26,8 @@ public class BaakoDAO implements IBaakoDAO {
 	PersistenceManager pm = null;
 
 	Transaction tx = null;
+	
+	Logger logger = LoggerFactory.getLogger(BaakoDAO.class);
 
 	@SuppressWarnings("finally")
 	public User getUser(String username){
@@ -37,7 +41,7 @@ public class BaakoDAO implements IBaakoDAO {
 
 		try{
 			tx.begin();
-			System.out.println("INFO: Getting a user from the db:");
+			logger.info("INFO: Getting a user from the db:");
 			//FUNCIONA
 			//			Extent e = pm.getExtent(AdminUser.class, true);
 			//			Iterator iter = e.iterator();
@@ -59,7 +63,7 @@ public class BaakoDAO implements IBaakoDAO {
 			query2.setUnique(true);
 
 			aux2 = (PlainUser) query2.execute(username);
-			System.out.println(aux2);
+			logger.info(aux2.toString());
 
 			tx.commit();
 			if(aux == null){
@@ -69,13 +73,13 @@ public class BaakoDAO implements IBaakoDAO {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println("WARN: Exception when retrieving from database");
+			logger.warn("Exception when retrieving from database");
 		}finally{
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
 			}
 			if (pm != null && !pm.isClosed()) {
-				System.out.println("CERRANDO");
+				logger.info("CERRANDO");
 				pm.close();
 			}
 		}
@@ -88,7 +92,7 @@ public class BaakoDAO implements IBaakoDAO {
 	public void addUser(PlainUser user) {
 		//DAO magic
 		pm = pmf.getPersistenceManager();
-		//		System.out.println(user.getName());
+		logger.info(user.getName());
 		try{
 			pm.makePersistent(user);
 		}finally{
@@ -124,7 +128,7 @@ public class BaakoDAO implements IBaakoDAO {
 
 		}finally{
 			if (tx != null && tx.isActive()) {
-				System.out.println("There's no such game");
+				logger.info("There's no such game");
 				tx.rollback();
 			}
 			if (pm != null && !pm.isClosed()) {
@@ -173,7 +177,7 @@ public class BaakoDAO implements IBaakoDAO {
 		List<Game> games = new ArrayList<Game>();
 
 		try{
-			System.out.println("....Searching game....");
+			logger.info("....Searching game....");
 			tx.begin();
 			Extent<Game> extent = pm.getExtent(Game.class, true);	
 			for(Game game: extent){
@@ -186,8 +190,7 @@ public class BaakoDAO implements IBaakoDAO {
 
 
 		}catch(Exception ex){
-			System.out.println("   $ Error retreiving an extent: " + ex.getMessage());
-			System.out.println("ERROR QUERY GAME DATABASE");
+			logger.error("   $ Error retreiving an extent: " + ex.getMessage());
 
 		}finally {
 			if (tx != null && tx.isActive()) {
