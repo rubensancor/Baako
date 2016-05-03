@@ -5,12 +5,12 @@ import baako.server.database.PlainUser;
 import baako.server.dto.GameDTO;
 import baako.server.dto.PlainUserDTO;
 
-public class GameAssembler {
+public class Assembler {
 	
-	public static GameAssembler instance;
-	public static GameAssembler getInstance(){
+	public static Assembler instance;
+	public static Assembler getInstance(){
 		if(instance== null){
-			instance = new GameAssembler();	
+			instance = new Assembler();	
 		}
 		return instance;
 	}

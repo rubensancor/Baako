@@ -7,7 +7,7 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import baako.server.assemblers.GameAssembler;
+import baako.server.assemblers.Assembler;
 import baako.server.database.Game;
 import baako.server.database.PlainUser;
 import baako.server.dto.GameDTO;
@@ -32,19 +32,19 @@ public class AssemblerTest {
     } 
     @Test 
     public void testAssembleGame() { 
-        assertEquals("El juego", GameAssembler.getInstance().assemble(game).getName());
+        assertEquals("El juego", Assembler.getInstance().assemble(game).getName());
     } 
     @Test 
     public void testDisassembleGame() { 
-        assertEquals("El juego", GameAssembler.getInstance().disassemble(gamedto).getName());
+        assertEquals("El juego", Assembler.getInstance().disassemble(gamedto).getName());
     } 
     @Test 
     public void testAssembleUser() { 
-        assertEquals("Gaizka", GameAssembler.getInstance().assemble(u).getUsername());
+        assertEquals("Gaizka", Assembler.getInstance().assemble(u).getUsername());
     } 
     @Test 
     public void testDisassembleUser() { 
-        assertEquals("Gaizka", GameAssembler.getInstance().dissasemble(userdto).getName());
+        assertEquals("Gaizka", Assembler.getInstance().dissasemble(userdto).getName());
     } 
  
 }
