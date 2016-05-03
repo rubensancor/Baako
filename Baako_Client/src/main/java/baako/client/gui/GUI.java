@@ -225,8 +225,6 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				logiPanel.setVisible(false);
 				registerview();
-				// newRegister();
-				// frame.dispose();
 			}
 		});
 
@@ -262,6 +260,7 @@ public class GUI {
 			}
 		});
 		frame.repaint();
+		frame.revalidate();
 	}
 
 	public void registerview() {
@@ -426,6 +425,8 @@ public class GUI {
 			}
 		});
 		frame.repaint();
+		frame.revalidate();
+
 	}
 
 	public boolean  register(String email, String username, String password, Date date){
