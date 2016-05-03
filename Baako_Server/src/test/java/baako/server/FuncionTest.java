@@ -1,12 +1,8 @@
 package baako.server;
 
 import java.rmi.RemoteException;
-<<<<<<< HEAD
-import java.util.Date;
-=======
 import java.util.Date;
 
->>>>>>> branch 'Gaizka' of https://github.com/rubensancor/Baako.git
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
