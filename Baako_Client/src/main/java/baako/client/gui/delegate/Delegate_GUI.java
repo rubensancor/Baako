@@ -33,9 +33,9 @@ public class Delegate_GUI extends GUI{
 	}
 	
 	public boolean  register(String email, String username, String password, Date date){
-		System.out.println("VAMOS A REGISTRAR");
+		logger.info("VAMOS A REGISTRAR");
 		PlainUserDTO u = new PlainUserDTO(email, username, password, date, null, null);
-		System.out.println(u.getEmail());
+		logger.info(u.getEmail());
 		controller.register(u);
 //		if(controller.register(username, password)){
 //			return true;

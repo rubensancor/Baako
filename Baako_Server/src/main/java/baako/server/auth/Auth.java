@@ -7,13 +7,15 @@ import baako.server.dao.IBaakoDAO;
 import baako.server.database.PlainUser;
 import baako.server.database.User;
 import baako.server.dto.PlainUserDTO;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory; 
 /**
  * @author Gusy
  *
  */
 public class Auth {
 
+	Logger logger = LoggerFactory.getLogger(Auth.class);
 	private BaakoDAO dao;
 
 
@@ -23,31 +25,31 @@ public class Auth {
 	}
 
 	public PlainUserDTO checkUserInfo(String username, String password) throws RemoteException {
-//		System.out.println(username);
-//		System.out.println(password);
+//		logger.info(username);
+//		logger.info(password);
 		PlainUser u = (PlainUser) dao.getUser(username);
-//		System.out.println(u.getName()+" is trying to log in");
-//		System.out.println(u.getPassword());
+//		logger.info(u.getName()+" is trying to log in");
+//		logger.info(u.getPassword());
 		if(u.getPassword().equals(password)){
-//			System.out.println("Logged as "+ u.getName());
+//			logger.info("Logged as "+ u.getName());
 			PlainUserDTO user = new PlainUserDTO(u);
-//			System.out.println(user);
+//			logger.info(user);
 			return user;
 		}else{
-			System.out.println("Error in the login");
+			logger.error("Error in the login");
 			return null;
 		}
 		//		if(users.get(username)==null || users.get(password)==null){
-		//			System.out.println("Error in the login");
+		//			logger.error("Error in the login");
 		//			return false;
 		//		}
 		//		else if(users.get(username).equals(password)){
-		//			System.out.println("Username: "+username);
-		//			System.out.println("Password: "+password);
+		//			logger.info("Username: "+username);
+		//			logger.info("Password: "+password);
 		//			return true;			
 		//		}
 		//		else{
-		//			System.out.println("Error in the login");
+		//			logger.error("Error in the login");
 		//			return false;
 		//		}
 	}
