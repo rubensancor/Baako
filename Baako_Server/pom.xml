@@ -75,7 +75,7 @@
 					<check>
 						<regexes>
 							<regex>
-								<pattern>src.test.java.*</pattern>
+								<pattern>baako.server.*</pattern>
 							</regex>
 						</regexes>
 					</check>
