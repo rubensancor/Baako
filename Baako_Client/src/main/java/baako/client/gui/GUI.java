@@ -426,7 +426,6 @@ public class GUI {
 		});
 		frame.repaint();
 		frame.revalidate();
-
 	}
 
 	public boolean  register(String email, String username, String password, Date date){

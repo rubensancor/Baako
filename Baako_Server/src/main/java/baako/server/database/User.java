@@ -11,6 +11,9 @@ import javax.jdo.annotations.PrimaryKey;
 import baako.server.dto.PlainUserDTO;
 import baako.server.dto.UserDTO;
 
+import baako.server.dto.PlainUserDTO;
+import baako.server.dto.UserDTO;
+
 @PersistenceCapable
 @Inheritance(strategy=InheritanceStrategy.SUBCLASS_TABLE)
 public abstract class User {
@@ -23,9 +26,6 @@ public abstract class User {
 	protected String password;
 
 	
-	public User(){
-	}
-
 	public User(String email, String name, String password,  Date birthdate){
 		super();
 		this.email = email;
@@ -40,8 +40,6 @@ public abstract class User {
 		this.password = user.getPassword();
 		this.birthdate = user.getBirthdate();
 	}
-
-
 
 
 	/**

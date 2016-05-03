@@ -56,6 +56,7 @@ public class PlainUser extends User {
 		this.games = games;
 	}
 
+
 	public void addGame(Game g){
 		games.add(g);
 	}
