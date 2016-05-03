@@ -63,6 +63,12 @@ public class BaakoDAO implements IBaakoDAO {
 
 
 			tx.commit();
+			if(aux == null){
+				return aux2;
+			}else{
+				System.out.println(aux.getEmail());
+				return aux;
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			System.out.println("WARN: Exception when retrieving from database");
@@ -74,12 +80,7 @@ public class BaakoDAO implements IBaakoDAO {
 				System.out.println("CERRANDO");
 				pm.close();
 			}
-			if(aux == null){
-				return aux2;
-			}else{
-				System.out.println(aux.getEmail());
-				return aux;
-			}
+			return null;
 		}
 	}
 
@@ -163,7 +164,7 @@ public class BaakoDAO implements IBaakoDAO {
 			pm.close();
 		}
 	}
-	
+
 
 
 
@@ -204,6 +205,6 @@ public class BaakoDAO implements IBaakoDAO {
 		return games.get(0);
 	}
 
-	
-	
+
+
 }

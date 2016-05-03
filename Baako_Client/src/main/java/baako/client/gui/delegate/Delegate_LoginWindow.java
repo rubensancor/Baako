@@ -1,10 +1,6 @@
-/**
- * 
- */
 package baako.client.gui.delegate;
 
 import javax.swing.JOptionPane;
-
 import baako.client.controller.BaakoController;
 import baako.client.gui.GUI;
 import baako.server.database.PlainUser;
