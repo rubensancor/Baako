@@ -1,5 +1,6 @@
 package baako.server.database;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +17,12 @@ public class Designer {
 	@Persistent(mappedBy="designers")
 	private Set<Game> games;
 
+	
+	public Designer(String name) {
+		this.name = name;
+		games = new HashSet<Game>();
+	}
+
 	/**
 	 * @return the name
 	 */
@@ -30,5 +37,12 @@ public class Designer {
 		return games;
 	}
 	
+	public boolean addGame(Game g){
+		games.add(g);
+		return true;
+	}
 	
+	public int getNumbGames(){
+		return games.size();
+	}
 }

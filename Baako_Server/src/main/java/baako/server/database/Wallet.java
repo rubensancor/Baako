@@ -21,6 +21,12 @@ public class Wallet {
 	@Element(column="USER_ID")
 	private User user;
 
+	public Wallet(int cardNumb, CardType type, User user) {
+		this.cardNumb = cardNumb;
+		this.type = type;
+		this.user = user;
+	}
+	
 	/**
 	 * @return the cardNumb
 	 */

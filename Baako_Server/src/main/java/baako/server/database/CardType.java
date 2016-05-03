@@ -1,6 +1,3 @@
-/**
- * 
- */
 package baako.server.database;
 
 /**
