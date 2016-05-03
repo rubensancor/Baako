@@ -30,8 +30,7 @@ public class BaakoDAO implements IBaakoDAO {
 	Logger logger = LoggerFactory.getLogger(BaakoDAO.class);
 
 	@SuppressWarnings("finally")
-	public User getUser(String username){
-		User aux = null;
+	public PlainUser getUser(String username){
 		PlainUser aux2 = null;
 
 		//DAO magic
@@ -57,19 +56,22 @@ public class BaakoDAO implements IBaakoDAO {
 //
 //			aux = (User) query.execute(username);
 
-			Query query2 = pm.newQuery(PlainUser.class);
-			query2.setFilter("username == usernameParam ");
-			query2.declareParameters("String usernameParam");
-			query2.setUnique(true);
+			Query query = pm.newQuery("SELECT FROM "+PlainUser.class.getName()+" WHERE username=='"+username+"'");
+//			Query query2 = pm.newQuery(PlainUser.class);
+//			query2.setFilter("username == usernameParam ");
+//			query2.declareParameters("String usernameParam");
+			query.setUnique(true);
 
-			aux2 = (PlainUser) query2.execute(username);
-			if(aux2 != null)
+			aux2 = (PlainUser) query.execute();
+			PlainUser u = null;
+			if(aux2 != null){
 				logger.info("Retrieving "+aux2.toString());
-			else
+				u = aux2;
+			}else
 				logger.warn("User '"+username+"' not found.");
 
 			tx.commit();
-			return aux2;
+			return u;
 		}catch(Exception e){
 			e.printStackTrace();
 			logger.warn("Exception when retrieving from database");

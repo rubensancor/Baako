@@ -1,12 +1,7 @@
 package baako.server;
 
 import java.rmi.RemoteException;
-<<<<<<< HEAD
 import java.util.Date;
-=======
-import java.util.Date;
-
->>>>>>> branch 'Gaizka' of https://github.com/rubensancor/Baako.git
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -36,7 +31,7 @@ public class FuncionTest {
 		PlainUserDTO u = null;
 		try {
 			u = a.checkUserInfo("ruben", "asd");
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		assertEquals("ruben", u.getName());
@@ -56,19 +51,18 @@ public class FuncionTest {
 	public void testRegister() { 
 		u = new PlainUser("gvirum@gmail.com", "GaizkaTere", "asd", new Date(System.currentTimeMillis()), null, null);
 		PlainUserDTO u2 = null;
-		System.out.println("Pass pre reg: "+u.getPassword());
 		try {
 			a.register(u);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		try {
-//			u2 = a.checkUserInfo(u.getName(),u.getPassword());
+			u2 = a.checkUserInfo(u.getName(),u.getPassword());
 		} catch (Exception e) {
 			System.out.println("Ha cazao una excepcion "+e.getClass());
 			e.printStackTrace();
 		}
-//		assertEquals(u.getName(), u2.getName());
+		assertEquals(u.getName(), u2.getName());
 	} 
 
 	@AfterClass 
