@@ -12,7 +12,7 @@ import baako.server.database.PlainUser;
  * @author gusy
  *
  */
-public class Delegate_GUI  extends GUI{
+public class Delegate_GUI extends GUI{
 
 	private BaakoController controller;
 
