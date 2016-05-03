@@ -2,21 +2,9 @@ package baako.server;
 
 import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-import baako.server.auth.Auth;
-import baako.server.auth.IAuth;
 import baako.server.dao.BaakoDAO;
 import baako.server.dao.IBaakoDAO;
-import baako.server.database.Game;
-import baako.server.database.PlainUser;
-import baako.server.database.User;
 import baako.server.facade.BaakoFacade;
 import baako.server.manager.IBaakoManager;
 
