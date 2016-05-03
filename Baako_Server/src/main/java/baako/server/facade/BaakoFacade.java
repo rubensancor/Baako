@@ -10,6 +10,7 @@ import baako.server.auth.Auth;
 import baako.server.dao.BaakoDAO;
 import baako.server.dao.IBaakoDAO;
 import baako.server.database.PlainUser;
+import baako.server.dto.DTOAssembler;
 import baako.server.dto.PlainUserDTO;
 import baako.server.manager.IBaakoManager;
 
@@ -37,9 +38,9 @@ public class BaakoFacade extends UnicastRemoteObject implements IBaakoManager{
 		return auth.checkUserInfo(username, password);
 	}
 
-	public boolean register(PlainUser user) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean register(PlainUserDTO user) throws RemoteException {
+		
+		return auth.register(user);
 	}
 
 	public boolean buyGame() throws RemoteException{

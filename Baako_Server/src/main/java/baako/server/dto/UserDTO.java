@@ -3,6 +3,7 @@
  */
 package baako.server.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import baako.server.database.User;
@@ -11,12 +12,16 @@ import baako.server.database.User;
  * @author gusy
  *
  */
-public abstract class UserDTO {
+public abstract class UserDTO implements Serializable{
+
+	private static final long serialVersionUID = -398423872161030910L;
+
+
 	protected String name;	
 	protected String email;
 	protected Date birthdate;
 	protected String password;
-	
+
 	public UserDTO(){
 	}
 
@@ -26,14 +31,14 @@ public abstract class UserDTO {
 		this.password = password;
 		this.birthdate = birthdate;
 	}
-	
+
 	public UserDTO(User user){
 		this.email = user.getEmail();
 		this.name = user.getName();
 		this.password = user.getPassword();
 		this.birthdate = user.getBirthdate();
 	}
-	
+
 	public String getUsername() {
 		return name;
 	}

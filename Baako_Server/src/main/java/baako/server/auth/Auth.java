@@ -58,16 +58,10 @@ public class Auth {
 		User u = dao.getUser(user.getName());
 		if(u == null){
 			dao.addUser(user);
+			return true;
 		}
-		//		if(!users.containsValue(username)){
-		//			System.out.println("Registrado");
-		//			users.put(username, password);
-		//			return true;
-		//		}
-		//		else{
-		//			return false;
-		//		}
-		//	}
-		return true;
+		else{
+			return false;
+		}
 	}
 }
