@@ -1,18 +1,23 @@
 # Baako
+![alt tag](https://raw.githubusercontent.com/rubensancor/Baako/master/Baako_Client/src/main/resources/images/bakologo.png)
 
+Baako is a videogame platform with user and administrator capabilities, it mixes:
+- Videogame related news.
+- Videogame storage per user.
+- Online videogame market.
+- Friend community.
 
-Nuestro proyecto se basa en una biblioteca virtual de videojuegos, estilo "Steam". 
-Los servicios externos que tendra seran los siguientes;
--Base de datos para los juegos, sus campos mas relevantes son , el game_id, nombre, precio, genero, diseñador, descripcion y pegi.
+This actions will be reflected in code as the following:
 
--Servicio de autorizacion, por el cual los usuarios se podran registrar, y acceder a la plataforma.
+Users/Admins will Log In the platform, and therefore accessing to all the functionalities available for that type of user; Administrators will be able to add/edit database's news or games, and Plain Users will access to the actions already listed above.
+If the user wants to Log In but he/she is not registered, using the Register Window he/she will have the ability to register in the database, allowing future logs in the applicaton.
 
--Servicio de pagos, el cual se conectara a un servicio externo como paypal para realizar la pasarela de pagos delegando la seguridad.
+Once in the application, the user will be able to buy/rent any game, providing a credit card. Once purchased, each game can be launched from the user's videogame library.
+Another online feature is the news section, users will be capable of navigating through news related to the games they own or games they like, the application will show a list of them after accessing the news database.
+He/she can also add friends to play with them later, adding the user to the friend list.
 
--Base de datos para usuarios, en la cual almacenaran los siguientes campos, user id, name, pass, brithdate y una lista con los juegos que tiene. 
+In addition to all this, they can Log Out anytime, exiting the application.
 
-Existen dos tipos de usuarios los users y los administradores, este ultimo podra editar los juegos y realizar diversas funciones.
+![alt tag](https://raw.githubusercontent.com/rubensancor/Baako/master/Baako_Client/src/main/resources/images/bakologo.png)
 
-Las funciones principales del BAKOO, seran, identificar a un usuario, almacenar juegos, tener tu propia libreria de juegos, estar al tanto de las noticias de los juegos, alquilar un juego y hacer amigos/ agregar amigos.
-
-Las plataformas en las cuales se podra usar el SW, sera en Linux y en Windows.
+Available for Windows and Linux
