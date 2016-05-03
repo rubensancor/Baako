@@ -43,13 +43,13 @@ public class BaakoApp {
 			dao = new BaakoDAO();
 			IBaakoManager manager = new BaakoFacade(dao);
 			
-			
 //			IAuth auth = new Auth(dao);
 			
 //		    ArrayList<Game> games = (ArrayList<Game>) dao.getAllGames();
 //		    System.out.println(games);
 //			System.out.println("Email ----> "+dao.getUser("ruben").getEmail());
-//			Naming.rebind(serverName, auth);
+			
+			Naming.rebind(serverName, manager);
 			System.out.println("Auth Server "+ serverName+ " active and waiting...");
 			java.io.InputStreamReader inputStreamReader = new java.io.InputStreamReader ( System.in );
 			java.io.BufferedReader stdin = new java.io.BufferedReader ( inputStreamReader );

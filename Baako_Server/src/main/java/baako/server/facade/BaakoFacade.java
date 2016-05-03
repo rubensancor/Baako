@@ -32,57 +32,34 @@ public class BaakoFacade extends UnicastRemoteObject implements IBaakoManager{
 		auth = new Auth(dao);
 	}
 
-	/* (non-Javadoc)
-	 * @see baako.server.manager.IBaakoManager#checkUserInfo(java.lang.String, java.lang.String)
-	 */
-	@Override
 	public PlainUserDTO checkUserInfo(String username, String password) throws RemoteException {
+		System.out.println("FACADE-> CHECK USER INFO");
 		return auth.checkUserInfo(username, password);
 	}
 
-	/* (non-Javadoc)
-	 * @see baako.server.manager.IBaakoManager#register(baako.server.database.PlainUser)
-	 */
-	@Override
 	public boolean register(PlainUser user) throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see baako.server.manager.IBaakoManager#buyGame()
-	 */
-	//	@Override
-	//	public boolean buyGame() {
-	//		// TODO Auto-generated method stub
-	//		return false;
-	//	}
-	//
-	//	/* (non-Javadoc)
-	//	 * @see baako.server.manager.IBaakoManager#launchGame()
-	//	 */
-	//	@Override
-	//	public boolean launchGame() {
-	//		// TODO Auto-generated method stub
-	//		return false;
-	//	}
-	//
-	//	/* (non-Javadoc)
-	//	 * @see baako.server.manager.IBaakoManager#searchGame()
-	//	 */
-	//	@Override
-	//	public boolean searchGame() {
-	//		// TODO Auto-generated method stub
-	//		return false;
-	//	}
-	//
-	//	/* (non-Javadoc)
-	//	 * @see baako.server.manager.IBaakoManager#addWallet()
-	//	 */
-	//	@Override
-	//	public boolean addWallet() {
-	//		// TODO Auto-generated method stub
-	//		return false;
-	//	}
+	public boolean buyGame() throws RemoteException{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean launchGame() throws RemoteException{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean searchGame() throws RemoteException{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addWallet() throws RemoteException{
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

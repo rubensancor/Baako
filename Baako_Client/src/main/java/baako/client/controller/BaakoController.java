@@ -32,12 +32,8 @@ public class BaakoController {
 			System.out.println("Username---> "+username);
 			System.out.println("Password---> "+password);
 			user = rmi.getService().checkUserInfo(username, password);
-			if(user.getPassword().equals(password)){
-				return true;
-			}
-			else{
-				return false;
-			}
+			System.out.println(user.getEmail());
+			return user != null;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return false;

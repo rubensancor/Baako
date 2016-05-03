@@ -29,7 +29,7 @@ public class BaakoDAO implements IBaakoDAO {
 	@SuppressWarnings("finally")
 	public User getUser(String username){
 		User aux = null;
-		User aux2 = null;
+		PlainUser aux2 = null;
 
 		//DAO magic
 		pm = pmf.getPersistenceManager();
@@ -59,14 +59,13 @@ public class BaakoDAO implements IBaakoDAO {
 			query2.declareParameters("String usernameParam");
 			query2.setUnique(true);
 
-			aux2 = (User) query2.execute(username);
-
+			aux2 = (PlainUser) query2.execute(username);
+			System.out.println(aux2);
 
 			tx.commit();
 			if(aux == null){
 				return aux2;
 			}else{
-				System.out.println(aux.getEmail());
 				return aux;
 			}
 		}catch(Exception e){
@@ -80,8 +79,8 @@ public class BaakoDAO implements IBaakoDAO {
 				System.out.println("CERRANDO");
 				pm.close();
 			}
-			return null;
 		}
+		return null;
 	}
 
 	/* (non-Javadoc)

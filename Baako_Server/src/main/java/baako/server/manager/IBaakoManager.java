@@ -19,8 +19,8 @@ public interface IBaakoManager  extends Remote{
 public PlainUserDTO checkUserInfo(String username, String password) throws RemoteException;
 public boolean register(PlainUser user)throws RemoteException;
 
-//public boolean buyGame();
-//public boolean launchGame();
-//public boolean searchGame();
-//public boolean addWallet();
+public boolean buyGame() throws RemoteException;
+public boolean launchGame() throws RemoteException;
+public boolean searchGame() throws RemoteException;
+public boolean addWallet() throws RemoteException;
 }
