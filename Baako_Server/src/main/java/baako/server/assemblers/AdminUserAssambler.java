@@ -1,11 +1,7 @@
 package baako.server.assemblers;
 
-import java.util.Date;
-
 import baako.server.database.AdminUser;
-import baako.server.database.PlainUser;
 import baako.server.dto.AdminUserDTO;
-import baako.server.dto.PlainUserDTO;
 
 public class AdminUserAssambler {
 
