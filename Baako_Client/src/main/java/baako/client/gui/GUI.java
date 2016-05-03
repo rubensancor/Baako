@@ -3,6 +3,7 @@ package baako.client.gui;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
@@ -18,6 +19,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import baako.server.database.PlainUser;
+import baako.server.database.User;
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
@@ -41,6 +44,7 @@ public class GUI {
 	protected JPasswordField pfpassField;
 	private JTextField nameField;
 	private JTextField priceField;
+	private String state;
 
 
 	/**
@@ -54,18 +58,21 @@ public class GUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		this.state=null;
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		frame.setVisible(true);
-		//loginview();
-		addgameview();
+		loginview();
+		//addgameview();
+		//mainview();
+		//mainview();
 	}
-/**
-	public void mainview(){
 
+	public void mainview(){
+		this.state="userfriends";
 		frame.setSize(741, 581);
 		frame.getContentPane().setLayout(null);
 
@@ -128,24 +135,192 @@ public class GUI {
 		logoutPanel.setBackground(new Color(105, 105, 105));
 		logoutPanel.setLayout(null);
 
-		JButton btnNewButton = new JButton("LOGOUT");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton.setBackground(new Color(255, 51, 0));
-		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setBounds(0, 0, 152, 50);
-		logoutPanel.add(btnNewButton);
+		JButton btnLogout = new JButton("LOGOUT");
+		btnLogout.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnLogout.setBackground(new Color(255, 51, 0));
+		btnLogout.setForeground(new Color(255, 255, 255));
+		btnLogout.setBounds(0, 0, 152, 50);
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mainPanel_1.setVisible(false);
+				loginview();
+				frame.repaint();
+			}
+		});
+		logoutPanel.add(btnLogout);
 
 		JPanel optionPanel = new JPanel();
 		optionPanel.setBackground(new Color(105, 105, 105));
 		optionPanel.setBounds(574, 49, 151, 493);
 		mainPanel_1.add(optionPanel);
-	}
-**/
+		GridBagLayout gbl_optionPanel = new GridBagLayout();
+		gbl_optionPanel.columnWidths = new int[]{0, 0, 0};
+		gbl_optionPanel.rowHeights = new int[]{117, 42, 42, 0, 0, 0, 0, 0, 0};
+		gbl_optionPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_optionPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		optionPanel.setLayout(gbl_optionPanel);
+		
+		JButton btninfo = new JButton("+INFO");
+		GridBagConstraints gbc_btninfo = new GridBagConstraints();
+		
+		JButton btnBack = new JButton("BACK");
+		GridBagConstraints gbc_btnBack = new GridBagConstraints();
+		
+		switch(state){
+		case "adminnews":
+			JButton btnAddNews = new JButton("ADD NEWS");
+			GridBagConstraints gbc_btnAddNews = new GridBagConstraints();
+			gbc_btnAddNews.fill = GridBagConstraints.BOTH;
+			gbc_btnAddNews.insets = new Insets(0, 25, 5, 0);
+			gbc_btnAddNews.gridx = 1;
+			gbc_btnAddNews.gridy = 1;
+			optionPanel.add(btnAddNews, gbc_btnAddNews);
+			
+			JButton btnEditNews = new JButton("EDIT NEWS");
+			GridBagConstraints gbc_btnEditNews = new GridBagConstraints();
+			gbc_btnEditNews.fill = GridBagConstraints.BOTH;
+			gbc_btnEditNews.insets = new Insets(0, 25, 5, 0);
+			gbc_btnEditNews.gridx = 1;
+			gbc_btnEditNews.gridy = 2;
+			optionPanel.add(btnEditNews, gbc_btnEditNews);
+			
 
-	/**
-	 * Changes to login view.
-	 */
-	/**
+			gbc_btninfo.insets = new Insets(40, 25, 5, 0);
+			gbc_btninfo.gridx = 1;
+			gbc_btninfo.gridy = 6;
+			optionPanel.add(btninfo, gbc_btninfo);
+			
+			gbc_btnBack.insets = new Insets(0, 25, 5, 0);
+			gbc_btnBack.gridx = 1;
+			gbc_btnBack.gridy = 7;
+			optionPanel.add(btnBack, gbc_btnBack);
+			break;
+		case "usernews":
+
+			gbc_btninfo.fill = GridBagConstraints.BOTH;
+			gbc_btninfo.insets = new Insets(0, 45, 5, 0);
+			gbc_btninfo.gridx = 1;
+			gbc_btninfo.gridy = 1;
+			optionPanel.add(btninfo, gbc_btninfo);
+			
+
+			gbc_btnBack.fill = GridBagConstraints.BOTH;
+			gbc_btnBack.insets = new Insets(0, 45, 5, 0);
+			gbc_btnBack.gridx = 1;
+			gbc_btnBack.gridy = 2;
+			optionPanel.add(btnBack, gbc_btnBack);
+
+			break;
+		case "admingames":
+			JButton btnAddGame = new JButton("ADD GAME");
+			GridBagConstraints gbc_btnAddGame = new GridBagConstraints();
+			gbc_btnAddGame.fill = GridBagConstraints.BOTH;
+			gbc_btnAddGame.insets = new Insets(0, 35, 5, 0);
+			gbc_btnAddGame.gridx = 1;
+			gbc_btnAddGame.gridy = 1;
+			optionPanel.add(btnAddGame, gbc_btnAddGame);
+			
+			JButton btnEditGame = new JButton("EDIT GAME");
+			GridBagConstraints gbc_btnEditGame = new GridBagConstraints();
+			gbc_btnEditGame.fill = GridBagConstraints.BOTH;
+			gbc_btnEditGame.insets = new Insets(0, 35, 5, 0);
+			gbc_btnEditGame.gridx = 1;
+			gbc_btnEditGame.gridy = 2;
+			optionPanel.add(btnEditGame, gbc_btnEditGame);
+			
+
+			gbc_btninfo.insets = new Insets(40, 45, 5, 0);
+			gbc_btninfo.gridx = 1;
+			gbc_btninfo.gridy = 6;
+			optionPanel.add(btninfo, gbc_btninfo);
+			
+			gbc_btnBack.insets = new Insets(0, 45, 5, 0);
+			gbc_btnBack.gridx = 1;
+			gbc_btnBack.gridy = 7;
+			optionPanel.add(btnBack, gbc_btnBack);
+			break;
+		case "userlibrary":
+			JButton btnLaunch = new JButton("LAUNCH");
+			GridBagConstraints gbc_btnLaunch = new GridBagConstraints();
+			gbc_btnLaunch.fill = GridBagConstraints.BOTH;
+			gbc_btnLaunch.insets = new Insets(0, 45, 5, 0);
+			gbc_btnLaunch.gridx = 1;
+			gbc_btnLaunch.gridy = 1;
+			optionPanel.add(btnLaunch, gbc_btnLaunch);
+
+			gbc_btninfo.insets = new Insets(40, 45, 5, 0);
+			gbc_btninfo.gridx = 1;
+			gbc_btninfo.gridy = 3;
+			optionPanel.add(btninfo, gbc_btninfo);
+			
+			gbc_btnBack.insets = new Insets(0, 45, 5, 0);
+			gbc_btnBack.gridx = 1;
+			gbc_btnBack.gridy = 4;
+			optionPanel.add(btnBack, gbc_btnBack);
+			break;
+		case "usergames":
+			JButton btnBuy = new JButton("BUY GAME");
+			GridBagConstraints gbc_btnBuy = new GridBagConstraints();
+			gbc_btnBuy.fill = GridBagConstraints.BOTH;
+			gbc_btnBuy.insets = new Insets(0, 25, 5, 0);
+			gbc_btnBuy.gridx = 1;
+			gbc_btnBuy.gridy = 1;
+			optionPanel.add(btnBuy, gbc_btnBuy);
+			
+			JButton btnRent = new JButton("RENT GAME");
+			GridBagConstraints gbc_btnRent = new GridBagConstraints();
+			gbc_btnRent.fill = GridBagConstraints.BOTH;
+			gbc_btnRent.insets = new Insets(0, 25, 5, 0);
+			gbc_btnRent.gridx = 1;
+			gbc_btnRent.gridy = 2;
+			optionPanel.add(btnRent, gbc_btnRent);
+			
+
+			gbc_btninfo.insets = new Insets(40, 35, 5, 0);
+			gbc_btninfo.gridx = 1;
+			gbc_btninfo.gridy = 4;
+			optionPanel.add(btninfo, gbc_btninfo);
+			
+			gbc_btnBack.insets = new Insets(0, 35, 5, 0);
+			gbc_btnBack.gridx = 1;
+			gbc_btnBack.gridy = 5;
+			optionPanel.add(btnBack, gbc_btnBack);
+			break;
+		case "userfriends":
+			JButton btnAddFriend = new JButton("ADD FRIEND");
+			GridBagConstraints gbc_btnAddFriend = new GridBagConstraints();
+			gbc_btnAddFriend.fill = GridBagConstraints.BOTH;
+			gbc_btnAddFriend.insets = new Insets(0, 20, 5, 0);
+			gbc_btnAddFriend.gridx = 1;
+			gbc_btnAddFriend.gridy = 1;
+			optionPanel.add(btnAddFriend, gbc_btnAddFriend);
+			
+			JButton btnDeleteFriend = new JButton("DELETE FRIEND");
+			GridBagConstraints gbc_btnDeleteFriend = new GridBagConstraints();
+			gbc_btnDeleteFriend.fill = GridBagConstraints.BOTH;
+			gbc_btnDeleteFriend.insets = new Insets(0, 20, 5, 0);
+			gbc_btnDeleteFriend.gridx = 1;
+			gbc_btnDeleteFriend.gridy = 2;
+			optionPanel.add(btnDeleteFriend, gbc_btnDeleteFriend);
+			
+
+			gbc_btninfo.insets = new Insets(40, 30, 5, 0);
+			gbc_btninfo.gridx = 1;
+			gbc_btninfo.gridy = 4;
+			optionPanel.add(btninfo, gbc_btninfo);
+			
+			gbc_btnBack.insets = new Insets(0, 30, 5, 0);
+			gbc_btnBack.gridx = 1;
+			gbc_btnBack.gridy = 5;
+			optionPanel.add(btnBack, gbc_btnBack);
+			break;
+			
+		}
+	}
+
+	
+	
+	
 	private void loginview() {
 		frame.setSize(450, 300);
 		frame.getContentPane().setLayout(null);
@@ -221,7 +396,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				logiPanel.setVisible(false);
 				registerview();
-				//				newRegister();
+				
 				//				frame.dispose();
 			}
 		});
@@ -242,15 +417,26 @@ public class GUI {
 
 		btnLogIn.addActionListener(new ActionListener() {
 
+			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(logIn(usernameField.getText(), new String(passwordField.getPassword()))){
-					frame.dispose();
+				if(true/**LOGEA**/){
+					if(true/**Y EL USER ES ADMIN**/){
+					logiPanel.setVisible(false);
+					state="admingames";
+					mainview();
+				}else{//NO ES ADMIN
+					logiPanel.setVisible(false);
+					state="userlibrary";
+					mainview();
+				}}else{//NO LOGEA
+					System.out.println("NO LOGEAS PRINGUADO");
 				}
-			}
+				}
 		});
 	}
 
+	
 	public void registerview(){
 		frame.setSize(376, 455);
 		frame.getContentPane().setLayout(null);
@@ -443,8 +629,9 @@ public class GUI {
 			}
 		});
 
-	}**/
+	}
 
+	
 	public void addgameview(){
 		frame.setSize(450, 600);
 		frame.getContentPane().setLayout(null);
