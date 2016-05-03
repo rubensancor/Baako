@@ -32,7 +32,9 @@ public class Auth {
 		System.out.println(u.getPassword());
 		if(u.getPassword().equals(password)){
 			System.out.println("Logged as "+ u.getName());
-			return new PlainUserDTO(u);
+			PlainUserDTO user = new PlainUserDTO(u);
+			System.out.println(user);
+			return user;
 		}else{
 			System.out.println("Error in the login");
 			return null;

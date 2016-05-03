@@ -39,6 +39,18 @@ public class GameDTO {
 		this.setCategories(game.getCategories());
 		this.setDesigners(game.getDesigners());
 	}
+	/**
+	 * @param string
+	 * @param i
+	 * @param string2
+	 * @param j
+	 */
+	public GameDTO(String name, float price, String description, int pegi) {
+		this.name = name;
+		this.price = price;
+		this.description = description;
+		this.PEGI = pegi;
+	}
 	public String getName() {
 		return name;
 	}
