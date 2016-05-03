@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.jdo.*;
-import baako.server.database.AdminUser;
 import baako.server.database.Game;
 import baako.server.database.PlainUser;
 import baako.server.database.User;
@@ -47,12 +46,12 @@ public class BaakoDAO implements IBaakoDAO {
 			//				su = aux;
 			//			}
 
-			Query query = pm.newQuery(AdminUser.class);
-			query.setFilter("username == usernameParam ");
-			query.declareParameters("String usernameParam");
-			query.setUnique(true);
-
-			aux = (User) query.execute(username);
+//			Query query = pm.newQuery(AdminUser.class);
+//			query.setFilter("username == usernameParam ");
+//			query.declareParameters("String usernameParam");
+//			query.setUnique(true);
+//
+//			aux = (User) query.execute(username);
 
 			Query query2 = pm.newQuery(PlainUser.class);
 			query2.setFilter("username == usernameParam ");

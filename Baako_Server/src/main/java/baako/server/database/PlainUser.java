@@ -32,12 +32,18 @@ public class PlainUser extends User {
 		this.friends = friends;
 		this.games = games;
 	}
+	
+	public PlainUser(String email, String name, String password, Date birthdate) {
+		super(email, name, password, birthdate);
+		this.friends = null;
+		this.games = null;
+	}
 
 	/**
 	 * 
 	 */
 	public PlainUser(PlainUserDTO u) {
-		super(u);
+		super(u.getEmail(), u.getName(), u.getPassword(), u.getBirthdate());
 		this.friends = u.getFriends();
 		this.games = u.getGames();
 	}
@@ -50,6 +56,14 @@ public class PlainUser extends User {
 		this.games = games;
 	}
 
+	public void addGame(Game g){
+		games.add(g);
+	}
+	
+	public void addFriend(PlainUser u){
+		friends.add(u);
+	}
+	
 	public void setFriends(Set<PlainUser> friends) {
 		this.friends = friends;
 	}
@@ -61,9 +75,9 @@ public class PlainUser extends User {
 		return friends;
 	}
 
-	public boolean buyGame(Game game) {
-		// Code for buying a game
-		System.out.println(game + " purchased");
-		return true;
-	}
+//	public boolean buyGame(Game game) {
+//		// Code for buying a game
+//		System.out.println(game + " purchased");
+//		return true;
+//	}
 }

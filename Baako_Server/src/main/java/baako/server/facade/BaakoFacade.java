@@ -11,10 +11,8 @@ import baako.server.auth.Auth;
 import baako.server.dao.BaakoDAO;
 import baako.server.dao.IBaakoDAO;
 import baako.server.database.PlainUser;
-import baako.server.dto.DTOAssembler;
 import baako.server.dto.PlainUserDTO;
 import baako.server.manager.IBaakoManager;
-
 /**
  * @author gusy
  *

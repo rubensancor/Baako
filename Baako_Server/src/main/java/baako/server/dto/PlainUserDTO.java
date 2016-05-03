@@ -29,6 +29,13 @@ public class PlainUserDTO extends UserDTO implements Serializable{
 		this.games = u.getGames();
 	}
 	
+	
+	public PlainUserDTO(String email, String name, String password, Date birthdate) {
+		super(email, name, password, birthdate);
+		this.friends = null;
+		this.games = null;
+	}
+
 	public String getEmail() {
 		return email;
 	}
