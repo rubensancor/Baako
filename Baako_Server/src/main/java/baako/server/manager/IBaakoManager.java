@@ -8,7 +8,6 @@ import java.rmi.RemoteException;
 
 import baako.server.database.PlainUser;
 import baako.server.dto.PlainUserDTO;
-import baako.server.dto.UserDTO;
 
 /**
  * @author gusy

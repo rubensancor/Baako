@@ -256,8 +256,8 @@ public class GUI {
 				} else if (!logIn(usernameField.getText(), new String(passwordField.getPassword()))) {
 					JOptionPane.showMessageDialog(frame, "The login credentials are incorrect. Please, revise them");
 				} else {
-					// System.out.println("GO");
-					frame.dispose();
+					logiPanel.setVisible(false);
+					mainview();
 				}
 			}
 		});
@@ -419,10 +419,10 @@ public class GUI {
 				//				} else if(datePicker.getModel().getValue() == null){
 				//					JOptionPane.showMessageDialog(frame, "The field 'Birthdate' cannot be empty.");
 				//				} else {
-				register(tfEmail.getText(), tfUsername.getText(), passwordField.getText(), model.getValue().getTime());
-				frame.dispose();
-				loginview();
-				//				}
+				if(register(tfEmail.getText(), tfUsername.getText(), passwordField.getText(), model.getValue().getTime())){
+					registerPanel.setVisible(false);
+					loginview();
+				}
 			}
 		});
 		frame.repaint();

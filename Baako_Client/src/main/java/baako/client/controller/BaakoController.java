@@ -45,6 +45,7 @@ public class BaakoController {
 			System.out.println("Register");
 			System.out.println("Username---> "+u.getName());
 			System.out.println("Password---> "+u.getPassword());
+			//Casca aqui
 			if(rmi.getService().register(u)){
 				return true;
 			}else{

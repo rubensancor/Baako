@@ -6,6 +6,7 @@ package baako.server.facade;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import baako.server.assemblers.Assembler;
 import baako.server.auth.Auth;
 import baako.server.dao.BaakoDAO;
 import baako.server.dao.IBaakoDAO;
@@ -39,8 +40,10 @@ public class BaakoFacade extends UnicastRemoteObject implements IBaakoManager{
 	}
 
 	public boolean register(PlainUserDTO user) throws RemoteException {
-		
-		return auth.register(user);
+		System.out.println("FACADE-> REGISTER");
+		System.out.println(user.getEmail());
+		System.out.println(Assembler.getInstance().dissasemble(user));
+		return auth.register(Assembler.getInstance().dissasemble(user));
 	}
 
 	public boolean buyGame() throws RemoteException{

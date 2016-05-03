@@ -25,36 +25,24 @@ public class Auth {
 	}
 
 	public PlainUserDTO checkUserInfo(String username, String password) throws RemoteException {
-//		System.out.println(username);
-//		System.out.println(password);
+		//		System.out.println(username);
+		//		System.out.println(password);
 		PlainUser u = (PlainUser) dao.getUser(username);
-//		System.out.println(u.getName()+" is trying to log in");
-//		System.out.println(u.getPassword());
+		//		System.out.println(u.getName()+" is trying to log in");
+		//		System.out.println(u.getPassword());
 		if(u.getPassword().equals(password)){
-//			System.out.println("Logged as "+ u.getName());
+			//			System.out.println("Logged as "+ u.getName());
 			PlainUserDTO user = new PlainUserDTO(u);
-//			System.out.println(user);
+			//			System.out.println(user);
 			return user;
 		}else{
 			System.out.println("Error in the login");
 			return null;
 		}
-		//		if(users.get(username)==null || users.get(password)==null){
-		//			System.out.println("Error in the login");
-		//			return false;
-		//		}
-		//		else if(users.get(username).equals(password)){
-		//			System.out.println("Username: "+username);
-		//			System.out.println("Password: "+password);
-		//			return true;			
-		//		}
-		//		else{
-		//			System.out.println("Error in the login");
-		//			return false;
-		//		}
 	}
 
 	public boolean register(PlainUser user) throws RemoteException {
+		System.out.println(user);
 		User u = dao.getUser(user.getName());
 		if(u == null){
 			dao.addUser(user);

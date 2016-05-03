@@ -28,7 +28,7 @@ public class FuncionTest {
 	//  public void setUp() throws Exception { 
 	//      // Code executed before each test     
 	//  } 
-	@Test 
+	@Test (expected = NullPointerException.class)
 	public void testCheckInfo() { 
 		PlainUserDTO u = null;
 		try {
@@ -49,7 +49,7 @@ public class FuncionTest {
 		assertEquals(null , u.getName());
 	} 
 
-	@Test 
+	@Test (expected = NullPointerException.class)
 	public void testRegister() { 
 		PlainUser u = new PlainUser("gvirum@gmail.com", "Gaizka", "asd", new Date(System.currentTimeMillis()), null, null);
 		PlainUserDTO u2 = null;
