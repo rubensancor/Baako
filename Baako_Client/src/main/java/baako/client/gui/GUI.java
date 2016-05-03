@@ -3,6 +3,8 @@ package baako.client.gui;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,9 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import baako.server.database.PlainUser;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import baako.server.dto.PlainUserDTO;
 import net.sourceforge.jdatepicker.impl.UtilCalendarModel;
 
 import javax.swing.JPanel;
@@ -395,49 +397,43 @@ public class GUI {
 
 			public void actionPerformed(ActionEvent e) {
 
-				// Validations for the input of text in the registration
-				if (tfUsername.getText().equals("")) {
-					JOptionPane.showMessageDialog(frame, "The field 'Username' cannot be empty.");
-					tfUsername.requestFocus();
-				} else if (tfUsername.getText().length() < 3) {
-					JOptionPane.showMessageDialog(frame, "The username has to be at least 3 characters long.");
-					tfUsername.requestFocus();
-				} else if (passwordField.getPassword().length == 0) {
-					JOptionPane.showMessageDialog(frame, "The field 'password' cannot be empty.");
-					passwordField.requestFocus();
-				} else if (passwordField.getPassword().length < 6) {
-					JOptionPane.showMessageDialog(frame, "The password has to be at least 6 characters long.");
-					passwordField.requestFocus();
-				} else if (tfEmail.getText().equals("")) {
-					JOptionPane.showMessageDialog(frame, "The field 'email' cannot be empty.");
-					tfEmail.requestFocus();
-				} else if (!tfEmail.getText().contains("@") || !tfEmail.getText().contains(".")
-						|| tfEmail.getText().length() < 5) {
-					JOptionPane.showMessageDialog(frame, "Insert a valid email.");
-					tfEmail.requestFocus();
-				} else if (datePicker.getModel().getValue() == null) {
-					JOptionPane.showMessageDialog(frame, "The field 'Birthdate' cannot be empty.");
-				} else {
-					PlainUser user = new PlainUser(tfEmail.getText(), tfUsername.getText(),
-							pfpassField.getPassword().toString(), model.getValue().getTime(), null, null);
-					register(user);
-					frame.dispose();
-				}
-
+				//	Validations for the input of text in the registration
+				//				if(tfUsername.getText().equals("")){
+				//					JOptionPane.showMessageDialog(frame, "The field 'Username' cannot be empty.");
+				//					tfUsername.requestFocus();
+				//				} else if(tfUsername.getText().length() < 3){
+				//					JOptionPane.showMessageDialog(frame, "The username has to be at least 3 characters long.");
+				//					tfUsername.requestFocus();
+				//				} else if(passwordField.getPassword().length == 0){
+				//					JOptionPane.showMessageDialog(frame, "The field 'password' cannot be empty.");
+				//					passwordField.requestFocus();
+				//				} else if(passwordField.getPassword().length < 6){
+				//					JOptionPane.showMessageDialog(frame, "The password has to be at least 6 characters long.");
+				//					passwordField.requestFocus();
+				//				} else if(tfEmail.getText().equals("")){
+				//					JOptionPane.showMessageDialog(frame, "The field 'email' cannot be empty.");
+				//					tfEmail.requestFocus();
+				//				} else if(!tfEmail.getText().contains("@") || !tfEmail.getText().contains(".") || tfEmail.getText().length() < 5){
+				//					JOptionPane.showMessageDialog(frame, "Insert a valid email.");
+				//					tfEmail.requestFocus();
+				//				} else if(datePicker.getModel().getValue() == null){
+				//					JOptionPane.showMessageDialog(frame, "The field 'Birthdate' cannot be empty.");
+				//				} else {
+				register(tfEmail.getText(), tfUsername.getText(), passwordField.getText(), model.getValue().getTime());
+				frame.dispose();
+				loginview();
+				//				}
 			}
 		});
 		frame.repaint();
 	}
 
-	public void register(PlainUser u) {
+	public boolean  register(String email, String username, String password, Date date){
+		return true;
 	}
 
 	public boolean logIn(String username, String password) {
 		return true;
-	}
-
-	public void newRegister() {
-
 	}
 
 	/**

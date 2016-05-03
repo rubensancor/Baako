@@ -40,7 +40,7 @@ public class BaakoController {
 		}
 	}
 	
-	public boolean register(PlainUser u){
+	public boolean register(PlainUserDTO u){
 		try{
 			System.out.println("Register");
 			System.out.println("Username---> "+u.getName());

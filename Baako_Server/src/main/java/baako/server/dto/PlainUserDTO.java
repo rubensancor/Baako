@@ -10,7 +10,9 @@ import baako.server.database.PlainUser;
 
 public class PlainUserDTO extends UserDTO implements Serializable{
 
-	private String password;
+	private static final long serialVersionUID = -6344367997349054739L;
+	
+	
 	private Set<PlainUser> friends = new HashSet<PlainUser>();
 	private Set<Game> games = new HashSet<Game>();
 

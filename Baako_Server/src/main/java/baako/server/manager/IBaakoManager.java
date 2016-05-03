@@ -17,7 +17,7 @@ import baako.server.dto.UserDTO;
 public interface IBaakoManager  extends Remote{
 
 public PlainUserDTO checkUserInfo(String username, String password) throws RemoteException;
-public boolean register(PlainUser user)throws RemoteException;
+public boolean register(PlainUserDTO user)throws RemoteException;
 
 public boolean buyGame() throws RemoteException;
 public boolean launchGame() throws RemoteException;

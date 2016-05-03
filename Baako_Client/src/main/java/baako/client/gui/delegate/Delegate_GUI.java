@@ -3,10 +3,12 @@
  */
 package baako.client.gui.delegate;
 
+import java.util.Date;
+
 import javax.swing.JOptionPane;
 import baako.client.controller.BaakoController;
 import baako.client.gui.GUI;
-import baako.server.database.PlainUser;
+import baako.server.dto.PlainUserDTO;
 
 /**
  * @author gusy
@@ -30,20 +32,20 @@ public class Delegate_GUI extends GUI{
 		}
 	}
 	
-	public void register(PlainUser u){
+	public boolean  register(String email, String username, String password, Date date){
 		System.out.println("VAMOS A REGISTRAR");
+		PlainUserDTO u = new PlainUserDTO(email, username, password, date, null, null);
 		System.out.println(u.getEmail());
-//		controller.register();
+		controller.register(u);
 //		if(controller.register(username, password)){
 //			return true;
 //		}else{
 //			new JOptionPane("YOU ARE ALREADY REGISTERED");
 //			return false;
 //		}
+		return true;
 	}
 	
-	public void newRegister(){
-	}
 	
 
 }
