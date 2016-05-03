@@ -24,15 +24,14 @@ public class PlainUser extends User {
 	private Set<Game> games;
 
 	/**
-	* 
-	*/
-	public PlainUser(String email, String name, String password, Date birthdate, Set<PlainUser> friends,
-			Set<Game> games) {
+	 * 
+	 */
+	public PlainUser(String email, String name, String password, Date birthdate, Set<PlainUser> friends,Set<Game> games) {
 		super(email, name, password, birthdate);
 		this.friends = friends;
 		this.games = games;
 	}
-	
+
 	public PlainUser(String email, String name, String password, Date birthdate) {
 		super(email, name, password, birthdate);
 		this.friends = null;
@@ -48,6 +47,13 @@ public class PlainUser extends User {
 		this.games = u.getGames();
 	}
 
+	public PlainUser(PlainUser u){
+		super(u.getEmail(), u.getName(), u.getPassword(), u.getBirthdate());
+		this.friends = u.getFriends();
+		this.games = u.getGames();	
+	}
+
+
 	public Set<Game> getGames() {
 		return games;
 	}
@@ -60,11 +66,11 @@ public class PlainUser extends User {
 	public void addGame(Game g){
 		games.add(g);
 	}
-	
+
 	public void addFriend(PlainUser u){
 		friends.add(u);
 	}
-	
+
 	public void setFriends(Set<PlainUser> friends) {
 		this.friends = friends;
 	}
@@ -76,9 +82,14 @@ public class PlainUser extends User {
 		return friends;
 	}
 
-//	public boolean buyGame(Game game) {
-//		// Code for buying a game
-//		System.out.println(game + " purchased");
-//		return true;
-//	}
+	@Override
+	public String toString() {
+		return "User: "+username;
+	}
+
+	//	public boolean buyGame(Game game) {
+	//		// Code for buying a game
+	//		System.out.println(game + " purchased");
+	//		return true;
+	//	}
 }

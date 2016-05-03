@@ -41,7 +41,7 @@ public class BaakoDAO implements IBaakoDAO {
 
 		try{
 			tx.begin();
-			logger.info("INFO: Getting a user from the db:");
+			logger.info("Getting user '"+username+"' from the db:");
 			//FUNCIONA
 			//			Extent e = pm.getExtent(AdminUser.class, true);
 			//			Iterator iter = e.iterator();
@@ -63,14 +63,13 @@ public class BaakoDAO implements IBaakoDAO {
 			query2.setUnique(true);
 
 			aux2 = (PlainUser) query2.execute(username);
-			logger.info(aux2.toString());
+			if(aux2 != null)
+				logger.info("Retrieving "+aux2.toString());
+			else
+				logger.warn("User '"+username+"' not found.");
 
 			tx.commit();
-			if(aux == null){
-				return aux2;
-			}else{
-				return aux;
-			}
+			return aux2;
 		}catch(Exception e){
 			e.printStackTrace();
 			logger.warn("Exception when retrieving from database");
@@ -79,7 +78,7 @@ public class BaakoDAO implements IBaakoDAO {
 				tx.rollback();
 			}
 			if (pm != null && !pm.isClosed()) {
-				logger.info("CERRANDO");
+				logger.info("Cerrando");
 				pm.close();
 			}
 		}
@@ -92,9 +91,9 @@ public class BaakoDAO implements IBaakoDAO {
 	public void addUser(PlainUser user) {
 		//DAO magic
 		pm = pmf.getPersistenceManager();
-		logger.info(user.getName());
 		try{
 			pm.makePersistent(user);
+			logger.info("Registered "+user);
 		}finally{
 			pm.close();
 		}		
@@ -122,13 +121,35 @@ public class BaakoDAO implements IBaakoDAO {
 		try{
 			tx.begin();
 			//TODO SELECT TO PREVENT THE SERVER FROM STOPPING
-			Query query = pm.newQuery("DELETE FROM "+game.getClass().getName()+" WHERE name=='"+game+"'");
+			Query query = pm.newQuery("DELETE FROM "+Game.class.getName()+" WHERE name=='"+game+"'");
 			Long n = (Long) query.execute();
 			tx.commit();
 
 		}finally{
 			if (tx != null && tx.isActive()) {
 				logger.info("There's no such game");
+				tx.rollback();
+			}
+			if (pm != null && !pm.isClosed()) {
+				pm.close();
+			}
+		}
+	}
+
+	public void deleteUser(String user) {
+		//DAOmagic
+		pm = pmf.getPersistenceManager();
+		tx = pm.currentTransaction();
+		try{
+			tx.begin();
+			//TODO SELECT TO PREVENT THE SERVER FROM STOPPING
+			Query query = pm.newQuery("DELETE FROM "+PlainUser.class.getName()+" WHERE username=='"+user+"'");
+			Long n = (Long) query.execute();
+			tx.commit();
+
+		}finally{
+			if (tx != null && tx.isActive()) {
+				logger.info("There's no such user");
 				tx.rollback();
 			}
 			if (pm != null && !pm.isClosed()) {

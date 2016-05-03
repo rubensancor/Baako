@@ -2,6 +2,7 @@ package baako.server.auth;
 
 import java.rmi.RemoteException;
 
+import baako.server.assemblers.Assembler;
 import baako.server.dao.BaakoDAO;
 import baako.server.dao.IBaakoDAO;
 import baako.server.database.PlainUser;
@@ -25,15 +26,13 @@ public class Auth {
 	}
 
 	public PlainUserDTO checkUserInfo(String username, String password) throws RemoteException {
-//		logger.info(username);
-//		logger.info(password);
-		PlainUser u = (PlainUser) dao.getUser(username);
-//		logger.info(u.getName()+" is trying to log in");
-//		logger.info(u.getPassword());
+		//		logger.info(username);
+		//		logger.info(password);
+		PlainUser u = new PlainUser((PlainUser) dao.getUser(username));
 		if(u.getPassword().equals(password)){
-//			logger.info("Logged as "+ u.getName());
-			PlainUserDTO user = new PlainUserDTO(u);
-//			logger.info(user);
+			//			logger.info("Logged as "+ u.getName());
+			PlainUserDTO user = Assembler.getInstance().assemble(u);
+			//			logger.info(user);
 			return user;
 		}else{
 			logger.error("Error in the login");
@@ -42,7 +41,7 @@ public class Auth {
 	}
 
 	public boolean register(PlainUser user) throws RemoteException {
-		System.out.println(user);
+		logger.info("Registering user: "+user);
 		User u = dao.getUser(user.getName());
 		if(u == null){
 			dao.addUser(user);
