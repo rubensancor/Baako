@@ -1,7 +1,9 @@
 package baako.server.assemblers;
 
 import baako.server.database.Game;
+import baako.server.database.PlainUser;
 import baako.server.dto.GameDTO;
+import baako.server.dto.PlainUserDTO;
 
 public class GameAssembler {
 	
@@ -15,14 +17,20 @@ public class GameAssembler {
 	
 
 	public GameDTO assemble(Game game) {
-		GameDTO dto= new GameDTO(game);
-		return dto;
+		return new GameDTO(game);
 	}
 	
 	public Game disassemble(GameDTO game) {
-		Game normal = new Game(game);
-		return normal;
-
+		return new Game(game);
+		
+	}
+	
+	public PlainUserDTO assemble(PlainUser u){
+		return new PlainUserDTO(u);
+	}
+	
+	public PlainUser dissasemble(PlainUserDTO u){
+		return new PlainUser(u);
 	}
 	
 }

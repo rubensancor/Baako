@@ -3,11 +3,6 @@ package baako.client.gui;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Properties;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,10 +13,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.JFormattedTextField.AbstractFormatter;
 import baako.server.database.PlainUser;
-import net.sourceforge.jdatepicker.JDatePanel;
-import net.sourceforge.jdatepicker.JDatePicker;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.UtilCalendarModel;
 
 import javax.swing.JPanel;
@@ -40,7 +34,6 @@ public class GUI {
 	protected JTextField tfUsername;
 	protected JTextField tfEmail;
 	protected JPasswordField pfpassField;
-
 
 	/**
 	 * Create the application.
@@ -62,7 +55,7 @@ public class GUI {
 		frame.revalidate();
 	}
 
-	public void mainview(){
+	public void mainview() {
 
 		frame.setSize(741, 581);
 		frame.getContentPane().setLayout(null);
@@ -139,19 +132,19 @@ public class GUI {
 		mainPanel_1.add(optionPanel);
 	}
 
-	public void logOut(){
+	public void logOut() {
 		JButton btnLogin = new JButton("LOGIN");
 		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnLogin.setForeground(new Color(255, 255, 255));
 		btnLogin.setBackground(new Color(0, 128, 0));
 		btnLogin.setBounds(10, 0, 102, 27);
-		//	LogPanel.add(btnLogin);
+		// LogPanel.add(btnLogin);
 
 		JLabel lblLogged = new JLabel("Log Status");
 		lblLogged.setForeground(new Color(255, 255, 255));
 		lblLogged.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblLogged.setBounds(124, 0, 119, 27);
-		//	LogPanel.add(lblLogged);
+		// LogPanel.add(lblLogged);
 	}
 
 	/**
@@ -166,12 +159,11 @@ public class GUI {
 		logiPanel.setBounds(0, 0, 434, 261);
 		frame.getContentPane().add(logiPanel);
 		GridBagLayout gbl_logiPanel = new GridBagLayout();
-		gbl_logiPanel.columnWidths = new int[]{37, 81, 16, 164, 6, 63, 0};
-		gbl_logiPanel.rowHeights = new int[]{60, 47, 68, 65, 0};
-		gbl_logiPanel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_logiPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_logiPanel.columnWidths = new int[] { 37, 81, 16, 164, 6, 63, 0 };
+		gbl_logiPanel.rowHeights = new int[] { 60, 47, 68, 65, 0 };
+		gbl_logiPanel.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_logiPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		logiPanel.setLayout(gbl_logiPanel);
-
 
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setForeground(new Color(255, 255, 255));
@@ -231,8 +223,8 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				logiPanel.setVisible(false);
 				registerview();
-				//				newRegister();
-				//				frame.dispose();
+				// newRegister();
+				// frame.dispose();
 			}
 		});
 
@@ -253,24 +245,24 @@ public class GUI {
 		btnLogIn.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				if(usernameField.getText().equals("")){
+				if (usernameField.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "The field 'Username' cannot be empty.");
 					usernameField.requestFocus();
-				} else if(passwordField.getPassword().length == 0){
+				} else if (passwordField.getPassword().length == 0) {
 					JOptionPane.showMessageDialog(frame, "The field 'password' cannot be empty.");
 					passwordField.requestFocus();
-				}else if(!logIn(usernameField.getText(), new String(passwordField.getPassword()))){
+				} else if (!logIn(usernameField.getText(), new String(passwordField.getPassword()))) {
 					JOptionPane.showMessageDialog(frame, "The login credentials are incorrect. Please, revise them");
 				} else {
-					//					System.out.println("GO");
+					// System.out.println("GO");
 					frame.dispose();
 				}
-			}			
+			}
 		});
 		frame.repaint();
 	}
 
-	public void registerview(){
+	public void registerview() {
 		frame.setSize(376, 455);
 		frame.getContentPane().setLayout(null);
 
@@ -282,10 +274,10 @@ public class GUI {
 		JPanel panel_1 = new JPanel();
 		registerPanel.add(panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{63, 106, 151, 0, 0};
-		gbl_panel_1.rowHeights = new int[]{20, 0, 0, 0, 0, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.columnWidths = new int[] { 63, 106, 151, 0, 0 };
+		gbl_panel_1.rowHeights = new int[] { 20, 0, 0, 0, 0, 0 };
+		gbl_panel_1.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
 
 		JLabel lblUsername = new JLabel("Username:");
@@ -350,10 +342,10 @@ public class GUI {
 		JPanel panel_2 = new JPanel();
 		registerPanel.add(panel_2);
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
-		gbl_panel_2.columnWidths = new int[]{27, 72, 56, 37, 37, 49, 19, 0};
-		gbl_panel_2.rowHeights = new int[]{34, 34, 38, 31, 0};
-		gbl_panel_2.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_2.columnWidths = new int[] { 27, 72, 56, 37, 37, 49, 19, 0 };
+		gbl_panel_2.rowHeights = new int[] { 34, 34, 38, 31, 0 };
+		gbl_panel_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_2.setLayout(gbl_panel_2);
 
 		JLabel lblDate = new JLabel("Birthdate:");
@@ -363,21 +355,20 @@ public class GUI {
 		gbc_lblDate.gridy = 0;
 		panel_2.add(lblDate, gbc_lblDate);
 		lblDate.setBounds(23, 197, 72, 16);
-		
+
 		final UtilCalendarModel model = new UtilCalendarModel();
-		net.sourceforge.jdatepicker.impl.JDatePanelImpl datePanel = new net.sourceforge.jdatepicker.impl.JDatePanelImpl(model);
-		final net.sourceforge.jdatepicker.impl.JDatePickerImpl datePicker = new net.sourceforge.jdatepicker.impl.JDatePickerImpl(datePanel);
+		JDatePanelImpl datePanel = new JDatePanelImpl(model);
+		final JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
 		datePanel.setBounds(128, 107, 208, 28);
 		panel_2.add(datePicker);
 
-		
 		JPanel panel_3 = new JPanel();
 		registerPanel.add(panel_3);
 		GridBagLayout gbl_panel_3 = new GridBagLayout();
-		gbl_panel_3.columnWidths = new int[]{57, 135, 133, 0};
-		gbl_panel_3.rowHeights = new int[]{0, 97, 0};
-		gbl_panel_3.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_3.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_3.columnWidths = new int[] { 57, 135, 133, 0 };
+		gbl_panel_3.rowHeights = new int[] { 0, 97, 0 };
+		gbl_panel_3.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel_3.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		panel_3.setLayout(gbl_panel_3);
 		JButton btnCancel = new JButton("Cancel");
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
@@ -393,7 +384,6 @@ public class GUI {
 			}
 		});
 
-
 		JButton btnSend = new JButton("Send");
 		GridBagConstraints gbc_btnSend = new GridBagConstraints();
 		gbc_btnSend.gridx = 2;
@@ -405,51 +395,50 @@ public class GUI {
 
 			public void actionPerformed(ActionEvent e) {
 
-				//	Validations for the input of text in the registration
-				if(tfUsername.getText().equals("")){
+				// Validations for the input of text in the registration
+				if (tfUsername.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "The field 'Username' cannot be empty.");
 					tfUsername.requestFocus();
-				} else if(tfUsername.getText().length() < 3){
+				} else if (tfUsername.getText().length() < 3) {
 					JOptionPane.showMessageDialog(frame, "The username has to be at least 3 characters long.");
 					tfUsername.requestFocus();
-				} else if(passwordField.getPassword().length == 0){
+				} else if (passwordField.getPassword().length == 0) {
 					JOptionPane.showMessageDialog(frame, "The field 'password' cannot be empty.");
 					passwordField.requestFocus();
-				} else if(passwordField.getPassword().length < 6){
+				} else if (passwordField.getPassword().length < 6) {
 					JOptionPane.showMessageDialog(frame, "The password has to be at least 6 characters long.");
 					passwordField.requestFocus();
-				} else if(tfEmail.getText().equals("")){
+				} else if (tfEmail.getText().equals("")) {
 					JOptionPane.showMessageDialog(frame, "The field 'email' cannot be empty.");
 					tfEmail.requestFocus();
-				} else if(!tfEmail.getText().contains("@") || !tfEmail.getText().contains(".") || tfEmail.getText().length() < 5){
+				} else if (!tfEmail.getText().contains("@") || !tfEmail.getText().contains(".")
+						|| tfEmail.getText().length() < 5) {
 					JOptionPane.showMessageDialog(frame, "Insert a valid email.");
 					tfEmail.requestFocus();
-				} else if(datePicker.getModel().getValue() == null){
+				} else if (datePicker.getModel().getValue() == null) {
 					JOptionPane.showMessageDialog(frame, "The field 'Birthdate' cannot be empty.");
 				} else {
-					PlainUser user = new PlainUser(tfEmail.getText(), tfUsername.getText(), pfpassField.getPassword().toString(), model.getValue().getTime());
+					PlainUser user = new PlainUser(tfEmail.getText(), tfUsername.getText(),
+							pfpassField.getPassword().toString(), model.getValue().getTime(), null, null);
 					register(user);
 					frame.dispose();
 				}
 
-					
 			}
 		});
 		frame.repaint();
 	}
 
-
-
-
-	public void register(PlainUser u){
+	public void register(PlainUser u) {
 	}
-	public boolean logIn(String username, String password){
+
+	public boolean logIn(String username, String password) {
 		return true;
 	}
-	public void newRegister(){
+
+	public void newRegister() {
 
 	}
-
 
 	/**
 	 * Launch the application.
@@ -467,26 +456,3 @@ public class GUI {
 		});
 	}
 }
-
-//class DateLabelFormatter extends AbstractFormatter {
-//
-//	private static final long serialVersionUID = 1L;
-//	private String datePattern = "yyyy-MM-dd";
-//	private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
-//
-//	@Override
-//	public Object stringToValue(String text) throws ParseException {
-//		return dateFormatter.parseObject(text);
-//	}
-//
-//	@Override
-//	public String valueToString(Object value) throws ParseException {
-//		if (value != null) {
-//			Calendar cal = (Calendar) value;
-//			return dateFormatter.format(cal.getTime());
-//		}
-//
-//		return "";
-//	}
-//}
-//

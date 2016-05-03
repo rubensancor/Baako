@@ -1,34 +1,50 @@
 package baako.server;
 
-import static org.junit.Assert.assertEquals; 
+import static org.junit.Assert.assertEquals;
+
+import java.util.Date;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-
 import baako.server.assemblers.GameAssembler;
 import baako.server.database.Game;
+import baako.server.database.PlainUser;
 import baako.server.dto.GameDTO;
+import baako.server.dto.PlainUserDTO;
 
 /**
  * Unit test for simple App.
  */
 public class AssemblerTest {
 	
-	private Game game;
-	private GameDTO dto;
+	private static Game game;
+	private static GameDTO gamedto;
+	private static PlainUser u;
+	private static PlainUserDTO userdto;
 	
-	@Before 
-    public void setUp() throws Exception { 
+	@BeforeClass 
+    public static void setUp() throws Exception { 
         game = new Game("El juego", 20, "Mejor juego del mundo", 18);
-        dto = new GameDTO("El juego", 20, "Mejor juego del mundo", 18);
+        gamedto = new GameDTO("El juego", 20, "Mejor juego del mundo", 18);
+        u = new PlainUser("gvirum@gmail.com", "Gaizka", "Tere", new Date(System.currentTimeMillis()), null, null);
+        userdto = new PlainUserDTO("gvirum@gmail.com", "Gaizka", "Tere", new Date(System.currentTimeMillis()), null, null);
     } 
     @Test 
-    public void testAssemble() { 
-        assertEquals(dto, GameAssembler.getInstance().assemble(game));
+    public void testAssembleGame() { 
+        assertEquals("El juego", GameAssembler.getInstance().assemble(game).getName());
     } 
     @Test 
-    public void testDisassemble() { 
-        assertEquals(game, GameAssembler.getInstance().disassemble(dto));
+    public void testDisassembleGame() { 
+        assertEquals("El juego", GameAssembler.getInstance().disassemble(gamedto).getName());
+    } 
+    @Test 
+    public void testAssembleUser() { 
+        assertEquals("Gaizka", GameAssembler.getInstance().assemble(u).getUsername());
+    } 
+    @Test 
+    public void testDisassembleUser() { 
+        assertEquals("Gaizka", GameAssembler.getInstance().dissasemble(userdto).getName());
     } 
  
 }

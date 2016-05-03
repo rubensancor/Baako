@@ -51,7 +51,7 @@ public class Main
         {
             tx.begin();
             System.out.println("Persisting Inventory of products");
-            PlainUser user = new PlainUser("chali@dostos.es", "chali", "yiguepe", new Date(1995, 9, 22));
+            PlainUser user = new PlainUser("chali@dostos.es", "chali", "yiguepe", new Date(1995, 9, 22), null, null);
             Game game = new Game("Through the Doors", 15, "Fast paced FPS", 13);
             pm.makePersistent(user);
             pm.makePersistent(game);
