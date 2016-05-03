@@ -229,8 +229,6 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				logiPanel.setVisible(false);
 				registerview();
-				// newRegister();
-				// frame.dispose();
 			}
 		});
 
@@ -260,12 +258,13 @@ public class GUI {
 				} else if (!logIn(usernameField.getText(), new String(passwordField.getPassword()))) {
 					JOptionPane.showMessageDialog(frame, "The login credentials are incorrect. Please, revise them");
 				} else {
-					// logger.info("GO");
-					frame.dispose();
+					logiPanel.setVisible(false);
+					mainview();
 				}
 			}
 		});
 		frame.repaint();
+		frame.revalidate();
 	}
 
 	public void registerview() {
@@ -423,13 +422,14 @@ public class GUI {
 				//				} else if(datePicker.getModel().getValue() == null){
 				//					JOptionPane.showMessageDialog(frame, "The field 'Birthdate' cannot be empty.");
 				//				} else {
-				register(tfEmail.getText(), tfUsername.getText(), passwordField.getText(), model.getValue().getTime());
-				frame.dispose();
-				loginview();
-				//				}
+				if(register(tfEmail.getText(), tfUsername.getText(), passwordField.getText(), model.getValue().getTime())){
+					registerPanel.setVisible(false);
+					loginview();
+				}
 			}
 		});
 		frame.repaint();
+		frame.revalidate();
 	}
 
 	public boolean  register(String email, String username, String password, Date date){

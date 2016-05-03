@@ -16,18 +16,18 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class BaakoController {
-	
+
 	Logger logger = LoggerFactory.getLogger(BaakoController.class);
 	private RMIServiceLocator rmi;
 	private static PlainUserDTO user;
-	 
+
 	/**
 	 * 
 	 */
 	public BaakoController(RMIServiceLocator rmi) {
 		this.rmi = rmi;
 	}
-	
+
 	public boolean logIn(String username, String password){
 		try {
 			logger.info("Controller----> ");
@@ -41,7 +41,7 @@ public class BaakoController {
 			return false;
 		}
 	}
-	
+
 	public boolean register(PlainUserDTO u){
 		try{
 			logger.info("Register");

@@ -39,22 +39,10 @@ public class Auth {
 			logger.error("Error in the login");
 			return null;
 		}
-		//		if(users.get(username)==null || users.get(password)==null){
-		//			logger.error("Error in the login");
-		//			return false;
-		//		}
-		//		else if(users.get(username).equals(password)){
-		//			logger.info("Username: "+username);
-		//			logger.info("Password: "+password);
-		//			return true;			
-		//		}
-		//		else{
-		//			logger.error("Error in the login");
-		//			return false;
-		//		}
 	}
 
 	public boolean register(PlainUser user) throws RemoteException {
+		System.out.println(user);
 		User u = dao.getUser(user.getName());
 		if(u == null){
 			dao.addUser(user);

@@ -8,6 +8,8 @@ import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.PrimaryKey;
+import baako.server.dto.PlainUserDTO;
+import baako.server.dto.UserDTO;
 
 import baako.server.dto.PlainUserDTO;
 import baako.server.dto.UserDTO;
@@ -38,7 +40,6 @@ public abstract class User {
 		this.password = user.getPassword();
 		this.birthdate = user.getBirthdate();
 	}
-
 
 
 	/**

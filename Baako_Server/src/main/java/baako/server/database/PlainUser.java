@@ -26,7 +26,8 @@ public class PlainUser extends User {
 	/**
 	* 
 	*/
-	public PlainUser(String email, String name, String password, Date birthdate, Set<PlainUser> friends,Set<Game> games) {
+	public PlainUser(String email, String name, String password, Date birthdate, Set<PlainUser> friends,
+			Set<Game> games) {
 		super(email, name, password, birthdate);
 		this.friends = friends;
 		this.games = games;
@@ -47,7 +48,6 @@ public class PlainUser extends User {
 		this.games = u.getGames();
 	}
 
-
 	public Set<Game> getGames() {
 		return games;
 	}
@@ -55,6 +55,7 @@ public class PlainUser extends User {
 	public void setGames(Set<Game> games) {
 		this.games = games;
 	}
+
 
 	public void addGame(Game g){
 		games.add(g);

@@ -37,11 +37,13 @@ public class BaakoFacade extends UnicastRemoteObject implements IBaakoManager{
 
 	public PlainUserDTO checkUserInfo(String username, String password) throws RemoteException {
 		logger.info("FACADE-> CHECK USER INFO");
-		return (PlainUserDTO) auth.checkUserInfo(username, password);
+		return auth.checkUserInfo(username, password);
 	}
 
 	public boolean register(PlainUserDTO user) throws RemoteException {
-		
+		System.out.println("FACADE-> REGISTER");
+		System.out.println(user.getEmail());
+		System.out.println(Assembler.getInstance().dissasemble(user));
 		return auth.register(Assembler.getInstance().dissasemble(user));
 	}
 
