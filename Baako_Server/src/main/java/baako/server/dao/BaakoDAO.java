@@ -86,7 +86,6 @@ public class BaakoDAO implements IBaakoDAO {
 	/* (non-Javadoc)
 	 * @see baako.server.dao.IBaakoDAO#addUser(baako.server.database.PlainUser)
 	 */
-	@Override
 	public void addUser(PlainUser user) {
 		//DAO magic
 		pm = pmf.getPersistenceManager();
@@ -113,7 +112,6 @@ public class BaakoDAO implements IBaakoDAO {
 	/* (non-Javadoc)
 	 * @see baako.server.dao.IBaakoDAO#editGame(baako.server.database.Game)
 	 */
-	@Override
 	public void deleteGame(String game) {
 		//DAOmagic
 		pm = pmf.getPersistenceManager();
@@ -139,7 +137,6 @@ public class BaakoDAO implements IBaakoDAO {
 	/* (non-Javadoc)
 	 * @see baako.server.dao.IBaakoDAO#getAllGames()
 	 */
-	@Override
 	public ArrayList<Game> getAllGames() {
 		pm = pmf.getPersistenceManager();
 		tx = pm.currentTransaction();
