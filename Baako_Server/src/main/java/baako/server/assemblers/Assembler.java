@@ -7,7 +7,7 @@ import baako.server.dto.PlainUserDTO;
 
 public class Assembler {
 	
-	public static Assembler instance;
+	private static Assembler instance;
 	public static Assembler getInstance(){
 		if(instance== null){
 			instance = new Assembler();	
