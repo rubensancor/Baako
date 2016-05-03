@@ -5,7 +5,6 @@ package baako.client.gui.delegate;
 
 import java.util.Date;
 
-import baako.client.controller.BaakoController;
 import baako.client.gui.LoginWindow;
 import baako.client.gui.RegisterWindow;
 import baako.server.database.PlainUser;

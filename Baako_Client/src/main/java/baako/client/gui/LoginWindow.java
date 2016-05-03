@@ -83,7 +83,6 @@ public class LoginWindow {
 
 		btnLogIn.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(usernameField.getText().equals("")){
 					JOptionPane.showMessageDialog(frame, "The field 'Username' cannot be empty.");
@@ -102,7 +101,6 @@ public class LoginWindow {
 
 		btnRegister.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				newRegister();
 				frame.dispose();

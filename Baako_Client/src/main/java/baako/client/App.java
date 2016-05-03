@@ -3,11 +3,8 @@ package baako.client;
 import java.rmi.RMISecurityManager;
 
 import baako.client.controller.BaakoController;
-import baako.client.gui.GUI;
-import baako.client.gui.LoginWindow;
 import baako.client.gui.delegate.Delegate_LoginWindow;
 import baako.client.remote.RMIServiceLocator;
-import baako.server.auth.IAuth;
 /**
  *
  */
