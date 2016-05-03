@@ -5,9 +5,8 @@ import java.rmi.RMISecurityManager;
 import baako.client.controller.BaakoController;
 import baako.client.gui.GUI;
 import baako.client.gui.LoginWindow;
-import baako.client.gui.delegate.Delegate_LoginWindow;
+import baako.client.gui.delegate.Delegate_GUI;
 import baako.client.remote.RMIServiceLocator;
-import baako.server.auth.IAuth;
 /**
  *
  */
@@ -16,12 +15,13 @@ public class App
 	public static void main( String[] args )
 	{
 		if (System.getSecurityManager() == null) {
+
 			System.setSecurityManager(new RMISecurityManager());
 		}
 
 		RMIServiceLocator rmi = new RMIServiceLocator(args[0], args[1], args[2]);
 		BaakoController controller = new BaakoController(rmi);
-		new Delegate_LoginWindow(controller);
+		new Delegate_GUI(controller);
 		//		try {
 		//			String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
 		//			IAuth auth = (IAuth) java.rmi.Naming.lookup(name);

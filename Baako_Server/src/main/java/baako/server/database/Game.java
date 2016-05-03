@@ -9,6 +9,8 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import baako.server.dto.GameDTO;
+
 @PersistenceCapable
 public class Game {
 
@@ -41,6 +43,28 @@ public class Game {
 		this.price = price;
 		this.description = description;
 		this.PEGI = PEGI;
+	}
+	
+	
+	public Game(GameDTO game) {
+		this.name = game.getName();
+		this.price = game.getPrice();
+		this.description = game.getDescription();
+		this.PEGI = game.getPEGI();
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setPrice(float price) {
+		this.price = price;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public void setPEGI(int pEGI) {
+		PEGI = pEGI;
 	}
 	/**
 	 * @return the name
@@ -83,6 +107,15 @@ public class Game {
 	 */
 	public Set<Designer> getDesigners() {
 		return designers;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Game eq;
+		if(obj instanceof Game)eq = (Game)obj; 
+		else return false;
+		if(!eq.getName().equals(name)) return false;
+		else return true;
 	}
 	
 	

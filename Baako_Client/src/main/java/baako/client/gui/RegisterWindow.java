@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.DateFormatter;
 
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
+//import org.jdatepicker.impl.JDatePanelImpl;
+//import org.jdatepicker.impl.JDatePickerImpl;
+//import org.jdatepicker.impl.UtilDateModel;
 
 import baako.server.database.PlainUser;
 
@@ -119,6 +119,7 @@ public class RegisterWindow {
 		passwordField = new JPasswordField();
 		passwordField.setBounds(128, 77, 208, 28);
 		frame.getContentPane().add(passwordField);
+	}
 
 		//		JLabel lblYear = new JLabel("Year");
 		//		lblYear.setBounds(91, 224, 55, 16);
@@ -147,58 +148,59 @@ public class RegisterWindow {
 		//		comboDay.setBounds(231, 297, 62, 26);
 		//		frame.getContentPane().add(comboDay);
 		//		
-		UtilDateModel model = new UtilDateModel();
-		Properties p = new Properties();
-		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-		datePicker.setBounds(128, 197, 208, 28);
+//		final UtilDateModel model = new UtilDateModel();
+//		Properties p = new Properties();
+//		final JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+//		final JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+//		datePicker.setBounds(128, 197, 208, 28);
 
-		frame.add(datePicker);
-		frame.repaint();
+//		frame.add(datePicker);
+//		frame.repaint();
 
 
-		btnCancel.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-			}
-		});
-
-		btnSend.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				//	Validations for the input of text in the registration
-				if(tfUsername.getText().equals("")){
-					JOptionPane.showMessageDialog(frame, "The field 'Username' cannot be empty.");
-					tfUsername.requestFocus();
-				} else if(tfUsername.getText().length() < 3){
-					JOptionPane.showMessageDialog(frame, "The username has to be at least 3 characters long.");
-					tfUsername.requestFocus();
-				} else if(passwordField.getPassword().length == 0){
-					JOptionPane.showMessageDialog(frame, "The field 'password' cannot be empty.");
-					passwordField.requestFocus();
-				} else if(passwordField.getPassword().length < 6){
-					JOptionPane.showMessageDialog(frame, "The password has to be at least 6 characters long.");
-					passwordField.requestFocus();
-				} else if(tfEmail.getText().equals("")){
-					JOptionPane.showMessageDialog(frame, "The field 'email' cannot be empty.");
-					tfEmail.requestFocus();
-				} else if(!tfEmail.getText().contains("@") || !tfEmail.getText().contains(".") || tfEmail.getText().length() < 5){
-					JOptionPane.showMessageDialog(frame, "Insert a valid email.");
-					tfEmail.requestFocus();
-				} else if(datePicker.getModel().getValue() == null){
-					JOptionPane.showMessageDialog(frame, "The field 'Birthdate' cannot be empty.");
-				} else {
-					register((Date)datePicker.getModel().getValue());
-					frame.dispose();
-				}
-			}
-		});
-	}
+//		btnCancel.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				frame.dispose();
+//			}
+//		});
+//
+//		btnSend.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//
+//				//	Validations for the input of text in the registration
+//				if(tfUsername.getText().equals("")){
+//					JOptionPane.showMessageDialog(frame, "The field 'Username' cannot be empty.");
+//					tfUsername.requestFocus();
+//				} else if(tfUsername.getText().length() < 3){
+//					JOptionPane.showMessageDialog(frame, "The username has to be at least 3 characters long.");
+//					tfUsername.requestFocus();
+//				} else if(passwordField.getPassword().length == 0){
+//					JOptionPane.showMessageDialog(frame, "The field 'password' cannot be empty.");
+//					passwordField.requestFocus();
+//				} else if(passwordField.getPassword().length < 6){
+//					JOptionPane.showMessageDialog(frame, "The password has to be at least 6 characters long.");
+//					passwordField.requestFocus();
+//				} else if(tfEmail.getText().equals("")){
+//					JOptionPane.showMessageDialog(frame, "The field 'email' cannot be empty.");
+//					tfEmail.requestFocus();
+//				} else if(!tfEmail.getText().contains("@") || !tfEmail.getText().contains(".") || tfEmail.getText().length() < 5){
+//					JOptionPane.showMessageDialog(frame, "Insert a valid email.");
+//					tfEmail.requestFocus();
+////				} else if(datePicker.getModel().getValue() == null){
+////					JOptionPane.showMessageDialog(frame, "The field 'Birthdate' cannot be empty.");
+////				} else {
+////					register((Date)datePicker.getModel().getValue());
+//					frame.dispose();
+//				}
+//			}
+//		});
+//	}
 	public void register(Date birthdate){
+		
 	}
 }
 
