@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 
 import baako.client.remote.RMIServiceLocator;
 import baako.server.database.PlainUser;
+import baako.server.dto.PlainUserDTO;
 import baako.server.dto.UserDTO;
 
 /**
@@ -16,7 +17,7 @@ import baako.server.dto.UserDTO;
 public class BaakoController {
 	
 	private RMIServiceLocator rmi;
-	private static UserDTO user;
+	private static PlainUserDTO user;
 	 
 	/**
 	 * 
@@ -30,13 +31,9 @@ public class BaakoController {
 			System.out.println("Controller----> ");
 			System.out.println("Username---> "+username);
 			System.out.println("Password---> "+password);
-			//user = rmi.getService().checkUserInfo(username, password);
-			if(rmi.getService().checkUserInfo(username, password)){
-				return true;
-			}
-			else{
-				return false;
-			}
+			user = rmi.getService().checkUserInfo(username, password);
+			System.out.println(user.getEmail());
+			return user != null;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return false;
