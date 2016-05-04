@@ -30,8 +30,9 @@ public class BaakoController {
 
 	public boolean logIn(String username, String password){
 		try {
-			logger.info("Username: "+username);
-			logger.info("Password: "+password);
+			logger.info("Controller----> ");
+			logger.info("Username---> "+username);
+			logger.info("Password---> "+password);
 			user = rmi.getService().checkUserInfo(username, password);
 			logger.info(user.getEmail());
 			return user != null;
