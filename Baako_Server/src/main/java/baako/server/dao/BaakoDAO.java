@@ -65,12 +65,13 @@ public class BaakoDAO implements IBaakoDAO {
 			aux2 = (PlainUser) query.execute();
 			PlainUser u = null;
 			if(aux2 != null){
-				logger.info("Retrieving "+aux2.toString());
+				logger.info("Retrieving "+aux2.toString()+" with password '"+aux2.getPassword()+"'");
 				u = aux2;
 			}else
 				logger.warn("User '"+username+"' not found.");
 
 			tx.commit();
+			logger.info("Copied to an auxiliary var: "+u.getName()+", "+u.getPassword());
 			return u;
 		}catch(Exception e){
 			e.printStackTrace();

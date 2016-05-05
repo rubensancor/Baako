@@ -24,7 +24,7 @@ public class Delegate_GUI extends GUI{
 	
 	public boolean logIn(String username, String password){
 		if(controller.logIn(username, password)){
-			new Delegate_MainWindow();
+//			new Delegate_MainWindow();
 			return true;
 		}else{
 			new JOptionPane("ERROR IN THE LOGIN",1);

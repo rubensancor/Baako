@@ -29,7 +29,7 @@ public class Auth {
 		//		logger.info(username);
 		//		logger.info(password);
 		PlainUser u = new PlainUser(dao.getUser(username));
-		logger.info("Le pass: "+u.getPassword());
+		logger.info("Password: "+u.getPassword());
 		if(u.getPassword().equals(password)){
 			//			logger.info("Logged as "+ u.getName());
 			PlainUserDTO user = Assembler.getInstance().assemble(u);
