@@ -30,7 +30,7 @@ public class BaakoDAO implements IBaakoDAO {
 	PersistenceManager pm = null;
 
 	Transaction tx = null;
-	
+
 	Logger logger = LoggerFactory.getLogger(BaakoDAO.class);
 
 	@SuppressWarnings("finally")
@@ -53,12 +53,12 @@ public class BaakoDAO implements IBaakoDAO {
 			//				su = aux;
 			//			}
 
-//			Query query = pm.newQuery(AdminUser.class);
-//			query.setFilter("username == usernameParam ");
-//			query.declareParameters("String usernameParam");
-//			query.setUnique(true);
-//
-//			aux = (User) query.execute(username);
+			//			Query query = pm.newQuery(AdminUser.class);
+			//			query.setFilter("username == usernameParam ");
+			//			query.declareParameters("String usernameParam");
+			//			query.setUnique(true);
+			//
+			//			aux = (User) query.execute(username);
 
 			Query query = pm.newQuery("SELECT FROM "+PlainUser.class.getName()+" WHERE username=='"+username+"'");
 //			Query query2 = pm.newQuery(PlainUser.class);
@@ -77,19 +77,17 @@ public class BaakoDAO implements IBaakoDAO {
 			tx.commit();
 			logger.info("Copied to an auxiliary var: "+u.getName()+", "+u.getPassword());
 			return u;
+
 		}catch(Exception e){
 			e.printStackTrace();
 			logger.warn("Exception when retrieving from database");
 		}finally{
-			if (tx != null && tx.isActive()) {
+			if(tx.isActive()){
 				tx.rollback();
 			}
-			if (pm != null && !pm.isClosed()) {
-				logger.info("Cerrando");
-				pm.close();
-			}
+			pm.close();
 		}
-		return null;
+		return aux2;
 	}
 
 	/* (non-Javadoc)
@@ -155,13 +153,10 @@ public class BaakoDAO implements IBaakoDAO {
 			tx.commit();
 
 		}finally{
-			if (tx != null && tx.isActive()) {
-				logger.info("There's no such user");
+			if(tx.isActive()){
 				tx.rollback();
 			}
-			if (pm != null && !pm.isClosed()) {
-				pm.close();
-			}
+			pm.close();
 		}
 	}
 

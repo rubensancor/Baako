@@ -49,7 +49,9 @@ public class BaakoController {
 			logger.info("Register");
 			logger.info("Username---> "+u.getName());
 			logger.info("Password---> "+u.getPassword());
+			
 			if(rmi.getService().register(u)){
+				logger.info("PASOTERE");
 				return true;
 			}else{
 				return false;
