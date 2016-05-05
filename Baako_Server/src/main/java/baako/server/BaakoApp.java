@@ -8,6 +8,7 @@ import baako.server.dao.IBaakoDAO;
 import baako.server.facade.BaakoFacade;
 import baako.server.manager.IBaakoManager;
 
+
 /**
  *
  */
@@ -38,7 +39,7 @@ public class BaakoApp {
 //			System.out.println("Email ----> "+dao.getUser("ruben").getEmail());
 			
 			Naming.rebind(serverName, manager);
-			System.out.println("Auth Server "+ serverName+ " active and waiting...");
+			System.out.println("Baako Server "+ serverName+ " active and waiting...");
 			java.io.InputStreamReader inputStreamReader = new java.io.InputStreamReader ( System.in );
 			java.io.BufferedReader stdin = new java.io.BufferedReader ( inputStreamReader );
 			String line  = stdin.readLine();

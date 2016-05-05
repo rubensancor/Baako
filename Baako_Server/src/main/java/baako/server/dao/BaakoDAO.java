@@ -11,9 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
 
 import javax.jdo.*;
+
+import baako.server.database.Category;
+import baako.server.database.Designer;
 import baako.server.database.Game;
 import baako.server.database.PlainUser;
 import baako.server.database.User;
+import baako.server.database.Wallet;
 import baako.server.dao.IBaakoDAO;
 /**
  * @author gusy
@@ -188,6 +192,34 @@ public class BaakoDAO implements IBaakoDAO {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#getAllGames()
+	 */
+	public ArrayList<Category> getAllCategories() {
+		pm = pmf.getPersistenceManager();
+		tx = pm.currentTransaction();
+		ArrayList<Category> categories= new ArrayList<Category>();
+		try{
+			tx.begin();
+			Extent<Category> e = pm.getExtent(Category.class,true);
+			Iterator<Category> iter = e.iterator();
+			while (iter.hasNext())
+			{
+				Category aux = (Category) iter.next();
+				logger.info(aux.getName());
+				categories.add(aux);
+			}
+			tx.commit();
+			return categories;
+
+		}finally{
+			if(tx.isActive()){
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
 
 
 
@@ -227,6 +259,44 @@ public class BaakoDAO implements IBaakoDAO {
 		return games.get(0);
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#getAllDesigners()
+	 */
+	public ArrayList<Designer> getAllDesigners() {
+		pm = pmf.getPersistenceManager();
+		tx = pm.currentTransaction();
+		ArrayList<Designer> designers= new ArrayList<Designer>();
+		try{
+			tx.begin();
+			Extent<Designer> e = pm.getExtent(Designer.class,true);
+			Iterator<Designer> iter = e.iterator();
+			while (iter.hasNext())
+			{
+				Designer aux = (Designer) iter.next();
+				logger.info(aux.getName());
+				designers.add(aux);
+			}
+			tx.commit();
+			return designers;
 
+		}finally{
+			if(tx.isActive()){
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	public void addWallet(Wallet wallet){
+		//DAO magic
+		pm = pmf.getPersistenceManager();
+		try{
+			//					Query q = pm.newQuery("javax.jdo.query.SQL", "INSERT INTO WALLET('CARDNUMB', 'TYPE', 'USER_USERNAME_OID') VALUES('?','?','?')");
+			//					q.execute(wallet.getCardNumb(),wallet.getType(),wallet.getUser().getName());
+			pm.makePersistent(wallet);
+		}finally{
+			pm.close();
+		}
+	}
 
 }

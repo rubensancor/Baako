@@ -1,5 +1,7 @@
 package baako.server.dto;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,8 +9,12 @@ import baako.server.database.Category;
 import baako.server.database.Designer;
 import baako.server.database.Game;
 
-public class GameDTO {
+public class GameDTO implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private float price;
 	private String description;
@@ -20,7 +26,6 @@ public class GameDTO {
 	
 	public GameDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public GameDTO(String name, float price, String description, int pegi, Set<Category> categories, Set<Designer> designers) {
 		super();
@@ -39,6 +44,21 @@ public class GameDTO {
 		this.setCategories(game.getCategories());
 		this.setDesigners(game.getDesigners());
 	}
+	public GameDTO(String name, float price, String description, int pegi, ArrayList<String> categories, ArrayList<String> designers) {
+		this.name = name;
+		this.price = price;
+		this.description = description;
+		this.PEGI = pegi;
+		for (String string : categories) {
+			Category aux = new Category(string);
+			this.categories.add(aux);
+		}
+		for (String string : categories) {
+			Designer aux = new Designer(string);
+			this.designers.add(aux);
+		}
+	}
+
 	/**
 	 * @param string
 	 * @param i
