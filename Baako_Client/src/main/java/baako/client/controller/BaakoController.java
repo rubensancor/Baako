@@ -4,8 +4,10 @@
 package baako.client.controller;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import baako.client.remote.RMIServiceLocator;
+import baako.server.dto.GameDTO;
 import baako.server.dto.PlainUserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
@@ -57,4 +59,35 @@ public class BaakoController {
 			return false;
 		}
 	}
+	
+	public boolean addGame(GameDTO game){
+		try{
+			logger.info("Adding game");
+			logger.info("Name-->"+game.getName());
+			logger.info("Price -->"+game.getPrice());
+			return rmi.getService().addGame(game);
+		}catch(RemoteException e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public ArrayList<String> getAllCategories(){
+		try {
+			return  rmi.getService().getAllCategories();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList<String> getAllDesigners(){
+		try {
+			return  rmi.getService().getAllDesigners();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

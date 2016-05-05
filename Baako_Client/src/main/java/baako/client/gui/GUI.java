@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -14,7 +16,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import baako.server.dto.PlainUserDTO;
@@ -24,11 +29,13 @@ import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.GridLayout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
+
 
 
 public class GUI {
@@ -40,6 +47,27 @@ public class GUI {
 	protected JTextField tfUsername;
 	protected JTextField tfEmail;
 	protected JPasswordField pfpassField;
+	private JTextField nameField;
+	private JTextField priceField;
+
+	private int state;
+	/*0 = adminNews 
+	1 = userNews 
+	2 = adminGames
+	3 = userLibrary 
+	4 = userGames 
+	5 = userFriends*/
+	protected JComboBox<String> categoryCBox;
+	protected JComboBox<String> categoryCBoxOpt1;
+	protected JComboBox<String> categoryCBoxOpt2;
+	protected JComboBox<String> categoryCBoxOpt3;
+	protected JComboBox<String> categoryCBoxOpt4;
+	protected JComboBox<String> categoryCBoxOpt5;
+	protected JComboBox<String> designerCBox; 
+	protected JComboBox<String> designerCBoxOpt1; 
+	protected JComboBox<String> designerCBoxOpt2; 
+	protected JComboBox<String> designerCBoxOpt3; 
+
 
 	/**
 	 * Create the application.
@@ -53,6 +81,7 @@ public class GUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\virum\\git\\Baako\\Baako_Server\\src\\main\\images\\bakologo.png"));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -62,11 +91,11 @@ public class GUI {
 	}
 
 	public void mainview() {
-
+		//		this.state="userfriends";
 		frame.setSize(741, 581);
 		frame.getContentPane().setLayout(null);
 
-		JPanel mainPanel_1 = new JPanel();
+		final JPanel mainPanel_1 = new JPanel();
 		mainPanel_1.setBounds(0, 0, 725, 542);
 		frame.getContentPane().add(mainPanel_1);
 		mainPanel_1.setLayout(null);
@@ -125,32 +154,204 @@ public class GUI {
 		logoutPanel.setBackground(new Color(105, 105, 105));
 		logoutPanel.setLayout(null);
 
-		JButton btnNewButton = new JButton("LOGOUT");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton.setBackground(new Color(255, 51, 0));
-		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setBounds(0, 0, 152, 50);
-		logoutPanel.add(btnNewButton);
+		JButton btnLogOut = new JButton("LOGOUT");
+		btnLogOut.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnLogOut.setBackground(new Color(255, 51, 0));
+		btnLogOut.setForeground(new Color(255, 255, 255));
+		btnLogOut.setBounds(0, 0, 152, 50);
+		btnLogOut.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				mainPanel_1.setVisible(false);
+				loginview();
+			}
+		});
+		logoutPanel.add(btnLogOut);
 
 		JPanel optionPanel = new JPanel();
 		optionPanel.setBackground(new Color(105, 105, 105));
 		optionPanel.setBounds(574, 49, 151, 493);
 		mainPanel_1.add(optionPanel);
-	}
 
-	public void logOut() {
-		JButton btnLogin = new JButton("LOGIN");
-		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnLogin.setForeground(new Color(255, 255, 255));
-		btnLogin.setBackground(new Color(0, 128, 0));
-		btnLogin.setBounds(10, 0, 102, 27);
-		// LogPanel.add(btnLogin);
+		GridBagLayout gbl_optionPanel = new GridBagLayout();
+		gbl_optionPanel.columnWidths = new int[]{0, 0, 0, 0};
+		gbl_optionPanel.rowHeights = new int[]{117, 42, 42, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_optionPanel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_optionPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		optionPanel.setLayout(gbl_optionPanel);
 
-		JLabel lblLogged = new JLabel("Log Status");
-		lblLogged.setForeground(new Color(255, 255, 255));
-		lblLogged.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblLogged.setBounds(124, 0, 119, 27);
-		// LogPanel.add(lblLogged);
+		JLabel iconlabel = new JLabel("");
+		iconlabel.setIcon(new ImageIcon("C:\\eclipse\\git\\Baako\\Baako_Server\\src\\main\\images\\bakologo.ico"));
+		GridBagConstraints gbc_iconlabel = new GridBagConstraints();
+		gbc_iconlabel.insets = new Insets(60, 0, 5, 0);
+		gbc_iconlabel.gridx = 1;
+		gbc_iconlabel.gridy = 10;
+		optionPanel.add(iconlabel, gbc_iconlabel);
+
+		JButton btninfo = new JButton("+INFO");
+		GridBagConstraints gbc_btninfo = new GridBagConstraints();
+
+		JButton btnBack = new JButton("BACK");
+		GridBagConstraints gbc_btnBack = new GridBagConstraints();
+
+		switch(state){
+		case 0:
+			JButton btnAddNews = new JButton("ADD NEWS");
+			GridBagConstraints gbc_btnAddNews = new GridBagConstraints();
+			gbc_btnAddNews.fill = GridBagConstraints.BOTH;
+			gbc_btnAddNews.insets = new Insets(0, 25, 5, 0);
+			gbc_btnAddNews.gridx = 1;
+			gbc_btnAddNews.gridy = 1;
+			optionPanel.add(btnAddNews, gbc_btnAddNews);
+
+			JButton btnEditNews = new JButton("EDIT NEWS");
+			GridBagConstraints gbc_btnEditNews = new GridBagConstraints();
+			gbc_btnEditNews.fill = GridBagConstraints.BOTH;
+			gbc_btnEditNews.insets = new Insets(0, 25, 5, 0);
+			gbc_btnEditNews.gridx = 1;
+			gbc_btnEditNews.gridy = 2;
+			optionPanel.add(btnEditNews, gbc_btnEditNews);
+
+
+			gbc_btninfo.insets = new Insets(40, 25, 5, 0);
+			gbc_btninfo.gridx = 1;
+			gbc_btninfo.gridy = 6;
+			optionPanel.add(btninfo, gbc_btninfo);
+
+			gbc_btnBack.insets = new Insets(0, 25, 5, 0);
+			gbc_btnBack.gridx = 1;
+			gbc_btnBack.gridy = 7;
+			optionPanel.add(btnBack, gbc_btnBack);
+			break;
+		case 1:
+
+			gbc_btninfo.fill = GridBagConstraints.BOTH;
+			gbc_btninfo.insets = new Insets(0, 45, 5, 0);
+			gbc_btninfo.gridx = 1;
+			gbc_btninfo.gridy = 1;
+			optionPanel.add(btninfo, gbc_btninfo);
+
+
+			gbc_btnBack.fill = GridBagConstraints.BOTH;
+			gbc_btnBack.insets = new Insets(0, 45, 5, 0);
+			gbc_btnBack.gridx = 1;
+			gbc_btnBack.gridy = 2;
+			optionPanel.add(btnBack, gbc_btnBack);
+
+			break;
+		case 2:
+			JButton btnAddGame = new JButton("ADD GAME");
+			GridBagConstraints gbc_btnAddGame = new GridBagConstraints();
+			gbc_btnAddGame.fill = GridBagConstraints.BOTH;
+			gbc_btnAddGame.insets = new Insets(0, 35, 5, 0);
+			gbc_btnAddGame.gridx = 1;
+			gbc_btnAddGame.gridy = 1;
+			optionPanel.add(btnAddGame, gbc_btnAddGame);
+
+			btnAddGame.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					mainPanel_1.setVisible(false);
+					addgameview();
+				}
+			});
+
+			JButton btnEditGame = new JButton("EDIT GAME");
+			GridBagConstraints gbc_btnEditGame = new GridBagConstraints();
+			gbc_btnEditGame.fill = GridBagConstraints.BOTH;
+			gbc_btnEditGame.insets = new Insets(0, 35, 5, 0);
+			gbc_btnEditGame.gridx = 1;
+			gbc_btnEditGame.gridy = 2;
+			optionPanel.add(btnEditGame, gbc_btnEditGame);
+
+
+			gbc_btninfo.insets = new Insets(40, 45, 5, 0);
+			gbc_btninfo.gridx = 1;
+			gbc_btninfo.gridy = 6;
+			optionPanel.add(btninfo, gbc_btninfo);
+
+			gbc_btnBack.insets = new Insets(0, 45, 5, 0);
+			gbc_btnBack.gridx = 1;
+			gbc_btnBack.gridy = 7;
+			optionPanel.add(btnBack, gbc_btnBack);
+			break;
+		case 3:
+			JButton btnLaunch = new JButton("LAUNCH");
+			GridBagConstraints gbc_btnLaunch = new GridBagConstraints();
+			gbc_btnLaunch.fill = GridBagConstraints.BOTH;
+			gbc_btnLaunch.insets = new Insets(0, 45, 5, 0);
+			gbc_btnLaunch.gridx = 1;
+			gbc_btnLaunch.gridy = 1;
+			optionPanel.add(btnLaunch, gbc_btnLaunch);
+
+			gbc_btninfo.insets = new Insets(40, 45, 5, 0);
+			gbc_btninfo.gridx = 1;
+			gbc_btninfo.gridy = 3;
+			optionPanel.add(btninfo, gbc_btninfo);
+
+			gbc_btnBack.insets = new Insets(0, 45, 5, 0);
+			gbc_btnBack.gridx = 1;
+			gbc_btnBack.gridy = 4;
+			optionPanel.add(btnBack, gbc_btnBack);
+			break;
+		case 4:
+			JButton btnBuy = new JButton("BUY GAME");
+			GridBagConstraints gbc_btnBuy = new GridBagConstraints();
+			gbc_btnBuy.fill = GridBagConstraints.BOTH;
+			gbc_btnBuy.insets = new Insets(0, 25, 5, 0);
+			gbc_btnBuy.gridx = 1;
+			gbc_btnBuy.gridy = 1;
+			optionPanel.add(btnBuy, gbc_btnBuy);
+
+			JButton btnRent = new JButton("RENT GAME");
+			GridBagConstraints gbc_btnRent = new GridBagConstraints();
+			gbc_btnRent.fill = GridBagConstraints.BOTH;
+			gbc_btnRent.insets = new Insets(0, 25, 5, 0);
+			gbc_btnRent.gridx = 1;
+			gbc_btnRent.gridy = 2;
+			optionPanel.add(btnRent, gbc_btnRent);
+
+
+			gbc_btninfo.insets = new Insets(40, 35, 5, 0);
+			gbc_btninfo.gridx = 1;
+			gbc_btninfo.gridy = 4;
+			optionPanel.add(btninfo, gbc_btninfo);
+
+			gbc_btnBack.insets = new Insets(0, 35, 5, 0);
+			gbc_btnBack.gridx = 1;
+			gbc_btnBack.gridy = 5;
+			optionPanel.add(btnBack, gbc_btnBack);
+			break;
+		case 5:
+			JButton btnAddFriend = new JButton("ADD FRIEND");
+			GridBagConstraints gbc_btnAddFriend = new GridBagConstraints();
+			gbc_btnAddFriend.fill = GridBagConstraints.BOTH;
+			gbc_btnAddFriend.insets = new Insets(0, 20, 5, 0);
+			gbc_btnAddFriend.gridx = 1;
+			gbc_btnAddFriend.gridy = 1;
+			optionPanel.add(btnAddFriend, gbc_btnAddFriend);
+
+			JButton btnDeleteFriend = new JButton("DELETE FRIEND");
+			GridBagConstraints gbc_btnDeleteFriend = new GridBagConstraints();
+			gbc_btnDeleteFriend.fill = GridBagConstraints.BOTH;
+			gbc_btnDeleteFriend.insets = new Insets(0, 20, 5, 0);
+			gbc_btnDeleteFriend.gridx = 1;
+			gbc_btnDeleteFriend.gridy = 2;
+			optionPanel.add(btnDeleteFriend, gbc_btnDeleteFriend);
+
+
+			gbc_btninfo.insets = new Insets(40, 30, 5, 0);
+			gbc_btninfo.gridx = 1;
+			gbc_btninfo.gridy = 4;
+			optionPanel.add(btninfo, gbc_btninfo);
+
+			gbc_btnBack.insets = new Insets(0, 30, 5, 0);
+			gbc_btnBack.gridx = 1;
+			gbc_btnBack.gridy = 5;
+			optionPanel.add(btnBack, gbc_btnBack);
+			break;
+		}
+
 	}
 
 	/**
@@ -259,6 +460,7 @@ public class GUI {
 					JOptionPane.showMessageDialog(frame, "The login credentials are incorrect. Please, revise them");
 				} else {
 					logiPanel.setVisible(false);
+					state=2;
 					mainview();
 				}
 			}
@@ -431,6 +633,164 @@ public class GUI {
 		frame.repaint();
 		frame.revalidate();
 	}
+	
+	public void addgameview(){
+		frame.setSize(450, 600);
+		frame.getContentPane().setLayout(null);
+		final JPanel panel = new JPanel();
+		panel.setBackground(new Color(105, 105, 105));
+		panel.setBounds(0, 0, 434, 561);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+
+		JLabel lblName = new JLabel("NAME");
+		lblName.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblName.setForeground(new Color(255, 255, 255));
+		lblName.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblName.setBounds(93, 23, 46, 14);
+		panel.add(lblName);
+
+		JLabel lblPrice = new JLabel("PRICE");
+		lblPrice.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPrice.setForeground(new Color(255, 255, 255));
+		lblPrice.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPrice.setBounds(93, 75, 46, 14);
+		panel.add(lblPrice);
+
+		JLabel lblPEGI = new JLabel("PEGI");
+		lblPEGI.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPEGI.setForeground(new Color(255, 255, 255));
+		lblPEGI.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPEGI.setBounds(93, 120, 46, 14);
+		panel.add(lblPEGI);
+
+		JLabel lblDescription = new JLabel("DESCRIPTION");
+		lblDescription.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDescription.setForeground(new Color(255, 255, 255));
+		lblDescription.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblDescription.setBounds(39, 150, 100, 14);
+		panel.add(lblDescription);
+
+		JLabel lblCategory = new JLabel("CATEGORY");
+		lblCategory.setForeground(new Color(255, 255, 255));
+		lblCategory.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblCategory.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCategory.setBounds(62, 285, 77, 14);
+		panel.add(lblCategory);
+
+		JLabel lblDesigner = new JLabel("DESIGNER");
+		lblDesigner.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDesigner.setForeground(new Color(255, 255, 255));
+		lblDesigner.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblDesigner.setBounds(62, 393, 77, 22);
+		panel.add(lblDesigner);
+
+		nameField = new JTextField();
+		nameField.setBounds(164, 22, 134, 17);
+		panel.add(nameField);
+		nameField.setColumns(10);
+
+		priceField = new JTextField();
+		priceField.setBounds(164, 73, 134, 20);
+		panel.add(priceField);
+		priceField.setColumns(10);
+
+		final JComboBox<String> pegiCBox = new JComboBox<String>();
+		pegiCBox.addItem("3");
+		pegiCBox.addItem("7");
+		pegiCBox.addItem("12");
+		pegiCBox.addItem("16");
+		pegiCBox.addItem("18");
+		pegiCBox.setBounds(164, 120, 100, 20);
+		panel.add(pegiCBox);
+
+		categoryCBox = new JComboBox<String>();
+		categoryCBox.insertItemAt("", 0);
+		categoryCBox.setBounds(164, 285, 100, 20);
+		panel.add(categoryCBox);
+
+		designerCBox = new JComboBox<String>();
+		designerCBox.insertItemAt("", 0);
+		designerCBox.setBounds(164, 393, 100, 20);
+		panel.add(designerCBox);
+
+		categoryCBoxOpt1 = new JComboBox<String>();
+		categoryCBoxOpt1.insertItemAt("", 0);
+		categoryCBoxOpt1.setBounds(294, 320, 100, 20);
+		panel.add(categoryCBoxOpt1);
+
+		categoryCBoxOpt2 = new JComboBox<String>();
+		categoryCBoxOpt2.insertItemAt("", 0);
+		categoryCBoxOpt2.setBounds(164, 320, 100, 22);
+		panel.add(categoryCBoxOpt2);
+
+		categoryCBoxOpt3 = new JComboBox<String>();
+		categoryCBoxOpt3.insertItemAt("", 0);
+		categoryCBoxOpt3.setBounds(164, 355, 100, 24);
+		panel.add(categoryCBoxOpt3);
+
+		categoryCBoxOpt4 = new JComboBox<String>();
+		categoryCBoxOpt4.insertItemAt("", 0);
+		categoryCBoxOpt4.setBounds(294, 285, 100, 22);
+		panel.add(categoryCBoxOpt4);
+
+		categoryCBoxOpt5 = new JComboBox<String>();
+		categoryCBoxOpt5.insertItemAt("", 0);
+		categoryCBoxOpt5.setBounds(294, 355, 100, 20);
+		panel.add(categoryCBoxOpt5);
+
+		designerCBoxOpt1 = new JComboBox<String>();
+		designerCBoxOpt1.insertItemAt("", 0);
+		designerCBoxOpt1.setBounds(294, 393, 100, 20);
+		panel.add(designerCBoxOpt1);
+
+		designerCBoxOpt2 = new JComboBox<String>();
+		designerCBoxOpt2.insertItemAt("", 0);
+		designerCBoxOpt2.setBounds(164, 420, 100, 20);
+		panel.add(designerCBoxOpt2);
+
+		designerCBoxOpt3 = new JComboBox<String>();
+		designerCBoxOpt3.insertItemAt("", 0);
+		designerCBoxOpt3.setBounds(294, 420, 100, 20);
+		panel.add(designerCBoxOpt3);
+
+		final JTextArea descTArea = new JTextArea();
+		descTArea.setBounds(164, 150, 230, 122);
+		panel.add(descTArea);
+
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(100, 520, 95, 28);
+		panel.add(btnCancel);
+
+		btnCancel.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				panel.setVisible(false);
+				mainview();
+			}
+		});
+
+		JButton btnSend = new JButton("Send");
+		btnSend.setBounds(300, 520, 95, 28);
+		panel.add(btnSend);
+
+		btnSend.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				int price = Integer.parseInt(priceField.getText());
+				logger.info(pegiCBox.getSelectedItem().toString());
+				int pegi = Integer.parseInt(pegiCBox.getSelectedItem().toString());
+				if(addGame(nameField.getText(), price, descTArea.getText(), pegi)){
+					panel.setVisible(false);
+					mainview();
+				}
+			}
+		});
+		fill();
+		frame.repaint();
+		frame.revalidate();
+	}
+
 
 	public boolean  register(String email, String username, String password, Date date){
 		return true;
@@ -439,6 +799,15 @@ public class GUI {
 	public boolean logIn(String username, String password) {
 		return true;
 	}
+	
+	public boolean addGame(String name, int price, String description, int pegi){
+		return true;
+	}
+	
+	public void fill(){
+
+	}
+
 
 	/**
 	 * Launch the application.
