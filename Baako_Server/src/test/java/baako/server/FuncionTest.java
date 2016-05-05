@@ -32,7 +32,7 @@ public class FuncionTest {
 		PlainUserDTO u = null;
 		try {
 			u = a.checkUserInfo("ruben", "asd");
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		assertEquals("ruben", u.getName());
@@ -52,7 +52,6 @@ public class FuncionTest {
 	public void testRegister() { 
 		u = new PlainUser("gvirum@gmail.com", "GaizkaTere", "asd", new Date(System.currentTimeMillis()), null, null);
 		PlainUserDTO u2 = null;
-		System.out.println("Pass pre reg: "+u.getPassword());
 		try {
 			a.register(u);
 		} catch (RemoteException e) {

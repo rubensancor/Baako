@@ -28,7 +28,8 @@ public class Auth {
 	public PlainUserDTO checkUserInfo(String username, String password) throws RemoteException {
 		//		logger.info(username);
 		//		logger.info(password);
-		PlainUser u = new PlainUser((PlainUser) dao.getUser(username));
+		PlainUser u = new PlainUser(dao.getUser(username));
+		logger.info("Password: "+u.getPassword());
 		if(u.getPassword().equals(password)){
 			//			logger.info("Logged as "+ u.getName());
 			PlainUserDTO user = Assembler.getInstance().assemble(u);
@@ -39,7 +40,7 @@ public class Auth {
 	}
 
 	public boolean register(PlainUser user) throws RemoteException {
-		logger.info("Registering user: "+user);
+		logger.info("Registering "+user);
 		User u = dao.getUser(user.getName());
 		if(u == null){
 			dao.addUser(user);
