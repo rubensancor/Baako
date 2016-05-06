@@ -11,9 +11,13 @@ import baako.server.auth.Auth;
 import baako.server.dao.BaakoDAO;
 import baako.server.database.PlainUser;
 import baako.server.dto.PlainUserDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory; 
+
 
 public class FuncionTest {
 
+	Logger logger = LoggerFactory.getLogger(Auth.class);
 	private static BaakoDAO dao;
 	private static Auth a;
 	private static PlainUser u;
@@ -26,7 +30,7 @@ public class FuncionTest {
 			e.printStackTrace();
 		}
 	} 
-
+	// Beforeclass add rows to test
 	@Test 
 	public void testCheckInfo() { 
 		PlainUserDTO u = null;
@@ -44,6 +48,8 @@ public class FuncionTest {
 			u = a.checkUserInfo("txaahli", "asd");
 		} catch (RemoteException e) {
 			e.printStackTrace();
+		} catch (NullPointerException e){
+			logger.warn("The user does not exist.");
 		}
 		assertEquals(null , u.getName());
 	} 
@@ -51,7 +57,7 @@ public class FuncionTest {
 	@Test 
 	public void testRegister() { 
 		u = new PlainUser("gvirum@gmail.com", "GaizkaTere", "asd", new Date(System.currentTimeMillis()), null, null);
-		PlainUserDTO u2 = null;
+//		PlainUserDTO u2 = null;
 		try {
 			a.register(u);
 		} catch (RemoteException e) {
@@ -59,10 +65,12 @@ public class FuncionTest {
 		}
 		try {
 //			u2 = a.checkUserInfo(u.getName(),u.getPassword());
-		} catch (Exception e) {
-			System.out.println("Ha cazao una excepcion "+e.getClass());
-			e.printStackTrace();
+			logger.info("Copied");
+		} catch (NullPointerException e1) {
+			logger.info("Error en el check");
+			e1.printStackTrace();
 		}
+//		logger.info(u2.getName());
 //		assertEquals(u.getName(), u2.getName());
 	} 
 

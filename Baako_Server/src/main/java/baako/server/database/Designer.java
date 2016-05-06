@@ -1,7 +1,6 @@
 package baako.server.database;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.jdo.annotations.PersistenceCapable;
@@ -26,7 +25,7 @@ public class Designer {
 	/**
 	 * @return the name
 	 */
-	public String getName() {
+	public String getName() {		
 		return name;
 	}
 

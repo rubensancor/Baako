@@ -16,7 +16,6 @@ import baako.server.database.Category;
 import baako.server.database.Designer;
 import baako.server.database.Game;
 import baako.server.database.PlainUser;
-import baako.server.database.User;
 import baako.server.database.Wallet;
 import baako.server.dao.IBaakoDAO;
 /**
@@ -30,11 +29,10 @@ public class BaakoDAO implements IBaakoDAO {
 	PersistenceManager pm = null;
 
 	Transaction tx = null;
-	
+
 	Logger logger = LoggerFactory.getLogger(BaakoDAO.class);
 
-	@SuppressWarnings("finally")
-	public PlainUser getUser(String username){
+	public PlainUser getUser(String username) throws NullPointerException{
 		PlainUser aux2 = null;
 
 		//DAO magic
@@ -53,17 +51,17 @@ public class BaakoDAO implements IBaakoDAO {
 			//				su = aux;
 			//			}
 
-//			Query query = pm.newQuery(AdminUser.class);
-//			query.setFilter("username == usernameParam ");
-//			query.declareParameters("String usernameParam");
-//			query.setUnique(true);
-//
-//			aux = (User) query.execute(username);
+			//			Query query = pm.newQuery(AdminUser.class);
+			//			query.setFilter("username == usernameParam ");
+			//			query.declareParameters("String usernameParam");
+			//			query.setUnique(true);
+			//
+			//			aux = (User) query.execute(username);
 
 			Query query = pm.newQuery("SELECT FROM "+PlainUser.class.getName()+" WHERE username=='"+username+"'");
-//			Query query2 = pm.newQuery(PlainUser.class);
-//			query2.setFilter("username == usernameParam ");
-//			query2.declareParameters("String usernameParam");
+			//			Query query2 = pm.newQuery(PlainUser.class);
+			//			query2.setFilter("username == usernameParam ");
+			//			query2.declareParameters("String usernameParam");
 			query.setUnique(true);
 
 			aux2 = (PlainUser) query.execute();
@@ -75,7 +73,9 @@ public class BaakoDAO implements IBaakoDAO {
 				logger.warn("User '"+username+"' not found.");
 
 			tx.commit();
-			logger.info("Copied to an auxiliary var: "+u.getName()+", "+u.getPassword());
+			// Esto tiene que estar aqui, porque sino por alguna fuerza que desconozco, casca
+			if(u != null)
+				logger.info("Copied to an auxiliary var: "+u.getName()+", "+u.getPassword());
 			return u;
 		}catch(Exception e){
 			e.printStackTrace();

@@ -25,7 +25,7 @@ public class Auth {
 		this.dao = (BaakoDAO) dao;
 	}
 
-	public PlainUserDTO checkUserInfo(String username, String password) throws RemoteException {
+	public PlainUserDTO checkUserInfo(String username, String password) throws RemoteException, NullPointerException {
 		//		logger.info(username);
 		//		logger.info(password);
 		PlainUser u = new PlainUser(dao.getUser(username));
