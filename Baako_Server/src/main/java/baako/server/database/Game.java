@@ -1,6 +1,5 @@
 package baako.server.database;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.jdo.annotations.Element;

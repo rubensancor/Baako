@@ -1,16 +1,20 @@
 package baako.server.database;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory; 
+
+
 @PersistenceCapable
 public class Category {
 
+	Logger logger = LoggerFactory.getLogger(Category.class);
 	
 	@PrimaryKey
 	private String name;
@@ -30,20 +34,24 @@ public class Category {
 	 * @return the name
 	 */
 	public String getName() {
-		return name;
+		logger.info("Get name: "+name);
+		return this.name;
 	}
 	
 	public Set<Game> getGames() {
-		return games;
+		logger.info("Set games");
+		return this.games;
 	}
 	
 	public boolean addGame(Game g){
+		logger.info("addGame");
 		games.add(g);
 		return true;
 	}
 	
 	public int getNumbGames(){
-		return games.size();
+		logger.info("getNumberofGames");
+		return this.games.size();
 	}
 	
 }

@@ -1,17 +1,11 @@
 package baako.server.database;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
-import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.PrimaryKey;
-import baako.server.dto.PlainUserDTO;
-import baako.server.dto.UserDTO;
-
-import baako.server.dto.PlainUserDTO;
 import baako.server.dto.UserDTO;
 
 @PersistenceCapable

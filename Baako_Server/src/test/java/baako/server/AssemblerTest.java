@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import baako.server.assemblers.Assembler;

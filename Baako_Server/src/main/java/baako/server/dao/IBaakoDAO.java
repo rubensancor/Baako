@@ -4,8 +4,6 @@
 package baako.server.dao;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import baako.server.database.Category;
 import baako.server.database.Designer;
 import baako.server.database.Game;
