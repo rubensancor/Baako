@@ -15,15 +15,15 @@ import org.slf4j.LoggerFactory;
 public class Category {
 
 	Logger logger = LoggerFactory.getLogger(Category.class);
-	
+
 	@PrimaryKey
 	private String name;
-	
+
 	@Persistent(mappedBy="categories")
 	private Set<Game> games;
 
-	
-	
+
+
 	public Category(String name) {
 		super();
 		this.name = name;
@@ -37,21 +37,31 @@ public class Category {
 		logger.info("Get name: "+name);
 		return this.name;
 	}
-	
+
 	public Set<Game> getGames() {
 		logger.info("Set games");
 		return this.games;
 	}
-	
+
 	public boolean addGame(Game g){
 		logger.info("addGame");
 		games.add(g);
 		return true;
 	}
-	
+
 	public int getNumbGames(){
 		logger.info("getNumberofGames");
 		return this.games.size();
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		boolean b = false;
+		if(obj != null)
+			if(obj instanceof Category){
+				Category c = (Category)obj;
+				b = this.name.equals(c.getName());
+			}
+		return b;
+	}
 }

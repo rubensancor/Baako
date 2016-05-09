@@ -3,7 +3,6 @@
  */
 package baako.server.database;
 
-import javax.jdo.annotations.Element;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.PrimaryKey;
 
@@ -17,16 +16,17 @@ public class Wallet {
 	private int cardNumb;
 	
 	private CardType type;
-	
-	@Element(column="USER_ID")
-	private User user;
 
-	public Wallet(int cardNumb, CardType type, User user) {
+	public Wallet(int cardNumb, CardType type) {
 		this.cardNumb = cardNumb;
 		this.type = type;
-		this.user = user;
 	}
 	
+	public Wallet(int cardNumber) {
+		this.cardNumb = cardNumber;
+		this.type = CardType.MASTERCARD;
+	}
+
 	/**
 	 * @return the cardNumb
 	 */
@@ -40,14 +40,5 @@ public class Wallet {
 	public CardType getType() {
 		return type;
 	}
-
-	/**
-	 * @return the user
-	 */
-	public User getUser() {
-		return user;
-	}
-	
-	
 	
 }

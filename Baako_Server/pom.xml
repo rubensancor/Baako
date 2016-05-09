@@ -14,7 +14,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
 		<policy.file>${basedir}/src/main/resources/security/java.policy</policy.file>
-		<server.IP>127.0.0.1</server.IP>
+<!--		<server.IP>127.0.0.1</server.IP> -->
+<!--		<server.IP>192.168.43.26</server.IP> -->
+		<server.IP>192.168.43.26</server.IP>
 		<server.port>1099</server.port>
 		<server.Name>BaakoServer</server.Name>
 	</properties>

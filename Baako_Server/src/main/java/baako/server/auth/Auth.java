@@ -32,7 +32,7 @@ public class Auth {
 		logger.info("Password: "+u.getPassword());
 		if(u.getPassword().equals(password)){
 			//			logger.info("Logged as "+ u.getName());
-			PlainUserDTO user = Assembler.getInstance().assemble(u);
+			PlainUserDTO user = Assembler.getInstance().disassemble(u);
 			//			logger.info(user);
 			return user;
 

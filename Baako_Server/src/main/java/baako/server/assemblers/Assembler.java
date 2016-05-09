@@ -25,11 +25,11 @@ public class Assembler {
 		
 	}
 	
-	public PlainUserDTO assemble(PlainUser u){
+	public PlainUserDTO disassemble(PlainUser u){
 		return new PlainUserDTO(u);
 	}
 	
-	public PlainUser dissasemble(PlainUserDTO u){
+	public PlainUser assemble(PlainUserDTO u){
 		return new PlainUser(u);
 	}
 	
