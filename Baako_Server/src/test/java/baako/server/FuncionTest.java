@@ -26,6 +26,7 @@ public class FuncionTest {
 		dao = new BaakoDAO();
 		try {
 			a = new Auth(dao);
+			a.register(new PlainUser("rubensancor@gmail.com", "Try", "asd", new Date()));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -35,7 +36,7 @@ public class FuncionTest {
 	public void testCheckInfo() { 
 		PlainUserDTO u = null;
 		try {
-			u = a.checkUserInfo("ruben", "asd");
+			u = a.checkUserInfo("Try", "asd");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -56,7 +57,7 @@ public class FuncionTest {
 
 	@Test 
 	public void testRegister() { 
-		u = new PlainUser("gvirum@gmail.com", "GaizkaTere", "asd", new Date(System.currentTimeMillis()), null, null);
+		u = new PlainUser("gvirum@gmail.com", "GaizkaTere", "asd", new Date(System.currentTimeMillis()));
 //		PlainUserDTO u2 = null;
 		try {
 			a.register(u);
@@ -77,6 +78,7 @@ public class FuncionTest {
 	@AfterClass 
 	public static void tearDownClass() throws Exception { 
 		dao.deleteUser("GaizkaTere");
+		dao.deleteUser("Try");
 	} 
 
 }

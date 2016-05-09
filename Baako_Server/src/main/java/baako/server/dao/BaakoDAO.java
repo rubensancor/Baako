@@ -287,16 +287,81 @@ public class BaakoDAO implements IBaakoDAO {
 		}
 	}
 
-	public void addWallet(Wallet wallet){
+	public void addWallet(Wallet wallet, PlainUser u){
 		//DAO magic
 		pm = pmf.getPersistenceManager();
 		try{
-			//					Query q = pm.newQuery("javax.jdo.query.SQL", "INSERT INTO WALLET('CARDNUMB', 'TYPE', 'USER_USERNAME_OID') VALUES('?','?','?')");
-			//					q.execute(wallet.getCardNumb(),wallet.getType(),wallet.getUser().getName());
-			pm.makePersistent(wallet);
+			u.setWallet(wallet);
+			pm.makePersistent(u);
 		}finally{
 			pm.close();
 		}
 	}
 
+	public void buyGame(Game game, PlainUser user) {
+		//DAO magic
+		pm = pmf.getPersistenceManager();
+		try{
+			user.addGame(game);
+			pm.makePersistent(user);
+		}finally{
+			pm.close();
+		}
+	}
+
+	public ArrayList<Game> searchGamesByDesigner(String designer) {
+		pm = pmf.getPersistenceManager();
+		tx = pm.currentTransaction();
+		ArrayList<Game> games= new ArrayList<Game>();
+		try{
+			tx.begin();
+			Extent<Game> e = pm.getExtent(Game.class,true);
+			Iterator<Game> iter = e.iterator();
+			while (iter.hasNext())
+			{
+				Game aux = (Game) iter.next();
+				logger.info(aux.getName());
+				for (Designer d : aux.getDesigners()) {
+					if(d.getName().equals(designer))
+						games.add(aux);
+				}
+			}
+			tx.commit();
+			return games;
+
+		}finally{
+			if(tx.isActive()){
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	public ArrayList<Game> searchGamesByCategory(String category) {
+		pm = pmf.getPersistenceManager();
+		tx = pm.currentTransaction();
+		ArrayList<Game> games= new ArrayList<Game>();
+		try{
+			tx.begin();
+			Extent<Game> e = pm.getExtent(Game.class,true);
+			Iterator<Game> iter = e.iterator();
+			while (iter.hasNext())
+			{
+				Game aux = (Game) iter.next();
+				logger.info(aux.getName());
+				for (Designer d : aux.getDesigners()) {
+					if(d.getName().equals(category))
+						games.add(aux);
+				}
+			}
+			tx.commit();
+			return games;
+
+		}finally{
+			if(tx.isActive()){
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 }

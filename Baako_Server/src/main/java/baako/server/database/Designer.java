@@ -44,4 +44,16 @@ public class Designer {
 	public int getNumbGames(){
 		return games.size();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		boolean b = false;
+		if(obj != null)
+			if(obj instanceof Designer){
+				Designer c = (Designer)obj;
+				b = this.name.equals(c.getName());
+			}
+		return b;
+	}
+
 }
