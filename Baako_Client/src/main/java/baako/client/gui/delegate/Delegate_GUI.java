@@ -69,12 +69,6 @@ public class Delegate_GUI extends GUI{
 		PlainUserDTO u = new PlainUserDTO(email, username, password, date, null, null);
 		logger.info(u.getEmail());
 		controller.register(u);
-//		if(controller.register(username, password)){
-//			return true;
-//		}else{
-//			new JOptionPane("YOU ARE ALREADY REGISTERED");
-//			return false;
-//		}
 		return true;
 	}
 	

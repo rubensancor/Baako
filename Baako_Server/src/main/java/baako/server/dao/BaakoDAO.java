@@ -77,19 +77,17 @@ public class BaakoDAO implements IBaakoDAO {
 			if(u != null)
 				logger.info("Copied to an auxiliary var: "+u.getName()+", "+u.getPassword());
 			return u;
+
 		}catch(Exception e){
 			e.printStackTrace();
 			logger.warn("Exception when retrieving from database");
 		}finally{
-			if (tx != null && tx.isActive()) {
+			if(tx.isActive()){
 				tx.rollback();
 			}
-			if (pm != null && !pm.isClosed()) {
-				logger.info("Cerrando");
-				pm.close();
-			}
+			pm.close();
 		}
-		return null;
+		return aux2;
 	}
 
 	/* (non-Javadoc)
@@ -155,13 +153,10 @@ public class BaakoDAO implements IBaakoDAO {
 			tx.commit();
 
 		}finally{
-			if (tx != null && tx.isActive()) {
-				logger.info("There's no such user");
+			if(tx.isActive()){
 				tx.rollback();
 			}
-			if (pm != null && !pm.isClosed()) {
-				pm.close();
-			}
+			pm.close();
 		}
 	}
 
