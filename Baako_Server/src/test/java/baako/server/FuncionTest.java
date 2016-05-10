@@ -57,7 +57,11 @@ public class FuncionTest {
 
 	@Test 
 	public void testRegister() { 
+<<<<<<< Upstream, based on origin/master
 		u = new PlainUser("gvirum@gmail.com", "GaizkaTere", "asd", new Date(System.currentTimeMillis()));
+=======
+		u = new PlainUser("gvirum@gmail.com", "GaizkaTere", "asd", new Date(System.currentTimeMillis()), null, null);
+>>>>>>> ad30356 Sprint 2 final
 //		PlainUserDTO u2 = null;
 		try {
 			a.register(u);
