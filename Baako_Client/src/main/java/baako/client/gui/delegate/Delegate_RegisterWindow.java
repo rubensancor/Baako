@@ -24,7 +24,7 @@ public class Delegate_RegisterWindow extends RegisterWindow{
 	public void  register(Date birthdate){
 		String password = new String(passwordField.getPassword().toString());
 		System.out.println(tfEmail.getText());
-		PlainUser aux = new PlainUser(tfEmail.getText(), tfUsername.getText(), password, birthdate, null, null);
+		PlainUser aux = new PlainUser(tfEmail.getText(), tfUsername.getText(), password, birthdate);
 		System.out.println("DELEGATE RW");
 		System.out.println(aux.getName());
 		log.register(aux);

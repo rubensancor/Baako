@@ -109,10 +109,19 @@ public class BaakoDAO implements IBaakoDAO {
 	public void addGame(Game game){
 		//DAO magic
 		pm = pmf.getPersistenceManager();
+		tx = pm.currentTransaction();
 		try{
+			tx.begin();
 			pm.makePersistent(game);
+			tx.commit();
 		}finally{
-			pm.close();
+			if (tx != null && tx.isActive()) {
+				logger.info("There's no such game");
+				tx.rollback();
+			}
+			if (pm != null && !pm.isClosed()) {
+				pm.close();
+			}
 		}
 
 

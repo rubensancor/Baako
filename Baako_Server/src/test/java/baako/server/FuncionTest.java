@@ -40,7 +40,7 @@ public class FuncionTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertEquals("ruben", u.getName());
+		assertEquals("Try", u.getName());
 	} 
 	@Test(expected = NullPointerException.class)
 	public void testWrongCheckInfo() { 

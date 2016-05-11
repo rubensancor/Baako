@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+import baako.server.BaakoApp;
 import baako.server.assemblers.Assembler;
 import baako.server.auth.Auth;
 import baako.server.dao.BaakoDAO;
@@ -32,26 +33,20 @@ public class BaakoFacade extends UnicastRemoteObject implements IBaakoManager{
 
 
 	Logger logger = LoggerFactory.getLogger(BaakoFacade.class);
-	private Auth auth;
-	private IBaakoDAO dao;
+	private BaakoApp app;
 	/**
 	 * @throws RemoteException
 	 */
-	public BaakoFacade(IBaakoDAO dao) throws RemoteException {
-		this.dao = (BaakoDAO) dao;
-		auth = new Auth(dao);
+	public BaakoFacade(BaakoApp app) throws RemoteException {
+		this.app = app;
 	}
 
 	public PlainUserDTO checkUserInfo(String username, String password) throws RemoteException {
-		logger.info("Checking user info...");
-		return auth.checkUserInfo(username, password);
+		return app.checkUserInfo(username, password);
 	}
 
 	public boolean register(PlainUserDTO user) throws RemoteException {
-		logger.info("Registering user...");
-		System.out.println(user.getEmail());
-		System.out.println(Assembler.getInstance().assemble(user));
-		return auth.register(Assembler.getInstance().assemble(user));
+		return app.register(user);
 	}
 
 	public boolean launchGame() throws RemoteException{
@@ -60,70 +55,41 @@ public class BaakoFacade extends UnicastRemoteObject implements IBaakoManager{
 	}
 
 	public boolean addWallet(int cardNumber, PlainUserDTO u) throws RemoteException{
-		Wallet w = new Wallet(cardNumber);
-		PlainUser user = Assembler.getInstance().assemble(u);
-		dao.addWallet(w , user);
-		return true;
+		return app.addWallet(cardNumber, u);
 	}
 
 	public boolean addGame(GameDTO game) throws RemoteException{
-		logger.info("ADD GAME FACADE");
-		dao.addGame(Assembler.getInstance().disassemble(game));
-		return true;
+		return app.addGame(game);
 	}
 
 	/* (non-Javadoc)
 	 * @see baako.server.manager.IBaakoManager#getAllCategories()
 	 */
 	public ArrayList<String>  getAllCategories() throws RemoteException {
-		ArrayList<Category> aux = dao.getAllCategories();
-		ArrayList<String> aux2 = new ArrayList<String>();
-		for (Category category : aux) {
-			aux2.add(category.getName());
-		}
-		return aux2;	
+		return app.getAllCategories();	
 	}
 
 	/* (non-Javadoc)
 	 * @see baako.server.manager.IBaakoManager#getAllDesigners()
 	 */
 	public ArrayList<String> getAllDesigners() throws RemoteException {
-		ArrayList<Designer> aux = dao.getAllDesigners();
-		ArrayList<String> aux2 = new ArrayList<String>();
-		for (Designer designer : aux) {
-			aux2.add(designer.getName());
-		}
-		return aux2;
+		return app.getAllDesigners();
 	}
 
 	public boolean buyGame(GameDTO g, PlainUserDTO u) throws RemoteException {
-		Game game = dao.searchGame(Assembler.getInstance().disassemble(g).getName());
-		PlainUser user = Assembler.getInstance().assemble(u);
-		if(user.pay(game.getPrice()))
-			dao.buyGame(game, user);
-		return true;
+		return app.buyGame(g, u);
 	}
 
 	public GameDTO searchGame(String name) throws RemoteException {
-		return Assembler.getInstance().assemble(dao.searchGame(name));
+		return app.searchGame(name);
 	}
 
 	public ArrayList<GameDTO> searchGamebyCategory(String category) throws RemoteException {
-		ArrayList<Game> g = dao.searchGamesByCategory(category);
-		ArrayList<GameDTO> dto = new ArrayList<GameDTO>();
-		for (Game game : g) {
-			dto.add(Assembler.getInstance().assemble(game));
-		}
-		return dto;
+		return app.searchGamebyCategory(category);
 	}
 
 	public ArrayList<GameDTO> searchGamebyDesigner(String designer) throws RemoteException {
-		ArrayList<Game> g = dao.searchGamesByDesigner(designer);
-		ArrayList<GameDTO> dto = new ArrayList<GameDTO>();
-		for (Game game : g) {
-			dto.add(Assembler.getInstance().assemble(game));
-		}
-		return dto;
+		return app.searchGamebyDesigner(designer);
 	}
 
 }
