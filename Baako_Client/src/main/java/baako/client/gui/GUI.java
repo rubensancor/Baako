@@ -49,6 +49,8 @@ public class GUI {
 	protected JPasswordField pfpassField;
 	private JTextField nameField;
 	private JTextField priceField;
+	protected JButton btnLogOut;
+	protected String user;
 
 	private int state;
 	/*0 = adminNews 
@@ -153,12 +155,13 @@ public class GUI {
 		mainPanel_1.add(logoutPanel);
 		logoutPanel.setBackground(new Color(105, 105, 105));
 		logoutPanel.setLayout(null);
-
-		JButton btnLogOut = new JButton("LOGOUT");
-		btnLogOut.setFont(new Font("Tahoma", Font.BOLD, 16));
+		
+		// TODO Add the name of the username to the GUI
+		btnLogOut = new JButton("Log Out");
+		btnLogOut.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnLogOut.setBackground(new Color(255, 51, 0));
 		btnLogOut.setForeground(new Color(255, 255, 255));
-		btnLogOut.setBounds(0, 0, 152, 50);
+		btnLogOut.setBounds(0, 0, 152, 70);
 		btnLogOut.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {

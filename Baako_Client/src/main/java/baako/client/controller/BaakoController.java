@@ -30,17 +30,17 @@ public class BaakoController {
 		this.rmi = rmi;
 	}
 
-	public boolean logIn(String username, String password){
+	public String logIn(String username, String password){
 		try {
 			logger.info("Controller----> ");
 			logger.info("Username---> "+username);
 			logger.info("Password---> "+password);
 			user = rmi.getService().checkUserInfo(username, password);
 			logger.info(user.getEmail());
-			return user != null;
+			return user.getName();
 		} catch (RemoteException e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 
@@ -90,6 +90,16 @@ public class BaakoController {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public GameDTO searchGame(String name){
+		GameDTO g =null;
+		try {
+			g = rmi.getService().searchGame(name);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return g;
 	}
 
 }

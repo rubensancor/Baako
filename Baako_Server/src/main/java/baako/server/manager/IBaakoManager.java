@@ -14,11 +14,10 @@ import baako.server.dto.PlainUserDTO;
  * @author gusy
  *
  */
-public interface IBaakoManager  extends Remote{
+public interface IBaakoManager extends Remote{
 
 	public PlainUserDTO checkUserInfo(String username, String password) throws RemoteException;
 	public boolean register(PlainUserDTO user)throws RemoteException;
-
 	public boolean buyGame(GameDTO g, PlainUserDTO u) throws RemoteException;
 	public boolean launchGame() throws RemoteException;
 	public GameDTO searchGame(String name) throws RemoteException;
