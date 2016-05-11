@@ -23,6 +23,7 @@ public interface IBaakoDAO {
 		public void addGame(Game game);
 		public void deleteGame(String game);
 		public void addWallet(Wallet wallet, PlainUser u);
+		public void addFriend(PlainUser u2, PlainUser u);		
 		public ArrayList<Game> getAllGames();
 		public ArrayList<Category> getAllCategories();
 		public ArrayList<Designer> getAllDesigners();

@@ -8,10 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
-import baako.client.gui.delegate.Delegate_RegisterWindow;
 import baako.server.database.PlainUser;
-
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
