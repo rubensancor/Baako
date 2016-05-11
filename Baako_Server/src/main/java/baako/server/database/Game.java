@@ -10,7 +10,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 import baako.server.dto.GameDTO;
 
-@PersistenceCapable
+@PersistenceCapable(detachable="true")
 public class Game {
 
 	@PrimaryKey

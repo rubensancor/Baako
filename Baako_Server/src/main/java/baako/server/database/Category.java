@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 public class Category {
 
 	Logger logger = LoggerFactory.getLogger(Category.class);
-
 	@PrimaryKey
 	private String name;
 
