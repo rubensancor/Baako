@@ -6,8 +6,11 @@ package baako.server.database;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 
 import baako.server.dto.PlainUserDTO;
 
@@ -18,12 +21,17 @@ import baako.server.dto.PlainUserDTO;
 @PersistenceCapable
 public class PlainUser extends User {
 
-	@Join
+
+	@Persistent(table="PLAINUSER_FRIEND")
+	@Join(column="PLAINUSER_ID_A")
+	@Element(column="PLAINUSER_ID_B")
 	private Set<PlainUser> friends;
 
-	@Join
+	@Persistent(table="PLAINUSER_GAMES")
+	@Join(column="PLAINUSER_ID")
+	@Element(column="GAME_ID")
 	private Set<Game> games;
-	
+
 	private Wallet wallet;
 
 	/**
@@ -69,7 +77,7 @@ public class PlainUser extends User {
 
 
 	public void addGame(Game g){
-		games.add(g);
+		this.games.add(g);
 	}
 
 	public void addFriend(PlainUser u){
@@ -99,10 +107,10 @@ public class PlainUser extends User {
 	public void setWallet(Wallet wallet) {
 		this.wallet = wallet;
 	}
-	
+
 	public boolean pay(float money){
 		// OMG CRAZY ASF PAYING STUFF
 		return true;
 	}
-	
+
 }
