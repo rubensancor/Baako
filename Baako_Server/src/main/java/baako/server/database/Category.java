@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
 
 
-@PersistenceCapable
+@PersistenceCapable(detachable="true")
 public class Category {
 
 	Logger logger = LoggerFactory.getLogger(Category.class);

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import baako.server.database.Category;
 import baako.server.database.Designer;
 import baako.server.database.Game;
+import baako.server.database.News;
 import baako.server.database.PlainUser;
 import baako.server.database.User;
 import baako.server.database.Wallet;
@@ -24,6 +25,7 @@ public interface IBaakoDAO {
 		public void deleteGame(String game);
 		public void addWallet(Wallet wallet, PlainUser u);
 		public void addFriend(PlainUser u2, PlainUser u);		
+		public void addNews(News n);
 		public ArrayList<Game> getAllGames();
 		public ArrayList<Category> getAllCategories();
 		public ArrayList<Designer> getAllDesigners();

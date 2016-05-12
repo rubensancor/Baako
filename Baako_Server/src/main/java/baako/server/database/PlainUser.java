@@ -7,7 +7,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.jdo.annotations.Column;
 import javax.jdo.annotations.Element;
+import javax.jdo.annotations.FetchPlan;
 import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -18,7 +20,7 @@ import baako.server.dto.PlainUserDTO;
  * @author gusy
  *
  */
-@PersistenceCapable
+@PersistenceCapable(detachable="true")
 public class PlainUser extends User {
 
 
@@ -32,6 +34,7 @@ public class PlainUser extends User {
 	@Element(column="GAME_ID")
 	private Set<Game> games;
 
+	@Column(name="WALLET_ID")
 	private Wallet wallet;
 
 	/**
