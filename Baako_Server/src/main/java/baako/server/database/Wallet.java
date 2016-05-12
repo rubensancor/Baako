@@ -10,7 +10,7 @@ import javax.jdo.annotations.PrimaryKey;
  * @author gusy
  *
  */
-@PersistenceCapable
+@PersistenceCapable(detachable="true")
 public class Wallet {
 	@PrimaryKey
 	private int cardNumb;

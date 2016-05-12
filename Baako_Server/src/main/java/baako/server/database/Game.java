@@ -21,9 +21,9 @@ public class Game {
 	private String description;
 	private int PEGI;
 	
-//	@Element(column="USERS_ID")
-//	private List<User> users;
 	
+
+
 	@Persistent(table= "GAME_CATEGORIES")
 	@Join(column="GAME_ID")
 	@Element(column="CATEGORY_ID")
@@ -42,6 +42,8 @@ public class Game {
 		this.price = price;
 		this.description = description;
 		this.PEGI = PEGI;
+		this.categories = null;
+		this.designers = null;
 	}
 	
 	
@@ -89,12 +91,6 @@ public class Game {
 	public int getPEGI() {
 		return PEGI;
 	}
-//	/**
-//	 * @return the users
-//	 */
-//	public Set<User> getUsers() {
-//		return users;
-//	}
 	/**
 	 * @return the categories
 	 */
@@ -106,6 +102,29 @@ public class Game {
 	 */
 	public Set<Designer> getDesigners() {
 		return designers;
+	}
+	
+	/**
+	 * @param categories the categories to set
+	 */
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+
+
+	/**
+	 * @param designers the designers to set
+	 */
+	public void setDesigners(Set<Designer> designers) {
+		this.designers = designers;
+	}
+	
+	public void addDesigner(Designer designer){
+		this.designers.add(designer);
+	}
+	
+	public void addCategories(Category category){
+		this.categories.add(category);
 	}
 	
 	@Override

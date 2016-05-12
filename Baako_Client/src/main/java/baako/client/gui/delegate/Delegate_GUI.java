@@ -24,11 +24,11 @@ public class Delegate_GUI extends GUI{
 
 
 	public Delegate_GUI(BaakoController controller){
-			this.controller = controller;
-			categories = new ArrayList<String>();
-			designers = new ArrayList<String>();
+		this.controller = controller;
+		categories = new ArrayList<String>();
+		designers = new ArrayList<String>();
 	}
-	
+
 	public void fill(){
 		logger.info("FILL");
 
@@ -53,7 +53,7 @@ public class Delegate_GUI extends GUI{
 		}
 	}
 
-	
+
 	public boolean logIn(String username, String password){
 		user = controller.logIn(username, password);
 		if(user != null){
@@ -63,7 +63,7 @@ public class Delegate_GUI extends GUI{
 			return false;
 		}
 	}
-	
+
 	public boolean  register(String email, String username, String password, Date date){
 		logger.info("VAMOS A REGISTRAR");
 		PlainUserDTO u = new PlainUserDTO(email, username, password, date, null, null);
@@ -71,13 +71,39 @@ public class Delegate_GUI extends GUI{
 		controller.register(u);
 		return true;
 	}
-	
+
 	public boolean addGame(String name, int price, String description, int pegi){
 		logger.info("ADDING A GAME CONTROLLER");
 		ArrayList<String> categories = new ArrayList<String>();
 		categories.add(categoryCBox.getSelectedItem().toString());
+		designers.add(designerCBox.getSelectedItem().toString());
+		categoriesToArray();
+		designersToArray();
 		GameDTO g = new GameDTO(name, price, description, pegi);
 		return controller.addGame(g);
+	}
+
+	public void categoriesToArray(){
+		if(categoryCBoxOpt1.getSelectedItem().toString()!=""){
+			categories.add(categoryCBoxOpt1.getSelectedItem().toString());
+		} else if(categoryCBoxOpt2.getSelectedItem().toString()!=""){
+			categories.add(categoryCBoxOpt2.getSelectedItem().toString());
+		}else if(categoryCBoxOpt3.getSelectedItem().toString()!=""){
+			categories.add(categoryCBoxOpt3.getSelectedItem().toString());
+		}else if(categoryCBoxOpt4.getSelectedItem().toString()!=""){
+			categories.add(categoryCBoxOpt4.getSelectedItem().toString());
+		}else if(categoryCBoxOpt5.getSelectedItem().toString()!=""){
+			categories.add(categoryCBoxOpt5.getSelectedItem().toString());
+		}
+	}
+	public void designersToArray(){
+		if(designerCBoxOpt1.getSelectedItem().toString()!=""){
+			designers.add(designerCBoxOpt1.getSelectedItem().toString());
+		} else if(designerCBoxOpt2.getSelectedItem().toString()!=""){
+			designers.add(designerCBoxOpt2.getSelectedItem().toString());
+		}else if(designerCBoxOpt3.getSelectedItem().toString()!=""){
+			designers.add(designerCBoxOpt3.getSelectedItem().toString());
+		}
 	}
 
 
