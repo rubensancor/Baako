@@ -40,7 +40,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.SpringLayout; 
 
-
+/**
+ * @author Baako-Team
+ *
+ */
 
 public class GUI {
 

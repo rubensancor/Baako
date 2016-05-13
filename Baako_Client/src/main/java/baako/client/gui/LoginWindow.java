@@ -11,7 +11,10 @@ import javax.swing.JTextField;
 import baako.server.database.PlainUser;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
-
+/**
+ * @author Baako-Team
+ *
+ */
 public class LoginWindow {
 
 	private JFrame frame;

@@ -8,7 +8,10 @@ import java.util.Set;
 import baako.server.database.Category;
 import baako.server.database.Designer;
 import baako.server.database.Game;
-
+/**
+ * @author Baako-Team
+ *
+ */
 public class GameDTO implements Serializable{
 	
 	/**

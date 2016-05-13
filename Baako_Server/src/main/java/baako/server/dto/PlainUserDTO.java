@@ -7,7 +7,10 @@ import java.util.Set;
 
 import baako.server.database.Game;
 import baako.server.database.PlainUser;
-
+/**
+ * @author Baako-Team
+ *
+ */
 public class PlainUserDTO extends UserDTO implements Serializable{
 
 	private static final long serialVersionUID = -6344367997349054739L;

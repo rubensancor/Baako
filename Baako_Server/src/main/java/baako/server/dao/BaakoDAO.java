@@ -21,7 +21,7 @@ import baako.server.database.PlainUser;
 import baako.server.database.Wallet;
 import baako.server.dao.IBaakoDAO;
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 public class BaakoDAO implements IBaakoDAO {

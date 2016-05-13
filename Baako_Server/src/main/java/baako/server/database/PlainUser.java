@@ -17,7 +17,7 @@ import javax.jdo.annotations.Persistent;
 import baako.server.dto.PlainUserDTO;
 
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 @PersistenceCapable(detachable="true")

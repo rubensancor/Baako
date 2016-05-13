@@ -9,8 +9,10 @@ import javax.jdo.annotations.PrimaryKey;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
-
-
+/**
+ * @author Baako-Team
+ *
+ */
 @PersistenceCapable(detachable="true")
 public class Category {
 

@@ -13,7 +13,7 @@ import baako.server.database.User;
 import baako.server.database.Wallet;
 
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 public interface IBaakoDAO {

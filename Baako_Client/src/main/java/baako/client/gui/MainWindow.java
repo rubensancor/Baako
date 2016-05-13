@@ -18,7 +18,10 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
-
+/**
+ * @author Baako-Team
+ *
+ */
 public class MainWindow {
 
 	private JFrame frmBaako;

@@ -13,7 +13,7 @@ import baako.server.dto.GameDTO;
 import baako.server.dto.PlainUserDTO;
 
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 public class Delegate_GUI extends GUI{

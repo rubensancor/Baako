@@ -8,6 +8,7 @@ import baako.client.gui.LoginWindow;
 import baako.client.gui.delegate.Delegate_GUI;
 import baako.client.remote.RMIServiceLocator;
 /**
+ * @author Baako-Team
  *
  */
 public class App 

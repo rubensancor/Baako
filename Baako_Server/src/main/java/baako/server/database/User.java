@@ -7,7 +7,11 @@ import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.PrimaryKey;
 import baako.server.dto.UserDTO;
-
+/**
+ * @author Baako-Team
+ *
+ */
+ 
 @PersistenceCapable
 @Inheritance(strategy=InheritanceStrategy.SUBCLASS_TABLE)
 public abstract class User {

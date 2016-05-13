@@ -11,7 +11,7 @@ import baako.server.dto.PlainUserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
 /**
- * @author Gusy
+ * @author Baako-Team
  *
  */
 public class Auth {
