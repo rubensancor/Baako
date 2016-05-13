@@ -83,6 +83,9 @@ public class BaakoController {
 		}
 	}
 	
+	/**  
+	 * @return
+	 */
 	public ArrayList<String> getAllDesigners(){
 		try {
 			return  rmi.getService().getAllDesigners();
