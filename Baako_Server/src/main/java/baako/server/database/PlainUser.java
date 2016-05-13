@@ -100,7 +100,7 @@ public class PlainUser extends User {
 
 	@Override
 	public String toString() {
-		return "User: "+username;
+		return "User: "+getUsername();
 	}
 
 	public Wallet getWallet() {
@@ -115,5 +115,6 @@ public class PlainUser extends User {
 		// OMG CRAZY ASF PAYING STUFF
 		return true;
 	}
+
 
 }
