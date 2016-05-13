@@ -9,7 +9,7 @@ import java.util.Date;
 import baako.server.database.User;
 
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 public abstract class UserDTO implements Serializable{

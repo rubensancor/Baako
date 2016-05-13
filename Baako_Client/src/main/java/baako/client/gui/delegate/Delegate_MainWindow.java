@@ -6,7 +6,7 @@ package baako.client.gui.delegate;
 import baako.client.gui.MainWindow;
 
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 public class Delegate_MainWindow extends MainWindow{

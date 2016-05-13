@@ -7,7 +7,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.PrimaryKey;
 
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 @PersistenceCapable(detachable="true")

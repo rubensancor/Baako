@@ -34,7 +34,7 @@ import java.util.Properties;
 import java.util.regex.Pattern;
 
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 public class RegisterWindow {

@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 public class BaakoController {

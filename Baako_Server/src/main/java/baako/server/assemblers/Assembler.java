@@ -4,7 +4,10 @@ import baako.server.database.Game;
 import baako.server.database.PlainUser;
 import baako.server.dto.GameDTO;
 import baako.server.dto.PlainUserDTO;
-
+/**
+ * @author Baako-Team
+ *
+ */
 public class Assembler {
 	
 	private static Assembler instance;
