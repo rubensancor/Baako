@@ -22,6 +22,7 @@ import javax.swing.SwingConstants;
 
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import baako.server.database.CardType;
 import baako.server.dto.PlainUserDTO;
 import net.sourceforge.jdatepicker.impl.UtilCalendarModel;
 
@@ -34,7 +35,10 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.GridLayout;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory; 
+import org.slf4j.LoggerFactory;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.SpringLayout; 
 
 
 
@@ -87,13 +91,13 @@ public class GUI {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		loginview();
+		addnewsview();
 		frame.repaint();
 		frame.revalidate();
 	}
 
-	public void mainview() {
-		//		this.state="userfriends";
+	private void mainview() {
+		state=2;
 		frame.setSize(741, 581);
 		frame.getContentPane().setLayout(null);
 
@@ -104,7 +108,7 @@ public class GUI {
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		menuBar.setBounds(0, 0, 574, 50);
+		menuBar.setBounds(0, 0, 490, 50);
 		mainPanel_1.add(menuBar);
 		menuBar.setForeground(new Color(255, 255, 255));
 		menuBar.setBackground(new Color(105, 105, 105));
@@ -125,16 +129,19 @@ public class GUI {
 		JMenuItem mntmAllGames = new JMenuItem("All Games");
 		mnMarket.add(mntmAllGames);
 
+
 		JMenu mnGenre = new JMenu("Genre");
 		mnMarket.add(mnGenre);
+
 
 		JMenu mnStudio = new JMenu("Studio");
 		mnMarket.add(mnStudio);
 
-		JMenu mnNews = new JMenu("News");
+		final JMenu mnNews = new JMenu("News");
 		mnNews.setForeground(new Color(255, 255, 255));
 		mnNews.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuBar.add(mnNews);
+
 
 		JMenu mnCommunity = new JMenu("Community");
 		mnCommunity.setForeground(new Color(255, 255, 255));
@@ -146,6 +153,7 @@ public class GUI {
 
 		JMenuItem mntmFindFriends = new JMenuItem("Find Friends");
 		mnCommunity.add(mntmFindFriends);
+
 		JScrollPane mainPanel = new JScrollPane();
 		mainPanel.setBounds(0, 48, 574, 494);
 		mainPanel_1.add(mainPanel);
@@ -155,13 +163,13 @@ public class GUI {
 		mainPanel_1.add(logoutPanel);
 		logoutPanel.setBackground(new Color(105, 105, 105));
 		logoutPanel.setLayout(null);
-		
+
 		// TODO Add the name of the username to the GUI
-		btnLogOut = new JButton("Log Out");
-		btnLogOut.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnLogOut = new JButton("LOGOUT");
+		btnLogOut.setFont(new Font("Tahoma", Font.BOLD, 17));
 		btnLogOut.setBackground(new Color(255, 51, 0));
 		btnLogOut.setForeground(new Color(255, 255, 255));
-		btnLogOut.setBounds(0, 0, 152, 70);
+		btnLogOut.setBounds(0, 0, 152, 49);
 		btnLogOut.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -191,6 +199,19 @@ public class GUI {
 		gbc_iconlabel.gridy = 10;
 		optionPanel.add(iconlabel, gbc_iconlabel);
 
+		JButton btnNext = new JButton("->");
+		btnNext.setFont(new Font("Tahoma", Font.BOLD, 22));
+		btnNext.setBounds(490, 0, 84, 50);
+		mainPanel_1.add(btnNext);
+		btnNext.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(mnNews.isSelected()){
+					state=0;
+					frame.repaint();
+				}
+			}
+		});
+
 		JButton btninfo = new JButton("+INFO");
 		GridBagConstraints gbc_btninfo = new GridBagConstraints();
 
@@ -198,6 +219,7 @@ public class GUI {
 		GridBagConstraints gbc_btnBack = new GridBagConstraints();
 
 		switch(state){
+		//ADMINISTRATOR NEWS OPTIONPANEL
 		case 0:
 			JButton btnAddNews = new JButton("ADD NEWS");
 			GridBagConstraints gbc_btnAddNews = new GridBagConstraints();
@@ -206,6 +228,13 @@ public class GUI {
 			gbc_btnAddNews.gridx = 1;
 			gbc_btnAddNews.gridy = 1;
 			optionPanel.add(btnAddNews, gbc_btnAddNews);
+			btnAddNews.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					mainPanel_1.setVisible(false);
+					addnewsview();
+				}
+			});
 
 			JButton btnEditNews = new JButton("EDIT NEWS");
 			GridBagConstraints gbc_btnEditNews = new GridBagConstraints();
@@ -226,6 +255,7 @@ public class GUI {
 			gbc_btnBack.gridy = 7;
 			optionPanel.add(btnBack, gbc_btnBack);
 			break;
+
 		case 1:
 
 			gbc_btninfo.fill = GridBagConstraints.BOTH;
@@ -242,6 +272,8 @@ public class GUI {
 			optionPanel.add(btnBack, gbc_btnBack);
 
 			break;
+
+			//ADMINISTRATOR GAME OPTIONPANEL
 		case 2:
 			JButton btnAddGame = new JButton("ADD GAME");
 			GridBagConstraints gbc_btnAddGame = new GridBagConstraints();
@@ -278,6 +310,8 @@ public class GUI {
 			gbc_btnBack.gridy = 7;
 			optionPanel.add(btnBack, gbc_btnBack);
 			break;
+
+			//USER'S GAME LIBRARY OPTIONPANEL
 		case 3:
 			JButton btnLaunch = new JButton("LAUNCH");
 			GridBagConstraints gbc_btnLaunch = new GridBagConstraints();
@@ -297,6 +331,8 @@ public class GUI {
 			gbc_btnBack.gridy = 4;
 			optionPanel.add(btnBack, gbc_btnBack);
 			break;
+
+			//USER GAMESTORE OPTIONPANEL
 		case 4:
 			JButton btnBuy = new JButton("BUY GAME");
 			GridBagConstraints gbc_btnBuy = new GridBagConstraints();
@@ -325,6 +361,8 @@ public class GUI {
 			gbc_btnBack.gridy = 5;
 			optionPanel.add(btnBack, gbc_btnBack);
 			break;
+
+			//USER FRIEND OPTIONPANEL
 		case 5:
 			JButton btnAddFriend = new JButton("ADD FRIEND");
 			GridBagConstraints gbc_btnAddFriend = new GridBagConstraints();
@@ -357,9 +395,6 @@ public class GUI {
 
 	}
 
-	/**
-	 * Changes to login view.
-	 */
 	private void loginview() {
 		frame.setSize(450, 300);
 		frame.getContentPane().setLayout(null);
@@ -472,7 +507,7 @@ public class GUI {
 		frame.revalidate();
 	}
 
-	public void registerview() {
+	private void registerview() {
 		frame.setSize(376, 455);
 		frame.getContentPane().setLayout(null);
 
@@ -483,6 +518,7 @@ public class GUI {
 
 		JPanel panel_1 = new JPanel();
 		registerPanel.add(panel_1);
+		panel_1.setBackground(new Color(105, 105, 105));
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[] { 63, 106, 151, 0, 0 };
 		gbl_panel_1.rowHeights = new int[] { 20, 0, 0, 0, 0, 0 };
@@ -491,6 +527,7 @@ public class GUI {
 		panel_1.setLayout(gbl_panel_1);
 
 		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setForeground(new Color(255, 255, 255));
 		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
 		gbc_lblUsername.anchor = GridBagConstraints.WEST;
 		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
@@ -511,6 +548,7 @@ public class GUI {
 		tfUsername.setColumns(10);
 
 		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setForeground(new Color(255, 255, 255));
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
 		gbc_lblPassword.anchor = GridBagConstraints.WEST;
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
@@ -530,6 +568,7 @@ public class GUI {
 		passwordField.setBounds(128, 77, 208, 28);
 
 		JLabel lblEmail = new JLabel("E-mail:");
+		lblEmail.setForeground(new Color(255, 255, 255));
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.anchor = GridBagConstraints.WEST;
 		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
@@ -551,6 +590,7 @@ public class GUI {
 
 		JPanel panel_2 = new JPanel();
 		registerPanel.add(panel_2);
+		panel_2.setBackground(new Color(105, 105, 105));
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
 		gbl_panel_2.columnWidths = new int[] { 27, 72, 56, 37, 37, 49, 19, 0 };
 		gbl_panel_2.rowHeights = new int[] { 34, 34, 38, 31, 0 };
@@ -559,6 +599,7 @@ public class GUI {
 		panel_2.setLayout(gbl_panel_2);
 
 		JLabel lblDate = new JLabel("Birthdate:");
+		lblDate.setForeground(new Color(255, 255, 255));
 		GridBagConstraints gbc_lblDate = new GridBagConstraints();
 		gbc_lblDate.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDate.gridx = 1;
@@ -575,6 +616,7 @@ public class GUI {
 		JPanel panel_3 = new JPanel();
 		registerPanel.add(panel_3);
 		GridBagLayout gbl_panel_3 = new GridBagLayout();
+		panel_3.setBackground(new Color(105, 105, 105));
 		gbl_panel_3.columnWidths = new int[] { 57, 135, 133, 0 };
 		gbl_panel_3.rowHeights = new int[] { 0, 97, 0 };
 		gbl_panel_3.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
@@ -636,8 +678,171 @@ public class GUI {
 		frame.repaint();
 		frame.revalidate();
 	}
-	
-	public void addgameview(){
+
+	private void addgameview(){
+		frame.setSize(450, 600);
+		frame.getContentPane().setLayout(null);
+		final JPanel panel = new JPanel();
+		panel.setBackground(new Color(105, 105, 105));
+		panel.setBounds(0, 0, 434, 561);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+
+		JLabel lblName = new JLabel("NAME");
+		lblName.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblName.setForeground(new Color(255, 255, 255));
+		lblName.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblName.setBounds(93, 23, 46, 14);
+		panel.add(lblName);
+
+		JLabel lblPrice = new JLabel("PRICE");
+		lblPrice.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPrice.setForeground(new Color(255, 255, 255));
+		lblPrice.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPrice.setBounds(93, 75, 46, 14);
+		panel.add(lblPrice);
+
+		JLabel lblPEGI = new JLabel("PEGI");
+		lblPEGI.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPEGI.setForeground(new Color(255, 255, 255));
+		lblPEGI.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPEGI.setBounds(93, 120, 46, 14);
+		panel.add(lblPEGI);
+
+		JLabel lblDescription = new JLabel("DESCRIPTION");
+		lblDescription.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDescription.setForeground(new Color(255, 255, 255));
+		lblDescription.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblDescription.setBounds(39, 150, 100, 14);
+		panel.add(lblDescription);
+
+		JLabel lblCategory = new JLabel("CATEGORY");
+		lblCategory.setForeground(new Color(255, 255, 255));
+		lblCategory.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblCategory.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCategory.setBounds(62, 285, 77, 14);
+		panel.add(lblCategory);
+
+		JLabel lblDesigner = new JLabel("DESIGNER");
+		lblDesigner.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDesigner.setForeground(new Color(255, 255, 255));
+		lblDesigner.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblDesigner.setBounds(62, 393, 77, 22);
+		panel.add(lblDesigner);
+
+		nameField = new JTextField();
+		nameField.setBounds(164, 22, 134, 17);
+		panel.add(nameField);
+		nameField.setColumns(10);
+
+		priceField = new JTextField();
+		priceField.setBounds(164, 73, 134, 20);
+		panel.add(priceField);
+		priceField.setColumns(10);
+
+		final JComboBox<String> pegiCBox = new JComboBox<String>();
+		pegiCBox.addItem("3");
+		pegiCBox.addItem("7");
+		pegiCBox.addItem("12");
+		pegiCBox.addItem("16");
+		pegiCBox.addItem("18");
+		pegiCBox.setBounds(164, 120, 100, 20);
+		panel.add(pegiCBox);
+
+		categoryCBox = new JComboBox<String>();
+		categoryCBox.insertItemAt("", 0);
+		categoryCBox.setBounds(164, 285, 100, 20);
+		panel.add(categoryCBox);
+
+		designerCBox = new JComboBox<String>();
+		designerCBox.insertItemAt("", 0);
+		designerCBox.setBounds(164, 393, 100, 20);
+		panel.add(designerCBox);
+
+		categoryCBoxOpt1 = new JComboBox<String>();
+		categoryCBoxOpt1.insertItemAt("", 0);
+		categoryCBoxOpt1.setBounds(294, 320, 100, 20);
+		panel.add(categoryCBoxOpt1);
+
+		categoryCBoxOpt2 = new JComboBox<String>();
+		categoryCBoxOpt2.insertItemAt("", 0);
+		categoryCBoxOpt2.setBounds(164, 320, 100, 22);
+		panel.add(categoryCBoxOpt2);
+
+		categoryCBoxOpt3 = new JComboBox<String>();
+		categoryCBoxOpt3.insertItemAt("", 0);
+		categoryCBoxOpt3.setBounds(164, 355, 100, 24);
+		panel.add(categoryCBoxOpt3);
+
+		categoryCBoxOpt4 = new JComboBox<String>();
+		categoryCBoxOpt4.insertItemAt("", 0);
+		categoryCBoxOpt4.setBounds(294, 285, 100, 22);
+		panel.add(categoryCBoxOpt4);
+
+		categoryCBoxOpt5 = new JComboBox<String>();
+		categoryCBoxOpt5.insertItemAt("", 0);
+		categoryCBoxOpt5.setBounds(294, 355, 100, 20);
+		panel.add(categoryCBoxOpt5);
+
+		designerCBoxOpt1 = new JComboBox<String>();
+		designerCBoxOpt1.insertItemAt("", 0);
+		designerCBoxOpt1.setBounds(294, 393, 100, 20);
+		panel.add(designerCBoxOpt1);
+
+		designerCBoxOpt2 = new JComboBox<String>();
+		designerCBoxOpt2.insertItemAt("", 0);
+		designerCBoxOpt2.setBounds(164, 420, 100, 20);
+		panel.add(designerCBoxOpt2);
+
+		designerCBoxOpt3 = new JComboBox<String>();
+		designerCBoxOpt3.insertItemAt("", 0);
+		designerCBoxOpt3.setBounds(294, 420, 100, 20);
+		panel.add(designerCBoxOpt3);
+
+		final JTextArea descTArea = new JTextArea();
+		descTArea.setBounds(164, 150, 230, 122);
+		panel.add(descTArea);
+
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(100, 520, 95, 28);
+		panel.add(btnCancel);
+
+		btnCancel.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				panel.setVisible(false);
+				mainview();
+			}
+		});
+
+		JButton btnSend = new JButton("Send");
+		btnSend.setBounds(300, 520, 95, 28);
+		panel.add(btnSend);
+
+		btnSend.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				int price = Integer.parseInt(priceField.getText());
+				logger.info(pegiCBox.getSelectedItem().toString());
+				int pegi = Integer.parseInt(pegiCBox.getSelectedItem().toString());
+				if (categoryCBox.getSelectedItem().toString() == "") {
+					JOptionPane.showMessageDialog(frame, "The first category field cannot be empty.");
+					categoryCBox.requestFocus();
+				}else if(designerCBox.getSelectedItem().toString() == ""){
+					JOptionPane.showMessageDialog(frame, "The first designer field cannot be empty.");
+					designerCBox.requestFocus();
+				}else if(addGame(nameField.getText(), price, descTArea.getText(), pegi)){
+					panel.setVisible(false);
+					mainview();
+				}
+			}
+		});
+		fill();
+		frame.repaint();
+		frame.revalidate();
+	}
+
+	private void editgameview(){
 		frame.setSize(450, 600);
 		frame.getContentPane().setLayout(null);
 		final JPanel panel = new JPanel();
@@ -794,6 +999,322 @@ public class GUI {
 		frame.revalidate();
 	}
 
+	private void addwalletview(){
+		frame.setSize(350, 200);
+		final JPanel walletpanel = new JPanel();
+		walletpanel.setBackground(new Color(105, 105, 105));
+		walletpanel.setSize(350, 200);
+		frame.getContentPane().add(walletpanel);
+		GridBagLayout gbl_walletpanel = new GridBagLayout();
+		gbl_walletpanel.columnWidths = new int[]{0, 0, 20, 142, 0};
+		gbl_walletpanel.rowHeights = new int[]{0, 0, 19, 0, 0, 0, 0, 0, 0, 0};
+		gbl_walletpanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_walletpanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		walletpanel.setLayout(gbl_walletpanel);
+
+		JLabel lblUser = new JLabel("USER: ");
+		lblUser.setForeground(new Color(255, 255, 255));
+		lblUser.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblUser.setHorizontalAlignment(SwingConstants.LEFT);
+		GridBagConstraints gbc_lblUser = new GridBagConstraints();
+		gbc_lblUser.anchor = GridBagConstraints.WEST;
+		gbc_lblUser.insets = new Insets(0, 0, 5, 5);
+		gbc_lblUser.gridx = 1;
+		gbc_lblUser.gridy = 1;
+		walletpanel.add(lblUser, gbc_lblUser);
+
+		JLabel lblUservalue = new JLabel("");
+		lblUservalue.setForeground(new Color(220, 220, 220));
+		lblUservalue.setBackground(Color.WHITE);
+		GridBagConstraints gbc_lblUservalue = new GridBagConstraints();
+		gbc_lblUservalue.insets = new Insets(0, 0, 5, 0);
+		gbc_lblUservalue.gridx = 3;
+		gbc_lblUservalue.gridy = 1;
+		walletpanel.add(lblUservalue, gbc_lblUservalue);
+
+		JLabel lblCardType = new JLabel("CARD TYPE: ");
+		lblCardType.setForeground(new Color(255, 255, 255));
+		lblCardType.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblCardType.setHorizontalAlignment(SwingConstants.LEFT);
+		GridBagConstraints gbc_lblCardType = new GridBagConstraints();
+		gbc_lblCardType.anchor = GridBagConstraints.WEST;
+		gbc_lblCardType.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCardType.gridx = 1;
+		gbc_lblCardType.gridy = 3;
+		walletpanel.add(lblCardType, gbc_lblCardType);
+
+		JComboBox comboBox = new JComboBox();
+		GridBagConstraints gbc_comboBox = new GridBagConstraints();
+		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox.gridx = 3;
+		gbc_comboBox.gridy = 3;
+		walletpanel.add(comboBox, gbc_comboBox);
+		comboBox.addItem(CardType.MASTERCARD);
+		comboBox.addItem(CardType.VISA);
+
+		JLabel lblCardNumber = new JLabel("CARD NUMBER: ");
+		lblCardNumber.setForeground(new Color(255, 255, 255));
+		lblCardNumber.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblCardNumber.setHorizontalAlignment(SwingConstants.LEFT);
+		GridBagConstraints gbc_lblCardNumber = new GridBagConstraints();
+		gbc_lblCardNumber.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCardNumber.anchor = GridBagConstraints.EAST;
+		gbc_lblCardNumber.gridx = 1;
+		gbc_lblCardNumber.gridy = 5;
+		walletpanel.add(lblCardNumber, gbc_lblCardNumber);
+
+		JTextField cardNfield = new JTextField();
+		GridBagConstraints gbc_cardNfield = new GridBagConstraints();
+		gbc_cardNfield.insets = new Insets(0, 0, 5, 0);
+		gbc_cardNfield.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cardNfield.gridx = 3;
+		gbc_cardNfield.gridy = 5;
+		walletpanel.add(cardNfield, gbc_cardNfield);
+		cardNfield.setColumns(10);
+
+		JButton btnCancel = new JButton("CANCEL");
+		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
+		gbc_btnCancel.insets = new Insets(0, 0, 5, 5);
+		gbc_btnCancel.gridx = 1;
+		gbc_btnCancel.gridy = 7;
+		walletpanel.add(btnCancel, gbc_btnCancel);
+		btnCancel.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				walletpanel.setVisible(false);
+				mainview();
+			}
+		});
+
+		JButton btnAccept = new JButton("ACCEPT");
+		GridBagConstraints gbc_btnAccept = new GridBagConstraints();
+		gbc_btnAccept.insets = new Insets(0, 0, 5, 0);
+		gbc_btnAccept.gridx = 3;
+		gbc_btnAccept.gridy = 7;
+		walletpanel.add(btnAccept, gbc_btnAccept);
+		btnAccept.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				walletpanel.setVisible(false);
+				mainview();
+			}
+		});
+	}
+
+	private void addnewsview(){
+		frame.setSize(471, 556);
+		frame.getContentPane().setLayout(null);
+
+		final JPanel mainp = new JPanel();
+		mainp.setBounds(0, 0, 455, 517);
+		frame.getContentPane().add(mainp);
+		mainp.setLayout(null);
+
+		JPanel newsfieldspanel = new JPanel();
+		newsfieldspanel.setBounds(0, 0, 455, 289);
+		mainp.add(newsfieldspanel);
+		newsfieldspanel.setBackground(new Color(105, 105, 105));
+		GridBagLayout gbl_newsfieldspanel = new GridBagLayout();
+		gbl_newsfieldspanel.columnWidths = new int[]{0, 94, 15, 273, 0};
+		gbl_newsfieldspanel.rowHeights = new int[]{0, 0, 19, 183, 0};
+		gbl_newsfieldspanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_newsfieldspanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		newsfieldspanel.setLayout(gbl_newsfieldspanel);
+
+		JLabel lblTitle = new JLabel("TITLE");
+		lblTitle.setForeground(new Color(255, 255, 255));
+		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTitle.setHorizontalAlignment(SwingConstants.RIGHT);
+		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
+		gbc_lblTitle.anchor = GridBagConstraints.EAST;
+		gbc_lblTitle.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTitle.gridx = 1;
+		gbc_lblTitle.gridy = 1;
+		newsfieldspanel.add(lblTitle, gbc_lblTitle);
+
+		JTextField textField = new JTextField();
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.insets = new Insets(0, 0, 5, 0);
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.gridx = 3;
+		gbc_textField.gridy = 1;
+		newsfieldspanel.add(textField, gbc_textField);
+		textField.setColumns(10);
+
+		JLabel lblBody = new JLabel("BODY");
+		lblBody.setForeground(new Color(255, 255, 255));
+		lblBody.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblBody.setHorizontalAlignment(SwingConstants.RIGHT);
+		GridBagConstraints gbc_lblBody = new GridBagConstraints();
+		gbc_lblBody.anchor = GridBagConstraints.EAST;
+		gbc_lblBody.insets = new Insets(0, 0, 0, 5);
+		gbc_lblBody.gridx = 1;
+		gbc_lblBody.gridy = 3;
+		newsfieldspanel.add(lblBody, gbc_lblBody);
+
+		JTextArea textArea = new JTextArea();
+		GridBagConstraints gbc_textArea = new GridBagConstraints();
+		gbc_textArea.fill = GridBagConstraints.BOTH;
+		gbc_textArea.gridx = 3;
+		gbc_textArea.gridy = 3;
+		newsfieldspanel.add(textArea, gbc_textArea);
+
+		final UtilCalendarModel model = new UtilCalendarModel();
+		JDatePanelImpl datePanel = new JDatePanelImpl(model);
+		final JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
+		SpringLayout springLayout = (SpringLayout) datePicker.getLayout();
+		springLayout.putConstraint(SpringLayout.NORTH, datePicker.getJFormattedTextField(), 0, SpringLayout.NORTH, datePicker);
+		datePicker.setBackground(new Color(105, 105, 105));
+		datePicker.setSize(455, -133);
+		datePicker.setLocation(0, 422);
+		datePanel.setBounds(10, 2, 208, 28);
+		mainp.add(datePicker);
+
+		JPanel buttonspanel = new JPanel();
+		buttonspanel.setBounds(0, 417, 455, 100);
+		mainp.add(buttonspanel);
+		buttonspanel.setBackground(new Color(105, 105, 105));
+		buttonspanel.setLayout(null);
+
+		JButton btnCancel = new JButton("CANCEL");
+		btnCancel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnCancel.setBounds(135, 43, 102, 25);
+		buttonspanel.add(btnCancel);
+		btnCancel.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				mainp.setVisible(false);
+				mainview();
+			}
+		});
+
+		JButton btnAccept = new JButton("ACCEPT");
+		btnAccept.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnAccept.setBounds(306, 43, 102, 25);
+		buttonspanel.add(btnAccept);
+		btnAccept.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				mainp.setVisible(false);
+				mainview();
+			}
+		});
+
+		frame.repaint();
+	}
+
+	private void editnewsview(){
+		frame.setSize(471, 556);
+		frame.getContentPane().setLayout(null);
+
+		final JPanel mainp = new JPanel();
+		mainp.setBounds(0, 0, 455, 517);
+		frame.getContentPane().add(mainp);
+		mainp.setLayout(null);
+
+		JPanel newsfieldspanel = new JPanel();
+		newsfieldspanel.setBounds(0, 0, 455, 289);
+		mainp.add(newsfieldspanel);
+		newsfieldspanel.setBackground(new Color(105, 105, 105));
+		GridBagLayout gbl_newsfieldspanel = new GridBagLayout();
+		gbl_newsfieldspanel.columnWidths = new int[]{0, 94, 15, 273, 0};
+		gbl_newsfieldspanel.rowHeights = new int[]{0, 0, 19, 183, 0};
+		gbl_newsfieldspanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_newsfieldspanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		newsfieldspanel.setLayout(gbl_newsfieldspanel);
+
+		JLabel lblTitle = new JLabel("TITLE");
+		lblTitle.setForeground(new Color(255, 255, 255));
+		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTitle.setHorizontalAlignment(SwingConstants.RIGHT);
+		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
+		gbc_lblTitle.anchor = GridBagConstraints.EAST;
+		gbc_lblTitle.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTitle.gridx = 1;
+		gbc_lblTitle.gridy = 1;
+		newsfieldspanel.add(lblTitle, gbc_lblTitle);
+
+		JTextField textField = new JTextField();
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.insets = new Insets(0, 0, 5, 0);
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.gridx = 3;
+		gbc_textField.gridy = 1;
+		newsfieldspanel.add(textField, gbc_textField);
+		textField.setColumns(10);
+
+		JLabel lblBody = new JLabel("BODY");
+		lblBody.setForeground(new Color(255, 255, 255));
+		lblBody.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblBody.setHorizontalAlignment(SwingConstants.RIGHT);
+		GridBagConstraints gbc_lblBody = new GridBagConstraints();
+		gbc_lblBody.anchor = GridBagConstraints.EAST;
+		gbc_lblBody.insets = new Insets(0, 0, 0, 5);
+		gbc_lblBody.gridx = 1;
+		gbc_lblBody.gridy = 3;
+		newsfieldspanel.add(lblBody, gbc_lblBody);
+
+		JTextArea textArea = new JTextArea();
+		GridBagConstraints gbc_textArea = new GridBagConstraints();
+		gbc_textArea.fill = GridBagConstraints.BOTH;
+		gbc_textArea.gridx = 3;
+		gbc_textArea.gridy = 3;
+		newsfieldspanel.add(textArea, gbc_textArea);
+
+		final UtilCalendarModel model = new UtilCalendarModel();
+		JDatePanelImpl datePanel = new JDatePanelImpl(model);
+		final JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
+		SpringLayout springLayout = (SpringLayout) datePicker.getLayout();
+		springLayout.putConstraint(SpringLayout.NORTH, datePicker.getJFormattedTextField(), 0, SpringLayout.NORTH, datePicker);
+		datePicker.setBackground(new Color(105, 105, 105));
+		datePicker.setSize(455, -133);
+		datePicker.setLocation(0, 422);
+		datePanel.setBounds(10, 2, 208, 28);
+		mainp.add(datePicker);
+
+		JPanel buttonspanel = new JPanel();
+		buttonspanel.setBounds(0, 417, 455, 100);
+		mainp.add(buttonspanel);
+		buttonspanel.setBackground(new Color(105, 105, 105));
+		buttonspanel.setLayout(null);
+
+		JButton btnCancel = new JButton("CANCEL");
+		btnCancel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnCancel.setBounds(135, 43, 102, 25);
+		buttonspanel.add(btnCancel);
+		btnCancel.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				mainp.setVisible(false);
+				mainview();
+			}
+		});
+
+		JButton btnAccept = new JButton("ACCEPT");
+		btnAccept.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnAccept.setBounds(306, 43, 102, 25);
+		buttonspanel.add(btnAccept);
+		btnAccept.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				mainp.setVisible(false);
+				mainview();
+			}
+		});
+
+		frame.repaint();
+	}
+
+
+
+
+
 
 	public boolean  register(String email, String username, String password, Date date){
 		return true;
@@ -802,11 +1323,11 @@ public class GUI {
 	public boolean logIn(String username, String password) {
 		return true;
 	}
-	
+
 	public boolean addGame(String name, int price, String description, int pegi){
 		return true;
 	}
-	
+
 	public void fill(){
 
 	}

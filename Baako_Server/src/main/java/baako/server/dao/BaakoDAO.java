@@ -4,6 +4,7 @@
 package baako.server.dao;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import javax.jdo.*;
 import baako.server.database.Category;
 import baako.server.database.Designer;
 import baako.server.database.Game;
+import baako.server.database.News;
 import baako.server.database.PlainUser;
 import baako.server.database.Wallet;
 import baako.server.dao.IBaakoDAO;
@@ -103,6 +105,19 @@ public class BaakoDAO implements IBaakoDAO {
 			pm.close();
 		}		
 	}
+	
+	/** Add a game to the DB without categories and designers
+	 * @param game an instance of Game class
+	 */
+	public void addGamePlain(Game game){
+		//DAO magic
+		pm = pmf.getPersistenceManager();
+		try{
+			Game g1 = new Game(game.getName(), game.getPrice(), game.getDescription(), game.getPEGI());
+			pm.makePersistent(g1);
+		}finally{
+		}
+	}
 
 	public void addGame(Game game){
 		//DAO magic
@@ -110,19 +125,34 @@ public class BaakoDAO implements IBaakoDAO {
 		tx = pm.currentTransaction();
 		try{
 			tx.begin();
-			pm.makePersistent(game);
+			addGamePlain(game);
+			Query query = pm.newQuery("SELECT FROM "+Game.class.getName()+" WHERE name=='"+game.getName()+"'");
+			query.setUnique(true);
+			Game gaux = (Game) query.execute();
+			gaux.setCategories(new HashSet<Category>());
+			gaux.setDesigners(new HashSet<Designer>());
+			for (Designer designer : game.getDesigners()) {
+				logger.info(designer.getName());
+				Query query2 = pm.newQuery("SELECT FROM "+Designer.class.getName()+" WHERE name=='"+designer.getName()+"'");
+				query2.setUnique(true);
+				Designer aux = (Designer) query2.execute();
+				Designer det = pm.detachCopy(aux);
+				gaux.addDesigner(det);
+			}
+			for (Category category : game.getCategories()) {
+				Query query3 = pm.newQuery("SELECT FROM "+Category.class.getName()+" WHERE name=='"+category.getName()+"'");
+				query3.setUnique(true);
+				Category aux = (Category) query3.execute();
+				Category det = pm.detachCopy(aux);
+				gaux.addCategories(det);
+			}
 			tx.commit();
 		}finally{
-			if (tx != null && tx.isActive()) {
-				logger.info("There's no such game");
+			if(tx.isActive()){
 				tx.rollback();
 			}
-			if (pm != null && !pm.isClosed()) {
-				pm.close();
-			}
+			pm.close();
 		}
-
-
 	}
 
 	/* (non-Javadoc)
@@ -140,13 +170,10 @@ public class BaakoDAO implements IBaakoDAO {
 			tx.commit();
 
 		}finally{
-			if (tx != null && tx.isActive()) {
-				logger.info("There's no such game");
+			if(tx.isActive()){
 				tx.rollback();
 			}
-			if (pm != null && !pm.isClosed()) {
-				pm.close();
-			}
+			pm.close();
 		}
 	}
 
@@ -298,26 +325,45 @@ public class BaakoDAO implements IBaakoDAO {
 			u.setWallet(wallet);
 			pm.makePersistent(u);
 		}finally{
+			if(tx.isActive()){
+				tx.rollback();
+			}
 			pm.close();
 		}
 	}
 
-	public void addFriend(PlainUser u2, PlainUser u){
+	public void addFriend(PlainUser u, PlainUser u2){
 		//DAO magic
 		pm = pmf.getPersistenceManager();
 		tx = pm.currentTransaction();
 		try{
 			tx.begin();
-			Query query = pm.newQuery("SELECT FROM "+PlainUser.class.getName()+" WHERE username=='"+u2.getName()+"'");
+			Query query = pm.newQuery("SELECT FROM "+PlainUser.class.getName()+" WHERE username=='"+u.getName()+"'");
 			query.setUnique(true);
+			logger.info("BEFORE");
 			PlainUser aux = (PlainUser) query.execute();
-			aux.addFriend(u);
+			logger.info("AFTER");
+			Query query2 = pm.newQuery("SELECT FROM "+PlainUser.class.getName()+" WHERE username=='"+u2.getName()+"'");
+			query2.setUnique(true);
+			PlainUser aux2 = (PlainUser) query2.execute();
+			PlainUser det = pm.detachCopy(aux2);
+			aux.addFriend(det);
 			tx.commit();
 			//			pm.makePersistent(u2);
 		}finally{
 			if(tx.isActive()){
 				tx.rollback();
 			}
+			pm.close();
+		}
+	}
+
+	public void addNews(News n){
+		//DAO magic
+		pm = pmf.getPersistenceManager();
+		try{
+			pm.makePersistent(n);
+		}finally{
 			pm.close();
 		}
 	}
@@ -343,62 +389,62 @@ public class BaakoDAO implements IBaakoDAO {
 			}
 			pm.close();
 		}
-	
-}
 
-public ArrayList<Game> searchGamesByDesigner(String designer) {
-	pm = pmf.getPersistenceManager();
-	tx = pm.currentTransaction();
-	ArrayList<Game> games= new ArrayList<Game>();
-	try{
-		tx.begin();
-		Extent<Game> e = pm.getExtent(Game.class,true);
-		Iterator<Game> iter = e.iterator();
-		while (iter.hasNext())
-		{
-			Game aux = (Game) iter.next();
-			logger.info(aux.getName());
-			for (Designer d : aux.getDesigners()) {
-				if(d.getName().equals(designer))
-					games.add(aux);
-			}
-		}
-		tx.commit();
-		return games;
-
-	}finally{
-		if(tx.isActive()){
-			tx.rollback();
-		}
-		pm.close();
 	}
-}
 
-public ArrayList<Game> searchGamesByCategory(String category) {
-	pm = pmf.getPersistenceManager();
-	tx = pm.currentTransaction();
-	ArrayList<Game> games= new ArrayList<Game>();
-	try{
-		tx.begin();
-		Extent<Game> e = pm.getExtent(Game.class,true);
-		Iterator<Game> iter = e.iterator();
-		while (iter.hasNext())
-		{
-			Game aux = (Game) iter.next();
-			logger.info(aux.getName());
-			for (Designer d : aux.getDesigners()) {
-				if(d.getName().equals(category))
-					games.add(aux);
+	public ArrayList<Game> searchGamesByDesigner(String designer) {
+		pm = pmf.getPersistenceManager();
+		tx = pm.currentTransaction();
+		ArrayList<Game> games= new ArrayList<Game>();
+		try{
+			tx.begin();
+			Extent<Game> e = pm.getExtent(Game.class,true);
+			Iterator<Game> iter = e.iterator();
+			while (iter.hasNext())
+			{
+				Game aux = (Game) iter.next();
+				logger.info(aux.getName());
+				for (Designer d : aux.getDesigners()) {
+					if(d.getName().equals(designer))
+						games.add(aux);
+				}
 			}
-		}
-		tx.commit();
-		return games;
+			tx.commit();
+			return games;
 
-	}finally{
-		if(tx.isActive()){
-			tx.rollback();
+		}finally{
+			if(tx.isActive()){
+				tx.rollback();
+			}
+			pm.close();
 		}
-		pm.close();
 	}
-}
+
+	public ArrayList<Game> searchGamesByCategory(String category) {
+		pm = pmf.getPersistenceManager();
+		tx = pm.currentTransaction();
+		ArrayList<Game> games= new ArrayList<Game>();
+		try{
+			tx.begin();
+			Extent<Game> e = pm.getExtent(Game.class,true);
+			Iterator<Game> iter = e.iterator();
+			while (iter.hasNext())
+			{
+				Game aux = (Game) iter.next();
+				logger.info(aux.getName());
+				for (Designer d : aux.getDesigners()) {
+					if(d.getName().equals(category))
+						games.add(aux);
+				}
+			}
+			tx.commit();
+			return games;
+
+		}finally{
+			if(tx.isActive()){
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 }
