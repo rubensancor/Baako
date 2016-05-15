@@ -8,7 +8,6 @@ import java.util.HashSet;
 import baako.server.dao.BaakoDAO;
 import baako.server.dao.IBaakoDAO;
 import baako.server.database.Game;
-import baako.server.database.News;
 import baako.server.database.PlainUser;
 import baako.server.facade.BaakoFacade;
 import baako.server.manager.IBaakoManager;
@@ -161,16 +160,19 @@ public class BaakoApp {
 			//		    ArrayList<Game> games = (ArrayList<Game>) dao.getAllGames();
 			//		    System.out.println(games);
 			//			System.out.println("Email ----> "+dao.getUser("ruben").getEmail());
+//			PlainUser a = new PlainUser("a","a","a",new Date(95, 0, 19));
+			//			PlainUser b = new PlainUser("a","b","a",new Date(95, 0, 19));
+			//			PlainUser c = new PlainUser("a","c","a",new Date(95, 0, 19));
+//			Game g = new Game("asdf", 2, "asdf", 3);
 
-			PlainUser a = new PlainUser("a","a","a",new Date(95, 0, 19));
-			PlainUser b = new PlainUser("a","b","a",new Date(95, 0, 19));
 
-			Wallet w = new Wallet(1234);
-			Wallet w2 = new Wallet(12345);
-
-			a.setWallet(w);
-			b.setWallet(w2);
-
+//			dao.addGame(g);
+//			dao.addUser(a); 
+//			dao.buyGame(g, a);
+			//			dao.addUser(b);
+			//			dao.addUser(c);
+			//			dao.addFriend(a, b);
+			//			dao.addFriend(a, c);
 			//			Designer d = new Designer("EA");
 			//			Designer d2 = new Designer("Ubisoft");
 			//			HashSet<Designer> designers = new HashSet<Designer>();
@@ -197,10 +199,6 @@ public class BaakoApp {
 			//			dao.addGame(g);
 
 			//			dao.buyGame(g, a);
-
-						dao.addUser(a); 
-						dao.addUser(b);
-						dao.addFriend(a, b);
 
 
 			Naming.rebind(serverName, manager);

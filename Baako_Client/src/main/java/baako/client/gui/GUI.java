@@ -5,11 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -91,16 +94,19 @@ public class GUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\virum\\git\\Baako\\Baako_Server\\src\\main\\images\\bakologo.png"));
-		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		frame.setLocation(200, 100);
+		//frame.setBounds(100, 100, 450, 300);
+		//frame.setResizable(false);
 		loginview();
 		frame.repaint();
 		frame.revalidate();
 	}
 
+	@SuppressWarnings({ "unchecked", "serial", "rawtypes" })
 	private void mainview() {
-		state=2;
+		state=0;
 		frame.setSize(741, 581);
 		frame.getContentPane().setLayout(null);
 
@@ -109,6 +115,7 @@ public class GUI {
 		frame.getContentPane().add(mainPanel_1);
 		mainPanel_1.setLayout(null);
 
+		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		menuBar.setBounds(0, 0, 490, 50);
@@ -132,10 +139,8 @@ public class GUI {
 		JMenuItem mntmAllGames = new JMenuItem("All Games");
 		mnMarket.add(mntmAllGames);
 
-
 		JMenu mnGenre = new JMenu("Genre");
 		mnMarket.add(mnGenre);
-
 
 		JMenu mnStudio = new JMenu("Studio");
 		mnMarket.add(mnStudio);
@@ -144,7 +149,6 @@ public class GUI {
 		mnNews.setForeground(new Color(255, 255, 255));
 		mnNews.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuBar.add(mnNews);
-
 
 		JMenu mnCommunity = new JMenu("Community");
 		mnCommunity.setForeground(new Color(255, 255, 255));
@@ -157,10 +161,8 @@ public class GUI {
 		JMenuItem mntmFindFriends = new JMenuItem("Find Friends");
 		mnCommunity.add(mntmFindFriends);
 
-		JScrollPane mainPanel = new JScrollPane();
-		mainPanel.setBounds(0, 48, 574, 494);
-		mainPanel_1.add(mainPanel);
 
+		//LOGOUT PANEL
 		JPanel logoutPanel = new JPanel();
 		logoutPanel.setBounds(573, 0, 152, 49);
 		mainPanel_1.add(logoutPanel);
@@ -181,7 +183,36 @@ public class GUI {
 			}
 		});
 		logoutPanel.add(btnLogOut);
-
+		
+		
+		//MAIN PANEL
+		final JScrollPane mainPanel = new JScrollPane();
+		mainPanel.setBounds(0, 48, 574, 494);
+		mainPanel_1.add(mainPanel);
+		
+		//LIST OF ELEMENTS IN MAINVIEW
+		final JList list = new JList();
+		list.setBackground(Color.LIGHT_GRAY);
+		list.setVisibleRowCount(20);
+		list.setFont(new Font("Tahoma", Font.PLAIN, 32));
+		list.setModel(new AbstractListModel() {
+			//List for example view, insert db values later in logic
+			String[] values = new String[] {"", "juego1", "juego2", "juego3", "juego4", "a", "dsfsffsfd", "sdaasfd", "sdf", "fsdfd", "fdssdf", "ffd", "fsdf", "dsfsdfds", "sd", "f", "sd", "fdfd"};
+			
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
+		renderer.setHorizontalAlignment(SwingConstants.CENTER);
+		mainPanel.setViewportView(list);
+		//mainPanel_1.add(mainPanel);
+		
+		
+		//OPTION PANEL
 		JPanel optionPanel = new JPanel();
 		optionPanel.setBackground(new Color(105, 105, 105));
 		optionPanel.setBounds(574, 49, 151, 493);
@@ -215,16 +246,21 @@ public class GUI {
 			}
 		});
 
-		JButton btninfo = new JButton("+INFO");
+		final JButton btninfo = new JButton("+INFO");
+		btninfo.setBackground(new Color(153, 204, 204));
 		GridBagConstraints gbc_btninfo = new GridBagConstraints();
 
-		JButton btnBack = new JButton("BACK");
+		final JButton btnBack = new JButton("BACK");
+		btnBack.setBackground(new Color(255, 51, 0));
 		GridBagConstraints gbc_btnBack = new GridBagConstraints();
 
+		//CASES FOR THE OPTIONPANEL
 		switch(state){
+		
 		//ADMINISTRATOR NEWS OPTIONPANEL
 		case 0:
-			JButton btnAddNews = new JButton("ADD NEWS");
+			final JButton btnAddNews = new JButton("ADD NEWS");
+			btnAddNews.setBackground(new Color(50, 205, 50));
 			GridBagConstraints gbc_btnAddNews = new GridBagConstraints();
 			gbc_btnAddNews.fill = GridBagConstraints.BOTH;
 			gbc_btnAddNews.insets = new Insets(0, 25, 5, 0);
@@ -239,26 +275,98 @@ public class GUI {
 				}
 			});
 
-			JButton btnEditNews = new JButton("EDIT NEWS");
+			final JButton btnEditNews = new JButton("EDIT ENTRY");
+			btnEditNews.setBackground(new Color(255, 204, 51));
 			GridBagConstraints gbc_btnEditNews = new GridBagConstraints();
 			gbc_btnEditNews.fill = GridBagConstraints.BOTH;
 			gbc_btnEditNews.insets = new Insets(0, 25, 5, 0);
 			gbc_btnEditNews.gridx = 1;
 			gbc_btnEditNews.gridy = 2;
 			optionPanel.add(btnEditNews, gbc_btnEditNews);
+			btnEditNews.setEnabled(false);
+			btnEditNews.setBackground(new Color(204, 204, 204));
+
+			btnEditNews.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					mainPanel_1.setVisible(false);
+					editnewsview();
+				}
+			});
 
 
 			gbc_btninfo.insets = new Insets(40, 25, 5, 0);
 			gbc_btninfo.gridx = 1;
 			gbc_btninfo.gridy = 6;
 			optionPanel.add(btninfo, gbc_btninfo);
+			btninfo.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					btnEditNews.setEnabled(true);
+					btnEditNews.setBackground(new Color(255, 204, 51));
+					btnAddNews.setEnabled(false);
+					btnAddNews.setBackground(new Color(204, 204, 204));
+					btninfo.setEnabled(false);
+					btninfo.setBackground(new Color(204, 204, 204));
+					btnBack.setEnabled(true);
+					btnBack.setBackground(new Color(255, 51, 0));
+
+					mainPanel_1.remove(mainPanel);
+					
+					//BOD OF THE ARTICLE
+					JTextArea txtr = new JTextArea();
+					txtr.setText("Bua esto esta todo guapo porque es una news to importante sobre el \r\nUncharted y asi que esta to wapo y nathan se muere como Jon Nieve");
+					
+					final JScrollPane mainPanel = new JScrollPane(txtr);
+					mainPanel.setBounds(0, 48, 574, 494);
+					mainPanel_1.add(mainPanel);	
+					
+					//TITLE OF THE ARTICLE
+					JLabel lblTituloMasoGuapo = new JLabel("Titulo maso guapo");
+					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
+					lblTituloMasoGuapo.setHorizontalAlignment(SwingConstants.CENTER);
+					mainPanel.setColumnHeaderView(lblTituloMasoGuapo);
+					
+					//addnewsview();
+				}
+			});
 
 			gbc_btnBack.insets = new Insets(0, 25, 5, 0);
 			gbc_btnBack.gridx = 1;
 			gbc_btnBack.gridy = 7;
 			optionPanel.add(btnBack, gbc_btnBack);
+			btnBack.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					btnEditNews.setEnabled(false);
+					btnEditNews.setBackground(new Color(204, 204, 204));
+					btnAddNews.setEnabled(true);
+					btnAddNews.setBackground(new Color(50, 205, 50));
+					btninfo.setEnabled(true);
+					btninfo.setBackground(new Color(153, 204, 204));
+					btnBack.setEnabled(false);
+					btnBack.setBackground(new Color(204, 204, 204));
+
+					
+					mainPanel_1.remove(mainPanel);
+					
+					//RETURNING BACK TO THE LIST
+					final JScrollPane mainPanel = new JScrollPane();
+					mainPanel.setBounds(0, 48, 574, 494);
+					mainPanel_1.add(mainPanel);
+					
+					DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
+					renderer.setHorizontalAlignment(SwingConstants.CENTER);
+					mainPanel.setViewportView(list);
+					//addnewsview();
+				}
+			});
+			btnBack.setEnabled(false);
+			btnBack.setBackground(new Color(204, 204, 204));
 			break;
 
+			
+			//USER NEWS OPTIONPANEL
 		case 1:
 
 			gbc_btninfo.fill = GridBagConstraints.BOTH;
@@ -266,6 +374,32 @@ public class GUI {
 			gbc_btninfo.gridx = 1;
 			gbc_btninfo.gridy = 1;
 			optionPanel.add(btninfo, gbc_btninfo);
+			btninfo.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					btnBack.setEnabled(true);
+					btnBack.setBackground(new Color(255, 51, 0));
+					btninfo.setEnabled(false);
+					btninfo.setBackground(new Color(204, 204, 204));
+					
+					mainPanel_1.remove(mainPanel);
+					
+					//BOD OF THE ARTICLE
+					JTextArea txtr = new JTextArea();
+					txtr.setText("Bua esto esta todo guapo porque es una news to importante sobre el \r\nUncharted y asi que esta to wapo y nathan se muere como Jon Nieve");
+					
+					final JScrollPane mainPanel = new JScrollPane(txtr);
+					mainPanel.setBounds(0, 48, 574, 494);
+					mainPanel_1.add(mainPanel);	
+					
+					//TITLE OF THE ARTICLE
+					JLabel lblTituloMasoGuapo = new JLabel("Titulo maso guapo");
+					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
+					lblTituloMasoGuapo.setHorizontalAlignment(SwingConstants.CENTER);
+					mainPanel.setColumnHeaderView(lblTituloMasoGuapo);
+					//addnewsview();
+				}
+			});
 
 
 			gbc_btnBack.fill = GridBagConstraints.BOTH;
@@ -273,12 +407,36 @@ public class GUI {
 			gbc_btnBack.gridx = 1;
 			gbc_btnBack.gridy = 2;
 			optionPanel.add(btnBack, gbc_btnBack);
+			btnBack.addActionListener(new ActionListener() {
 
+				public void actionPerformed(ActionEvent e) {
+					btnBack.setEnabled(false);
+					btnBack.setBackground(new Color(204, 204, 204));
+					btninfo.setEnabled(true);
+					btninfo.setBackground(new Color(153, 204, 204));
+					
+					mainPanel_1.remove(mainPanel);
+					
+					//RETURNING BACK TO THE LIST
+					final JScrollPane mainPanel = new JScrollPane();
+					mainPanel.setBounds(0, 48, 574, 494);
+					mainPanel_1.add(mainPanel);
+					
+					DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
+					renderer.setHorizontalAlignment(SwingConstants.CENTER);
+					mainPanel.setViewportView(list);
+					//addnewsview();
+				}
+			});
+			btnBack.setEnabled(false);
+			btnBack.setBackground(new Color(204, 204, 204));
 			break;
 
 			//ADMINISTRATOR GAME OPTIONPANEL
 		case 2:
-			JButton btnAddGame = new JButton("ADD GAME");
+			
+			final JButton btnAddGame = new JButton("ADD GAME");
+			btnAddGame.setBackground(new Color(50, 205, 50));
 			GridBagConstraints gbc_btnAddGame = new GridBagConstraints();
 			gbc_btnAddGame.fill = GridBagConstraints.BOTH;
 			gbc_btnAddGame.insets = new Insets(0, 35, 5, 0);
@@ -294,96 +452,276 @@ public class GUI {
 				}
 			});
 
-			JButton btnEditGame = new JButton("EDIT GAME");
+			final JButton btnEditGame = new JButton("EDIT GAME");
+			btnEditGame.setBackground(new Color(255, 204, 51));
 			GridBagConstraints gbc_btnEditGame = new GridBagConstraints();
 			gbc_btnEditGame.fill = GridBagConstraints.BOTH;
 			gbc_btnEditGame.insets = new Insets(0, 35, 5, 0);
 			gbc_btnEditGame.gridx = 1;
 			gbc_btnEditGame.gridy = 2;
 			optionPanel.add(btnEditGame, gbc_btnEditGame);
+			btnEditGame.addActionListener(new ActionListener() {
 
+				public void actionPerformed(ActionEvent e) {
+					mainPanel_1.setVisible(false);
+					editgameview();
+				}
+			});
+			btnEditGame.setEnabled(false);
+			btnEditGame.setBackground(new Color(204, 204, 204));
 
 			gbc_btninfo.insets = new Insets(40, 45, 5, 0);
 			gbc_btninfo.gridx = 1;
 			gbc_btninfo.gridy = 6;
 			optionPanel.add(btninfo, gbc_btninfo);
+			btninfo.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					btnEditGame.setEnabled(true);
+					btnEditGame.setBackground(new Color(255, 204, 51));
+					btnAddGame.setEnabled(false);
+					btnAddGame.setBackground(new Color(204, 204, 204));
+					btninfo.setEnabled(false);
+					btninfo.setBackground(new Color(204, 204, 204));
+					btnBack.setEnabled(true);
+					btnBack.setBackground(new Color(255, 51, 0));
+					
+					mainPanel_1.remove(mainPanel);
+					
+					//BOD OF THE ARTICLE
+					JTextArea txtr = new JTextArea();
+					txtr.setText("Bua esto esta todo guapo porque es una news to importante sobre el \r\nUncharted y asi que esta to wapo y nathan se muere como Jon Nieve");
+					
+					final JScrollPane mainPanel = new JScrollPane(txtr);
+					mainPanel.setBounds(0, 48, 574, 494);
+					mainPanel_1.add(mainPanel);	
+					
+					//TITLE OF THE ARTICLE
+					JLabel lblTituloMasoGuapo = new JLabel("Titulo maso guapo");
+					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
+					lblTituloMasoGuapo.setHorizontalAlignment(SwingConstants.CENTER);
+					mainPanel.setColumnHeaderView(lblTituloMasoGuapo);
+					//addnewsview();
+				}
+			});
 
 			gbc_btnBack.insets = new Insets(0, 45, 5, 0);
 			gbc_btnBack.gridx = 1;
 			gbc_btnBack.gridy = 7;
 			optionPanel.add(btnBack, gbc_btnBack);
+			btnBack.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					btnEditGame.setEnabled(false);	
+					btnEditGame.setBackground(new Color(204, 204, 204));
+					btnAddGame.setEnabled(true);
+					btnAddGame.setBackground(new Color(50, 205, 50));
+					btninfo.setEnabled(true);
+					btninfo.setBackground(new Color(153, 204, 204));
+					btnBack.setEnabled(false);
+					btnBack.setBackground(new Color(204, 204, 204));
+					
+					mainPanel_1.remove(mainPanel);
+					
+					//RETURNING BACK TO THE LIST
+					final JScrollPane mainPanel = new JScrollPane();
+					mainPanel.setBounds(0, 48, 574, 494);
+					mainPanel_1.add(mainPanel);
+					
+					DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
+					renderer.setHorizontalAlignment(SwingConstants.CENTER);
+					mainPanel.setViewportView(list);
+					//addnewsview();
+				}
+			});
+			btnBack.setEnabled(false);
+			btnBack.setBackground(new Color(204, 204, 204));
 			break;
 
 			//USER'S GAME LIBRARY OPTIONPANEL
 		case 3:
 			JButton btnLaunch = new JButton("LAUNCH");
+			btnLaunch.setBackground(new Color(50, 205, 50));
 			GridBagConstraints gbc_btnLaunch = new GridBagConstraints();
 			gbc_btnLaunch.fill = GridBagConstraints.BOTH;
 			gbc_btnLaunch.insets = new Insets(0, 45, 5, 0);
 			gbc_btnLaunch.gridx = 1;
 			gbc_btnLaunch.gridy = 1;
 			optionPanel.add(btnLaunch, gbc_btnLaunch);
+			btnLaunch.addActionListener(new ActionListener() {
 
+				public void actionPerformed(ActionEvent e) {
+					
+					//addnewsview();
+				}
+			});
+			/**
 			gbc_btninfo.insets = new Insets(40, 45, 5, 0);
 			gbc_btninfo.gridx = 1;
 			gbc_btninfo.gridy = 3;
 			optionPanel.add(btninfo, gbc_btninfo);
+			btnBack.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					btnEditGame.setEnabled(false);
+					btnAddGame.setEnabled(true);
+					btninfo.setEnabled(true);
+					btnBack.setEnabled(false);
+					//addnewsview();
+				}
+			});
 
 			gbc_btnBack.insets = new Insets(0, 45, 5, 0);
 			gbc_btnBack.gridx = 1;
 			gbc_btnBack.gridy = 4;
 			optionPanel.add(btnBack, gbc_btnBack);
+			btnBack.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					btninfo.setEnabled(true);
+					btnBack.setEnabled(false);
+					//addnewsview();
+				}
+			});**/
 			break;
 
 			//USER GAMESTORE OPTIONPANEL
 		case 4:
-			JButton btnBuy = new JButton("BUY GAME");
+			final JButton btnBuy = new JButton("BUY GAME");
 			GridBagConstraints gbc_btnBuy = new GridBagConstraints();
 			gbc_btnBuy.fill = GridBagConstraints.BOTH;
 			gbc_btnBuy.insets = new Insets(0, 25, 5, 0);
 			gbc_btnBuy.gridx = 1;
 			gbc_btnBuy.gridy = 1;
 			optionPanel.add(btnBuy, gbc_btnBuy);
+			btnBuy.addActionListener(new ActionListener() {
 
-			JButton btnRent = new JButton("RENT GAME");
+				public void actionPerformed(ActionEvent e) {
+
+					//addnewsview();
+				}
+			});
+			btnBuy.setEnabled(false);
+			btnBuy.setBackground(new Color(204, 204, 204));
+
+			final JButton btnRent = new JButton("RENT GAME");
+			btnRent.setBackground(new Color(255, 204, 51));
 			GridBagConstraints gbc_btnRent = new GridBagConstraints();
 			gbc_btnRent.fill = GridBagConstraints.BOTH;
 			gbc_btnRent.insets = new Insets(0, 25, 5, 0);
 			gbc_btnRent.gridx = 1;
 			gbc_btnRent.gridy = 2;
 			optionPanel.add(btnRent, gbc_btnRent);
+			btnRent.addActionListener(new ActionListener() {
 
+				public void actionPerformed(ActionEvent e) {
+
+					//addnewsview();
+				}
+			});
+			btnRent.setEnabled(false);			
+			btnRent.setBackground(new Color(204, 204, 204));
 
 			gbc_btninfo.insets = new Insets(40, 35, 5, 0);
 			gbc_btninfo.gridx = 1;
 			gbc_btninfo.gridy = 4;
 			optionPanel.add(btninfo, gbc_btninfo);
+			btninfo.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					btnBuy.setEnabled(true);
+					btnRent.setEnabled(true);
+					btninfo.setEnabled(false);
+					btninfo.setBackground(new Color(204, 204, 204));
+					btnBack.setEnabled(true);
+					btnBack.setBackground(new Color(255, 51, 0));
+					
+					mainPanel_1.remove(mainPanel);
+					
+					//BOD OF THE ARTICLE
+					JTextArea txtr = new JTextArea();
+					txtr.setText("Bua esto esta todo guapo porque es una news to importante sobre el \r\nUncharted y asi que esta to wapo y nathan se muere como Jon Nieve");
+					
+					final JScrollPane mainPanel = new JScrollPane(txtr);
+					mainPanel.setBounds(0, 48, 574, 494);
+					mainPanel_1.add(mainPanel);	
+					
+					//TITLE OF THE ARTICLE
+					JLabel lblTituloMasoGuapo = new JLabel("Titulo maso guapo");
+					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
+					lblTituloMasoGuapo.setHorizontalAlignment(SwingConstants.CENTER);
+					mainPanel.setColumnHeaderView(lblTituloMasoGuapo);
+					//addnewsview();
+				}
+			});
 
 			gbc_btnBack.insets = new Insets(0, 35, 5, 0);
 			gbc_btnBack.gridx = 1;
 			gbc_btnBack.gridy = 5;
 			optionPanel.add(btnBack, gbc_btnBack);
+			btnBack.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					btnBuy.setEnabled(false);
+					btnBuy.setBackground(new Color(204, 204, 204));
+					btnRent.setEnabled(false);
+					btnRent.setBackground(new Color(204, 204, 204));
+					btninfo.setEnabled(true);
+					btninfo.setBackground(new Color(153, 204, 204));
+					btnBack.setEnabled(false);
+					btnBack.setBackground(new Color(204, 204, 204));
+					
+					mainPanel_1.remove(mainPanel);
+					
+					//RETURNING BACK TO THE LIST
+					final JScrollPane mainPanel = new JScrollPane();
+					mainPanel.setBounds(0, 48, 574, 494);
+					mainPanel_1.add(mainPanel);
+					
+					DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
+					renderer.setHorizontalAlignment(SwingConstants.CENTER);
+					mainPanel.setViewportView(list);
+					//addnewsview();
+				}
+			});
+			btnBack.setEnabled(false);
+			btnBack.setBackground(new Color(204, 204, 204));
 			break;
 
 			//USER FRIEND OPTIONPANEL
 		case 5:
 			JButton btnAddFriend = new JButton("ADD FRIEND");
+			btnAddFriend.setBackground(new Color(50, 205, 50));
 			GridBagConstraints gbc_btnAddFriend = new GridBagConstraints();
 			gbc_btnAddFriend.fill = GridBagConstraints.BOTH;
 			gbc_btnAddFriend.insets = new Insets(0, 20, 5, 0);
 			gbc_btnAddFriend.gridx = 1;
 			gbc_btnAddFriend.gridy = 1;
 			optionPanel.add(btnAddFriend, gbc_btnAddFriend);
+			btnAddFriend.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+
+					//addnewsview();
+				}
+			});
 
 			JButton btnDeleteFriend = new JButton("DELETE FRIEND");
+			btnDeleteFriend.setBackground(new Color(255, 51, 0));
 			GridBagConstraints gbc_btnDeleteFriend = new GridBagConstraints();
 			gbc_btnDeleteFriend.fill = GridBagConstraints.BOTH;
 			gbc_btnDeleteFriend.insets = new Insets(0, 20, 5, 0);
 			gbc_btnDeleteFriend.gridx = 1;
 			gbc_btnDeleteFriend.gridy = 2;
 			optionPanel.add(btnDeleteFriend, gbc_btnDeleteFriend);
+			btnDeleteFriend.addActionListener(new ActionListener() {
 
+				public void actionPerformed(ActionEvent e) {
+					//addnewsview();
+				}
+			});
 
+/**
 			gbc_btninfo.insets = new Insets(40, 30, 5, 0);
 			gbc_btninfo.gridx = 1;
 			gbc_btninfo.gridy = 4;
@@ -392,7 +730,7 @@ public class GUI {
 			gbc_btnBack.insets = new Insets(0, 30, 5, 0);
 			gbc_btnBack.gridx = 1;
 			gbc_btnBack.gridy = 5;
-			optionPanel.add(btnBack, gbc_btnBack);
+			optionPanel.add(btnBack, gbc_btnBack);**/
 			break;
 		}
 
@@ -463,6 +801,7 @@ public class GUI {
 		logiPanel.add(panel_2, gbc_panel_2);
 
 		JButton btnRegister = new JButton("Register");
+		btnRegister.setBackground(new Color(255, 204, 51));
 		panel_2.add(btnRegister);
 		btnRegister.setBounds(20, 11, 85, 45);
 
@@ -485,6 +824,7 @@ public class GUI {
 		logiPanel.add(panel_1, gbc_panel_1);
 
 		JButton btnLogIn = new JButton("Log In");
+		btnLogIn.setBackground(new Color(50, 205, 50));
 		panel_1.add(btnLogIn);
 		btnLogIn.setBounds(54, 11, 95, 43);
 
@@ -626,6 +966,7 @@ public class GUI {
 		gbl_panel_3.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		panel_3.setLayout(gbl_panel_3);
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBackground(new Color(255, 51, 0));
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancel.gridx = 1;
@@ -640,6 +981,7 @@ public class GUI {
 		});
 
 		JButton btnSend = new JButton("Send");
+		btnSend.setBackground(new Color(50, 205, 50));
 		GridBagConstraints gbc_btnSend = new GridBagConstraints();
 		gbc_btnSend.gridx = 2;
 		gbc_btnSend.gridy = 1;
@@ -807,6 +1149,7 @@ public class GUI {
 		panel.add(descTArea);
 
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBackground(new Color(255, 51, 0));
 		btnCancel.setBounds(100, 520, 95, 28);
 		panel.add(btnCancel);
 
@@ -970,6 +1313,7 @@ public class GUI {
 		panel.add(descTArea);
 
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBackground(new Color(255, 51, 0));
 		btnCancel.setBounds(100, 520, 95, 28);
 		panel.add(btnCancel);
 
@@ -1077,6 +1421,7 @@ public class GUI {
 		cardNfield.setColumns(10);
 
 		JButton btnCancel = new JButton("CANCEL");
+		btnCancel.setBackground(new Color(255, 51, 0));
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCancel.gridx = 1;
@@ -1091,6 +1436,7 @@ public class GUI {
 		});
 
 		JButton btnAccept = new JButton("ACCEPT");
+		btnAccept.setBackground(new Color(50, 205, 50));
 		GridBagConstraints gbc_btnAccept = new GridBagConstraints();
 		gbc_btnAccept.insets = new Insets(0, 0, 5, 0);
 		gbc_btnAccept.gridx = 3;
@@ -1182,6 +1528,7 @@ public class GUI {
 		buttonspanel.setLayout(null);
 
 		JButton btnCancel = new JButton("CANCEL");
+		btnCancel.setBackground(new Color(255, 51, 0));
 		btnCancel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnCancel.setBounds(135, 43, 102, 25);
 		buttonspanel.add(btnCancel);
@@ -1195,6 +1542,8 @@ public class GUI {
 		});
 
 		JButton btnAccept = new JButton("ACCEPT");
+		btnAccept.setBackground(new Color(50, 205, 50));
+
 		btnAccept.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnAccept.setBounds(306, 43, 102, 25);
 		buttonspanel.add(btnAccept);
@@ -1286,6 +1635,7 @@ public class GUI {
 		buttonspanel.setLayout(null);
 
 		JButton btnCancel = new JButton("CANCEL");
+		btnCancel.setBackground(new Color(255, 51, 0));
 		btnCancel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnCancel.setBounds(135, 43, 102, 25);
 		buttonspanel.add(btnCancel);
@@ -1299,6 +1649,8 @@ public class GUI {
 		});
 
 		JButton btnAccept = new JButton("ACCEPT");
+		btnAccept.setBackground(new Color(50, 205, 50));
+
 		btnAccept.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnAccept.setBounds(306, 43, 102, 25);
 		buttonspanel.add(btnAccept);

@@ -18,7 +18,7 @@ public abstract class User {
 
 
 	@PrimaryKey
-	protected String username;	
+	private String username;	
 	protected String email;
 	protected Date birthdate;
 	protected String password;
@@ -27,14 +27,14 @@ public abstract class User {
 	public User(String email, String name, String password,  Date birthdate){
 		super();
 		this.email = email;
-		this.username = name;
+		this.setUsername(name);
 		this.password = password;
 		this.birthdate = birthdate;	
 	}
 	
 	public User(UserDTO user){
 		this.email = user.getEmail();
-		this.username = user.getUsername();
+		this.setUsername(user.getUsername());
 		this.password = user.getPassword();
 		this.birthdate = user.getBirthdate();
 	}
@@ -51,7 +51,7 @@ public abstract class User {
 	 * @return the name
 	 */
 	public String getName() {
-		return username;
+		return getUsername();
 	}
 
 	/**
@@ -66,6 +66,14 @@ public abstract class User {
 	 */
 	public String getPassword() {
 		return password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	
