@@ -107,7 +107,7 @@ public class GUI {
 
 	@SuppressWarnings({ "unchecked", "serial", "rawtypes" })
 	private void mainview() {
-		frame.remove(thumb);
+	
 		state=0;
 		frame.setSize(741, 581);
 		frame.getContentPane().setLayout(null);
@@ -817,6 +817,7 @@ public class GUI {
 														
 																	public void actionPerformed(ActionEvent e) {
 																		logiPanel.setVisible(false);
+																		frame.remove(thumb);
 																		registerview();
 																	}
 																});
@@ -849,6 +850,7 @@ public class GUI {
 																		JOptionPane.showMessageDialog(frame, "The login credentials are incorrect. Please, revise them");
 																	} else {
 																		logiPanel.setVisible(false);
+																		frame.remove(thumb);
 																		state=2;
 																		mainview();
 																	}
@@ -861,7 +863,6 @@ public class GUI {
 	}
 
 	private void registerview() {
-		frame.remove(thumb);
 		frame.setSize(376, 455);
 		frame.getContentPane().setLayout(null);
 
