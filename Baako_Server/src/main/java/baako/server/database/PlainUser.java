@@ -17,19 +17,19 @@ import javax.jdo.annotations.Persistent;
 import baako.server.dto.PlainUserDTO;
 
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 @PersistenceCapable(detachable="true")
 public class PlainUser extends User {
 
 
-	@Persistent(table="PLAINUSER_FRIEND")
+	@Persistent(table="PLAINUSER_FRIEND", defaultFetchGroup="true")
 	@Join(column="PLAINUSER_ID_A")
 	@Element(column="PLAINUSER_ID_B")
 	private Set<PlainUser> friends;
 
-	@Persistent(table="PLAINUSER_GAMES")
+	@Persistent(table="PLAINUSER_GAMES", defaultFetchGroup="true")
 	@Join(column="PLAINUSER_ID")
 	@Element(column="GAME_ID")
 	private Set<Game> games;

@@ -21,7 +21,7 @@ import baako.server.database.PlainUser;
 import baako.server.database.Wallet;
 import baako.server.dao.IBaakoDAO;
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 public class BaakoDAO implements IBaakoDAO {
@@ -34,6 +34,9 @@ public class BaakoDAO implements IBaakoDAO {
 
 	Logger logger = LoggerFactory.getLogger(BaakoDAO.class);
 
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#getUser(java.lang.String)
+	 */
 	public PlainUser getUser(String username) throws NullPointerException{
 		PlainUser aux2 = null;
 
@@ -119,6 +122,9 @@ public class BaakoDAO implements IBaakoDAO {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#addGame(baako.server.database.Game)
+	 */
 	public void addGame(Game game){
 		//DAO magic
 		pm = pmf.getPersistenceManager();
@@ -177,6 +183,9 @@ public class BaakoDAO implements IBaakoDAO {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#deleteUser(java.lang.String)
+	 */
 	public void deleteUser(String user) {
 		//DAOmagic
 		pm = pmf.getPersistenceManager();
@@ -252,8 +261,9 @@ public class BaakoDAO implements IBaakoDAO {
 	}
 
 
-
-
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#searchGame(java.lang.String)
+	 */
 	public Game searchGame(String name){
 
 		PersistenceManagerFactory pmf = JDOHelper
@@ -318,6 +328,9 @@ public class BaakoDAO implements IBaakoDAO {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#addWallet(baako.server.database.Wallet, baako.server.database.PlainUser)
+	 */
 	public void addWallet(Wallet wallet, PlainUser u){
 		//DAO magic
 		pm = pmf.getPersistenceManager();
@@ -332,6 +345,9 @@ public class BaakoDAO implements IBaakoDAO {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#addFriend(baako.server.database.PlainUser, baako.server.database.PlainUser)
+	 */
 	public void addFriend(PlainUser u, PlainUser u2){
 		//DAO magic
 		pm = pmf.getPersistenceManager();
@@ -342,12 +358,13 @@ public class BaakoDAO implements IBaakoDAO {
 			query.setUnique(true);
 			logger.info("BEFORE");
 			PlainUser aux = (PlainUser) query.execute();
-			logger.info("AFTER");
 			Query query2 = pm.newQuery("SELECT FROM "+PlainUser.class.getName()+" WHERE username=='"+u2.getName()+"'");
 			query2.setUnique(true);
 			PlainUser aux2 = (PlainUser) query2.execute();
 			PlainUser det = pm.detachCopy(aux2);
+			logger.info("AFTER");
 			aux.addFriend(det);
+			logger.info("SI");
 			tx.commit();
 			//			pm.makePersistent(u2);
 		}finally{
@@ -358,6 +375,9 @@ public class BaakoDAO implements IBaakoDAO {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#addNews(baako.server.database.News)
+	 */
 	public void addNews(News n){
 		//DAO magic
 		pm = pmf.getPersistenceManager();
@@ -368,6 +388,9 @@ public class BaakoDAO implements IBaakoDAO {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#buyGame(baako.server.database.Game, baako.server.database.PlainUser)
+	 */
 	public void buyGame(Game game, PlainUser user) {
 		//DAO magic
 		pm = pmf.getPersistenceManager();
@@ -392,6 +415,9 @@ public class BaakoDAO implements IBaakoDAO {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#searchGamesByDesigner(java.lang.String)
+	 */
 	public ArrayList<Game> searchGamesByDesigner(String designer) {
 		pm = pmf.getPersistenceManager();
 		tx = pm.currentTransaction();
@@ -420,6 +446,9 @@ public class BaakoDAO implements IBaakoDAO {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#searchGamesByCategory(java.lang.String)
+	 */
 	public ArrayList<Game> searchGamesByCategory(String category) {
 		pm = pmf.getPersistenceManager();
 		tx = pm.currentTransaction();

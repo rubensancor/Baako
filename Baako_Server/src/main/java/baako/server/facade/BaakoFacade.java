@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
 
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 public class BaakoFacade extends UnicastRemoteObject implements IBaakoManager{

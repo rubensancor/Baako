@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 public class BaakoController {
@@ -83,6 +83,9 @@ public class BaakoController {
 		}
 	}
 	
+	/**  
+	 * @return
+	 */
 	public ArrayList<String> getAllDesigners(){
 		try {
 			return  rmi.getService().getAllDesigners();

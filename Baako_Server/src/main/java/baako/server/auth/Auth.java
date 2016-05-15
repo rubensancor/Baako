@@ -13,8 +13,12 @@ import baako.server.dto.PlainUserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
 /**
+<<<<<<< HEAD
  * @brief Class that hosts the logic for the register and the login functions
  * @author BaakoTeam
+=======
+ * @author Baako-Team
+>>>>>>> refs/remotes/origin/master
  *
  */
 public class Auth {

@@ -6,7 +6,10 @@ import java.util.Set;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
-
+/**
+ * @author Baako-Team
+ *
+ */
 @PersistenceCapable(detachable="true")
 public class Designer {
 	

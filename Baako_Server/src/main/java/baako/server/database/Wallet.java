@@ -7,13 +7,14 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.PrimaryKey;
 
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 @PersistenceCapable(detachable="true")
 public class Wallet {
 	@PrimaryKey
 	private int cardNumb;
+	
 	
 	private CardType type;
 
@@ -22,12 +23,15 @@ public class Wallet {
 		this.type = type;
 	}
 	
+	/** Constructor for Wallet class
+	 * @param cardNumber An Integer with the card number
+	 */
 	public Wallet(int cardNumber) {
 		this.cardNumb = cardNumber;
 		this.type = CardType.MASTERCARD;
 	}
 
-	/**
+	/** 
 	 * @return the cardNumb
 	 */
 	public int getCardNumb() {
