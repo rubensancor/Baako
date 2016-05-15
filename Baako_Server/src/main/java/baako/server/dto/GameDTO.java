@@ -59,12 +59,6 @@ public class GameDTO implements Serializable{
 		}
 	}
 
-	/**
-	 * @param string
-	 * @param i
-	 * @param string2
-	 * @param j
-	 */
 	public GameDTO(String name, float price, String description, int pegi) {
 		this.name = name;
 		this.price = price;
