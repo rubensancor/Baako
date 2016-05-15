@@ -100,7 +100,7 @@ public class GUI {
 		frame.setLocation(200, 100);
 		//frame.setBounds(100, 100, 450, 300);
 		//frame.setResizable(false);
-		loginview();
+		mainview();
 		frame.repaint();
 		frame.revalidate();
 	}
