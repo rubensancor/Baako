@@ -23,66 +23,66 @@ public interface IBaakoDAO {
 		 * @return User retrieved from the database
 		 */
 		public User getUser(String username);
-		/**
-		 * @param user
+		/** Adds a User to the database
+		 * @param user The User to be added
 		 */
 		public void addUser(PlainUser user);
-		/**
-		 * @param user
+		/** Deletes an user from the database 
+		 * @param user A String with the username of the User to be deleted
 		 */
 		public void deleteUser(String user);
-		/**
-		 * @param game
+		/**Adds a Game to the database
+		 * @param game The Game to be added
 		 */
 		public void addGame(Game game);
-		/**
-		 * @param game
+		/** Deletes a Game from the database
+		 * @param game A String with the name of the Game to be deleted
 		 */
 		public void deleteGame(String game);
-		/**
-		 * @param wallet
-		 * @param u
+		/** Creates the link between Wallet and User in the database
+		 * @param wallet A Wallet to be attached to the user
+		 * @param u A User with the propietary of the Wallet
 		 */
 		public void addWallet(Wallet wallet, PlainUser u);
-		/**
-		 * @param u2
-		 * @param u
+		/** Creates the link between two Users in the database
+		 * @param u A User to be linked
+		 * @param u2 A User to be linked
 		 */
-		public void addFriend(PlainUser u2, PlainUser u);		
-		/**
-		 * @param n
-		 */
-		public void addNews(News n);
-		/**
-		 * @return
-		 */
-		public ArrayList<Game> getAllGames();
-		/**
-		 * @return
-		 */
-		public ArrayList<Category> getAllCategories();
-		/**
-		 * @return
-		 */
-		public ArrayList<Designer> getAllDesigners();
-		/**
-		 * @param game
-		 * @param user
+		public void addFriend(PlainUser u, PlainUser u2);		
+		/** Creates the link between a User and a Game
+		 * @param game The Game to be linked with the User
+		 * @param user The User who bought the Game
 		 */
 		public void buyGame(Game game, PlainUser user);
-		/**
-		 * @param name
-		 * @return
+		/** Adds a News to the database
+		 * @param n The News to be added
+		 */
+		public void addNews(News n);
+		/** Retrieves all the Game in the database
+		 * @return An ArrayLIst of Game
+		 */
+		public ArrayList<Game> getAllGames();
+		/** Retrieves all the Category in the database
+		 * @return An ArrayList of Category
+		 */
+		public ArrayList<Category> getAllCategories();
+		/** Retrieves all the Designer in the database
+		 * @return An ArrayList of Designer
+		 */
+		public ArrayList<Designer> getAllDesigners();
+		/** Retrieves a Game from the database, given the name
+		 * @param name A String with the name of the Game to retrieve
+		 * @return The Game to retrieve
 		 */
 		public Game searchGame(String name);
-		/**
-		 * @param category
-		 * @return
+		/** Retrieves all the Games in the database, given a Category
+		 * @param category A String with the name of the Category
+		 * @return An ArrayList of Game with the Games retrieved
 		 */
 		public ArrayList<Game> searchGamesByCategory(String category);
-		/**
-		 * @param designer
-		 * @return
+		/** Retrieves all the Games in the database, given a Designer
+		 * @param designer A String with the name of the Designer
+		 * @return An ArrayList of Game with the Games retrieved
 		 */
 		public ArrayList<Game> searchGamesByDesigner(String designer);		
 }
