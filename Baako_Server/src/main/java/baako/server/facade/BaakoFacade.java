@@ -18,6 +18,7 @@ import baako.server.database.Game;
 import baako.server.database.PlainUser;
 import baako.server.database.Wallet;
 import baako.server.dto.GameDTO;
+import baako.server.dto.NewsDTO;
 import baako.server.dto.PlainUserDTO;
 import baako.server.manager.IBaakoManager;
 import org.slf4j.Logger;
@@ -120,6 +121,15 @@ public class BaakoFacade extends UnicastRemoteObject implements IBaakoManager{
 	public ArrayList<GameDTO> searchGamebyDesigner(String designer) throws RemoteException {
 		return app.searchGamebyDesigner(designer);
 	}
+
+	/* (non-Javadoc)
+	 * @see baako.server.manager.IBaakoManager#addNews(baako.server.dto.NewsDTO)
+	 */
+	public boolean addNews(NewsDTO n) throws RemoteException {
+		return app.addNews(n);
+	}
+	
+
 
 }
 
