@@ -503,6 +503,31 @@ public class BaakoDAO implements IBaakoDAO {
 			pm.close();
 		}
 	}
+	public void editGame(News new2) {
+		//TODO
+		//DAO magic
+		pm = pmf.getPersistenceManager();
+		tx = pm.currentTransaction();
+		try{
+			tx.begin();
+			Query query = pm.newQuery("SELECT FROM "+News.class.getName()+" WHERE title=='"+new2.getTitle()+"'");
+			query.setUnique(true);
+			News gaux = (News) query.execute();
+			News det = pm.detachCopy(gaux);
+			det.setTitle(new2.getTitle());
+			det.setDate(new2.getDate());
+			det.setBody(new2.getBody());
+
+		}finally{
+			if(tx.isActive()){
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+
+
 
 
 }
