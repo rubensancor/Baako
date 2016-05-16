@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
-
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
@@ -22,13 +21,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import baako.server.database.CardType;
-import baako.server.dto.PlainUserDTO;
 import net.sourceforge.jdatepicker.impl.UtilCalendarModel;
-
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -39,8 +35,6 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.SpringLayout; 
 
 /**
@@ -100,14 +94,14 @@ public class GUI {
 		frame.setLocation(200, 100);
 		//frame.setBounds(100, 100, 450, 300);
 		//frame.setResizable(false);
-		mainview();
+		addnewsview();
 		frame.repaint();
 		frame.revalidate();
 	}
 
 	@SuppressWarnings({ "unchecked", "serial", "rawtypes" })
 	private void mainview() {
-	
+
 		state=0;
 		frame.setSize(741, 581);
 		frame.getContentPane().setLayout(null);
@@ -741,121 +735,121 @@ public class GUI {
 	private void loginview() {
 		frame.setSize(450, 300);
 		frame.getContentPane().setLayout(null);
-		
+
 		thumb = new JLabel();
 		thumb.setLocation(0, 0);
 		thumb.setSize(434, 261);
 		ImageIcon image = new ImageIcon(this.getClass().getResource("/images/logback.jpg"));
-		
-				final JPanel logiPanel = new JPanel();
-				logiPanel.setBackground(new Color(105, 105, 105, 100));
-				logiPanel.setBounds(0, 0, 434, 261);
-				frame.getContentPane().add(logiPanel);
-				GridBagLayout gbl_logiPanel = new GridBagLayout();
-				gbl_logiPanel.columnWidths = new int[] { 37, 81, 16, 164, 6, 63, 0 };
-				gbl_logiPanel.rowHeights = new int[] { 60, 47, 68, 65, 0 };
-				gbl_logiPanel.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-				gbl_logiPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
-				logiPanel.setLayout(gbl_logiPanel);
-				
 
-				JLabel lblUsername = new JLabel("Username:");
-				lblUsername.setForeground(new Color(255, 255, 255));
-				lblUsername.setFont(new Font("Tahoma", Font.BOLD, 15));
-				GridBagConstraints gbc_lblUsername = new GridBagConstraints();
-				gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
-				gbc_lblUsername.gridx = 1;
-				gbc_lblUsername.gridy = 1;
-				logiPanel.add(lblUsername, gbc_lblUsername);
-				lblUsername.setBounds(28, 33, 67, 14);
-				
-						usernameField = new JTextField();
-						GridBagConstraints gbc_usernameField = new GridBagConstraints();
-						gbc_usernameField.fill = GridBagConstraints.HORIZONTAL;
-						gbc_usernameField.insets = new Insets(0, 0, 5, 5);
-						gbc_usernameField.gridx = 3;
-						gbc_usernameField.gridy = 1;
-						logiPanel.add(usernameField, gbc_usernameField);
-						usernameField.setBounds(127, 30, 155, 20);
-						usernameField.setColumns(10);
-						
-								JLabel lblPassword = new JLabel("Password:");
-								lblPassword.setForeground(new Color(255, 255, 255));
-								lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
-								GridBagConstraints gbc_lblPassword = new GridBagConstraints();
-								gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
-								gbc_lblPassword.gridx = 1;
-								gbc_lblPassword.gridy = 2;
-								logiPanel.add(lblPassword, gbc_lblPassword);
-								lblPassword.setBounds(28, 71, 67, 14);
-								
-										passwordField = new JPasswordField();
-										GridBagConstraints gbc_passwordField = new GridBagConstraints();
-										gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
-										gbc_passwordField.insets = new Insets(0, 0, 5, 5);
-										gbc_passwordField.gridx = 3;
-										gbc_passwordField.gridy = 2;
-										logiPanel.add(passwordField, gbc_passwordField);
-										passwordField.setBounds(127, 68, 155, 20);
-										
-												JPanel panel_2 = new JPanel();
-												panel_2.setBackground(new Color(105, 105, 105,0));
-												panel_2.setLayout(null);
-												GridBagConstraints gbc_panel_2 = new GridBagConstraints();
-												gbc_panel_2.insets = new Insets(0, 0, 0, 5);
-												gbc_panel_2.fill = GridBagConstraints.BOTH;
-												gbc_panel_2.gridx = 1;
-												gbc_panel_2.gridy = 3;
-												logiPanel.add(panel_2, gbc_panel_2);
-												
-														JButton btnRegister = new JButton("Register");
-														btnRegister.setBackground(new Color(255, 204, 51));
-														panel_2.add(btnRegister);
-														btnRegister.setBounds(20, 11, 85, 45);
-														
-																btnRegister.addActionListener(new ActionListener() {
-														
-																	public void actionPerformed(ActionEvent e) {
-																		logiPanel.setVisible(false);
-																		frame.remove(thumb);
-																		registerview();
-																	}
-																});
-																
-												JPanel panel_1 = new JPanel();
-												panel_1.setBackground(new Color(105, 105, 105,0));
-												panel_1.setLayout(null);
-												GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-												gbc_panel_1.insets = new Insets(0, 0, 0, 5);
-												gbc_panel_1.fill = GridBagConstraints.BOTH;
-												gbc_panel_1.gridx = 3;
-												gbc_panel_1.gridy = 3;
-												logiPanel.add(panel_1, gbc_panel_1);
-																		
-																	JButton btnLogIn = new JButton("Log In");
-																	btnLogIn.setBackground(new Color(50, 205, 50));
-																	panel_1.add(btnLogIn);
-																	btnLogIn.setBounds(54, 11, 95, 43);
-																				
-																	btnLogIn.addActionListener(new ActionListener() {
-																				
-																	public void actionPerformed(ActionEvent e) {
-																	if (usernameField.getText().equals("")) {
-																		JOptionPane.showMessageDialog(frame, "The field 'Username' cannot be empty.");
-																		usernameField.requestFocus();
-																	} else if (passwordField.getPassword().length == 0) {
-																		JOptionPane.showMessageDialog(frame, "The field 'password' cannot be empty.");
-																		passwordField.requestFocus();
-																	} else if (!logIn(usernameField.getText(), new String(passwordField.getPassword()))) {
-																		JOptionPane.showMessageDialog(frame, "The login credentials are incorrect. Please, revise them");
-																	} else {
-																		logiPanel.setVisible(false);
-																		frame.remove(thumb);
-																		state=2;
-																		mainview();
-																	}
-																	}
-																	});
+		final JPanel logiPanel = new JPanel();
+		logiPanel.setBackground(new Color(105, 105, 105, 100));
+		logiPanel.setBounds(0, 0, 434, 261);
+		frame.getContentPane().add(logiPanel);
+		GridBagLayout gbl_logiPanel = new GridBagLayout();
+		gbl_logiPanel.columnWidths = new int[] { 37, 81, 16, 164, 6, 63, 0 };
+		gbl_logiPanel.rowHeights = new int[] { 60, 47, 68, 65, 0 };
+		gbl_logiPanel.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_logiPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		logiPanel.setLayout(gbl_logiPanel);
+
+
+		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setForeground(new Color(255, 255, 255));
+		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 15));
+		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
+		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
+		gbc_lblUsername.gridx = 1;
+		gbc_lblUsername.gridy = 1;
+		logiPanel.add(lblUsername, gbc_lblUsername);
+		lblUsername.setBounds(28, 33, 67, 14);
+
+		usernameField = new JTextField();
+		GridBagConstraints gbc_usernameField = new GridBagConstraints();
+		gbc_usernameField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_usernameField.insets = new Insets(0, 0, 5, 5);
+		gbc_usernameField.gridx = 3;
+		gbc_usernameField.gridy = 1;
+		logiPanel.add(usernameField, gbc_usernameField);
+		usernameField.setBounds(127, 30, 155, 20);
+		usernameField.setColumns(10);
+
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setForeground(new Color(255, 255, 255));
+		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
+		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
+		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPassword.gridx = 1;
+		gbc_lblPassword.gridy = 2;
+		logiPanel.add(lblPassword, gbc_lblPassword);
+		lblPassword.setBounds(28, 71, 67, 14);
+
+		passwordField = new JPasswordField();
+		GridBagConstraints gbc_passwordField = new GridBagConstraints();
+		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
+		gbc_passwordField.gridx = 3;
+		gbc_passwordField.gridy = 2;
+		logiPanel.add(passwordField, gbc_passwordField);
+		passwordField.setBounds(127, 68, 155, 20);
+
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(105, 105, 105,0));
+		panel_2.setLayout(null);
+		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
+		gbc_panel_2.insets = new Insets(0, 0, 0, 5);
+		gbc_panel_2.fill = GridBagConstraints.BOTH;
+		gbc_panel_2.gridx = 1;
+		gbc_panel_2.gridy = 3;
+		logiPanel.add(panel_2, gbc_panel_2);
+
+		JButton btnRegister = new JButton("Register");
+		btnRegister.setBackground(new Color(255, 204, 51));
+		panel_2.add(btnRegister);
+		btnRegister.setBounds(20, 11, 85, 45);
+
+		btnRegister.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				logiPanel.setVisible(false);
+				frame.remove(thumb);
+				registerview();
+			}
+		});
+
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(105, 105, 105,0));
+		panel_1.setLayout(null);
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.insets = new Insets(0, 0, 0, 5);
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 3;
+		gbc_panel_1.gridy = 3;
+		logiPanel.add(panel_1, gbc_panel_1);
+
+		JButton btnLogIn = new JButton("Log In");
+		btnLogIn.setBackground(new Color(50, 205, 50));
+		panel_1.add(btnLogIn);
+		btnLogIn.setBounds(54, 11, 95, 43);
+
+		btnLogIn.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				if (usernameField.getText().equals("")) {
+					JOptionPane.showMessageDialog(frame, "The field 'Username' cannot be empty.");
+					usernameField.requestFocus();
+				} else if (passwordField.getPassword().length == 0) {
+					JOptionPane.showMessageDialog(frame, "The field 'password' cannot be empty.");
+					passwordField.requestFocus();
+				} else if (!logIn(usernameField.getText(), new String(passwordField.getPassword()))) {
+					JOptionPane.showMessageDialog(frame, "The login credentials are incorrect. Please, revise them");
+				} else {
+					logiPanel.setVisible(false);
+					frame.remove(thumb);
+					state=2;
+					mainview();
+				}
+			}
+		});
 		thumb.setIcon(image);
 		frame.getContentPane().add(thumb);
 		frame.repaint();
@@ -1402,7 +1396,7 @@ public class GUI {
 		gbc_lblCardType.gridy = 3;
 		walletpanel.add(lblCardType, gbc_lblCardType);
 
-		JComboBox comboBox = new JComboBox();
+		JComboBox<CardType> comboBox = new JComboBox<CardType>();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -1495,14 +1489,14 @@ public class GUI {
 		gbc_lblTitle.gridy = 1;
 		newsfieldspanel.add(lblTitle, gbc_lblTitle);
 
-		JTextField textField = new JTextField();
+		final JTextField titleField = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 0);
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField.gridx = 3;
 		gbc_textField.gridy = 1;
-		newsfieldspanel.add(textField, gbc_textField);
-		textField.setColumns(10);
+		newsfieldspanel.add(titleField, gbc_textField);
+		titleField.setColumns(10);
 
 		JLabel lblBody = new JLabel("BODY");
 		lblBody.setForeground(new Color(255, 255, 255));
@@ -1515,12 +1509,12 @@ public class GUI {
 		gbc_lblBody.gridy = 3;
 		newsfieldspanel.add(lblBody, gbc_lblBody);
 
-		JTextArea textArea = new JTextArea();
+		final JTextArea bodyArea = new JTextArea();
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.fill = GridBagConstraints.BOTH;
 		gbc_textArea.gridx = 3;
 		gbc_textArea.gridy = 3;
-		newsfieldspanel.add(textArea, gbc_textArea);
+		newsfieldspanel.add(bodyArea, gbc_textArea);
 
 		final UtilCalendarModel model = new UtilCalendarModel();
 		JDatePanelImpl datePanel = new JDatePanelImpl(model);
@@ -1528,7 +1522,7 @@ public class GUI {
 		SpringLayout springLayout = (SpringLayout) datePicker.getLayout();
 		springLayout.putConstraint(SpringLayout.NORTH, datePicker.getJFormattedTextField(), 0, SpringLayout.NORTH, datePicker);
 		datePicker.setBackground(new Color(105, 105, 105));
-		datePicker.setSize(455, -133);
+		datePicker.setSize(455, 133);
 		datePicker.setLocation(0, 422);
 		datePanel.setBounds(10, 2, 208, 28);
 		mainp.add(datePicker);
@@ -1563,12 +1557,14 @@ public class GUI {
 
 			public void actionPerformed(ActionEvent e) {
 
+				addNews(titleField.getText(), bodyArea.getText(), new Date(2016-1900, 04, 12));
 				mainp.setVisible(false);
 				mainview();
 			}
 		});
 
 		frame.repaint();
+		frame.revalidate();
 	}
 
 	private void editnewsview(){
@@ -1676,6 +1672,7 @@ public class GUI {
 		});
 
 		frame.repaint();
+		frame.revalidate();
 	}
 
 
@@ -1696,7 +1693,10 @@ public class GUI {
 	}
 
 	public void fill(){
-
+	}
+	
+	public boolean addNews(String title, String body, Date date){
+	return true;
 	}
 
 

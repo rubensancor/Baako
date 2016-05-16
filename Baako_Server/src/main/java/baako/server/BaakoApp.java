@@ -24,6 +24,7 @@ import baako.server.database.Game;
 import baako.server.database.PlainUser;
 import baako.server.database.Wallet;
 import baako.server.dto.GameDTO;
+import baako.server.dto.NewsDTO;
 import baako.server.dto.PlainUserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
@@ -135,6 +136,14 @@ public class BaakoApp {
 		}
 		return dto;
 	}
+	/**
+	 * @param n
+	 * @return
+	 */
+	public boolean addNews(NewsDTO n) {
+		dao.addNews(Assembler.getInstance().assemble(n));
+		return true;
+	}
 
 
 	@SuppressWarnings("deprecation")
@@ -155,20 +164,19 @@ public class BaakoApp {
 			BaakoApp app = new BaakoApp(dao);
 			IBaakoManager manager = new BaakoFacade(app);
 
-			//			IAuth auth = new Auth(dao);
 
 			//		    ArrayList<Game> games = (ArrayList<Game>) dao.getAllGames();
 			//		    System.out.println(games);
 			//			System.out.println("Email ----> "+dao.getUser("ruben").getEmail());
-//			PlainUser a = new PlainUser("a","a","a",new Date(95, 0, 19));
+			//			PlainUser a = new PlainUser("a","a","a",new Date(95, 0, 19));
 			//			PlainUser b = new PlainUser("a","b","a",new Date(95, 0, 19));
 			//			PlainUser c = new PlainUser("a","c","a",new Date(95, 0, 19));
-//			Game g = new Game("asdf", 2, "asdf", 3);
+			//			Game g = new Game("asdf", 2, "asdf", 3);
 
 
-//			dao.addGame(g);
-//			dao.addUser(a); 
-//			dao.buyGame(g, a);
+			//			dao.addGame(g);
+			//			dao.addUser(a); 
+			//			dao.buyGame(g, a);
 			//			dao.addUser(b);
 			//			dao.addUser(c);
 			//			dao.addFriend(a, b);
@@ -200,7 +208,7 @@ public class BaakoApp {
 
 			//			dao.buyGame(g, a);
 
-
+			logger.info("asdfasdf");
 			Naming.rebind(serverName, manager);
 			logger.info(serverName+ " active and waiting...");
 			java.io.InputStreamReader inputStreamReader = new java.io.InputStreamReader ( System.in );
@@ -210,5 +218,6 @@ public class BaakoApp {
 			e.printStackTrace();
 		}
 	}
+
 
 }
