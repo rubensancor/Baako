@@ -36,9 +36,15 @@ public class PlainUser extends User {
 
 	@Column(name="WALLET_ID")
 	private Wallet wallet;
-
-	/**
-	 * 
+	
+	/** Contructor of a PlainUser with all the attributes
+	 * @param email A String with the email of the user
+	 * @param name A String with the of the user
+	 * @param password A String with the password of the user
+	 * @param birthdate A Date with the birthdate of the user
+	 * @param friends A Set of PlainUser containing the friends of the user
+	 * @param games A Set of Game containing the games owned by the user
+	 * @param wallet The Wallet of the user
 	 */
 	public PlainUser(String email, String name, String password, Date birthdate, Set<PlainUser> friends, Set<Game> games, Wallet wallet) {
 		super(email, name, password, birthdate);
