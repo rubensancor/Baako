@@ -10,8 +10,10 @@
 package baako.server.assemblers;
 
 import baako.server.database.Game;
+import baako.server.database.News;
 import baako.server.database.PlainUser;
 import baako.server.dto.GameDTO;
+import baako.server.dto.NewsDTO;
 import baako.server.dto.PlainUserDTO;
 
 /**
@@ -86,5 +88,13 @@ public class Assembler {
 	public PlainUserDTO disassemble(PlainUser u) {
 		return new PlainUserDTO(u);
 	}
-
+	
+	public News assemble(NewsDTO n){
+		return new News(n);
+	}
+	
+	public NewsDTO disassemble(News n){
+		return new NewsDTO(n);
+	}
+	
 }
