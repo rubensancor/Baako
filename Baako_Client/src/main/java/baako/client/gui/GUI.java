@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
-
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
@@ -22,13 +21,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import baako.server.database.CardType;
-import baako.server.dto.PlainUserDTO;
 import net.sourceforge.jdatepicker.impl.UtilCalendarModel;
-
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -39,8 +35,6 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.SpringLayout; 
 
 /**
@@ -1402,7 +1396,7 @@ public class GUI {
 		gbc_lblCardType.gridy = 3;
 		walletpanel.add(lblCardType, gbc_lblCardType);
 
-		JComboBox comboBox = new JComboBox();
+		JComboBox<CardType> comboBox = new JComboBox<CardType>();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;

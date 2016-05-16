@@ -88,7 +88,7 @@ public class Assembler {
 	public PlainUserDTO disassemble(PlainUser u) {
 		return new PlainUserDTO(u);
 	}
-	
+		
 	public News assemble(NewsDTO n){
 		return new News(n);
 	}
