@@ -160,18 +160,18 @@ public class BaakoApp {
 			//		    ArrayList<Game> games = (ArrayList<Game>) dao.getAllGames();
 			//		    System.out.println(games);
 			//			System.out.println("Email ----> "+dao.getUser("ruben").getEmail());
-//			PlainUser a = new PlainUser("a","a","a",new Date(95, 0, 19));
-			//			PlainUser b = new PlainUser("a","b","a",new Date(95, 0, 19));
+						PlainUser a = new PlainUser("a","a","a",new Date(95, 0, 19));
+						PlainUser b = new PlainUser("a","b","a",new Date(95, 0, 19));
 			//			PlainUser c = new PlainUser("a","c","a",new Date(95, 0, 19));
-//			Game g = new Game("asdf", 2, "asdf", 3);
+			//			Game g = new Game("asdf", 2, "asdf", 3);
 
 
-//			dao.addGame(g);
-//			dao.addUser(a); 
-//			dao.buyGame(g, a);
-			//			dao.addUser(b);
+			//			dao.addGame(g);
+						dao.addUser(a); 
+			//			dao.buyGame(g, a);
+						dao.addUser(b);
 			//			dao.addUser(c);
-			//			dao.addFriend(a, b);
+						dao.addFriend(a, b);
 			//			dao.addFriend(a, c);
 			//			Designer d = new Designer("EA");
 			//			Designer d2 = new Designer("Ubisoft");

@@ -353,6 +353,7 @@ public class BaakoDAO implements IBaakoDAO {
 		pm = pmf.getPersistenceManager();
 		tx = pm.currentTransaction();
 		try{
+			//DO NOT EDIT THIS!
 			tx.begin();
 			Query query = pm.newQuery("SELECT FROM "+PlainUser.class.getName()+" WHERE username=='"+u.getName()+"'");
 			query.setUnique(true);
@@ -363,7 +364,7 @@ public class BaakoDAO implements IBaakoDAO {
 			PlainUser aux2 = (PlainUser) query2.execute();
 			PlainUser det = pm.detachCopy(aux2);
 			logger.info("AFTER");
-			aux.addFriend(det);
+			aux.addFriend(aux2);
 			logger.info("SI");
 			tx.commit();
 			//			pm.makePersistent(u2);

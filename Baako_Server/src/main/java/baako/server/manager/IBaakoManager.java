@@ -1,59 +1,58 @@
-/**
- * 
+/** @package baako.server.manager
+ * @brief Package containing the manager interface of the server which allows the client to access to the server zone.
  */
 package baako.server.manager;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
 import baako.server.dto.GameDTO;
 import baako.server.dto.PlainUserDTO;
 
 /**
+ * @brief Interface with all the methods that the Client is able to use
  * @author Baako-Team
- *
  */
 public interface IBaakoManager extends Remote{
 
 	/** Check the user information
-	 * @param username A String with the username of the User to retrieve
-	 * @param password A String with the password of the User to retrieve
-	 * @return A PlainUserDTO with the data of the user retrieved
+	 * @param username A String with the username of the {@link User} to retrieve
+	 * @param password A String with the password of the {@link User} to retrieve
+	 * @return A {@link PlainUserDTO} with the data of the {@link User} retrieved
 	 * @throws RemoteException
 	 */
 	public PlainUserDTO checkUserInfo(String username, String password) throws RemoteException;
 	
 	/** Register the user
-	 * @param user A PlainUserDTO to register
+	 * @param user A {@link PlainUserDTO} to register
 	 * @return A boolean. True if the user is registered and false if not.
 	 * @throws RemoteException
 	 */
 	public boolean register(PlainUserDTO user)throws RemoteException;
 	
-	/** 
-	 * @param g A GameDTO which has been bought by a User
-	 * @param u The PlainUserDTO who 
-	 * @return 
+	/**  Buy a Game by a User
+	 * @param g A {@link GameDTO} which has been bought by a {@link User}
+	 * @param u The {@link PlainUserDTO} who bought the {@link Game}
+	 * @return  A boolean. True if the game is bought successfully, false if not
 	 * @throws RemoteException
 	 */
 	public boolean buyGame(GameDTO g, PlainUserDTO u) throws RemoteException;
 	
 	/** Launch a game 
-	 * @return A boolean. True if the game is launched and false if not.
+	 * @return A boolean. True if the {@link Game} is launched and false if not.
 	 * @throws RemoteException
 	 */
 	public boolean launchGame() throws RemoteException;
 	
-	/**
-	 * @param name
-	 * @return
+	/** Search a {@link Game}
+	 * @param name A String with the name of the {@link Game}
+	 * @return A {@link GameDTO } with the data of the {@link Game} retrieved
 	 * @throws RemoteException
 	 */
 	public GameDTO searchGame(String name) throws RemoteException;
 	
-	/**
-	 * @param category
+	/** Search all the {@link Game} given a {@link Category}
+	 * @param category A String with the name of the {@link Category}
 	 * @return
 	 * @throws RemoteException
 	 */
