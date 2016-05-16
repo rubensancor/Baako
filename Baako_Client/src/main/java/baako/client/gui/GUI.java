@@ -100,7 +100,7 @@ public class GUI {
 		frame.setLocation(200, 100);
 		//frame.setBounds(100, 100, 450, 300);
 		//frame.setResizable(false);
-		loginview();
+		mainview();
 		frame.repaint();
 		frame.revalidate();
 	}
@@ -117,7 +117,7 @@ public class GUI {
 		frame.getContentPane().add(mainPanel_1);
 		mainPanel_1.setLayout(null);
 
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		menuBar.setBounds(0, 0, 490, 50);
@@ -185,13 +185,13 @@ public class GUI {
 			}
 		});
 		logoutPanel.add(btnLogOut);
-		
-		
+
+
 		//MAIN PANEL
 		final JScrollPane mainPanel = new JScrollPane();
 		mainPanel.setBounds(0, 48, 574, 494);
 		mainPanel_1.add(mainPanel);
-		
+
 		//LIST OF ELEMENTS IN MAINVIEW
 		final JList list = new JList();
 		list.setBackground(Color.LIGHT_GRAY);
@@ -200,7 +200,7 @@ public class GUI {
 		list.setModel(new AbstractListModel() {
 			//List for example view, insert db values later in logic
 			String[] values = new String[] {"", "juego1", "juego2", "juego3", "juego4", "a", "dsfsffsfd", "sdaasfd", "sdf", "fsdfd", "fdssdf", "ffd", "fsdf", "dsfsdfds", "sd", "f", "sd", "fdfd"};
-			
+
 			public int getSize() {
 				return values.length;
 			}
@@ -212,8 +212,8 @@ public class GUI {
 		renderer.setHorizontalAlignment(SwingConstants.CENTER);
 		mainPanel.setViewportView(list);
 		//mainPanel_1.add(mainPanel);
-		
-		
+
+
 		//OPTION PANEL
 		JPanel optionPanel = new JPanel();
 		optionPanel.setBackground(new Color(105, 105, 105));
@@ -258,7 +258,7 @@ public class GUI {
 
 		//CASES FOR THE OPTIONPANEL
 		switch(state){
-		
+
 		//ADMINISTRATOR NEWS OPTIONPANEL
 		case 0:
 			final JButton btnAddNews = new JButton("ADD NEWS");
@@ -314,21 +314,21 @@ public class GUI {
 					btnBack.setBackground(new Color(255, 51, 0));
 
 					mainPanel_1.remove(mainPanel);
-					
+
 					//BOD OF THE ARTICLE
 					JTextArea txtr = new JTextArea();
 					txtr.setText("Bua esto esta todo guapo porque es una news to importante sobre el \r\nUncharted y asi que esta to wapo y nathan se muere como Jon Nieve");
-					
+
 					final JScrollPane mainPanel = new JScrollPane(txtr);
 					mainPanel.setBounds(0, 48, 574, 494);
 					mainPanel_1.add(mainPanel);	
-					
+
 					//TITLE OF THE ARTICLE
 					JLabel lblTituloMasoGuapo = new JLabel("Titulo maso guapo");
 					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
 					lblTituloMasoGuapo.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setColumnHeaderView(lblTituloMasoGuapo);
-					
+
 					//addnewsview();
 				}
 			});
@@ -349,14 +349,14 @@ public class GUI {
 					btnBack.setEnabled(false);
 					btnBack.setBackground(new Color(204, 204, 204));
 
-					
+
 					mainPanel_1.remove(mainPanel);
-					
+
 					//RETURNING BACK TO THE LIST
 					final JScrollPane mainPanel = new JScrollPane();
 					mainPanel.setBounds(0, 48, 574, 494);
 					mainPanel_1.add(mainPanel);
-					
+
 					DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
 					renderer.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setViewportView(list);
@@ -367,7 +367,7 @@ public class GUI {
 			btnBack.setBackground(new Color(204, 204, 204));
 			break;
 
-			
+
 			//USER NEWS OPTIONPANEL
 		case 1:
 
@@ -383,17 +383,17 @@ public class GUI {
 					btnBack.setBackground(new Color(255, 51, 0));
 					btninfo.setEnabled(false);
 					btninfo.setBackground(new Color(204, 204, 204));
-					
+
 					mainPanel_1.remove(mainPanel);
-					
+
 					//BOD OF THE ARTICLE
 					JTextArea txtr = new JTextArea();
 					txtr.setText("Bua esto esta todo guapo porque es una news to importante sobre el \r\nUncharted y asi que esta to wapo y nathan se muere como Jon Nieve");
-					
+
 					final JScrollPane mainPanel = new JScrollPane(txtr);
 					mainPanel.setBounds(0, 48, 574, 494);
 					mainPanel_1.add(mainPanel);	
-					
+
 					//TITLE OF THE ARTICLE
 					JLabel lblTituloMasoGuapo = new JLabel("Titulo maso guapo");
 					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -416,14 +416,14 @@ public class GUI {
 					btnBack.setBackground(new Color(204, 204, 204));
 					btninfo.setEnabled(true);
 					btninfo.setBackground(new Color(153, 204, 204));
-					
+
 					mainPanel_1.remove(mainPanel);
-					
+
 					//RETURNING BACK TO THE LIST
 					final JScrollPane mainPanel = new JScrollPane();
 					mainPanel.setBounds(0, 48, 574, 494);
 					mainPanel_1.add(mainPanel);
-					
+
 					DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
 					renderer.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setViewportView(list);
@@ -436,7 +436,7 @@ public class GUI {
 
 			//ADMINISTRATOR GAME OPTIONPANEL
 		case 2:
-			
+
 			final JButton btnAddGame = new JButton("ADD GAME");
 			btnAddGame.setBackground(new Color(50, 205, 50));
 			GridBagConstraints gbc_btnAddGame = new GridBagConstraints();
@@ -487,17 +487,17 @@ public class GUI {
 					btninfo.setBackground(new Color(204, 204, 204));
 					btnBack.setEnabled(true);
 					btnBack.setBackground(new Color(255, 51, 0));
-					
+
 					mainPanel_1.remove(mainPanel);
-					
+
 					//BOD OF THE ARTICLE
 					JTextArea txtr = new JTextArea();
 					txtr.setText("Bua esto esta todo guapo porque es una news to importante sobre el \r\nUncharted y asi que esta to wapo y nathan se muere como Jon Nieve");
-					
+
 					final JScrollPane mainPanel = new JScrollPane(txtr);
 					mainPanel.setBounds(0, 48, 574, 494);
 					mainPanel_1.add(mainPanel);	
-					
+
 					//TITLE OF THE ARTICLE
 					JLabel lblTituloMasoGuapo = new JLabel("Titulo maso guapo");
 					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -522,14 +522,14 @@ public class GUI {
 					btninfo.setBackground(new Color(153, 204, 204));
 					btnBack.setEnabled(false);
 					btnBack.setBackground(new Color(204, 204, 204));
-					
+
 					mainPanel_1.remove(mainPanel);
-					
+
 					//RETURNING BACK TO THE LIST
 					final JScrollPane mainPanel = new JScrollPane();
 					mainPanel.setBounds(0, 48, 574, 494);
 					mainPanel_1.add(mainPanel);
-					
+
 					DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
 					renderer.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setViewportView(list);
@@ -553,7 +553,7 @@ public class GUI {
 			btnLaunch.addActionListener(new ActionListener() {
 
 				public void actionPerformed(ActionEvent e) {
-					
+
 					//addnewsview();
 				}
 			});
@@ -637,17 +637,17 @@ public class GUI {
 					btninfo.setBackground(new Color(204, 204, 204));
 					btnBack.setEnabled(true);
 					btnBack.setBackground(new Color(255, 51, 0));
-					
+
 					mainPanel_1.remove(mainPanel);
-					
+
 					//BOD OF THE ARTICLE
 					JTextArea txtr = new JTextArea();
 					txtr.setText("Bua esto esta todo guapo porque es una news to importante sobre el \r\nUncharted y asi que esta to wapo y nathan se muere como Jon Nieve");
-					
+
 					final JScrollPane mainPanel = new JScrollPane(txtr);
 					mainPanel.setBounds(0, 48, 574, 494);
 					mainPanel_1.add(mainPanel);	
-					
+
 					//TITLE OF THE ARTICLE
 					JLabel lblTituloMasoGuapo = new JLabel("Titulo maso guapo");
 					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -672,14 +672,14 @@ public class GUI {
 					btninfo.setBackground(new Color(153, 204, 204));
 					btnBack.setEnabled(false);
 					btnBack.setBackground(new Color(204, 204, 204));
-					
+
 					mainPanel_1.remove(mainPanel);
-					
+
 					//RETURNING BACK TO THE LIST
 					final JScrollPane mainPanel = new JScrollPane();
 					mainPanel.setBounds(0, 48, 574, 494);
 					mainPanel_1.add(mainPanel);
-					
+
 					DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
 					renderer.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setViewportView(list);
@@ -723,7 +723,7 @@ public class GUI {
 				}
 			});
 
-/**
+			/**
 			gbc_btninfo.insets = new Insets(40, 30, 5, 0);
 			gbc_btninfo.gridx = 1;
 			gbc_btninfo.gridy = 4;

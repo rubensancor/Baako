@@ -31,15 +31,15 @@ public class Wallet {
 		this.type = CardType.MASTERCARD;
 	}
 
-	/** 
-	 * @return the cardNumb
+	/**  Returns the card number of the class Wallet
+	 * @return the cardNumb An Integer with the card number
 	 */
 	public int getCardNumb() {
 		return cardNumb;
 	}
 
-	/**
-	 * @return the type
+	/** Returns the CardType of the class Wallet
+	 * @return the type A CardType with the card type
 	 */
 	public CardType getType() {
 		return type;
