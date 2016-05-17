@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
  */
 public class BaakoController {
 
-	Logger logger = LoggerFactory.getLogger(BaakoController.class);
 	private RMIServiceLocator rmi;
 	private static PlainUserDTO user;
 
@@ -106,7 +105,16 @@ public class BaakoController {
 		return g;
 	}
 	
-	public boolean addNews(NewsDTO n){
+	public ArrayList<GameDTO> searchGamesByCategory(String name){
+		ArrayList<GameDTO> g = new ArrayList<GameDTO>();
+		try {
+			g = rmi.getService().searchGamebyCategory(name);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return g;
+	}
+		public boolean addNews(NewsDTO n){
 		try {
 			return rmi.getService().addNews(n);
 		} catch(RemoteException e) {
