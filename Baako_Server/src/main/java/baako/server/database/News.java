@@ -19,17 +19,23 @@ import baako.server.dto.NewsDTO;
 public class News {
 
 	private String title;
-	
+
 	private Date date;
 	private String body;
-	
+
+	/**
+	 * The constructor of the class
+	 * @param title	The title of the new
+	 * @param date		The date of the new
+	 * @param description The description of the new
+	 */
 	public News(String title, Date  date, String body){
 		this.title = title;
 		this.date = date;
 		this.body = body;
-				
+
 	}
-	
+
 	public News(NewsDTO n){
 		this.title = n.getTitle();
 		this.body = n.getBody();

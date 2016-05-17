@@ -150,7 +150,7 @@ public class BaakoDAO implements IBaakoDAO {
 				query3.setUnique(true);
 				Category aux = (Category) query3.execute();
 				Category det = pm.detachCopy(aux);
-				gaux.addCategories(det);
+				gaux.addCategory(det);
 			}
 			tx.commit();
 		}finally{
