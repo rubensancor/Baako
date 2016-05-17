@@ -3,12 +3,19 @@
  */
 package baako.client.remote;
 
+import baako.server.manager.IBaakoManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory; 
+
 
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 public class RMIServiceLocator {
+
+	Logger logger = LoggerFactory.getLogger(RMIServiceLocator.class);
+	private IBaakoManager manager;
 
 	public RMIServiceLocator(String IP, String port, String name){
 		this.setManager(IP,port,name);
@@ -18,16 +25,16 @@ public class RMIServiceLocator {
 
 		String serverName="//"+ IP +":"+ port +"/"+ name ;
 		try{
-			System.out.println("Estoy RMI");
-//			this.manager = (ITralalaManager) java.rmi.Naming.lookup(serverName);
-			System.out.println("He conectado");
+			logger.info("Estoy RMI");
+			this.manager = (IBaakoManager) java.rmi.Naming.lookup(serverName);
+			logger.info("He conectado");
 		}catch(Exception e) {
-			System.err.println("- Exception running the client: " + e.getMessage());
+			logger.error("- Exception running the client: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
-	
-//	public ITralalaManager getService(){
-//		return manager;
-//	}
+
+	public IBaakoManager getService(){
+		return manager;
+	}
 }

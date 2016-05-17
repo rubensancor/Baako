@@ -1,42 +1,44 @@
 package baako.server.database;
 
 import java.util.Date;
-import java.util.List;
-import javax.jdo.annotations.Join;
 
-//@PersistenceCapable(detachable="true")
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.PrimaryKey;
+import baako.server.dto.UserDTO;
+/**
+ * @author Baako-Team
+ *
+ */
+ 
+@PersistenceCapable
+@Inheritance(strategy=InheritanceStrategy.SUBCLASS_TABLE)
 public abstract class User {
 
-//	@PrimaryKey
-	private int userId;
 
-	private String email;
-	private String name;
-	private Date birthdate;
-	private String password;
+	@PrimaryKey
+	private String username;	
+	protected String email;
+	protected Date birthdate;
+	protected String password;
 
-	@Join
-	private List<Game> games;
-
-
-	public User(){
-
-	}
-
-	public User(int userId, String email, String name, Date birthdate){
+	
+	public User(String email, String name, String password,  Date birthdate){
 		super();
 		this.email = email;
-		this.name = name;
-		this.birthdate = birthdate;
-		
+		this.setUsername(name);
+		this.password = password;
+		this.birthdate = birthdate;	
+	}
+	
+	public User(UserDTO user){
+		this.email = user.getEmail();
+		this.setUsername(user.getUsername());
+		this.password = user.getPassword();
+		this.birthdate = user.getBirthdate();
 	}
 
-	/**
-	 * @return the userId
-	 */
-	public int getUserId() {
-		return userId;
-	}
 
 	/**
 	 * @return the email
@@ -49,7 +51,7 @@ public abstract class User {
 	 * @return the name
 	 */
 	public String getName() {
-		return name;
+		return getUsername();
 	}
 
 	/**
@@ -66,12 +68,14 @@ public abstract class User {
 		return password;
 	}
 
-	/**
-	 * @return the games
-	 */
-	public List<Game> getGames() {
-		return games;
+	public String getUsername() {
+		return username;
 	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	
 	
 

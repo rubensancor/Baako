@@ -3,51 +3,46 @@
  */
 package baako.server.database;
 
-import javax.jdo.annotations.Element;
+import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.PrimaryKey;
 
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
+@PersistenceCapable(detachable="true")
 public class Wallet {
 	@PrimaryKey
-	private int walletId;
-	
 	private int cardNumb;
-	private CardType type;
 	
-	@Element(column="USER_ID")
-	private User user;
+	
+	private CardType type;
 
-	/**
-	 * @return the walletId
+	public Wallet(int cardNumb, CardType type) {
+		this.cardNumb = cardNumb;
+		this.type = type;
+	}
+	
+	/** Constructor for Wallet class
+	 * @param cardNumber An Integer with the card number
 	 */
-	public int getWalletId() {
-		return walletId;
+	public Wallet(int cardNumber) {
+		this.cardNumb = cardNumber;
+		this.type = CardType.MASTERCARD;
 	}
 
-	/**
-	 * @return the cardNumb
+	/**  Returns the card number of the class Wallet
+	 * @return the cardNumb An Integer with the card number
 	 */
 	public int getCardNumb() {
 		return cardNumb;
 	}
 
-	/**
-	 * @return the type
+	/** Returns the CardType of the class Wallet
+	 * @return the type A CardType with the card type
 	 */
 	public CardType getType() {
 		return type;
 	}
-
-	/**
-	 * @return the user
-	 */
-	public User getUser() {
-		return user;
-	}
-	
-	
 	
 }

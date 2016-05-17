@@ -4,116 +4,97 @@
 package baako.server.database;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.jdo.annotations.Column;
+import javax.jdo.annotations.Element;
+import javax.jdo.annotations.FetchPlan;
+import javax.jdo.annotations.Join;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+
+import baako.server.dto.PlainUserDTO;
+
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
+@PersistenceCapable(detachable="true")
 public class PlainUser extends User {
 
-	@Join
+
+	@Persistent(table="PLAINUSER_FRIEND", defaultFetchGroup="true")
+	@Join(column="PLAINUSER_ID_A")
+	@Element(column="PLAINUSER_ID_B")
 	private Set<PlainUser> friends;
+
+	@Persistent(table="PLAINUSER_GAMES", defaultFetchGroup="true")
+	@Join(column="PLAINUSER_ID")
+	@Element(column="GAME_ID")
+	private Set<Game> games;
+
+	@Column(name="WALLET_ID")
+	private Wallet wallet;
 	
-	/* (non-Javadoc)
-	 * @see baako.server.database.User#getUserId()
+	/** Contructor of a PlainUser with all the attributes
+	 * @param email A String with the email of the user
+	 * @param name A String with the of the user
+	 * @param password A String with the password of the user
+	 * @param birthdate A Date with the birthdate of the user
+	 * @param friends A Set of PlainUser containing the friends of the user
+	 * @param games A Set of Game containing the games owned by the user
+	 * @param wallet The Wallet of the user
 	 */
-	@Override
-	public int getUserId() {
-		// TODO Auto-generated method stub
-		return super.getUserId();
+	public PlainUser(String email, String name, String password, Date birthdate, Set<PlainUser> friends, Set<Game> games, Wallet wallet) {
+		super(email, name, password, birthdate);
+		this.friends = friends;
+		this.games = games;
+		this.wallet = wallet;
 	}
 
-	/* (non-Javadoc)
-	 * @see baako.server.database.User#getEmail()
-	 */
-	@Override
-	public String getEmail() {
-		// TODO Auto-generated method stub
-		return super.getEmail();
+	public PlainUser(String email, String name, String password, Date birthdate) {
+		super(email, name, password, birthdate);
+		this.friends = new HashSet<PlainUser>();
+		this.games = new HashSet<Game>();
+		this.wallet = null;
 	}
 
-	/* (non-Javadoc)
-	 * @see baako.server.database.User#getName()
+	/**
+	 * 
 	 */
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return super.getName();
+	public PlainUser(PlainUserDTO u) {
+		super(u.getEmail(), u.getName(), u.getPassword(), u.getBirthdate());
+		this.friends = u.getFriends();
+		this.games = u.getGames();
 	}
 
-	/* (non-Javadoc)
-	 * @see baako.server.database.User#getBirthdate()
-	 */
-	@Override
-	public Date getBirthdate() {
-		// TODO Auto-generated method stub
-		return super.getBirthdate();
-	}
-
-	/* (non-Javadoc)
-	 * @see baako.server.database.User#getPassword()
-	 */
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return super.getPassword();
+	public PlainUser(PlainUser u){
+		super(u.getEmail(), u.getName(), u.getPassword(), u.getBirthdate());
+		this.friends = u.getFriends();
+		this.games = u.getGames();	
 	}
 
 
-	/* (non-Javadoc)
-	 * @see baako.server.database.User#getGames()
-	 */
-	@Override
-	public List<Game> getGames() {
-		// TODO Auto-generated method stub
-		return super.getGames();
+	public Set<Game> getGames() {
+		return games;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		// TODO Auto-generated method stub
-		return super.hashCode();
+	public void setGames(Set<Game> games) {
+		this.games = games;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
+
+	public void addGame(Game g){
+		this.games.add(g);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#clone()
-	 */
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
+	public void addFriend(PlainUser u){
+		friends.add(u);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#finalize()
-	 */
-	@Override
-	protected void finalize() throws Throwable {
-		// TODO Auto-generated method stub
-		super.finalize();
+	public void setFriends(Set<PlainUser> friends) {
+		this.friends = friends;
 	}
 
 	/**
@@ -122,5 +103,24 @@ public class PlainUser extends User {
 	public Set<PlainUser> getFriends() {
 		return friends;
 	}
+
+	@Override
+	public String toString() {
+		return "User: "+getUsername();
+	}
+
+	public Wallet getWallet() {
+		return wallet;
+	}
+
+	public void setWallet(Wallet wallet) {
+		this.wallet = wallet;
+	}
+
+	public boolean pay(float money){
+		// OMG CRAZY ASF PAYING STUFF
+		return true;
+	}
+
 
 }

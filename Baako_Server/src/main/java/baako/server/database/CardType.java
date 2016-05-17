@@ -1,10 +1,7 @@
-/**
- * 
- */
 package baako.server.database;
 
 /**
- * @author gusy
+ * @author Baako-Team
  *
  */
 public enum CardType {
