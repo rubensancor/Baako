@@ -6,6 +6,7 @@ import java.rmi.RMISecurityManager;
 import baako.server.dao.BaakoDAO;
 import baako.server.dao.IBaakoDAO;
 import baako.server.database.Game;
+import baako.server.database.News;
 import baako.server.database.PlainUser;
 import baako.server.facade.BaakoFacade;
 import baako.server.manager.IBaakoManager;
@@ -101,6 +102,16 @@ public class BaakoApp {
 		for (Designer designer : aux) {
 			aux2.add(designer.getName());
 		}
+		return aux2;
+	}
+	
+	public ArrayList<NewsDTO> getAllNews() throws RemoteException{
+		ArrayList<News> aux = dao.getAllNews();
+		ArrayList<NewsDTO> aux2 = new ArrayList<NewsDTO>();
+		for (News news : aux) {
+			aux2.add(new NewsDTO(news));
+		}
+		logger.info(aux.get(0).getTitle());
 		return aux2;
 	}
 

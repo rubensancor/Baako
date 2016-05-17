@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
+import javax.swing.ListModel;
+import javax.swing.event.ListDataListener;
+
 import baako.client.controller.BaakoController;
 import baako.client.gui.GUI;
 import baako.server.dto.GameDTO;
@@ -57,7 +60,16 @@ public class Delegate_GUI extends GUI{
 		}
 	}
 
-
+/* (non-Javadoc)
+ * @see baako.client.gui.GUI#fillNews()
+ */
+public void fillNews(){
+	logger.info("FILLING NEWS");
+	logger.info(controller.getAllNews().get(0).getTitle());
+	values = controller.getAllNews();
+	
+}
+	
 	/* (non-Javadoc)
 	 * @see baako.client.gui.GUI#logIn(java.lang.String, java.lang.String)
 	 */

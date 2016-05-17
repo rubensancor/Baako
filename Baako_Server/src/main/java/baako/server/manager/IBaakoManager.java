@@ -117,7 +117,7 @@ public interface IBaakoManager extends Remote{
 	 * @return The latest news
 	 * @throws RemoteException
 	 */
-	public ArrayList<News> getAllNews() throws RemoteException;
+	public ArrayList<NewsDTO> getAllNews() throws RemoteException;
 	/*TODO: 
 
 	public boolean addFriend(PlainUserDTO user, PlainUserDTO newFriend) throws RemoteException;

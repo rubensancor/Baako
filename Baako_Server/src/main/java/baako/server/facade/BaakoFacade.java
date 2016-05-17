@@ -130,9 +130,9 @@ public class BaakoFacade extends UnicastRemoteObject implements IBaakoManager{
 	/* (non-Javadoc)
 	 * @see baako.server.manager.IBaakoManager#getAllNews()
 	 */
-	public ArrayList<News> getAllNews() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<NewsDTO> getAllNews() throws RemoteException {
+		logger.info("FACADE NEWS");
+		return app.getAllNews();
 	}
 	
 

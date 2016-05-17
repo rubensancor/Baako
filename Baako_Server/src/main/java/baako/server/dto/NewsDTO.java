@@ -80,5 +80,15 @@ public class NewsDTO implements Serializable{
 		this.date = date;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@SuppressWarnings("deprecation")
+	@Override
+	public String toString() {
+//		return this.title +" [" ;//*+ this.date.getDay() +"/" + this.date.getMonth() +"/" + this.date.getYear()+"]";*//
+			return this.title;
+	}
+	
 	
 }
