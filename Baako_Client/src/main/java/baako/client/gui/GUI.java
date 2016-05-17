@@ -100,7 +100,7 @@ public class GUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setLocation(200, 100);
-		admin=true;
+		admin=false;
 		//frame.setBounds(100, 100, 450, 300);
 		//frame.setResizable(false);
 		mainview();
@@ -212,7 +212,7 @@ public class GUI {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				//state=5;
-				if(admin){
+				if(!admin){
 					mainPanel_1.remove(mainPanel_1.findComponentAt(574, 49));
 					menuchange(5, mainPanel_1);
 					}else{
