@@ -108,7 +108,7 @@ public class BaakoDAO implements IBaakoDAO {
 			pm.close();
 		}		
 	}
-
+	
 	/** Add a game to the DB without categories and designers
 	 * @param game an instance of Game class
 	 */
@@ -484,25 +484,26 @@ public class BaakoDAO implements IBaakoDAO {
 	public void editGame(Game game) {
 		//TODO
 		//DAO magic
-		pm = pmf.getPersistenceManager();
-		tx = pm.currentTransaction();
-		try{
-			tx.begin();
-			Query query = pm.newQuery("SELECT FROM "+Game.class.getName()+" WHERE name=='"+game.getName()+"'");
-			query.setUnique(true);
-			Game gaux = (Game) query.execute();
-			Game det = pm.detachCopy(gaux);
-			det.setPrice(game.getPrice());
-			det.setPEGI(game.getPEGI());
-			det.setDescription(game.getDescription());
-
-		}finally{
-			if(tx.isActive()){
-				tx.rollback();
-			}
-			pm.close();
-		}
+				pm = pmf.getPersistenceManager();
+				tx = pm.currentTransaction();
+				try{
+					tx.begin();
+					Query query = pm.newQuery("SELECT FROM "+Game.class.getName()+" WHERE name=='"+game.getName()+"'");
+					query.setUnique(true);
+					Game gaux = (Game) query.execute();
+					Game det = pm.detachCopy(gaux);
+					det.setPrice(game.getPrice());
+					det.setPEGI(game.getPEGI());
+					det.setDescription(game.getDescription());
+					
+				}finally{
+					if(tx.isActive()){
+						tx.rollback();
+					}
+					pm.close();
+				}
 	}
+	
 	public void editGame(News new2) {
 		//TODO
 		//DAO magic
@@ -526,9 +527,4 @@ public class BaakoDAO implements IBaakoDAO {
 			pm.close();
 		}
 	}
-
-
-
-
-
 }

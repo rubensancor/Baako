@@ -101,8 +101,8 @@ public interface IBaakoDAO {
 		 */
 		public ArrayList<Game> searchGamesByDesigner(String designer);		
 		
-		/** Edit the parameters of a Game 
-		 * @param name
+		/** Edit the parameters of a Game
+		 * @param game
 		 */
 		public void editGame(Game game);
 }
