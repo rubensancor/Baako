@@ -18,8 +18,8 @@ import baako.server.dto.PlainUserDTO;
 
 /**
  * @brief Assembler that allows you to do transformations to
- *        {@link baako.server.database.Game} and
- *        {@link baako.server.database.PlainUser}
+ *        {@link Game} and
+ *        {@link PlainUser}
  * @author Baako-Team
  *
  */
