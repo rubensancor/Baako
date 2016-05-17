@@ -35,8 +35,6 @@ import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.GridLayout;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import javax.swing.SpringLayout; 
 
 /**
@@ -261,7 +259,7 @@ public class GUI {
 		list.setModel(new AbstractListModel() {
 			private static final long serialVersionUID = -7603622508164614421L;
 			//List for example view, insert db values later in logic
-			String[] values = new String[] {"", "juego1", "juego2", "juego3", "juego4", "a", "dsfsffsfd", "sdaasfd", "sdf", "fsdfd", "fdssdf", "ffd", "fsdf", "dsfsdfds", "sd", "f", "sd", "fdfd"};
+			String[] values = new String[] {"", "new1", "juego2", "juego3", "juego4", "a", "dsfsffsfd", "sdaasfd", "sdf", "fsdfd", "fdssdf", "ffd", "fsdf", "dsfsdfds", "sd", "f", "sd", "fdfd"};
 
 			public int getSize() {
 				return values.length;
