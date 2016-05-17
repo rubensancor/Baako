@@ -5,9 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,16 +18,21 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListDataListener;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import baako.server.database.CardType;
+import baako.server.dto.NewsDTO;
 import net.sourceforge.jdatepicker.impl.UtilCalendarModel;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
@@ -57,6 +64,7 @@ public class GUI {
 	protected String user;
 	protected JLabel thumb;
 	protected boolean admin;
+	protected ArrayList<NewsDTO> values;
 
 	//private int state;
 	/*0 = adminNews 
@@ -75,6 +83,7 @@ public class GUI {
 	protected JComboBox<String> designerCBoxOpt1; 
 	protected JComboBox<String> designerCBoxOpt2; 
 	protected JComboBox<String> designerCBoxOpt3; 
+	protected JList<NewsDTO> list;
 
 
 	/**
@@ -96,7 +105,7 @@ public class GUI {
 		admin=true;
 		//frame.setBounds(100, 100, 450, 300);
 		//frame.setResizable(false);
-		mainview();
+		loginview();
 		frame.repaint();
 		frame.revalidate();
 	}
@@ -252,22 +261,23 @@ public class GUI {
 	private void menuchange(int state, final JPanel p){
 
 		//LIST OF ELEMENTS IN MAINVIEW
-		final JList list = new JList();
+
+		fillNews();
+		list = new JList(values.toArray());
 		list.setBackground(Color.LIGHT_GRAY);
 		list.setVisibleRowCount(20);
 		list.setFont(new Font("Tahoma", Font.PLAIN, 32));
-		list.setModel(new AbstractListModel() {
-			private static final long serialVersionUID = -7603622508164614421L;
-			//List for example view, insert db values later in logic
-			String[] values = new String[] {"", "new1", "juego2", "juego3", "juego4", "a", "dsfsffsfd", "sdaasfd", "sdf", "fsdfd", "fdssdf", "ffd", "fsdf", "dsfsdfds", "sd", "f", "sd", "fdfd"};
-
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});		
+//		list.setModel(new AbstractListModel() {
+//			private static final long serialVersionUID = -7603622508164614421L;
+//			//List for example view, insert db values later in logic
+//			
+//			public int getSize() {
+//				return values.size();
+//			}
+//			public NewsDTO getElementAt(int index) {
+//				return values.get(index);
+//			}
+//		});		
 
 		final JPanel optionPanel = new JPanel();
 		optionPanel.setBackground(new Color(105, 105, 105));
@@ -349,16 +359,16 @@ public class GUI {
 
 					p.remove(p.findComponentAt(0,50));
 
-					//BOD OF THE ARTICLE
+					//BODY OF THE ARTICLE
 					JTextArea txtr = new JTextArea();
-					txtr.setText("Bua esto esta todo guapo porque es una news to importante sobre el \r\nUncharted y asi que esta to wapo y nathan se muere como Jon Nieve");
+					txtr.setText(list.getSelectedValue().getBody());
 
 					final JScrollPane mainPanel = new JScrollPane(txtr);
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);	
 
 					//TITLE OF THE ARTICLE
-					JLabel lblTituloMasoGuapo = new JLabel("Titulo maso guapo");
+					JLabel lblTituloMasoGuapo = new JLabel(list.getSelectedValue().getTitle());
 					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
 					lblTituloMasoGuapo.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setColumnHeaderView(lblTituloMasoGuapo);
@@ -444,16 +454,16 @@ public class GUI {
 
 					p.remove(p.findComponentAt(0,50));
 
-					//BOD OF THE ARTICLE
+					//BODY OF THE ARTICLE
 					JTextArea txtr = new JTextArea();
-					txtr.setText("Bua esto esta todo guapo porque es una news to importante sobre el \r\nUncharted y asi que esta to wapo y nathan se muere como Jon Nieve");
+					txtr.setText(list.getSelectedValue().getBody());
 
 					final JScrollPane mainPanel = new JScrollPane(txtr);
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);	
 
 					//TITLE OF THE ARTICLE
-					JLabel lblTituloMasoGuapo = new JLabel("Titulo maso guapo");
+					JLabel lblTituloMasoGuapo = new JLabel(list.getSelectedValue().getTitle());
 					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
 					lblTituloMasoGuapo.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setColumnHeaderView(lblTituloMasoGuapo);
@@ -1818,6 +1828,9 @@ public class GUI {
 
 	public boolean addNews(String title, String body, Date date){
 		return true;
+	}
+	
+	public void fillNews(){
 	}
 
 

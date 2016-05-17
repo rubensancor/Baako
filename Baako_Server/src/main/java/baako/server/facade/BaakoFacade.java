@@ -125,6 +125,14 @@ public class BaakoFacade extends UnicastRemoteObject implements IBaakoManager{
 	public ArrayList<GameDTO> getUsersGames(PlainUserDTO user) throws RemoteException {
 		return app.getUserGames(user);
 	}
+
+	/* (non-Javadoc)
+	 * @see baako.server.manager.IBaakoManager#getAllNews()
+	 */
+	public ArrayList<NewsDTO> getAllNews() throws RemoteException {
+		logger.info("FACADE NEWS");
+		return app.getAllNews();
+	}
 	
 
 
