@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import baako.server.BaakoApp;
+import baako.server.database.News;
 import baako.server.dto.GameDTO;
 import baako.server.dto.NewsDTO;
 import baako.server.dto.PlainUserDTO;
@@ -124,6 +125,14 @@ public class BaakoFacade extends UnicastRemoteObject implements IBaakoManager{
 	 */
 	public ArrayList<GameDTO> getUsersGames(PlainUserDTO user) throws RemoteException {
 		return app.getUserGames(user);
+	}
+
+	/* (non-Javadoc)
+	 * @see baako.server.manager.IBaakoManager#getAllNews()
+	 */
+	public ArrayList<News> getAllNews() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

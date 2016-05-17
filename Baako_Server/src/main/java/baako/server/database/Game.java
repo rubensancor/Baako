@@ -11,6 +11,11 @@ import javax.jdo.annotations.PrimaryKey;
 import baako.server.dto.GameDTO;
 import baako.server.dto.UserDTO;
 
+/**
+ * @brief The class for games
+ * @author virum
+ *
+ */
 @PersistenceCapable(detachable="true")
 public class Game {
 
