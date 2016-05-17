@@ -14,11 +14,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
 		<policy.file>${basedir}/src/main/resources/security/java.policy</policy.file>
-<!--		<server.IP>127.0.0.1</server.IP> -->
-<!--		<server.IP>192.168.43.26</server.IP> -->
-		<server.IP>192.168.43.26</server.IP>
+		<!-- <server.IP>127.0.0.1</server.IP> -->
+		<!-- <server.IP>192.168.43.26</server.IP> -->
+		<server.IP>127.0.0.1</server.IP>
 		<server.port>1099</server.port>
 		<server.Name>BaakoServer</server.Name>
+		<doxygen.config.file>${basedir}/src/main/resources/Doxyfile</doxygen.config.file>
 	</properties>
 
 	<dependencies>
@@ -64,13 +65,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.17</version>
 		</dependency>
-		
-        <dependency>
-            <groupId>org.databene</groupId>
-            <artifactId>contiperf</artifactId>
-            <version>2.2.0</version>
-            <scope>test</scope>
-        </dependency>
+
+		<dependency>
+			<groupId>org.databene</groupId>
+			<artifactId>contiperf</artifactId>
+			<version>2.2.0</version>
+			<scope>test</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -88,28 +89,67 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<!-- http://mvnrepository.com/artifact/org.mockito/mockito-all -->
+		<dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-all</artifactId>
+		    <version>1.9.5</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>com.soebes.maven.plugins.dmg</groupId>
+				<artifactId>doxygen-maven-plugin</artifactId>
+				<version>1.0.1</version>
+				<configuration>
+					<configurationFile>${doxygen.config.file}</configurationFile>
+				</configuration>
+			</plugin>
+			<!--<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.5.2</version>
+				<version>2.6</version>
 				<configuration>
 					<formats>
 						<format>html</format>
 						<format>xml</format>
 					</formats>
 					<check>
+						<branchRate>85</branchRate>
+						<lineRate>85</lineRate>
+						<haltOnFailure>true</haltOnFailure>
+						<totalBranchRate>85</totalBranchRate>
+						<totalLineRate>85</totalLineRate>
+						<packageLineRate>85</packageLineRate>
+						<packageBranchRate>85</packageBranchRate>
 						<regexes>
 							<regex>
 								<pattern>baako.server.*</pattern>
+								<branchRate>70</branchRate>
+								<lineRate>70</lineRate>
 							</regex>
 						</regexes>
 					</check>
+				</configuration>	
+
+			</plugin>-->
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+				<instrumentation>
+					<excludes>
+						<exclude>baako/server/database/**/*.class</exclude>
+					</excludes>
+				</instrumentation>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>

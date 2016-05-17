@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import baako.client.controller.BaakoController;
 import baako.client.gui.GUI;
 import baako.server.dto.GameDTO;
+import baako.server.dto.NewsDTO;
 import baako.server.dto.PlainUserDTO;
 
 /**
@@ -28,6 +29,9 @@ public class Delegate_GUI extends GUI{
 		designers = new ArrayList<String>();
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.client.gui.GUI#fill()
+	 */
 	public void fill(){
 		logger.info("FILL");
 
@@ -53,6 +57,9 @@ public class Delegate_GUI extends GUI{
 	}
 
 
+	/* (non-Javadoc)
+	 * @see baako.client.gui.GUI#logIn(java.lang.String, java.lang.String)
+	 */
 	public boolean logIn(String username, String password){
 		user = controller.logIn(username, password);
 		if(user != null){
@@ -63,6 +70,9 @@ public class Delegate_GUI extends GUI{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.client.gui.GUI#register(java.lang.String, java.lang.String, java.lang.String, java.util.Date)
+	 */
 	public boolean  register(String email, String username, String password, Date date){
 		logger.info("VAMOS A REGISTRAR");
 		PlainUserDTO u = new PlainUserDTO(email, username, password, date, null, null);
@@ -71,6 +81,9 @@ public class Delegate_GUI extends GUI{
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.client.gui.GUI#addGame(java.lang.String, int, java.lang.String, int)
+	 */
 	public boolean addGame(String name, int price, String description, int pegi){
 		logger.info("ADDING A GAME CONTROLLER");
 		ArrayList<String> categories = new ArrayList<String>();
@@ -81,7 +94,15 @@ public class Delegate_GUI extends GUI{
 		GameDTO g = new GameDTO(name, price, description, pegi);
 		return controller.addGame(g);
 	}
+	
+	public boolean addNews(String title, String body, Date date){
+		NewsDTO n = new NewsDTO(title, body, date);
+		return controller.addNews(n);
+	}
 
+	/**
+	 * 
+	 */
 	public void categoriesToArray(){
 		if(categoryCBoxOpt1.getSelectedItem().toString()!=""){
 			categories.add(categoryCBoxOpt1.getSelectedItem().toString());
@@ -95,6 +116,10 @@ public class Delegate_GUI extends GUI{
 			categories.add(categoryCBoxOpt5.getSelectedItem().toString());
 		}
 	}
+	
+	/**
+	 * 
+	 */
 	public void designersToArray(){
 		if(designerCBoxOpt1.getSelectedItem().toString()!=""){
 			designers.add(designerCBoxOpt1.getSelectedItem().toString());
