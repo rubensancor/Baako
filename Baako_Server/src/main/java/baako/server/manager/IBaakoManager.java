@@ -93,8 +93,8 @@ public interface IBaakoManager extends Remote{
 	 */
 	public ArrayList<String> getAllDesigners() throws RemoteException;
 	
-	/**
-	 * @param n
+	/** Adds a piece of News to the database
+	 * @param n A {@link NewsDTO} with the data of the {@link News} to add to the database
 	 * @return
 	 * @throws RemoteException
 	 */
