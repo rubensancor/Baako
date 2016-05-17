@@ -506,6 +506,7 @@ public class BaakoDAO implements IBaakoDAO {
 	public void editGame(News new2) {
 		//TODO
 		//DAO magic
+		//editgame
 		pm = pmf.getPersistenceManager();
 		tx = pm.currentTransaction();
 		try{
