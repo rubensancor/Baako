@@ -115,4 +115,14 @@ public class BaakoController {
 		}
 	}
 
+	public ArrayList<NewsDTO> getAllNews(){
+		try{
+			logger.info(rmi.getService().getAllNews().get(0).getTitle());
+			return rmi.getService().getAllNews();
+		}catch(RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 }

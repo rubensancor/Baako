@@ -250,6 +250,8 @@ public class BaakoDAO implements IBaakoDAO {
 				categories.add(aux);
 			}
 			tx.commit();
+			// Esto tiene que estar aqui, porque sino por alguna fuerza que desconozco, casca
+			for (Category cat: categories) logger.info(cat.getName());
 			return categories;
 
 		}finally{
@@ -527,4 +529,37 @@ public class BaakoDAO implements IBaakoDAO {
 			pm.close();
 		}
 	}
+
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#getAllNews()
+	 */
+	public ArrayList<News> getAllNews() {
+		pm = pmf.getPersistenceManager();
+		tx = pm.currentTransaction();
+		ArrayList<News> news = new ArrayList<News>();
+		try{
+			tx.begin();
+			Extent<News> e = pm.getExtent(News.class,true);
+			Iterator<News> iter = e.iterator();
+			while (iter.hasNext())
+			{
+				News aux = (News) iter.next();
+				logger.info(aux.getTitle());
+				news.add(aux);
+			}
+			tx.commit();
+			// Esto tiene que estar aqui, porque sino por alguna fuerza que desconozco, casca
+			for (News news2 : news) news2.getTitle();
+			
+			return news;
+
+		}finally{
+			if(tx.isActive()){
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	
 }

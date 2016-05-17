@@ -3,6 +3,7 @@
  */
 package baako.server.dao;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import baako.server.database.Category;
 import baako.server.database.Designer;
@@ -82,6 +83,11 @@ public interface IBaakoDAO {
 		 * @return An ArrayList of {@link Designer} with all the designers
 		 */
 		public ArrayList<Designer> getAllDesigners();
+		
+		/**
+		 * @return
+		 */
+		public ArrayList<News> getAllNews();
 		
 		/** Retrieves a Game from the database, given the name
 		 * @param name A String with the name of the {@link Game} to retrieve
