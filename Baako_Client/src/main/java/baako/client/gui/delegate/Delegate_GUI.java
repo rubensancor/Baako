@@ -18,7 +18,6 @@ import baako.server.dto.PlainUserDTO;
  */
 public class Delegate_GUI extends GUI{
 
-	private BaakoController controller;
 	private ArrayList<String> categories = null;
 	private ArrayList<String> designers = null;
 

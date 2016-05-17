@@ -104,5 +104,15 @@ public class BaakoController {
 		}
 		return g;
 	}
+	
+	public ArrayList<GameDTO> searchGamesByCategory(String name){
+		ArrayList<GameDTO> g = new ArrayList<GameDTO>();
+		try {
+			g = rmi.getService().searchGamebyCategory(name);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return g;
+	}
 
 }

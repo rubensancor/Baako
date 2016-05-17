@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
+import javax.sound.midi.ControllerEventListener;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
@@ -26,6 +27,7 @@ import javax.swing.plaf.OptionPaneUI;
 
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import baako.client.controller.BaakoController;
 import baako.server.database.CardType;
 import baako.server.dto.PlainUserDTO;
 import net.sourceforge.jdatepicker.impl.UtilCalendarModel;
@@ -51,6 +53,7 @@ import javax.swing.SpringLayout;
 
 public class GUI {
 
+	protected BaakoController controller;
 	protected Logger logger = LoggerFactory.getLogger(GUI.class);
 	private JFrame frame;
 	private JTextField usernameField;
@@ -60,18 +63,20 @@ public class GUI {
 	protected JPasswordField pfpassField;
 	private JTextField nameField;
 	private JTextField priceField;
+	private JTextField searchfield;
 	protected JButton btnLogOut;
 	protected String user;
 	protected JLabel thumb;
 	protected boolean admin;
-
-	//private int state;
+	public int state;
 	/*0 = adminNews 
 	1 = userNews 
 	2 = adminGames
 	3 = userLibrary 
 	4 = userGames 
 	5 = userFriends*/
+
+
 	protected JComboBox<String> categoryCBox;
 	protected JComboBox<String> categoryCBoxOpt1;
 	protected JComboBox<String> categoryCBoxOpt2;
@@ -81,7 +86,7 @@ public class GUI {
 	protected JComboBox<String> designerCBox; 
 	protected JComboBox<String> designerCBoxOpt1; 
 	protected JComboBox<String> designerCBoxOpt2; 
-	protected JComboBox<String> designerCBoxOpt3; 
+	protected JComboBox<String> designerCBoxOpt3;
 
 
 	/**
@@ -109,6 +114,8 @@ public class GUI {
 	}
 
 	private void mainview() {
+		
+
 	
 		frame.setSize(741, 581);
 		frame.getContentPane().setLayout(null);
@@ -179,12 +186,44 @@ public class GUI {
 		mnMarket.setForeground(new Color(255, 255, 255));
 		mnMarket.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuBar.add(mnMarket);
+		
+		JMenu mnSearchGames = new JMenu("Search Games");
+		mnMarket.add(mnSearchGames);
+		
+		JMenu mnByCategory = new JMenu("By Category");
+		mnByCategory.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				mainPanel_1.remove(mainPanel_1.findComponentAt(574, 49));
+				state=6;
+				if(admin){searchviews(state, mainPanel_1);}else{searchviews(state, mainPanel_1);}
+				frame.repaint();
+				frame.revalidate();
+				mainPanel_1.findComponentAt(574, 49).repaint();				
+			}
+		});
+		mnSearchGames.add(mnByCategory);
+		
+		JMenu mnByDesigner = new JMenu("By Designer");
+		mnByDesigner.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mainPanel_1.remove(mainPanel_1.findComponentAt(574, 49));
+				state=7;
+				if(admin){searchviews(state, mainPanel_1);}else{searchviews(state, mainPanel_1);}
+				frame.repaint();
+				frame.revalidate();
+				mainPanel_1.findComponentAt(574, 49).repaint();
+				
+			}
+		});
+		mnSearchGames.add(mnByDesigner);
 		mnMarket.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//state=4;
+				
 				mainPanel_1.remove(mainPanel_1.findComponentAt(574, 49));
-				if(admin){menuchange(2, mainPanel_1);}else{menuchange(4, mainPanel_1);}
+				if(admin){ state=2; menuchange(state, mainPanel_1);}else{ state=4; menuchange(state, mainPanel_1);}
 				frame.repaint();
 				frame.revalidate();
 				mainPanel_1.findComponentAt(574, 49).repaint();
@@ -200,7 +239,7 @@ public class GUI {
 			public void mouseClicked(MouseEvent arg0) {
 				//state=3;
 				mainPanel_1.remove(mainPanel_1.findComponentAt(574, 49));
-				if(admin){menuchange(0, mainPanel_1);}else{menuchange(1, mainPanel_1);}
+				if(admin){state=0;menuchange(state, mainPanel_1);}else{state=1;menuchange(state, mainPanel_1);}
 				frame.repaint();
 				frame.revalidate();
 				mainPanel_1.findComponentAt(574, 49).repaint();
@@ -213,8 +252,9 @@ public class GUI {
 			public void mouseClicked(MouseEvent arg0) {
 				//state=5;
 				if(!admin){
+					state=5;
 					mainPanel_1.remove(mainPanel_1.findComponentAt(574, 49));
-					menuchange(5, mainPanel_1);
+					menuchange(state, mainPanel_1);
 					}else{
 						JOptionPane.showMessageDialog(frame, "View reserved to final users, administrators don't have acces to friend community");
 					}
@@ -262,7 +302,7 @@ public class GUI {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void menuchange(int state, final JPanel p){
+	private void menuchange(final int state, final JPanel p){
 		
 		//MAIN PANEL
 
@@ -869,11 +909,106 @@ public class GUI {
 			frame.revalidate();
 			p.repaint();
 			frame.repaint();
-			break;
-		}
+			break;			
+	}
 		frame.revalidate();
 		p.repaint();
 		frame.repaint();
+	}
+	
+	private void searchviews( final int state,final JPanel p){
+	switch(state){
+	
+	
+	//SEARCH BY CATEGORY MAINPANEL
+case 6:	
+
+	p.remove(p.findComponentAt(0,50));
+	
+	//RETURNING BACK TO THE LIST
+	final JScrollPane mainPanel7 = new JScrollPane();
+	mainPanel7.setBounds(0, 48, 574, 494);
+	p.add(mainPanel7);
+	
+
+	JPanel searchpanel = new JPanel();
+	mainPanel7.setViewportView(searchpanel);
+	searchpanel.setLayout(null);
+	
+	searchfield = new JTextField();
+	searchfield.setBounds(51, 172, 353, 61);
+	searchfield.setFont(new Font("Tahoma", Font.PLAIN, 24));
+	searchpanel.add(searchfield);
+	searchfield.setColumns(10);
+	
+	JLabel lblSearch = new JLabel("SEARCH BY CATEGORY");
+	lblSearch.setFont(new Font("Tahoma", Font.BOLD, 30));
+	lblSearch.setHorizontalAlignment(SwingConstants.CENTER);
+	lblSearch.setBounds(62, 77, 367, 44);
+	searchpanel.add(lblSearch);
+	
+	JButton searchButton = new JButton("");
+	searchButton.setIcon(new ImageIcon(this.getClass().getResource("/images/lup.png")));
+	searchButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			//Code to search games by category
+			controller.searchGamesByCategory(searchfield.getText());
+			menuchange(4, p);
+		}
+	});
+	searchButton.setBounds(438, 172, 89, 61);
+	searchpanel.add(searchButton);
+	
+	//addnewsview();
+	frame.revalidate();
+	p.repaint();
+	frame.repaint();
+	break;
+	
+	//SEARCH BY DESIGNER MAINPANEL
+case 7:	
+	
+	p.remove(p.findComponentAt(0,50));
+	
+	//RETURNING BACK TO THE LIST
+	final JScrollPane mainPanel8 = new JScrollPane();
+	mainPanel8.setBounds(0, 48, 574, 494);
+	p.add(mainPanel8);
+	
+	JPanel searchpanel2 = new JPanel();
+	mainPanel8.setViewportView(searchpanel2);
+	searchpanel2.setLayout(null);
+	
+	searchfield = new JTextField();
+	searchfield.setBounds(51, 172, 353, 61);
+	searchfield.setFont(new Font("Tahoma", Font.PLAIN, 24));
+	searchpanel2.add(searchfield);
+	searchfield.setColumns(10);
+	
+	JLabel lblSearch2 = new JLabel("SEARCH BY DESIGNER");
+	lblSearch2.setFont(new Font("Tahoma", Font.BOLD, 30));
+	lblSearch2.setHorizontalAlignment(SwingConstants.CENTER);
+	lblSearch2.setBounds(62, 77, 367, 44);
+	searchpanel2.add(lblSearch2);
+	
+	JButton searchButton2 = new JButton("");
+	searchButton2.setIcon(new ImageIcon(this.getClass().getResource("/images/lup.png")));
+	searchButton2.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			//Code to search games by designer
+			controller.searchGamesByCategory(searchfield.getText());
+			menuchange(4, p);	
+		}
+	});
+	searchButton2.setBounds(438, 172, 89, 61);
+	searchpanel2.add(searchButton2);
+	
+	//addnewsview();
+	frame.revalidate();
+	p.repaint();
+	frame.repaint();
+	break;
+	}
 	}
 		
 		
