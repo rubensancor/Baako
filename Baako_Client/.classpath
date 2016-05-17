@@ -24,10 +24,12 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry exported="true" kind="lib" path="lib/server-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j.jar"/>
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Adrian/Desktop/Baako/Baako_Client/lib/IBaako_Server.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
