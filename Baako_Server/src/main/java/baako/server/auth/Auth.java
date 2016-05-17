@@ -12,13 +12,10 @@ import baako.server.database.User;
 import baako.server.dto.PlainUserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
+
 /**
-<<<<<<< HEAD
  * @brief Class that hosts the logic for the register and the login functions
- * @author BaakoTeam
-=======
  * @author Baako-Team
->>>>>>> refs/remotes/origin/master
  *
  */
 public class Auth {
@@ -60,7 +57,7 @@ public class Auth {
 	}
 
 	/** <p>Method that registers a user</p>
-	 * 	<p>It checks if there is already a user with that name, if not it is registered.
+	 * 	<p>It checks if there is already a user with that name, if not it is registered.</p>
 	 * @param user {@link PlainUser} that wants to be registered
 	 * @return	<p>true - If it is registered</p>
 	 * 			<p>false - If it is not registered</p>

@@ -21,6 +21,12 @@ public class News {
 	private Date date;
 	private String description;
 	
+	/**
+	 * The constructor of the class
+	 * @param headline	The headline of the new
+	 * @param date		The date of the new
+	 * @param description The description of the new
+	 */
 	public News(String headline, Date  date, String description){
 		this.headline = headline;
 		this.date = date;
