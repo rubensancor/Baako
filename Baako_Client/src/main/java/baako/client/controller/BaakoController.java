@@ -5,9 +5,10 @@ package baako.client.controller;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
+import java.util.Date;
 import baako.client.remote.RMIServiceLocator;
 import baako.server.dto.GameDTO;
+import baako.server.dto.NewsDTO;
 import baako.server.dto.PlainUserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
@@ -103,6 +104,15 @@ public class BaakoController {
 			e.printStackTrace();
 		}
 		return g;
+	}
+	
+	public boolean addNews(NewsDTO n){
+		try {
+			return rmi.getService().addNews(n);
+		} catch(RemoteException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

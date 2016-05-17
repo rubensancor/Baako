@@ -353,6 +353,7 @@ public class BaakoDAO implements IBaakoDAO {
 		pm = pmf.getPersistenceManager();
 		tx = pm.currentTransaction();
 		try{
+			//DO NOT EDIT THIS!
 			tx.begin();
 			Query query = pm.newQuery("SELECT FROM "+PlainUser.class.getName()+" WHERE username=='"+u.getName()+"'");
 			query.setUnique(true);
@@ -363,7 +364,7 @@ public class BaakoDAO implements IBaakoDAO {
 			PlainUser aux2 = (PlainUser) query2.execute();
 			PlainUser det = pm.detachCopy(aux2);
 			logger.info("AFTER");
-			aux.addFriend(det);
+			aux.addFriend(aux2);
 			logger.info("SI");
 			tx.commit();
 			//			pm.makePersistent(u2);
@@ -468,6 +469,56 @@ public class BaakoDAO implements IBaakoDAO {
 			}
 			tx.commit();
 			return games;
+
+		}finally{
+			if(tx.isActive()){
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#editGame(java.lang.String)
+	 */
+	public void editGame(Game game) {
+		//TODO
+		//DAO magic
+				pm = pmf.getPersistenceManager();
+				tx = pm.currentTransaction();
+				try{
+					tx.begin();
+					Query query = pm.newQuery("SELECT FROM "+Game.class.getName()+" WHERE name=='"+game.getName()+"'");
+					query.setUnique(true);
+					Game gaux = (Game) query.execute();
+					Game det = pm.detachCopy(gaux);
+					det.setPrice(game.getPrice());
+					det.setPEGI(game.getPEGI());
+					det.setDescription(game.getDescription());
+					
+				}finally{
+					if(tx.isActive()){
+						tx.rollback();
+					}
+					pm.close();
+				}
+	}
+	
+	public void editGame(News new2) {
+		//TODO
+		//DAO magic
+		//editgame
+		pm = pmf.getPersistenceManager();
+		tx = pm.currentTransaction();
+		try{
+			tx.begin();
+			Query query = pm.newQuery("SELECT FROM "+News.class.getName()+" WHERE title=='"+new2.getTitle()+"'");
+			query.setUnique(true);
+			News gaux = (News) query.execute();
+			News det = pm.detachCopy(gaux);
+			det.setTitle(new2.getTitle());
+			det.setDate(new2.getDate());
+			det.setBody(new2.getBody());
 
 		}finally{
 			if(tx.isActive()){
