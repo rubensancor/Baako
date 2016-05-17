@@ -6,9 +6,12 @@ package baako.server.manager;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashSet;
+
 import baako.server.dto.GameDTO;
 import baako.server.dto.NewsDTO;
 import baako.server.dto.PlainUserDTO;
+import baako.server.dto.UserDTO;
 
 /**
  * @brief Interface with all the methods that the Client is able to use
@@ -99,6 +102,14 @@ public interface IBaakoManager extends Remote{
 	 * @throws RemoteException
 	 */
 	public boolean addNews(NewsDTO n) throws RemoteException;
+	
+	/**
+	 * Retrieves all the games of the user
+	 * @param user The user that wants to retrieve the games
+	 * @return An Arraylist of games
+	 * @throws RemoteException
+	 */
+	public ArrayList<GameDTO> getUsersGames(PlainUserDTO user) throws RemoteException;
 	
 	/*TODO: 
 

@@ -2,8 +2,6 @@ package baako.server;
 
 import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
-import java.util.Date;
-import java.util.HashSet;
 
 import baako.server.dao.BaakoDAO;
 import baako.server.dao.IBaakoDAO;
@@ -13,19 +11,18 @@ import baako.server.facade.BaakoFacade;
 import baako.server.manager.IBaakoManager;
 
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import baako.server.assemblers.Assembler;
 import baako.server.auth.Auth;
 import baako.server.database.Category;
 import baako.server.database.Designer;
-import baako.server.database.Game;
-import baako.server.database.PlainUser;
 import baako.server.database.Wallet;
 import baako.server.dto.GameDTO;
 import baako.server.dto.NewsDTO;
 import baako.server.dto.PlainUserDTO;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
 
@@ -217,6 +214,19 @@ public class BaakoApp {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @param user
+	 * @return
+	 */
+	public ArrayList<GameDTO> getUserGames(PlainUserDTO user) {
+		HashSet<Game> games = (HashSet<Game>) Assembler.getInstance().assemble(user).getGames();
+		ArrayList<GameDTO> dto = new ArrayList<GameDTO>();
+		for (Game game : games) {
+			dto.add(Assembler.getInstance().assemble(game));
+		}
+		return dto;
 	}
 
 

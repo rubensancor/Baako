@@ -150,7 +150,7 @@ public class PlainUser extends User {
 	 */
 	@Override
 	public String toString() {
-		return "User: "+name;
+		return "User: "+username;
 	}
 	
 	
