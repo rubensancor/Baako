@@ -503,7 +503,7 @@ public class BaakoDAO implements IBaakoDAO {
 					pm.close();
 				}
 	}
-<<<<<<< Upstream, based on origin/master
+	
 	public void editGame(News new2) {
 		//TODO
 		//DAO magic
@@ -527,13 +527,4 @@ public class BaakoDAO implements IBaakoDAO {
 			pm.close();
 		}
 	}
-
-
-
-
-
-=======
-	
-	
->>>>>>> a777540 Merged GUI
 }
