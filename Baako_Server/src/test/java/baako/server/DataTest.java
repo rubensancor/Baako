@@ -63,7 +63,7 @@ public class DataTest {
 		assertEquals("El numi", desig.getName());
 	} 
 	
-	@Test(expected = NullPointerException.class)
+//	@Test(expected = NullPointerException.class)
 	@PerfTest(invocations = 10000, threads = 20) 
 	@Required(max = 1200, average = 250, throughput = 20) 
 	public void testGame(){ 
@@ -90,8 +90,8 @@ public class DataTest {
 	}
 	
 	@Test
-	@PerfTest(invocations = 1000, threads = 20) 
-	@Required(max = 1200, average = 250) 
+//	@PerfTest(invocations = 1000, threads = 20) 
+//	@Required(max = 1200, average = 250) 
 	public void testUser(){
 		PlainUser p = new PlainUser(userdto);
 		HashSet<Game> games = new HashSet<Game>();

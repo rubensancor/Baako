@@ -5,7 +5,6 @@ package baako.client.controller;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Date;
 import baako.client.remote.RMIServiceLocator;
 import baako.server.dto.GameDTO;
 import baako.server.dto.NewsDTO;
@@ -31,14 +30,14 @@ public class BaakoController {
 		this.rmi = rmi;
 	}
 
-	public String logIn(String username, String password){
+	public PlainUserDTO logIn(String username, String password){
 		try {
 			logger.info("Controller----> ");
 			logger.info("Username---> "+username);
 			logger.info("Password---> "+password);
 			user = rmi.getService().checkUserInfo(username, password);
 			logger.info(user.getEmail());
-			return user.getName();
+			return user;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -50,7 +49,7 @@ public class BaakoController {
 			logger.info("Register");
 			logger.info("Username---> "+u.getName());
 			logger.info("Password---> "+u.getPassword());
-			
+
 			if(rmi.getService().register(u)){
 				logger.info("PASOTERE");
 				return true;
@@ -62,7 +61,7 @@ public class BaakoController {
 			return false;
 		}
 	}
-	
+
 	public boolean addGame(GameDTO game){
 		try{
 			logger.info("Adding game");
@@ -83,7 +82,7 @@ public class BaakoController {
 			return null;
 		}
 	}
-	
+
 	/**  
 	 * @return
 	 */
@@ -95,7 +94,7 @@ public class BaakoController {
 			return null;
 		}
 	}
-	
+
 	public GameDTO searchGame(String name){
 		GameDTO g =null;
 		try {
@@ -105,7 +104,7 @@ public class BaakoController {
 		}
 		return g;
 	}
-	
+
 	public boolean addNews(NewsDTO n){
 		try {
 			return rmi.getService().addNews(n);
@@ -117,12 +116,44 @@ public class BaakoController {
 
 	public ArrayList<NewsDTO> getAllNews(){
 		try{
-			logger.info(rmi.getService().getAllNews().get(0).getTitle());
 			return rmi.getService().getAllNews();
 		}catch(RemoteException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
-	
+
+	/**
+	 * @return
+	 */
+	public ArrayList<GameDTO> getAllGames() {
+		try{
+			return rmi.getService().getAllGames();
+		}catch(RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public boolean buy(GameDTO game){
+		try {
+			return rmi.getService().buyGame(game, user);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	/**
+	 * @return
+	 */
+	public ArrayList<GameDTO> getUserGames() {
+		try{
+			return rmi.getService().getUsersGames(user);
+		}catch(RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

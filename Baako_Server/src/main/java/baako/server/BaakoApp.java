@@ -3,8 +3,6 @@ package baako.server;
 import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
 
-import baako.server.dao.BaakoDAO;
-import baako.server.dao.IBaakoDAO;
 import baako.server.database.Game;
 import baako.server.database.News;
 import baako.server.database.PlainUser;
@@ -17,6 +15,8 @@ import java.util.HashSet;
 
 import baako.server.assemblers.Assembler;
 import baako.server.auth.Auth;
+import baako.server.dao.BaakoDAO;
+import baako.server.dao.IBaakoDAO;
 import baako.server.database.Category;
 import baako.server.database.Designer;
 import baako.server.database.Wallet;
@@ -59,8 +59,8 @@ public class BaakoApp {
 	public boolean register(PlainUserDTO user) throws RemoteException {
 		logger.info("Registering user...");
 		System.out.println(user.getEmail());
-		System.out.println(Assembler.getInstance().assemble(user));
-		return auth.register(Assembler.getInstance().assemble(user));
+		System.out.println(Assembler.getInstance().disassemble(user));
+		return auth.register(Assembler.getInstance().disassemble(user));
 	}
 
 	public boolean launchGame() throws RemoteException{
@@ -70,7 +70,7 @@ public class BaakoApp {
 
 	public boolean addWallet(int cardNumber, PlainUserDTO u) throws RemoteException{
 		Wallet w = new Wallet(cardNumber);
-		PlainUser user = Assembler.getInstance().assemble(u);
+		PlainUser user = Assembler.getInstance().disassemble(u);
 		dao.addWallet(w , user);
 		return true;
 	}
@@ -116,8 +116,8 @@ public class BaakoApp {
 	}
 
 	public boolean buyGame(GameDTO g, PlainUserDTO u) throws RemoteException {
-		Game game = dao.searchGame(Assembler.getInstance().disassemble(g).getName());
-		PlainUser user = Assembler.getInstance().assemble(u);
+		Game game = Assembler.getInstance().disassemble(g);
+		PlainUser user = Assembler.getInstance().disassemble(u);
 		if(user.pay(game.getPrice()))
 			dao.buyGame(game, user);
 		return true;
@@ -215,8 +215,6 @@ public class BaakoApp {
 			//			dao.addGame(g);
 
 			//			dao.buyGame(g, a);
-
-			logger.info("asdfasdf");
 			Naming.rebind(serverName, manager);
 			logger.info(serverName+ " active and waiting...");
 			java.io.InputStreamReader inputStreamReader = new java.io.InputStreamReader ( System.in );
@@ -232,12 +230,24 @@ public class BaakoApp {
 	 * @return
 	 */
 	public ArrayList<GameDTO> getUserGames(PlainUserDTO user) {
-		HashSet<Game> games = (HashSet<Game>) Assembler.getInstance().assemble(user).getGames();
-		ArrayList<GameDTO> dto = new ArrayList<GameDTO>();
-		for (Game game : games) {
-			dto.add(Assembler.getInstance().assemble(game));
+		return new ArrayList<GameDTO>(user.getGames());
+	}
+
+	/**
+	 * @return
+	 */
+	public ArrayList<GameDTO> getAllGames() {
+		ArrayList<Game> aux = dao.getAllGames();
+		ArrayList<GameDTO> aux2 = new ArrayList<GameDTO>();
+		for (Game game : aux) {
+			logger.info(game.getName());
+			logger.info(game.getDescription());
+			logger.info(Integer.toString(game.getPEGI()));
+			logger.info(Float.toString(game.getPrice()));
+			aux2.add(Assembler.getInstance().assemble(game));
 		}
-		return dto;
+		logger.info(aux.get(0).getName());
+		return aux2;
 	}
 
 

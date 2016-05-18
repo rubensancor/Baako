@@ -74,7 +74,7 @@ public class Assembler {
 	 *            Serializable
 	 * @return The DTO version of the PlainUser given
 	 */
-	public PlainUser assemble(PlainUserDTO u) {
+	public PlainUser disassemble(PlainUserDTO u) {
 		return new PlainUser(u);
 	}
 
@@ -85,7 +85,7 @@ public class Assembler {
 	 *            The PlainUserDTO you want to disassemble
 	 * @return The normal version of the PlainUserDTO given
 	 */
-	public PlainUserDTO disassemble(PlainUser u) {
+	public PlainUserDTO assemble(PlainUser u) {
 		return new PlainUserDTO(u);
 	}
 		

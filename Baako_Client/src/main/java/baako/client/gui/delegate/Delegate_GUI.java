@@ -25,12 +25,15 @@ public class Delegate_GUI extends GUI{
 	private BaakoController controller;
 	private ArrayList<String> categories = null;
 	private ArrayList<String> designers = null;
+	private ArrayList<String> admins = new ArrayList<String>();
 
 
 	public Delegate_GUI(BaakoController controller){
 		this.controller = controller;
 		categories = new ArrayList<String>();
 		designers = new ArrayList<String>();
+		admins.add("gaizka");
+		admins.add("carlos");
 	}
 
 	/* (non-Javadoc)
@@ -58,24 +61,38 @@ public class Delegate_GUI extends GUI{
 			designerCBoxOpt2.addItem(string);
 			designerCBoxOpt3.addItem(string);
 		}
+
+		logger.info("Out of fill");
 	}
 
-/* (non-Javadoc)
- * @see baako.client.gui.GUI#fillNews()
- */
-public void fillNews(){
-	logger.info("FILLING NEWS");
-	logger.info(controller.getAllNews().get(0).getTitle());
-	values = controller.getAllNews();
-	
-}
-	
+	/* (non-Javadoc)
+	 * @see baako.client.gui.GUI#fillNews()
+	 */
+	public void fillNews(){
+		logger.info("FILLING NEWS");
+		news = controller.getAllNews();
+	}
+
+	public void fillGames(){
+		logger.info("FILLING GAMES");
+		games = controller.getAllGames();
+	}
+
+	public void fillOwned(){
+		logger.info("FILLING Owned");
+		owned = controller.getUserGames();
+	}
+
+
+
 	/* (non-Javadoc)
 	 * @see baako.client.gui.GUI#logIn(java.lang.String, java.lang.String)
 	 */
 	public boolean logIn(String username, String password){
 		user = controller.logIn(username, password);
 		if(user != null){
+			if(admins.contains(user.getName())) admin = true; 
+			else admin = false;
 			return true;
 		}else{
 			new JOptionPane("ERROR IN THE LOGIN",1);
@@ -105,11 +122,13 @@ public void fillNews(){
 		categoriesToArray();
 		designersToArray();
 		GameDTO g = new GameDTO(name, price, description, pegi);
+		games.add(g);
 		return controller.addGame(g);
 	}
-	
+
 	public boolean addNews(String title, String body, Date date){
 		NewsDTO n = new NewsDTO(title, body, date);
+		news.add(n);
 		return controller.addNews(n);
 	}
 
@@ -129,7 +148,7 @@ public void fillNews(){
 			categories.add(categoryCBoxOpt5.getSelectedItem().toString());
 		}
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -143,5 +162,17 @@ public void fillNews(){
 		}
 	}
 
+	public boolean buy(){
+		if(!owned.contains(listGames.getSelectedValue()))
+			if(controller.buy(listGames.getSelectedValue())){
+				owned.add(listGames.getSelectedValue());
+				return true;
+			} else
+				return false;
+		else{
+			new JOptionPane("Already own that game", 1);
+			return false;
+		}
+	}
 
 }

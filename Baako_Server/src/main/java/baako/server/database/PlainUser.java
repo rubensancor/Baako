@@ -9,6 +9,9 @@ import javax.jdo.annotations.Element;
 import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
+
+import baako.server.assemblers.Assembler;
+import baako.server.dto.GameDTO;
 import baako.server.dto.PlainUserDTO;
 
 /**
@@ -72,8 +75,12 @@ public class PlainUser extends User {
 	 */
 	public PlainUser(PlainUserDTO u) {
 		super(u.getEmail(), u.getName(), u.getPassword(), u.getBirthdate());
-		this.friends = u.getFriends();
-		this.games = u.getGames();
+		for (PlainUserDTO friend : u.getFriends()) {
+			this.friends.add(Assembler.getInstance().disassemble(friend));
+		}
+		for (GameDTO game: u.getGames()) {
+			this.games.add(Assembler.getInstance().disassemble(game));
+		}
 	}
 
 	/**
@@ -91,6 +98,7 @@ public class PlainUser extends User {
 	 * @param g the game to add
 	 */
 	public void addGame(Game g){
+		if(!games.contains(g))
 		this.games.add(g);
 	}
 

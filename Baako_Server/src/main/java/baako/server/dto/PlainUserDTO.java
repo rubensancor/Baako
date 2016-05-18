@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import baako.server.assemblers.Assembler;
 import baako.server.database.Game;
 import baako.server.database.PlainUser;
 /**
@@ -16,11 +17,11 @@ public class PlainUserDTO extends UserDTO implements Serializable{
 	private static final long serialVersionUID = -6344367997349054739L;
 	
 	
-	private Set<PlainUser> friends = new HashSet<PlainUser>();
-	private Set<Game> games = new HashSet<Game>();
+	private Set<PlainUserDTO> friends;
+	private Set<GameDTO> games;
 
-	public PlainUserDTO(String email, String name, String password, Date birthdate, Set<PlainUser> friends,
-			Set<Game> games) {
+	public PlainUserDTO(String email, String name, String password, Date birthdate, Set<PlainUserDTO> friends,
+			Set<GameDTO> games) {
 		super(email, name, password, birthdate);
 		this.friends = friends;
 		this.games = games;
@@ -28,14 +29,18 @@ public class PlainUserDTO extends UserDTO implements Serializable{
 	
 	public PlainUserDTO(PlainUser u) {
 		super(u);
-		this.friends = u.getFriends();
-		this.games = u.getGames();
+		for (PlainUser friend : u.getFriends()) {
+			this.friends.add(Assembler.getInstance().assemble(friend));
+		}
+		for (Game game: u.getGames()) {
+			this.games.add(Assembler.getInstance().assemble(game));
+		}
 	}
 	
 	public PlainUserDTO(String email, String name, String password, Date birthdate) {
 		super(email, name, password, birthdate);
-		this.friends = null;
-		this.games = null;
+		this.friends  = new HashSet<PlainUserDTO>();
+		this.games = new HashSet<GameDTO>();
 	}
 
 	public String getEmail() {
@@ -56,22 +61,22 @@ public class PlainUserDTO extends UserDTO implements Serializable{
 	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
 	}
-	public Set<PlainUser> getFriends() {
+	public Set<PlainUserDTO> getFriends() {
 		return friends;
 	}
-	public void setFriends(Set<PlainUser> friends) {
+	public void setFriends(Set<PlainUserDTO> friends) {
 		this.friends = friends;
 	}
 	/**
 	 * @return the games
 	 */
-	public Set<Game> getGames() {
+	public Set<GameDTO> getGames() {
 		return games;
 	}
 	/**
 	 * @param games the games to set
 	 */
-	public void setGames(Set<Game> games) {
+	public void setGames(Set<GameDTO> games) {
 		this.games = games;
 	}
 

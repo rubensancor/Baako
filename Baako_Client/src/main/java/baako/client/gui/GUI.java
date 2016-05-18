@@ -32,7 +32,9 @@ import org.slf4j.LoggerFactory;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import baako.server.database.CardType;
+import baako.server.dto.GameDTO;
 import baako.server.dto.NewsDTO;
+import baako.server.dto.PlainUserDTO;
 import net.sourceforge.jdatepicker.impl.UtilCalendarModel;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
@@ -61,10 +63,13 @@ public class GUI {
 	private JTextField nameField;
 	private JTextField priceField;
 	protected JButton btnLogOut;
-	protected String user;
+	protected PlainUserDTO user;
 	protected JLabel thumb;
 	protected boolean admin;
-	protected ArrayList<NewsDTO> values;
+	protected ArrayList<NewsDTO> news;
+	protected ArrayList<GameDTO> games;
+	protected ArrayList<GameDTO> owned;
+	boolean filled;
 
 	//private int state;
 	/*0 = adminNews 
@@ -83,7 +88,9 @@ public class GUI {
 	protected JComboBox<String> designerCBoxOpt1; 
 	protected JComboBox<String> designerCBoxOpt2; 
 	protected JComboBox<String> designerCBoxOpt3; 
-	protected JList<NewsDTO> list;
+	protected JList<NewsDTO> listNews;
+	protected JList<GameDTO> listGames;
+	protected JList<GameDTO> listOwned;
 
 
 	/**
@@ -102,7 +109,7 @@ public class GUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setLocation(200, 100);
-		admin=true;
+		filled = false;
 		//frame.setBounds(100, 100, 450, 300);
 		//frame.setResizable(false);
 		loginview();
@@ -249,8 +256,16 @@ public class GUI {
 			}
 		});
 		logoutPanel.add(btnLogOut);
+		logger.info("Pre-"+Boolean.toString(filled));
+		if (!filled) {
+			fillGames();
+			fillNews();
+			fillOwned();
+			filled = true;
+		}
+		logger.info("Post"+Boolean.toString(filled));
 		frame.repaint();
-
+		
 		//MAIN PANEL
 		//		final JScrollPane mainPanel = new JScrollPane();
 		//		mainPanel.setBounds(0, 48, 574, 494);
@@ -261,24 +276,29 @@ public class GUI {
 	private void menuchange(int state, final JPanel p){
 
 		//LIST OF ELEMENTS IN MAINVIEW
+		switch (state) {
+		case 0:case 1:
+			listNews = new JList(news.toArray());
+			listNews.setBackground(Color.LIGHT_GRAY);
+			listNews.setVisibleRowCount(20);
+			listNews.setFont(new Font("Tahoma", Font.PLAIN, 32));
+			break;
+		case 2:case 4:
+			listGames = new JList(games.toArray());
+			listGames.setBackground(Color.LIGHT_GRAY);
+			listGames.setVisibleRowCount(20);
+			listGames.setFont(new Font("Tahoma", Font.PLAIN, 32));
+			break;
+		case 3: 
+			listOwned = new JList(owned.toArray());
+			listOwned.setBackground(Color.LIGHT_GRAY);
+			listOwned.setVisibleRowCount(20);
+			listOwned.setFont(new Font("Tahoma", Font.PLAIN, 32));
+			break;
 
-		fillNews();
-		list = new JList(values.toArray());
-		list.setBackground(Color.LIGHT_GRAY);
-		list.setVisibleRowCount(20);
-		list.setFont(new Font("Tahoma", Font.PLAIN, 32));
-//		list.setModel(new AbstractListModel() {
-//			private static final long serialVersionUID = -7603622508164614421L;
-//			//List for example view, insert db values later in logic
-//			
-//			public int getSize() {
-//				return values.size();
-//			}
-//			public NewsDTO getElementAt(int index) {
-//				return values.get(index);
-//			}
-//		});		
-
+		default:
+			break;
+		}
 		final JPanel optionPanel = new JPanel();
 		optionPanel.setBackground(new Color(105, 105, 105));
 		optionPanel.setBounds(574, 49, 151, 493);
@@ -361,14 +381,14 @@ public class GUI {
 
 					//BODY OF THE ARTICLE
 					JTextArea txtr = new JTextArea();
-					txtr.setText(list.getSelectedValue().getBody());
+					txtr.setText(listNews.getSelectedValue().getBody());
 
 					final JScrollPane mainPanel = new JScrollPane(txtr);
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);	
 
 					//TITLE OF THE ARTICLE
-					JLabel lblTituloMasoGuapo = new JLabel(list.getSelectedValue().getTitle());
+					JLabel lblTituloMasoGuapo = new JLabel(listNews.getSelectedValue().getTitle());
 					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
 					lblTituloMasoGuapo.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setColumnHeaderView(lblTituloMasoGuapo);
@@ -404,9 +424,9 @@ public class GUI {
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);
 
-					DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
+					DefaultListCellRenderer renderer = (DefaultListCellRenderer) listNews.getCellRenderer();
 					renderer.setHorizontalAlignment(SwingConstants.CENTER);
-					mainPanel.setViewportView(list);
+					mainPanel.setViewportView(listNews);
 
 					frame.revalidate();
 					p.repaint();
@@ -425,9 +445,9 @@ public class GUI {
 			mainPanel.setBounds(0, 48, 574, 494);
 			p.add(mainPanel);
 
-			DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
+			DefaultListCellRenderer renderer = (DefaultListCellRenderer) listNews.getCellRenderer();
 			renderer.setHorizontalAlignment(SwingConstants.CENTER);
-			mainPanel.setViewportView(list);
+			mainPanel.setViewportView(listNews);
 
 			frame.revalidate();
 			p.repaint();
@@ -456,14 +476,14 @@ public class GUI {
 
 					//BODY OF THE ARTICLE
 					JTextArea txtr = new JTextArea();
-					txtr.setText(list.getSelectedValue().getBody());
+					txtr.setText(listNews.getSelectedValue().getBody());
 
 					final JScrollPane mainPanel = new JScrollPane(txtr);
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);	
 
 					//TITLE OF THE ARTICLE
-					JLabel lblTituloMasoGuapo = new JLabel(list.getSelectedValue().getTitle());
+					JLabel lblTituloMasoGuapo = new JLabel(listNews.getSelectedValue().getTitle());
 					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
 					lblTituloMasoGuapo.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setColumnHeaderView(lblTituloMasoGuapo);
@@ -496,9 +516,9 @@ public class GUI {
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);
 
-					DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
+					DefaultListCellRenderer renderer = (DefaultListCellRenderer) listNews.getCellRenderer();
 					renderer.setHorizontalAlignment(SwingConstants.CENTER);
-					mainPanel.setViewportView(list);
+					mainPanel.setViewportView(listNews);
 
 					frame.revalidate();
 					p.repaint();
@@ -516,9 +536,9 @@ public class GUI {
 			mainPanel6.setBounds(0, 48, 574, 494);
 			p.add(mainPanel6);
 
-			DefaultListCellRenderer renderer6 = (DefaultListCellRenderer) list.getCellRenderer();
+			DefaultListCellRenderer renderer6 = (DefaultListCellRenderer) listNews.getCellRenderer();
 			renderer6.setHorizontalAlignment(SwingConstants.CENTER);
-			mainPanel6.setViewportView(list);
+			mainPanel6.setViewportView(listNews);
 
 			frame.revalidate();
 			p.repaint();
@@ -582,16 +602,16 @@ public class GUI {
 
 					p.remove(p.findComponentAt(0,50));
 
-					//BOD OF THE ARTICLE
+					//BODY OF THE ARTICLE
 					JTextArea txtr = new JTextArea();
-					txtr.setText("Bua esto esta todo guapo porque es una news to importante sobre el \r\nUncharted y asi que esta to wapo y nathan se muere como Jon Nieve");
+					txtr.setText(listGames.getSelectedValue().getDescription());
 
 					final JScrollPane mainPanel = new JScrollPane(txtr);
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);	
 
 					//TITLE OF THE ARTICLE
-					JLabel lblTituloMasoGuapo = new JLabel("Titulo maso guapo");
+					JLabel lblTituloMasoGuapo = new JLabel(listGames.getSelectedValue().getName());
 					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
 					lblTituloMasoGuapo.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setColumnHeaderView(lblTituloMasoGuapo);
@@ -626,9 +646,9 @@ public class GUI {
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);
 
-					DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
+					DefaultListCellRenderer renderer = (DefaultListCellRenderer) listGames.getCellRenderer();
 					renderer.setHorizontalAlignment(SwingConstants.CENTER);
-					mainPanel.setViewportView(list);
+					mainPanel.setViewportView(listGames);
 					//addnewsview();
 				}
 			});
@@ -642,9 +662,9 @@ public class GUI {
 			mainPanel5.setBounds(0, 48, 574, 494);
 			p.add(mainPanel5);
 
-			DefaultListCellRenderer renderer5 = (DefaultListCellRenderer) list.getCellRenderer();
+			DefaultListCellRenderer renderer5 = (DefaultListCellRenderer) listGames.getCellRenderer();
 			renderer5.setHorizontalAlignment(SwingConstants.CENTER);
-			mainPanel5.setViewportView(list);
+			mainPanel5.setViewportView(listGames);
 
 			frame.revalidate();
 			p.repaint();
@@ -676,9 +696,9 @@ public class GUI {
 			mainPanel4.setBounds(0, 48, 574, 494);
 			p.add(mainPanel4);
 
-			DefaultListCellRenderer renderer4 = (DefaultListCellRenderer) list.getCellRenderer();
+			DefaultListCellRenderer renderer4 = (DefaultListCellRenderer) listOwned.getCellRenderer();
 			renderer4.setHorizontalAlignment(SwingConstants.CENTER);
-			mainPanel4.setViewportView(list);
+			mainPanel4.setViewportView(listOwned);
 
 			frame.revalidate();
 			p.repaint();
@@ -698,8 +718,7 @@ public class GUI {
 			btnBuy.addActionListener(new ActionListener() {
 
 				public void actionPerformed(ActionEvent e) {
-
-					//addnewsview();
+					buy();
 				}
 			});
 			btnBuy.setEnabled(false);
@@ -739,16 +758,16 @@ public class GUI {
 
 					p.remove(p.findComponentAt(0,50));
 
-					//BOD OF THE ARTICLE
+					//BODY OF THE ARTICLE
 					JTextArea txtr = new JTextArea();
-					txtr.setText("Bua esto esta todo guapo porque es una news to importante sobre el \r\nUncharted y asi que esta to wapo y nathan se muere como Jon Nieve");
+					txtr.setText(listGames.getSelectedValue().getDescription());
 
 					final JScrollPane mainPanel = new JScrollPane(txtr);
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);	
 
 					//TITLE OF THE ARTICLE
-					JLabel lblTituloMasoGuapo = new JLabel("Titulo maso guapo");
+					JLabel lblTituloMasoGuapo = new JLabel(listGames.getSelectedValue().getName());
 					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
 					lblTituloMasoGuapo.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setColumnHeaderView(lblTituloMasoGuapo);
@@ -783,9 +802,9 @@ public class GUI {
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);
 
-					DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
+					DefaultListCellRenderer renderer = (DefaultListCellRenderer) listGames.getCellRenderer();
 					renderer.setHorizontalAlignment(SwingConstants.CENTER);
-					mainPanel.setViewportView(list);
+					mainPanel.setViewportView(listGames);
 					//addnewsview();
 				}
 			});
@@ -799,9 +818,9 @@ public class GUI {
 			mainPanel2.setBounds(0, 48, 574, 494);
 			p.add(mainPanel2);
 
-			DefaultListCellRenderer renderer2 = (DefaultListCellRenderer) list.getCellRenderer();
+			DefaultListCellRenderer renderer2 = (DefaultListCellRenderer) listGames.getCellRenderer();
 			renderer2.setHorizontalAlignment(SwingConstants.CENTER);
-			mainPanel2.setViewportView(list);
+			mainPanel2.setViewportView(listGames);
 			frame.revalidate();
 			p.repaint();
 			frame.repaint();
@@ -849,9 +868,9 @@ public class GUI {
 			mainPanel3.setBounds(0, 48, 574, 494);
 			p.add(mainPanel3);
 
-			DefaultListCellRenderer renderer3 = (DefaultListCellRenderer) list.getCellRenderer();
+			DefaultListCellRenderer renderer3 = (DefaultListCellRenderer) listNews.getCellRenderer();
 			renderer3.setHorizontalAlignment(SwingConstants.CENTER);
-			mainPanel3.setViewportView(list);
+			mainPanel3.setViewportView(listNews);
 			//addnewsview();
 			frame.revalidate();
 			p.repaint();
@@ -1320,7 +1339,6 @@ public class GUI {
 				}
 			}
 		});
-		fill();
 		frame.repaint();
 		frame.revalidate();
 	}
@@ -1829,9 +1847,18 @@ public class GUI {
 	public boolean addNews(String title, String body, Date date){
 		return true;
 	}
-	
+
 	public void fillNews(){
 	}
+
+	public void fillGames(){
+	}
+	public void fillOwned(){
+	}
+	
+	public boolean buy(){
+		return true;}
+
 
 
 	/**
