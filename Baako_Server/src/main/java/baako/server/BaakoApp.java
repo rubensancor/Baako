@@ -230,6 +230,9 @@ public class BaakoApp {
 	 * @return
 	 */
 	public ArrayList<GameDTO> getUserGames(PlainUserDTO user) {
+		/*
+		 * TODO: esto da fallo, cuando viene de fillOwned() se queda atascado y no vuelve :(
+		 */
 		return new ArrayList<GameDTO>(user.getGames());
 	}
 

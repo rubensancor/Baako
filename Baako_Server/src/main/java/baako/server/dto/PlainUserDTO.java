@@ -67,6 +67,7 @@ public class PlainUserDTO extends UserDTO implements Serializable{
 	public void setFriends(Set<PlainUserDTO> friends) {
 		this.friends = friends;
 	}
+	
 	/**
 	 * @return the games
 	 */
