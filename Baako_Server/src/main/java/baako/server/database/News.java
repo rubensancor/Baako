@@ -11,6 +11,7 @@ import javax.jdo.annotations.PrimaryKey;
 import baako.server.dto.NewsDTO;
 
 /**
+ * @brief The News class
  * @author Baako-Team
  *
  */

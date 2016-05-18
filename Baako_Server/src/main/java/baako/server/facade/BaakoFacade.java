@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import baako.server.BaakoApp;
+import baako.server.database.News;
 import baako.server.dto.GameDTO;
 import baako.server.dto.NewsDTO;
 import baako.server.dto.PlainUserDTO;

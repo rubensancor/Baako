@@ -8,6 +8,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import baako.server.database.News;
 import baako.server.dto.GameDTO;
 import baako.server.dto.NewsDTO;
 import baako.server.dto.PlainUserDTO;
@@ -111,13 +112,16 @@ public interface IBaakoManager extends Remote{
 	 */
 	public ArrayList<GameDTO> getUsersGames(PlainUserDTO user) throws RemoteException;
 	
+	/**
+	 * Retrieves the latest news
+	 * @return The latest news
+	 * @throws RemoteException
+	 */
 	public ArrayList<NewsDTO> getAllNews() throws RemoteException;
-	
 	/*TODO: 
 
 	public boolean addFriend(PlainUserDTO user, PlainUserDTO newFriend) throws RemoteException;
 
-	public ArrayList<News> getAllNews() throws RemoteException;
 
 	 */
 }
