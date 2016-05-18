@@ -125,5 +125,13 @@ public class GameDTO implements Serializable{
 	public void setDesigners(Set<Designer> designers) {
 		this.designers = designers;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return name +"[+"+PEGI+"]";
+	}
 
 }

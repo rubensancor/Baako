@@ -27,7 +27,7 @@ public class AssemblerTest {
         game = new Game("El juego", 20, "Mejor juego del mundo", 18);
         gamedto = new GameDTO("El juego", 20, "Mejor juego del mundo", 18);
         u = new PlainUser("gvirum@gmail.com", "Gaizka", "Tere", new Date(System.currentTimeMillis()));
-        userdto = new PlainUserDTO("gvirum@gmail.com", "Gaizka", "Tere", new Date(System.currentTimeMillis()), null, null);
+        userdto = new PlainUserDTO("gvirum@gmail.com", "Gaizka", "Tere", new Date(System.currentTimeMillis()));
     } 
     @Test 
     public void testAssembleGame() { 
@@ -39,11 +39,11 @@ public class AssemblerTest {
     } 
     @Test 
     public void testAssembleUser() { 
-        assertEquals("Gaizka", Assembler.getInstance().disassemble(u).getUsername());
+        assertEquals("Gaizka", Assembler.getInstance().assemble(u).getUsername());
     } 
     @Test 
     public void testDisassembleUser() { 
-        assertEquals("Gaizka", Assembler.getInstance().assemble(userdto).getName());
+        assertEquals("Gaizka", Assembler.getInstance().disassemble(userdto).getName());
     } 
  
 }

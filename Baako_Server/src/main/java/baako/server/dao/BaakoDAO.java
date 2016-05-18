@@ -419,7 +419,7 @@ public class BaakoDAO implements IBaakoDAO {
 	}
 
 	/* (non-Javadoc)
-	 * @see baako.server.dao.IBaakoDAO#searchGamesByDesigner(java.lang.String)
+	 * @see baako.server.dao.IBaakoDAO#GamesByDesigner(java.lang.String)
 	 */
 	public ArrayList<Game> searchGamesByDesigner(String designer) {
 		pm = pmf.getPersistenceManager();
