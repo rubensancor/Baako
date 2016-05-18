@@ -156,4 +156,21 @@ public class BaakoController {
 		}
 	}
 
+	public ArrayList<GameDTO> searchGamesByCategory(String category) throws RemoteException {
+		try{
+			return rmi.getService().searchGamebyCategory(category);
+		}catch(RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}	 
+	}
+	public ArrayList<GameDTO> searchGamesByDesigner(String designer) throws RemoteException {
+		try{
+			return rmi.getService().searchGamebyDesigner(designer);
+		}catch(RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}	 
+	}
+	
 }

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.AbstractListModel;
@@ -31,6 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import baako.client.controller.BaakoController;
 import baako.server.database.CardType;
 import baako.server.dto.GameDTO;
 import baako.server.dto.NewsDTO;
@@ -54,6 +56,8 @@ import javax.swing.SpringLayout;
 public class GUI {
 
 	protected Logger logger = LoggerFactory.getLogger(GUI.class);
+	protected BaakoController controller;
+
 	private JFrame frame;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
@@ -65,13 +69,14 @@ public class GUI {
 	protected JButton btnLogOut;
 	protected PlainUserDTO user;
 	protected JLabel thumb;
+	protected JTextField searchfield;
 	protected boolean admin;
 	protected ArrayList<NewsDTO> news;
 	protected ArrayList<GameDTO> games;
 	protected ArrayList<GameDTO> owned;
 	boolean filled;
 
-	//private int state;
+	private int state;
 	/*0 = adminNews 
 	1 = userNews 
 	2 = adminGames
@@ -123,14 +128,13 @@ public class GUI {
 		frame.getContentPane().setLayout(null);
 
 		//CREATING MAIN PANEL
-
 		final JPanel mainPanel_1 = new JPanel();
 		mainPanel_1.setBounds(0, 0, 725, 542);
 		frame.getContentPane().add(mainPanel_1);
 		mainPanel_1.setLayout(null);
+		//
 
-		//OPTION PANEL
-
+		//CREATING INITIAL OPTION PANEL (JUST BAAKO ICON)
 		final JPanel optionPanel = new JPanel();
 		optionPanel.setBackground(new Color(105, 105, 105));
 		optionPanel.setBounds(574, 49, 151, 493);
@@ -143,8 +147,7 @@ public class GUI {
 		gbl_optionPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		optionPanel.setLayout(gbl_optionPanel);
 
-		//BAAKO ICON
-
+		///BAAKO ICON
 		JLabel iconlabel = new JLabel("");
 		iconlabel.setIcon(new ImageIcon(this.getClass().getResource("/images/bakologo.png")));
 
@@ -153,9 +156,10 @@ public class GUI {
 		gbc_iconlabel.gridx = 1;
 		gbc_iconlabel.gridy = 10;
 		optionPanel.add(iconlabel, gbc_iconlabel);
-
-		//MENU BAR
-
+		///
+		//
+		
+		//CREATING THE MENU BAR
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		menuBar.setBounds(0, 0, 573, 50);
@@ -163,14 +167,18 @@ public class GUI {
 		menuBar.setForeground(new Color(255, 255, 255));
 		menuBar.setBackground(new Color(105, 105, 105));
 
+		///MENU ITEM FOR LIBRARY (CHANGES STATE TO 3 IN USER VIEW)
 		JMenu libraryMenu = new JMenu("Library");
 		libraryMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//state=3;
+				//If the user is admin he can't have a game library
+				//If the user is plain window state will change to 3 
+				///and he will access to his videogame library
 				if(!admin){
+					state=3;
 					mainPanel_1.remove(mainPanel_1.findComponentAt(574, 49));
-					menuchange(3, mainPanel_1);
+					menuchange(state, mainPanel_1);
 				}else{
 					JOptionPane.showMessageDialog(frame, "As administrator you can't acces this view, since you cannot own a game library");
 				}
@@ -184,6 +192,7 @@ public class GUI {
 		libraryMenu.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		menuBar.add(libraryMenu);
 
+		///MENU ITEM FOR MARKET (CHANGES STATE TO 2 OR 4)
 		JMenu mnMarket = new JMenu("Market");
 		mnMarket.setForeground(new Color(255, 255, 255));
 		mnMarket.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -191,14 +200,76 @@ public class GUI {
 		mnMarket.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				//If user is admin the window will change to the market; 
+				///The list of all market games in which he/she will be able:
+				////Add and edit game entries in the database 
+				////Viewing each game's details	
+				
+				//If the user is plain he will see the same list as admins 
+				///but he will have the following options:
+				////Buy a game or rent a game
+				////Viewing each game's details	
 				mainPanel_1.remove(mainPanel_1.findComponentAt(574, 49));
-				if(admin){menuchange(2, mainPanel_1);}else{menuchange(4, mainPanel_1);}
+				if(admin){
+					state=2;
+					menuchange(state, mainPanel_1);
+					}else{
+						state=4;
+						menuchange(state, mainPanel_1);
+						}
 				frame.repaint();
 				frame.revalidate();
 				mainPanel_1.findComponentAt(574, 49).repaint();
 			}
 		});
+		
+		////SUBMENU OF MARKET THAT ALLOWS US TO SEARCH DESIRED GAMES
+		JMenu mnSearchGames = new JMenu("Search Games");
+		mnMarket.add(mnSearchGames);
 
+		/////SUBMENU TO SEARCH BY DESIRED CATEGORY
+		JMenu mnByCategory = new JMenu("By Category");
+		mnByCategory.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				mainPanel_1.remove(mainPanel_1.findComponentAt(574, 49));
+				state=6;
+				if(admin){
+					searchviews(state, mainPanel_1);
+					}else{
+						searchviews(state, mainPanel_1);
+						}
+				frame.repaint();
+				frame.revalidate();
+				mainPanel_1.findComponentAt(574, 49).repaint();				
+			}
+		});
+		mnSearchGames.add(mnByCategory);
+		/////
+		
+		/////SUBMENU TO SEARCH BY DESIRED DESIGNER
+		JMenu mnByDesigner = new JMenu("By Designer");
+		mnByDesigner.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mainPanel_1.remove(mainPanel_1.findComponentAt(574, 49));
+				state=7;
+				if(admin){
+					searchviews(state, mainPanel_1);
+					}else{
+						searchviews(state, mainPanel_1);
+						}
+				frame.repaint();
+				frame.revalidate();
+				mainPanel_1.findComponentAt(574, 49).repaint();
+
+			}
+		});
+		mnSearchGames.add(mnByDesigner);
+		/////
+		////
+
+		///MENU ITEM FOR NEWS (CHANGES STATE TO 0 OR 1)
 		final JMenu mnNews = new JMenu("News");
 		mnNews.setForeground(new Color(255, 255, 255));
 		mnNews.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -206,14 +277,30 @@ public class GUI {
 		mnNews.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				//If user is admin the window will change to the news feed; 
+				///The list of all news about games in which he/she will be able:
+				////Add and edit pieces of news in the database 
+				/////Viewing each entry in detail	
+				
+				//If the user is plain he will see the same list as admins 
+				///but he will have the following options:
+				////View each entry ion detail
+				
 				mainPanel_1.remove(mainPanel_1.findComponentAt(574, 49));
-				if(admin){menuchange(0, mainPanel_1);}else{menuchange(1, mainPanel_1);}
+				if(admin){
+					state=0;
+					menuchange(state, mainPanel_1);
+					}else{
+						state=1;
+						menuchange(state, mainPanel_1);
+						}
 				frame.repaint();
 				frame.revalidate();
 				mainPanel_1.findComponentAt(574, 49).repaint();
 			}
 		});
 
+		///MENU ITEM FOR COMMUNITY (CHANGES STATE TO 5)
 		JMenu mnCommunity = new JMenu("Community");
 		mnCommunity.setForeground(new Color(255, 255, 255));
 		mnCommunity.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -221,9 +308,17 @@ public class GUI {
 		mnCommunity.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				//If user is admin he can't access to the community 
+				///since member add themselves when they register
+				
+				//If the user is plain he will see the list of users 
+				///and he will have the following options:
+				////Add a friend to his friendlist
+				/////Delte a friend from gis friendlist
 				if(!admin){
+					state=5;
 					mainPanel_1.remove(mainPanel_1.findComponentAt(574, 49));
-					menuchange(5, mainPanel_1);
+					menuchange(state, mainPanel_1);
 				}else{
 					JOptionPane.showMessageDialog(frame, "View reserved to final users, administrators don't have acces to friend community");
 				}
@@ -232,17 +327,17 @@ public class GUI {
 				mainPanel_1.findComponentAt(574, 49).repaint();
 			}
 		});
+		///
+		//
 
 
-
-		//LOGOUT PANEL
+		//CREATING THE LOGOUT PANEL
 		JPanel logoutPanel = new JPanel();
 		logoutPanel.setBounds(573, 0, 152, 49);
 		mainPanel_1.add(logoutPanel);
 		logoutPanel.setBackground(new Color(105, 105, 105));
 		logoutPanel.setLayout(null);
 
-		// TODO Add the name of the username to the GUI
 		btnLogOut = new JButton("LOGOUT");
 		btnLogOut.setFont(new Font("Tahoma", Font.BOLD, 17));
 		btnLogOut.setBackground(new Color(255, 51, 0));
@@ -251,6 +346,8 @@ public class GUI {
 		btnLogOut.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+							//Hides the panel and changes the view to the initial login.
+
 				mainPanel_1.setVisible(false);
 				loginview();
 			}
@@ -265,40 +362,53 @@ public class GUI {
 		}
 		logger.info("Post"+Boolean.toString(filled));
 		frame.repaint();
+		//
 		
-		//MAIN PANEL
-		//		final JScrollPane mainPanel = new JScrollPane();
-		//		mainPanel.setBounds(0, 48, 574, 494);
-		//		mainPanel_1.add(mainPanel);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void menuchange(int state, final JPanel p){
 
 		//LIST OF ELEMENTS IN MAINVIEW
+		
+		//This is the JList that has to be updated 
+		///everytime we need to show a list of something.
+		
 		switch (state) {
+		///NEWS LIST CASES
 		case 0:case 1:
 			listNews = new JList(news.toArray());
 			listNews.setBackground(Color.LIGHT_GRAY);
 			listNews.setVisibleRowCount(20);
 			listNews.setFont(new Font("Tahoma", Font.PLAIN, 32));
 			break;
+		///
+		
+		///GAMES LIST CASES
 		case 2:case 4:
 			listGames = new JList(games.toArray());
 			listGames.setBackground(Color.LIGHT_GRAY);
 			listGames.setVisibleRowCount(20);
 			listGames.setFont(new Font("Tahoma", Font.PLAIN, 32));
 			break;
+		///
+		
+		///OWNEDGAMES LIST CASES
 		case 3: 
 			listOwned = new JList(owned.toArray());
 			listOwned.setBackground(Color.LIGHT_GRAY);
 			listOwned.setVisibleRowCount(20);
 			listOwned.setFont(new Font("Tahoma", Font.PLAIN, 32));
 			break;
+		///
 
 		default:
 			break;
 		}
+		//
+		
+		//DECLARING OPTIONPANEL THIS PANEL WILL SHOW 
+		//DIFFERENT OPTIONS FOR USER AND ADMINS DEPENDING OF WHAT MAINVIEW THEY'RE IN
 		final JPanel optionPanel = new JPanel();
 		optionPanel.setBackground(new Color(105, 105, 105));
 		optionPanel.setBounds(574, 49, 151, 493);
@@ -310,21 +420,29 @@ public class GUI {
 		gbl_optionPanel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_optionPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		optionPanel.setLayout(gbl_optionPanel);
+		//
 
-
+		//AS BTNINFO AND BTNBACK WILL BE USED IN DIFFERENT OPTIONPANELS
+		//WE INITIALIZE THEM HERE AND THEN WE CHANGE THEM DEPENDING ON THE VIEW
+		
+		//+INFO BUTTON
 		final JButton btninfo = new JButton("+INFO");
 		btninfo.setBackground(new Color(153, 204, 204));
 		GridBagConstraints gbc_btninfo = new GridBagConstraints();
-
+		//
+		//BACK BUTTON
 		final JButton btnBack = new JButton("BACK");
 		btnBack.setBackground(new Color(255, 51, 0));
 		GridBagConstraints gbc_btnBack = new GridBagConstraints();
-
+		//
+		
 		//CASES FOR THE OPTIONPANEL
 		switch(state){
 
 		//ADMINISTRATOR NEWS OPTIONPANEL
 		case 0:
+		
+			//ADDNEWS BUTTON AND HIS ACTION
 			final JButton btnAddNews = new JButton("ADD NEWS");
 			btnAddNews.setBackground(new Color(50, 205, 50));
 			GridBagConstraints gbc_btnAddNews = new GridBagConstraints();
@@ -340,7 +458,9 @@ public class GUI {
 					addnewsview();
 				}
 			});
+			//
 
+			//EDIT NEWS BUTTON AND HIS ACTION
 			final JButton btnEditNews = new JButton("EDIT ENTRY");
 			btnEditNews.setBackground(new Color(255, 204, 51));
 			GridBagConstraints gbc_btnEditNews = new GridBagConstraints();
@@ -359,8 +479,9 @@ public class GUI {
 					editnewsview();
 				}
 			});
-
-
+			//
+			
+			//INFO BUTTON AND HIS ACTION
 			gbc_btninfo.insets = new Insets(40, 25, 5, 0);
 			gbc_btninfo.gridx = 1;
 			gbc_btninfo.gridy = 6;
@@ -379,27 +500,31 @@ public class GUI {
 
 					p.remove(p.findComponentAt(0,50));
 
-					//BODY OF THE ARTICLE
-					JTextArea txtr = new JTextArea();
-					txtr.setText(listNews.getSelectedValue().getBody());
+					//HERE WE DECLARE THE BODY OF THE ARTICLE
+					JTextArea txtbody = new JTextArea();
+					txtbody.setText(listNews.getSelectedValue().getBody());
 
-					final JScrollPane mainPanel = new JScrollPane(txtr);
+					final JScrollPane mainPanel = new JScrollPane(txtbody);
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);	
 
-					//TITLE OF THE ARTICLE
-					JLabel lblTituloMasoGuapo = new JLabel(listNews.getSelectedValue().getTitle());
-					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
-					lblTituloMasoGuapo.setHorizontalAlignment(SwingConstants.CENTER);
-					mainPanel.setColumnHeaderView(lblTituloMasoGuapo);
-
+					//HERE WE DECLARE THE TITLE OF THE ARTICLE
+					JLabel lblEntryTitle = new JLabel(listNews.getSelectedValue().getTitle());
+					lblEntryTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
+					lblEntryTitle.setHorizontalAlignment(SwingConstants.CENTER);
+					mainPanel.setColumnHeaderView(lblEntryTitle);
+					//
+					
+					//WE REPAINT THE WINDOW
 					frame.revalidate();
 					p.repaint();
 					frame.repaint();
-					//addnewsview();
+					//
 				}
 			});
-
+			//
+			
+			//BACK BUTTON AND HIS ACTION	
 			gbc_btnBack.insets = new Insets(0, 25, 5, 0);
 			gbc_btnBack.gridx = 1;
 			gbc_btnBack.gridy = 7;
@@ -419,7 +544,7 @@ public class GUI {
 
 					p.remove(p.findComponentAt(0,50));
 
-					//RETURNING BACK TO THE LIST
+					//HERE WE ADD THE MAINPANEL GOING BACK TO THE LIST
 					final JScrollPane mainPanel = new JScrollPane();
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);
@@ -427,38 +552,48 @@ public class GUI {
 					DefaultListCellRenderer renderer = (DefaultListCellRenderer) listNews.getCellRenderer();
 					renderer.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setViewportView(listNews);
-
+					//
+					
+					//WE REPAINT THE FRAME
 					frame.revalidate();
 					p.repaint();
 					frame.repaint();
-					//addnewsview();
+					//
 				}
 			});
 			btnBack.setEnabled(false);
 			btnBack.setBackground(new Color(204, 204, 204));
+			//
 
-
+			//AS DEFALUT WE WANT TO SHOW THE LIST OF NEWS, SO WE DECLARE IT 
 			p.remove(p.findComponentAt(0,50));
-
-			//RETURNING BACK TO THE LIST
+			//
+			
+			//ADDING THE CURRENT MAINPANEL
 			final JScrollPane mainPanel = new JScrollPane();
 			mainPanel.setBounds(0, 48, 574, 494);
 			p.add(mainPanel);
-
+			//
+			
+			//WE ADD THE LIST TO THE MAINPANEL
 			DefaultListCellRenderer renderer = (DefaultListCellRenderer) listNews.getCellRenderer();
 			renderer.setHorizontalAlignment(SwingConstants.CENTER);
 			mainPanel.setViewportView(listNews);
-
+			//
+			//
+			
+			//WE REPAINT THE FRAME
 			frame.revalidate();
 			p.repaint();
 			frame.repaint();
-			//addnewsview();
+			//
 			break;
-
+			//
 
 			//USER NEWS OPTIONPANEL
 		case 1:
-
+		
+			//INFO BUTTON AND HIS ACTION
 			gbc_btninfo.fill = GridBagConstraints.BOTH;
 			gbc_btninfo.insets = new Insets(0, 45, 5, 0);
 			gbc_btninfo.gridx = 1;
@@ -474,28 +609,32 @@ public class GUI {
 
 					p.remove(p.findComponentAt(0,50));
 
-					//BODY OF THE ARTICLE
-					JTextArea txtr = new JTextArea();
-					txtr.setText(listNews.getSelectedValue().getBody());
+					//HERE WE DECLARE THE BODY OF THE ARTICLE
+					JTextArea txtbody = new JTextArea();
+					txtbody.setText(listNews.getSelectedValue().getBody());
 
-					final JScrollPane mainPanel = new JScrollPane(txtr);
+					final JScrollPane mainPanel = new JScrollPane(txtbody);
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);	
+					//
 
-					//TITLE OF THE ARTICLE
-					JLabel lblTituloMasoGuapo = new JLabel(listNews.getSelectedValue().getTitle());
-					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
-					lblTituloMasoGuapo.setHorizontalAlignment(SwingConstants.CENTER);
-					mainPanel.setColumnHeaderView(lblTituloMasoGuapo);
-
+					//HERE WE DECLARE THE TITLE OF THE ARTICLE
+					JLabel lblEntryTitle = new JLabel(listNews.getSelectedValue().getTitle());
+					lblEntryTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
+					lblEntryTitle.setHorizontalAlignment(SwingConstants.CENTER);
+					mainPanel.setColumnHeaderView(lblEntryTitle);
+					//
+					
+					//WE REPAINT THE FRAME
 					frame.revalidate();
 					p.repaint();
 					frame.repaint();
-					//addnewsview();
+					//
 				}
 			});
-
-
+			//
+			
+			//BACK BUTTON AND HIS ACTION
 			gbc_btnBack.fill = GridBagConstraints.BOTH;
 			gbc_btnBack.insets = new Insets(0, 45, 5, 0);
 			gbc_btnBack.gridx = 1;
@@ -511,7 +650,7 @@ public class GUI {
 
 					p.remove(p.findComponentAt(0,50));
 
-					//RETURNING BACK TO THE LIST
+					//HERE WE ADD THE MAINPANEL GOING BACK TO THE LIST
 					final JScrollPane mainPanel = new JScrollPane();
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);
@@ -519,36 +658,46 @@ public class GUI {
 					DefaultListCellRenderer renderer = (DefaultListCellRenderer) listNews.getCellRenderer();
 					renderer.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setViewportView(listNews);
-
+					//
+					
+					//REPAINT THE FRAME
 					frame.revalidate();
 					p.repaint();
 					frame.repaint();
-					//addnewsview();
+					//
 				}
 			});
 			btnBack.setEnabled(false);
 			btnBack.setBackground(new Color(204, 204, 204));
+			//
 
+			//AS DEFALUT WE WANT TO SHOW THE LIST OF NEWS, SO WE DECLARE IT 
 			p.remove(p.findComponentAt(0,50));
 
-			//RETURNING BACK TO THE LIST
+			//ADDING THE CURRENT MAINPANEL
 			final JScrollPane mainPanel6 = new JScrollPane();
 			mainPanel6.setBounds(0, 48, 574, 494);
 			p.add(mainPanel6);
+			//
 
+			//WE ADD THE LIST TO THE MAINPANEL
 			DefaultListCellRenderer renderer6 = (DefaultListCellRenderer) listNews.getCellRenderer();
 			renderer6.setHorizontalAlignment(SwingConstants.CENTER);
 			mainPanel6.setViewportView(listNews);
+			//
 
+			//WE REPAINT THE WINDOW
 			frame.revalidate();
 			p.repaint();
 			frame.repaint();
-			//addnewsview();
+			//
 			break;
+			//
 
 			//ADMINISTRATOR GAME OPTIONPANEL
 		case 2:
 
+			//ADDGAME BUTTON AND HIS ACTION
 			final JButton btnAddGame = new JButton("ADD GAME");
 			btnAddGame.setBackground(new Color(50, 205, 50));
 			GridBagConstraints gbc_btnAddGame = new GridBagConstraints();
@@ -565,7 +714,9 @@ public class GUI {
 					addgameview();
 				}
 			});
-
+			//
+			
+			//EDITGAME BUTTON AND HIS ACTION
 			final JButton btnEditGame = new JButton("EDIT GAME");
 			btnEditGame.setBackground(new Color(255, 204, 51));
 			GridBagConstraints gbc_btnEditGame = new GridBagConstraints();
@@ -583,7 +734,9 @@ public class GUI {
 			});
 			btnEditGame.setEnabled(false);
 			btnEditGame.setBackground(new Color(204, 204, 204));
-
+			//
+			
+			//INFO BUTTON AND HIS ACTION
 			gbc_btninfo.insets = new Insets(40, 45, 5, 0);
 			gbc_btninfo.gridx = 1;
 			gbc_btninfo.gridy = 6;
@@ -602,27 +755,32 @@ public class GUI {
 
 					p.remove(p.findComponentAt(0,50));
 
-					//BODY OF THE ARTICLE
-					JTextArea txtr = new JTextArea();
-					txtr.setText(listGames.getSelectedValue().getDescription());
+					//HERE WE DECLARE THE BODY OF THE ARTICLE
+					JTextArea txtbody = new JTextArea();
+					txtbody.setText(listGames.getSelectedValue().getDescription());
 
-					final JScrollPane mainPanel = new JScrollPane(txtr);
+					final JScrollPane mainPanel = new JScrollPane(txtbody);
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);	
+					//
 
-					//TITLE OF THE ARTICLE
-					JLabel lblTituloMasoGuapo = new JLabel(listGames.getSelectedValue().getName());
-					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
-					lblTituloMasoGuapo.setHorizontalAlignment(SwingConstants.CENTER);
-					mainPanel.setColumnHeaderView(lblTituloMasoGuapo);
+					//HERE WE DECLARE THE TITLE OF THE ARTICLE
+					JLabel lblEntryTitle = new JLabel(listGames.getSelectedValue().getName());
+					lblEntryTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
+					lblEntryTitle.setHorizontalAlignment(SwingConstants.CENTER);
+					mainPanel.setColumnHeaderView(lblEntryTitle);
+					//
 
+					//WE REPAINT THE FRAME
 					frame.revalidate();
 					p.repaint();
 					frame.repaint();
-					//addnewsview();
+					//
 				}
 			});
+			//
 
+			//BACK BUTTON AND HIS ACTION
 			gbc_btnBack.insets = new Insets(0, 45, 5, 0);
 			gbc_btnBack.gridx = 1;
 			gbc_btnBack.gridy = 7;
@@ -641,7 +799,7 @@ public class GUI {
 
 					p.remove(p.findComponentAt(0,50));
 
-					//RETURNING BACK TO THE LIST
+					//HERE WE ADD THE MAINPANEL GOING BACK TO THE LIST
 					final JScrollPane mainPanel = new JScrollPane();
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);
@@ -649,31 +807,47 @@ public class GUI {
 					DefaultListCellRenderer renderer = (DefaultListCellRenderer) listGames.getCellRenderer();
 					renderer.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setViewportView(listGames);
-					//addnewsview();
+					//
+					
+					//WE REPAINT THE FRAME
+					frame.revalidate();
+					p.repaint();
+					frame.repaint();
+					//
 				}
 			});
 			btnBack.setEnabled(false);
 			btnBack.setBackground(new Color(204, 204, 204));
+			//
 
+			//AS DEFALUT WE WANT TO SHOW THE LIST OF NEWS, SO WE DECLARE IT 
 			p.remove(p.findComponentAt(0,50));
 
-			//RETURNING BACK TO THE LIST
+			//ADDING THE CURRENT MAINPANEL
 			final JScrollPane mainPanel5 = new JScrollPane();
 			mainPanel5.setBounds(0, 48, 574, 494);
 			p.add(mainPanel5);
-
+			//
+			
+			//WE ADD THE LIST TO THE MAINPANEL
 			DefaultListCellRenderer renderer5 = (DefaultListCellRenderer) listGames.getCellRenderer();
 			renderer5.setHorizontalAlignment(SwingConstants.CENTER);
 			mainPanel5.setViewportView(listGames);
-
+			//
+			
+			//REPAINTING THE FRAME
 			frame.revalidate();
 			p.repaint();
 			frame.repaint();
-			//addnewsview();
+			//
+			//
 			break;
-
+			//
+			
 			//USER'S GAME LIBRARY OPTIONPANEL
 		case 3:
+		
+			//LAUNCH BUTTON AND HIS ACTION
 			JButton btnLaunch = new JButton("LAUNCH");
 			btnLaunch.setBackground(new Color(50, 205, 50));
 			GridBagConstraints gbc_btnLaunch = new GridBagConstraints();
@@ -686,28 +860,41 @@ public class GUI {
 
 				public void actionPerformed(ActionEvent e) {
 
-					//addnewsview();
+					//ACTION TO PERFORM
+					
+					//				
 				}
 			});
+			//
+			
+			//AS DEFALUT WE WANT TO SHOW THE LIST OF NEWS, SO WE DECLARE IT 
 			p.remove(p.findComponentAt(0,50));
 
-			//RETURNING BACK TO THE LIST
+			//ADDING THE CURRENT MAINPANEL
 			final JScrollPane mainPanel4 = new JScrollPane();
 			mainPanel4.setBounds(0, 48, 574, 494);
 			p.add(mainPanel4);
+			//
 
+			//WE ADD THE LIST TO THE MAINPANEL
 			DefaultListCellRenderer renderer4 = (DefaultListCellRenderer) listOwned.getCellRenderer();
 			renderer4.setHorizontalAlignment(SwingConstants.CENTER);
 			mainPanel4.setViewportView(listOwned);
+			//
 
+			//REPAINTING THE FRAME
 			frame.revalidate();
 			p.repaint();
 			frame.repaint();
-			//addnewsview();
+			//
+			//
 			break;
+			//
 
 			//USER GAMESTORE OPTIONPANEL
 		case 4:
+		
+			//BUY BUTTON AND HIS ACTION
 			final JButton btnBuy = new JButton("BUY GAME");
 			GridBagConstraints gbc_btnBuy = new GridBagConstraints();
 			gbc_btnBuy.fill = GridBagConstraints.BOTH;
@@ -723,7 +910,9 @@ public class GUI {
 			});
 			btnBuy.setEnabled(false);
 			btnBuy.setBackground(new Color(204, 204, 204));
-
+			//
+			
+			//RENT BUTTON AND HIS ACTION
 			final JButton btnRent = new JButton("RENT GAME");
 			btnRent.setBackground(new Color(255, 204, 51));
 			GridBagConstraints gbc_btnRent = new GridBagConstraints();
@@ -736,12 +925,16 @@ public class GUI {
 
 				public void actionPerformed(ActionEvent e) {
 
-					//addnewsview();
+					//ACTION TO PERFORM
+					
+					//
 				}
 			});
 			btnRent.setEnabled(false);			
 			btnRent.setBackground(new Color(204, 204, 204));
-
+			//
+			
+			//+INFO BUTTON AND HIS ACTION
 			gbc_btninfo.insets = new Insets(40, 35, 5, 0);
 			gbc_btninfo.gridx = 1;
 			gbc_btninfo.gridy = 4;
@@ -758,27 +951,32 @@ public class GUI {
 
 					p.remove(p.findComponentAt(0,50));
 
-					//BODY OF THE ARTICLE
-					JTextArea txtr = new JTextArea();
-					txtr.setText(listGames.getSelectedValue().getDescription());
+					//HERE WE SET BODY OF THE GAME
+					JTextArea txtbody = new JTextArea();
+					txtbody.setText(listGames.getSelectedValue().getDescription());
 
-					final JScrollPane mainPanel = new JScrollPane(txtr);
+					final JScrollPane mainPanel = new JScrollPane(txtbody);
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);	
+					//
 
-					//TITLE OF THE ARTICLE
-					JLabel lblTituloMasoGuapo = new JLabel(listGames.getSelectedValue().getName());
-					lblTituloMasoGuapo.setFont(new Font("Tahoma", Font.BOLD, 20));
-					lblTituloMasoGuapo.setHorizontalAlignment(SwingConstants.CENTER);
-					mainPanel.setColumnHeaderView(lblTituloMasoGuapo);
-
+					//HERE WE SET THE TITLE OF THE GAME
+					JLabel lblEntryTitle = new JLabel(listGames.getSelectedValue().getName());
+					lblEntryTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
+					lblEntryTitle.setHorizontalAlignment(SwingConstants.CENTER);
+					mainPanel.setColumnHeaderView(lblEntryTitle);
+					//
+					
+					//REPAINTING THE FRAME
 					frame.revalidate();
 					p.repaint();
 					frame.repaint();
-					//addnewsview();
+					//
 				}
 			});
-
+			//
+			
+			//BACK BUTTON AND HIS ACTION
 			gbc_btnBack.insets = new Insets(0, 35, 5, 0);
 			gbc_btnBack.gridx = 1;
 			gbc_btnBack.gridy = 5;
@@ -797,7 +995,7 @@ public class GUI {
 
 					p.remove(p.findComponentAt(0,50));
 
-					//RETURNING BACK TO THE LIST
+					//HERE WE DECLARE THE NEW MAINPOANEL RETURNING BACK TO THE GAMELIST
 					final JScrollPane mainPanel = new JScrollPane();
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);
@@ -805,31 +1003,41 @@ public class GUI {
 					DefaultListCellRenderer renderer = (DefaultListCellRenderer) listGames.getCellRenderer();
 					renderer.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setViewportView(listGames);
-					//addnewsview();
+					//
 				}
 			});
 			btnBack.setEnabled(false);
 			btnBack.setBackground(new Color(204, 204, 204));
-
+			//
+			
+			//AS DEFALUT WE WANT TO SHOW THE LIST OF NEWS, SO WE DECLARE IT 
 			p.remove(p.findComponentAt(0,50));
 
-			//RETURNING BACK TO THE LIST
+			//ADDING THE CURRENT MAINPANEL
 			final JScrollPane mainPanel2 = new JScrollPane();
 			mainPanel2.setBounds(0, 48, 574, 494);
 			p.add(mainPanel2);
+			//
 
+			//WE ADD THE LIST TO THE MAINPANEL
 			DefaultListCellRenderer renderer2 = (DefaultListCellRenderer) listGames.getCellRenderer();
 			renderer2.setHorizontalAlignment(SwingConstants.CENTER);
 			mainPanel2.setViewportView(listGames);
+			//
+			
+			//REPAINTING THE FRAME
 			frame.revalidate();
 			p.repaint();
 			frame.repaint();
-			//addnewsview();
-
+			//
+			//
 			break;
-
+			//
+			
 			//USER FRIEND OPTIONPANEL
 		case 5:
+		
+			//ADDFRIEND BUTTON AND HIS ACTION
 			JButton btnAddFriend = new JButton("ADD FRIEND");
 			btnAddFriend.setBackground(new Color(50, 205, 50));
 			GridBagConstraints gbc_btnAddFriend = new GridBagConstraints();
@@ -842,10 +1050,14 @@ public class GUI {
 
 				public void actionPerformed(ActionEvent e) {
 
-					//addnewsview();
+					//ACTION TO PERFORM
+					
+					//				
 				}
 			});
-
+			//
+			
+			//DELETEFRIEND BUTTON AND HIS ACTION
 			JButton btnDeleteFriend = new JButton("DELETE FRIEND");
 			btnDeleteFriend.setBackground(new Color(255, 51, 0));
 			GridBagConstraints gbc_btnDeleteFriend = new GridBagConstraints();
@@ -857,31 +1069,167 @@ public class GUI {
 			btnDeleteFriend.addActionListener(new ActionListener() {
 
 				public void actionPerformed(ActionEvent e) {
-					//addnewsview();
+				
+					//ACTION TO PERFORM
+					
+					//
 				}
 			});
-
+			//
+			
+			//AS DEFALUT WE WANT TO SHOW THE LIST OF NEWS, SO WE DECLARE IT 
 			p.remove(p.findComponentAt(0,50));
 
-			//RETURNING BACK TO THE LIST
+			//ADDING THE CURRENT MAINPANEL
 			final JScrollPane mainPanel3 = new JScrollPane();
 			mainPanel3.setBounds(0, 48, 574, 494);
 			p.add(mainPanel3);
-
+			//
+			
+			//WE ADD THE LIST TO THE MAINPANEL
 			DefaultListCellRenderer renderer3 = (DefaultListCellRenderer) listNews.getCellRenderer();
 			renderer3.setHorizontalAlignment(SwingConstants.CENTER);
 			mainPanel3.setViewportView(listNews);
-			//addnewsview();
+			//
+			
+			//REPAINTING THE FRAME
 			frame.revalidate();
 			p.repaint();
 			frame.repaint();
+			//
+			//
 			break;
+			//
 		}
 		frame.revalidate();
 		p.repaint();
 		frame.repaint();
-	}
+		}
 
+	private void searchviews( final int state,final JPanel p){
+		
+		//TWO STATES FOR SEARCH VIEW
+		
+		switch(state){
+		//SEARCH BY CATEGORY MAINPANEL
+		case 6:	
+
+			p.remove(p.findComponentAt(0,50));
+
+			//MAKING A NEW MAINPANEL TO ADD OUR SEARCH VIEW
+			final JScrollPane mainPanel7 = new JScrollPane();
+			mainPanel7.setBounds(0, 48, 574, 494);
+			p.add(mainPanel7);
+			//
+			
+			//ADDING OUR SEARCHPANEL
+			JPanel searchpanel = new JPanel();
+			mainPanel7.setViewportView(searchpanel);
+			searchpanel.setLayout(null);
+
+			//TEXTFIELD TO WRITE THE CATEGORY
+			searchfield = new JTextField();
+			searchfield.setBounds(51, 172, 353, 61);
+			searchfield.setFont(new Font("Tahoma", Font.PLAIN, 24));
+			searchpanel.add(searchfield);
+			searchfield.setColumns(10);
+			//
+
+			//TITLE IN THE MAINVIEW
+			JLabel lblSearch = new JLabel("SEARCH BY CATEGORY");
+			lblSearch.setFont(new Font("Tahoma", Font.BOLD, 30));
+			lblSearch.setHorizontalAlignment(SwingConstants.CENTER);
+			lblSearch.setBounds(62, 77, 367, 44);
+			searchpanel.add(lblSearch);
+			//
+
+			//SEARCH BUTTON AND HIS ACTION
+			JButton searchButton = new JButton("");
+			searchButton.setIcon(new ImageIcon(this.getClass().getResource("/images/lup.png")));
+			searchButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					//Code to search games by category
+					try {
+						controller.searchGamesByCategory(searchfield.getText());
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					menuchange(4, p);
+				}
+			});
+			searchButton.setBounds(438, 172, 89, 61);
+			searchpanel.add(searchButton);
+			//
+			
+			//REPAINTING THE FRAME
+			frame.revalidate();
+			p.repaint();
+			frame.repaint();
+			//
+			break;
+			//
+
+			//SEARCH BY DESIGNER MAINPANEL
+		case 7:	
+
+			p.remove(p.findComponentAt(0,50));
+
+			//MAKING A NEW MAINPANEL TO ADD OUR SEARCH VIEW
+			final JScrollPane mainPanel8 = new JScrollPane();
+			mainPanel8.setBounds(0, 48, 574, 494);
+			p.add(mainPanel8);
+
+			//ADDING OUR SEARCHPANEL
+			JPanel searchpanel2 = new JPanel();
+			mainPanel8.setViewportView(searchpanel2);
+			searchpanel2.setLayout(null);
+			//
+			
+			//TEXTFIELD TO WRITE THE CATEGORY
+			searchfield = new JTextField();
+			searchfield.setBounds(51, 172, 353, 61);
+			searchfield.setFont(new Font("Tahoma", Font.PLAIN, 24));
+			searchpanel2.add(searchfield);
+			searchfield.setColumns(10);
+			//
+			
+			//TITLE IN THE MAINVIEW
+			JLabel lblSearch2 = new JLabel("SEARCH BY DESIGNER");
+			lblSearch2.setFont(new Font("Tahoma", Font.BOLD, 30));
+			lblSearch2.setHorizontalAlignment(SwingConstants.CENTER);
+			lblSearch2.setBounds(62, 77, 367, 44);
+			searchpanel2.add(lblSearch2);
+			//
+			
+			//SEARCH BUTTON AND HIS ACTION
+			JButton searchButton2 = new JButton("");
+			searchButton2.setIcon(new ImageIcon(this.getClass().getResource("/images/lup.png")));
+			searchButton2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					//Code to search games by designer
+					try {
+						controller.searchGamesByCategory(searchfield.getText());
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					menuchange(4, p);	
+				}
+			});
+			searchButton2.setBounds(438, 172, 89, 61);
+			searchpanel2.add(searchButton2);
+			//
+			
+			//REPAINTING THE MAINPANEL
+			frame.revalidate();
+			p.repaint();
+			frame.repaint();
+			//
+			break;
+			//
+		}
+	}
 
 	private void loginview() {
 		frame.setSize(450, 300);
