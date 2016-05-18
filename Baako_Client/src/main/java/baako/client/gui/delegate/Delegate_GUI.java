@@ -26,6 +26,8 @@ public class Delegate_GUI extends GUI{
 	private ArrayList<String> categories = null;
 	private ArrayList<String> designers = null;
 	private ArrayList<String> admins = new ArrayList<String>();
+	private ArrayList<String> categories2 = new ArrayList<String>();
+	private ArrayList<String> designers2 = new ArrayList<String>();
 
 
 	public Delegate_GUI(BaakoController controller){
@@ -42,7 +44,7 @@ public class Delegate_GUI extends GUI{
 	public void fill(){
 		logger.info("FILL");
 
-		logger.info(controller.getAllCategories().get(0));
+//		logger.info(controller.getAllCategories().get(0));
 		categories.addAll(controller.getAllCategories());
 		for (String string : categories) {
 			categoryCBox.addItem(string);
@@ -53,7 +55,7 @@ public class Delegate_GUI extends GUI{
 			categoryCBoxOpt5.addItem(string);
 		}
 
-		logger.info(controller.getAllDesigners().get(0));
+//		logger.info(controller.getAllDesigners().get(0));
 		designers.addAll(controller.getAllDesigners());
 		for (String string : designers) {
 			designerCBox.addItem(string);
@@ -65,9 +67,6 @@ public class Delegate_GUI extends GUI{
 		logger.info("Out of fill");
 	}
 
-	/* (non-Javadoc)
-	 * @see baako.client.gui.GUI#fillNews()
-	 */
 	public void fillNews(){
 		logger.info("FILLING NEWS");
 		news = controller.getAllNews();
@@ -83,8 +82,6 @@ public class Delegate_GUI extends GUI{
 		owned = controller.getUserGames();
 	}
 
-
-
 	/* (non-Javadoc)
 	 * @see baako.client.gui.GUI#logIn(java.lang.String, java.lang.String)
 	 */
@@ -95,7 +92,6 @@ public class Delegate_GUI extends GUI{
 			else admin = false;
 			return true;
 		}else{
-			new JOptionPane("ERROR IN THE LOGIN",1);
 			return false;
 		}
 	}
@@ -115,12 +111,11 @@ public class Delegate_GUI extends GUI{
 	 * @see baako.client.gui.GUI#addGame(java.lang.String, int, java.lang.String, int)
 	 */
 	public boolean addGame(String name, int price, String description, int pegi){
-		logger.info("ADDING A GAME CONTROLLER");
-		ArrayList<String> categories = new ArrayList<String>();
-		categories.add(categoryCBox.getSelectedItem().toString());
-		designers.add(designerCBox.getSelectedItem().toString());
+		categories2.add(categoryCBox.getSelectedItem().toString());
+		designers2.add(designerCBox.getSelectedItem().toString());
 		categoriesToArray();
-		designersToArray();
+//		designersToArray();
+		logger.info(categories2.get(1).toString());
 		GameDTO g = new GameDTO(name, price, description, pegi);
 		games.add(g);
 		return controller.addGame(g);
@@ -137,15 +132,20 @@ public class Delegate_GUI extends GUI{
 	 */
 	public void categoriesToArray(){
 		if(categoryCBoxOpt1.getSelectedItem().toString()!=""){
-			categories.add(categoryCBoxOpt1.getSelectedItem().toString());
+			categories2.add(categoryCBoxOpt1.getSelectedItem().toString());
+			logger.info("2");
 		} else if(categoryCBoxOpt2.getSelectedItem().toString()!=""){
-			categories.add(categoryCBoxOpt2.getSelectedItem().toString());
+			categories2.add(categoryCBoxOpt2.getSelectedItem().toString());
+			logger.info("3");
 		}else if(categoryCBoxOpt3.getSelectedItem().toString()!=""){
-			categories.add(categoryCBoxOpt3.getSelectedItem().toString());
+			categories2.add(categoryCBoxOpt3.getSelectedItem().toString());
+			logger.info("4");
 		}else if(categoryCBoxOpt4.getSelectedItem().toString()!=""){
-			categories.add(categoryCBoxOpt4.getSelectedItem().toString());
+			categories2.add(categoryCBoxOpt4.getSelectedItem().toString());
+			logger.info("5");
 		}else if(categoryCBoxOpt5.getSelectedItem().toString()!=""){
-			categories.add(categoryCBoxOpt5.getSelectedItem().toString());
+			categories2.add(categoryCBoxOpt5.getSelectedItem().toString());
+			logger.info("6");
 		}
 	}
 
@@ -154,11 +154,11 @@ public class Delegate_GUI extends GUI{
 	 */
 	public void designersToArray(){
 		if(designerCBoxOpt1.getSelectedItem().toString()!=""){
-			designers.add(designerCBoxOpt1.getSelectedItem().toString());
+			designers2.add(designerCBoxOpt1.getSelectedItem().toString());
 		} else if(designerCBoxOpt2.getSelectedItem().toString()!=""){
-			designers.add(designerCBoxOpt2.getSelectedItem().toString());
+			designers2.add(designerCBoxOpt2.getSelectedItem().toString());
 		}else if(designerCBoxOpt3.getSelectedItem().toString()!=""){
-			designers.add(designerCBoxOpt3.getSelectedItem().toString());
+			designers2.add(designerCBoxOpt3.getSelectedItem().toString());
 		}
 	}
 
