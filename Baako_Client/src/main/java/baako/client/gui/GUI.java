@@ -1325,7 +1325,7 @@ public class GUI {
 
 			public void actionPerformed(ActionEvent e) {
 				int price = Integer.parseInt(priceField.getText());
-				logger.info(pegiCBox.getSelectedItem().toString());
+//				logger.info(pegiCBox.getSelectedItem().toString());
 				int pegi = Integer.parseInt(pegiCBox.getSelectedItem().toString());
 				if (categoryCBox.getSelectedItem().toString() == "") {
 					JOptionPane.showMessageDialog(frame, "The first category field cannot be empty.");

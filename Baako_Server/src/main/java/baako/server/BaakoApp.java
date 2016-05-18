@@ -86,6 +86,7 @@ public class BaakoApp {
 	 */
 	public ArrayList<String>  getAllCategories() throws RemoteException {
 		ArrayList<Category> aux = dao.getAllCategories();
+		logger.info(aux.get(0).getName());
 		ArrayList<String> aux2 = new ArrayList<String>();
 		for (Category category : aux) {
 			aux2.add(category.getName());

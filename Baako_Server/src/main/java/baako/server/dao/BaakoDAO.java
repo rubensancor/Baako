@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
 
 import javax.jdo.*;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import baako.server.database.Category;
 import baako.server.database.Designer;
@@ -119,6 +120,7 @@ public class BaakoDAO implements IBaakoDAO {
 			Game g1 = new Game(game.getName(), game.getPrice(), game.getDescription(), game.getPEGI());
 			pm.makePersistent(g1);
 		}finally{
+			//No hay que cerrar el pm
 		}
 	}
 
@@ -238,21 +240,22 @@ public class BaakoDAO implements IBaakoDAO {
 	public ArrayList<Category> getAllCategories() {
 		pm = pmf.getPersistenceManager();
 		tx = pm.currentTransaction();
-		ArrayList<Category> categories= new ArrayList<Category>();
+		ArrayList<Category> cats = new ArrayList<Category>();
 		try{
 			tx.begin();
-			Extent<Category> e = pm.getExtent(Category.class,true);
+			Extent<Category> e = pm.getExtent(Category.class);
 			Iterator<Category> iter = e.iterator();
 			while (iter.hasNext())
 			{
 				Category aux = (Category) iter.next();
 				logger.info(aux.getName());
-				categories.add(aux);
+				cats.add(aux);
 			}
 			tx.commit();
 			// Esto tiene que estar aqui, porque sino por alguna fuerza que desconozco, casca
-			for (Category cat: categories) logger.info(cat.getName());
-			return categories;
+//			for (Category cat : cats) cat.getGames()();
+			
+			return cats;
 
 		}finally{
 			if(tx.isActive()){
@@ -560,6 +563,5 @@ public class BaakoDAO implements IBaakoDAO {
 			pm.close();
 		}
 	}
-	
-	
+
 }

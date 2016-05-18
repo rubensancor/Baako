@@ -2,13 +2,9 @@ package baako.server.database;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory; 
 /**
  * @brief Class that instanciates the categories of the games
  * @author Baako-Team
@@ -20,7 +16,7 @@ public class Category {
 	/**
 	 * Attribute for loggin purposes
 	 */
-	Logger logger = LoggerFactory.getLogger(Category.class);
+	
 	@PrimaryKey
 	private String name;
 
@@ -34,6 +30,7 @@ public class Category {
 	 * @param name The name of the category
 	 */
 	public Category(String name) {
+		super();
 		this.name = name;
 		games = new HashSet<Game>();
 	}
@@ -53,7 +50,6 @@ public class Category {
 	 * @return the name of the category
 	 */
 	public String getName() {
-		logger.info("Get name: "+name);
 		return this.name;
 	}
 
@@ -62,7 +58,6 @@ public class Category {
 	 * @return the games with this category
 	 */
 	public Set<Game> getGames() {
-		logger.info("Set games");
 		return this.games;
 	}
 
@@ -74,7 +69,6 @@ public class Category {
 	 * 		<p>false - If it isn't</p>
 	 */
 	public boolean addGame(Game g){
-		logger.info("addGame");
 		games.add(g);
 		return true;
 	}
@@ -84,7 +78,6 @@ public class Category {
 	 * @return The number of games asociated to this category
 	 */
 	public int getNumbGames(){
-		logger.info("getNumberofGames");
 		return this.games.size();
 	}
 	
@@ -92,14 +85,14 @@ public class Category {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@Override
-	public boolean equals(Object obj) {
-		boolean b = false;
-		if(obj != null)
-			if(obj instanceof Category){
-				Category c = (Category)obj;
-				b = this.name.equals(c.getName());
-			}
-		return b;
-	}
+//	@Override
+//	public boolean equals(Object obj) {
+//		boolean b = false;
+//		if(obj != null)
+//			if(obj instanceof Category){
+//				Category c = (Category)obj;
+//				b = this.name.equals(c.getName());
+//			}
+//		return b;
+//	}
 }
