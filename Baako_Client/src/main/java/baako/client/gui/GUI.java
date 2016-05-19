@@ -401,7 +401,13 @@ public class GUI {
 			listOwned.setFont(new Font("Tahoma", Font.PLAIN, 32));
 			break;
 		///
-
+		
+		case 5:
+			listPeople = new JList(people.toArray());
+			listPeople.setBackground(Color.LIGHT_GRAY);
+			listPeople.setVisibleRowCount(20);
+			listPeople.setFont(new Font("Tahoma", Font.PLAIN, 32));
+			break;
 		default:
 			break;
 		}
@@ -976,7 +982,7 @@ public class GUI {
 
 					p.remove(p.findComponentAt(0,50));
 
-					//HERE WE DECLARE THE NEW MAINPOANEL RETURNING BACK TO THE GAMELIST
+					//HERE WE DECLARE THE NEW MAINPANEL RETURNING BACK TO THE GAMELIST
 					final JScrollPane mainPanel = new JScrollPane();
 					mainPanel.setBounds(0, 48, 574, 494);
 					p.add(mainPanel);
@@ -1032,7 +1038,7 @@ public class GUI {
 				public void actionPerformed(ActionEvent e) {
 
 					//ACTION TO PERFORM
-					
+					addFriend(listPeople.getSelectedValue());
 					//				
 				}
 			});
@@ -1052,7 +1058,7 @@ public class GUI {
 				public void actionPerformed(ActionEvent e) {
 				
 					//ACTION TO PERFORM
-					
+					deleteFriend(listPeople.getSelectedValue());
 					//
 				}
 			});
@@ -1133,7 +1139,6 @@ public class GUI {
 					try {
 						controller.searchGamesByCategory(searchfield.getText());
 					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					menuchange(4, p);
@@ -1192,7 +1197,6 @@ public class GUI {
 					try {
 						controller.searchGamesByCategory(searchfield.getText());
 					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					menuchange(4, p);	
@@ -2190,6 +2194,10 @@ public class GUI {
 	}
 	
 	public void fillPeople(){ }
+
+	public void addFriend(PlainUserDTO newFriend){}
+	
+	public void deleteFriend(PlainUserDTO oldFriend){}
 	
 	public boolean buy(){
 		return true;}

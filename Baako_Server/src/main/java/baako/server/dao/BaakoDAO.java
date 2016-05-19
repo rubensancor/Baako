@@ -113,7 +113,7 @@ public class BaakoDAO implements IBaakoDAO {
 			pm.close();
 		}		
 	}
-	
+
 	/** Add a game to the DB without categories and designers
 	 * @param game an instance of Game class
 	 */
@@ -263,8 +263,8 @@ public class BaakoDAO implements IBaakoDAO {
 			}
 			tx.commit();
 			// Esto tiene que estar aqui, porque sino por alguna fuerza que desconozco, casca
-//			for (Category cat : cats) cat.getGames()();
-			
+			//			for (Category cat : cats) cat.getGames()();
+
 			return cats;
 
 		}finally{
@@ -499,30 +499,28 @@ public class BaakoDAO implements IBaakoDAO {
 	public void editGame(Game game) {
 		//TODO
 		//DAO magic
-				pm = pmf.getPersistenceManager();
-				tx = pm.currentTransaction();
-				try{
-					tx.begin();
-					Query query = pm.newQuery("SELECT FROM "+Game.class.getName()+" WHERE name=='"+game.getName()+"'");
-					query.setUnique(true);
-					Game gaux = (Game) query.execute();
-					Game det = pm.detachCopy(gaux);
-					det.setPrice(game.getPrice());
-					det.setPEGI(game.getPEGI());
-					det.setDescription(game.getDescription());
-					
-				}finally{
-					if(tx.isActive()){
-						tx.rollback();
-					}
-					pm.close();
-				}
+		pm = pmf.getPersistenceManager();
+		tx = pm.currentTransaction();
+		try{
+			tx.begin();
+			Query query = pm.newQuery("SELECT FROM "+Game.class.getName()+" WHERE name=='"+game.getName()+"'");
+			query.setUnique(true);
+			Game gaux = (Game) query.execute();
+			Game det = pm.detachCopy(gaux);
+			det.setPrice(game.getPrice());
+			det.setPEGI(game.getPEGI());
+			det.setDescription(game.getDescription());
+
+		}finally{
+			if(tx.isActive()){
+				tx.rollback();
+			}
+			pm.close();
+		}
 	}
-	
+
 	public void editGame(News new2) {
-		//TODO
 		//DAO magic
-		//editgame
 		pm = pmf.getPersistenceManager();
 		tx = pm.currentTransaction();
 		try{
@@ -563,7 +561,7 @@ public class BaakoDAO implements IBaakoDAO {
 			tx.commit();
 			// Esto tiene que estar aqui, porque sino por alguna fuerza que desconozco, casca
 			for (News news2 : news) news2.getTitle();
-			
+
 			return news;
 
 		}finally{
@@ -574,4 +572,34 @@ public class BaakoDAO implements IBaakoDAO {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.server.dao.IBaakoDAO#deleteFriend(baako.server.database.PlainUser, baako.server.database.PlainUser)
+	 */
+	public void deleteFriend(PlainUser user, PlainUser oldFriend) {
+		//DAO magic
+		pm = pmf.getPersistenceManager();
+		tx = pm.currentTransaction();
+		try{
+			//DO NOT EDIT THIS!
+			tx.begin();
+			Query query = pm.newQuery("SELECT FROM "+PlainUser.class.getName()+" WHERE username=='"+user.getName()+"'");
+			query.setUnique(true);
+			logger.info("BEFORE");
+			PlainUser aux = (PlainUser) query.execute();
+			Query query2 = pm.newQuery("SELECT FROM "+PlainUser.class.getName()+" WHERE username=='"+oldFriend.getName()+"'");
+			query2.setUnique(true);
+			PlainUser aux2 = (PlainUser) query2.execute();
+			/*PlainUser det = */pm.detachCopy(aux2);
+			logger.info("AFTER");
+			aux.deleteFriend(aux2);
+			logger.info("SI");
+			tx.commit();
+			//			pm.makePersistent(u2);
+		}finally{
+			if(tx.isActive()){
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 }

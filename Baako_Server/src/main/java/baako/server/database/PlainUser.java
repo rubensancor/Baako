@@ -176,5 +176,13 @@ public class PlainUser extends User {
 		return true;
 	}
 
+	/**
+	 * @param aux2
+	 */
+	public void deleteFriend(PlainUser aux2) {
+		friends.remove(aux2);
+		
+	}
+
 
 }

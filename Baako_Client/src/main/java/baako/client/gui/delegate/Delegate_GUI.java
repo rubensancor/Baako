@@ -82,7 +82,7 @@ public class Delegate_GUI extends GUI{
 
 	public void fillPeople(){
 		logger.info("FILLING People");
-		news = controller.getAllUsers();
+		people = controller.getAllUsers();
 	}
 
 	/* (non-Javadoc)
@@ -129,6 +129,22 @@ public class Delegate_GUI extends GUI{
 		return controller.addNews(n);
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.client.gui.GUI#addFriend(baako.server.dto.PlainUserDTO)
+	 */
+	@Override
+	public void addFriend(PlainUserDTO newFriend) {
+		controller.addFriend(newFriend);
+	}
+	
+	/* (non-Javadoc)
+	 * @see baako.client.gui.GUI#deleteFriend(baako.server.dto.PlainUserDTO)
+	 */
+	@Override
+	public void deleteFriend(PlainUserDTO oldFriend) {
+		controller.deleteFriend(oldFriend);
+	}
+	
 	/**
 	 * 
 	 */
@@ -179,5 +195,7 @@ public class Delegate_GUI extends GUI{
 			return false;
 		}
 	}
+	
+	
 
 }

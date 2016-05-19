@@ -175,5 +175,31 @@ public class BaakoController {
 			return null;
 		}	 
 	}
+
+	/**
+	 * @return
+	 */
+	public ArrayList<PlainUserDTO> getAllUsers() {
+//		return rmi.getService().getAllUsers();;
+	return null;
+	}
+	
+	public boolean addFriend(PlainUserDTO newFriend){
+		try {
+			return rmi.getService().addFriend(user, newFriend);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean deleteFriend(PlainUserDTO oldFriend){
+		try {
+			return rmi.getService().deleteFriend(user, oldFriend);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 }

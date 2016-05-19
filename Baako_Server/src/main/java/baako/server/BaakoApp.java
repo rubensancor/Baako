@@ -11,7 +11,6 @@ import baako.server.manager.IBaakoManager;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import baako.server.assemblers.Assembler;
 import baako.server.auth.Auth;
@@ -234,15 +233,15 @@ public class BaakoApp {
 	 */
 	public ArrayList<GameDTO> getUserGames(PlainUserDTO user) {
 //		logger.info(user.getName()+" "+user.getEmail());
-//		return new ArrayList<GameDTO>(user.getGames());
-		PlainUser u = Assembler.getInstance().disassemble(user);
-		HashSet<Game> games = (HashSet<Game>) u.getGames();
-		ArrayList<GameDTO> dtoGames = new ArrayList<GameDTO>();
-		for (Game game : games) {
-			logger.info(game.getName()+" "+game.getDescription());
-			dtoGames.add(Assembler.getInstance().assemble(game));
-		}
-		return dtoGames;
+		return new ArrayList<GameDTO>(user.getGames());
+//		PlainUser u = Assembler.getInstance().disassemble(user);
+//		HashSet<Game> games = (HashSet<Game>) u.getGames();
+//		ArrayList<GameDTO> dtoGames = new ArrayList<GameDTO>();
+//		for (Game game : games) {
+//			logger.info(game.getName()+" "+game.getDescription());
+//			dtoGames.add(Assembler.getInstance().assemble(game));
+//		}
+//		return dtoGames;
 	}
 
 	/**
@@ -260,6 +259,26 @@ public class BaakoApp {
 		}
 		logger.info(aux.get(0).getName());
 		return aux2;
+	}
+
+	/**
+	 * @param user
+	 * @param newFriend
+	 * @return
+	 */
+	public boolean addFriend(PlainUserDTO user, PlainUserDTO newFriend) {
+		dao.addFriend(Assembler.getInstance().disassemble(user), Assembler.getInstance().disassemble(newFriend));
+		return true;
+	}
+
+	/**
+	 * @param user
+	 * @param oldFriend
+	 * @return
+	 */
+	public boolean deleteFriend(PlainUserDTO user, PlainUserDTO oldFriend) {
+		dao.deleteFriend(Assembler.getInstance().disassemble(user), Assembler.getInstance().disassemble(oldFriend));
+		return true;
 	}
 
 
