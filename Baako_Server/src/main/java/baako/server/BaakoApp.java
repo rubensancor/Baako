@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
  * @author Baako-Team
  *
  */
+@SuppressWarnings("deprecation")
 public class BaakoApp {
 	static Logger logger = LoggerFactory.getLogger(BaakoApp.class);
 	private Auth auth;
@@ -157,7 +158,6 @@ public class BaakoApp {
 	}
 
 
-	@SuppressWarnings("deprecation")
 	public static void main( String[] args ){
 		if (args.length != 3) {
 			System.out.println("How to invoke: java [policy] [codebase] Server.Server [host] [port] [server]");

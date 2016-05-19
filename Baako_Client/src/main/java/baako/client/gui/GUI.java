@@ -10,9 +10,7 @@ import java.net.URISyntaxException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.AbstractListModel;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -26,9 +24,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 import javax.swing.SwingConstants;
-import javax.swing.event.ListDataListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,6 +73,7 @@ public class GUI {
 	protected ArrayList<NewsDTO> news;
 	protected ArrayList<GameDTO> games;
 	protected ArrayList<GameDTO> owned;
+	protected ArrayList<PlainUserDTO> people;
 	boolean filled;
 
 	private int state;
@@ -99,6 +96,7 @@ public class GUI {
 	protected JList<NewsDTO> listNews;
 	protected JList<GameDTO> listGames;
 	protected JList<GameDTO> listOwned;
+	protected JList<PlainUserDTO> listPeople;
 
 
 	/**
@@ -359,6 +357,7 @@ public class GUI {
 		if (!filled) {
 			fillGames();
 			fillNews();
+			fillPeople();
 			filled = true;
 		}
 		if (!admin)	fillOwned();
@@ -1476,6 +1475,7 @@ public class GUI {
 
 		btnSend.addActionListener(new ActionListener() {
 
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 
 				//	Validations for the input of text in the registration
@@ -1832,6 +1832,7 @@ public class GUI {
 		frame.revalidate();
 	}
 
+	@SuppressWarnings("unused")
 	private void addwalletview(){
 		frame.setSize(350, 200);
 		final JPanel walletpanel = new JPanel();
@@ -2035,6 +2036,7 @@ public class GUI {
 		buttonspanel.add(btnAccept);
 		btnAccept.addActionListener(new ActionListener() {
 
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 
 				addNews(titleField.getText(), bodyArea.getText(), new Date(2016-1900, 04, 12));
@@ -2186,6 +2188,8 @@ public class GUI {
 	}
 	public void fillOwned(){
 	}
+	
+	public void fillPeople(){ }
 	
 	public boolean buy(){
 		return true;}

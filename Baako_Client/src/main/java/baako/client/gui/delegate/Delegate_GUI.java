@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
-import javax.swing.event.ListDataListener;
 
 import baako.client.controller.BaakoController;
 import baako.client.gui.GUI;
@@ -80,6 +78,11 @@ public class Delegate_GUI extends GUI{
 	public void fillOwned(){
 		logger.info("FILLING Owned");
 		owned = controller.getUserGames();
+	}
+
+	public void fillPeople(){
+		logger.info("FILLING People");
+		news = controller.getAllUsers();
 	}
 
 	/* (non-Javadoc)

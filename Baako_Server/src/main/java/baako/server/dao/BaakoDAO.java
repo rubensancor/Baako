@@ -8,11 +8,15 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.jdo.Extent;
+import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Query;
+import javax.jdo.Transaction;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; 
-
-import javax.jdo.*;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import baako.server.database.Category;
 import baako.server.database.Designer;
@@ -172,9 +176,8 @@ public class BaakoDAO implements IBaakoDAO {
 		tx = pm.currentTransaction();
 		try{
 			tx.begin();
-			//TODO SELECT TO PREVENT THE SERVER FROM STOPPING
 			Query query = pm.newQuery("DELETE FROM "+Game.class.getName()+" WHERE name=='"+game+"'");
-			Long n = (Long) query.execute();
+			/*Long n = (Long) */query.execute();
 			tx.commit();
 
 		}finally{
@@ -194,9 +197,8 @@ public class BaakoDAO implements IBaakoDAO {
 		tx = pm.currentTransaction();
 		try{
 			tx.begin();
-			//TODO SELECT TO PREVENT THE SERVER FROM STOPPING
 			Query query = pm.newQuery("DELETE FROM "+PlainUser.class.getName()+" WHERE username=='"+user+"'");
-			Long n = (Long) query.execute();
+			/*Long n = (Long) */query.execute();
 			tx.commit();
 
 		}finally{
@@ -375,7 +377,7 @@ public class BaakoDAO implements IBaakoDAO {
 			Query query2 = pm.newQuery("SELECT FROM "+PlainUser.class.getName()+" WHERE username=='"+u2.getName()+"'");
 			query2.setUnique(true);
 			PlainUser aux2 = (PlainUser) query2.execute();
-			PlainUser det = pm.detachCopy(aux2);
+			/*PlainUser det = */pm.detachCopy(aux2);
 			logger.info("AFTER");
 			aux.addFriend(aux2);
 			logger.info("SI");
