@@ -67,6 +67,9 @@ public class BaakoController {
 			logger.info("Adding game");
 			logger.info("Name-->"+game.getName());
 			logger.info("Price -->"+game.getPrice());
+			logger.info(game.getCategoriesString().get(0).toString());
+			logger.info(game.getDesignersString().get(0).toString());
+			
 			return rmi.getService().addGame(game);
 		}catch(RemoteException e){
 			e.printStackTrace();

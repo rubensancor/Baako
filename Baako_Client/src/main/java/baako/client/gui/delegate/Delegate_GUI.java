@@ -44,7 +44,7 @@ public class Delegate_GUI extends GUI{
 	public void fill(){
 		logger.info("FILL");
 
-//		logger.info(controller.getAllCategories().get(0));
+		//		logger.info(controller.getAllCategories().get(0));
 		categories.addAll(controller.getAllCategories());
 		for (String string : categories) {
 			categoryCBox.addItem(string);
@@ -55,7 +55,7 @@ public class Delegate_GUI extends GUI{
 			categoryCBoxOpt5.addItem(string);
 		}
 
-//		logger.info(controller.getAllDesigners().get(0));
+		//		logger.info(controller.getAllDesigners().get(0));
 		designers.addAll(controller.getAllDesigners());
 		for (String string : designers) {
 			designerCBox.addItem(string);
@@ -114,9 +114,8 @@ public class Delegate_GUI extends GUI{
 		categories2.add(categoryCBox.getSelectedItem().toString());
 		designers2.add(designerCBox.getSelectedItem().toString());
 		categoriesToArray();
-//		designersToArray();
-		logger.info(categories2.get(1).toString());
-		GameDTO g = new GameDTO(name, price, description, pegi);
+		designersToArray();
+		GameDTO g = new GameDTO(name, price, description, pegi,categories2, designers2);
 		games.add(g);
 		return controller.addGame(g);
 	}
@@ -131,19 +130,19 @@ public class Delegate_GUI extends GUI{
 	 * 
 	 */
 	public void categoriesToArray(){
-		if(categoryCBoxOpt1.getSelectedItem().toString()!=""){
+		if(categoryCBoxOpt1.getSelectedItem()!=null){
 			categories2.add(categoryCBoxOpt1.getSelectedItem().toString());
 			logger.info("2");
-		} else if(categoryCBoxOpt2.getSelectedItem().toString()!=""){
+		} else if(categoryCBoxOpt2.getSelectedItem()!=null){
 			categories2.add(categoryCBoxOpt2.getSelectedItem().toString());
 			logger.info("3");
-		}else if(categoryCBoxOpt3.getSelectedItem().toString()!=""){
+		}else if(categoryCBoxOpt3.getSelectedItem()!=null){
 			categories2.add(categoryCBoxOpt3.getSelectedItem().toString());
 			logger.info("4");
-		}else if(categoryCBoxOpt4.getSelectedItem().toString()!=""){
+		}else if(categoryCBoxOpt4.getSelectedItem()!=null){
 			categories2.add(categoryCBoxOpt4.getSelectedItem().toString());
 			logger.info("5");
-		}else if(categoryCBoxOpt5.getSelectedItem().toString()!=""){
+		}else if(categoryCBoxOpt5.getSelectedItem()!=null){
 			categories2.add(categoryCBoxOpt5.getSelectedItem().toString());
 			logger.info("6");
 		}
@@ -153,12 +152,15 @@ public class Delegate_GUI extends GUI{
 	 * 
 	 */
 	public void designersToArray(){
-		if(designerCBoxOpt1.getSelectedItem().toString()!=""){
+		if(designerCBoxOpt1.getSelectedItem()!=null){
 			designers2.add(designerCBoxOpt1.getSelectedItem().toString());
-		} else if(designerCBoxOpt2.getSelectedItem().toString()!=""){
+			logger.info("2");
+		} else if(designerCBoxOpt2.getSelectedItem()!=null){
 			designers2.add(designerCBoxOpt2.getSelectedItem().toString());
-		}else if(designerCBoxOpt3.getSelectedItem().toString()!=""){
+			logger.info("3");
+		}else if(designerCBoxOpt3.getSelectedItem()!=null){
 			designers2.add(designerCBoxOpt3.getSelectedItem().toString());
+			logger.info("4");
 		}
 	}
 

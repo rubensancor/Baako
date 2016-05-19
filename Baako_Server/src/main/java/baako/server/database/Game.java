@@ -21,25 +21,25 @@ public class Game {
 
 	@PrimaryKey
 	private String name;
-	
-	
+
+
 	private float price;
 	private String description;
 	private int PEGI;
-	
-	
+
+
 
 
 	@Persistent(table= "GAME_CATEGORIES")
 	@Join(column="GAME_ID")
 	@Element(column="CATEGORY_ID")
 	private Set<Category> categories;
-	
+
 	@Persistent(table= "GAME_DESIGNERS")
 	@Join(column="GAME_ID")
 	@Element(column="DESIGNER_ID")
 	private Set<Designer> designers;
-	
+
 	/**
 	 * Constructor with all the classes
 	 * @param name	The name of the game
@@ -55,8 +55,8 @@ public class Game {
 		this.categories = null;
 		this.designers = null;
 	}
-	
-	
+
+
 	/**
 	 * Constructor that allows to create a new user from a {@link GameDTO} given
 	 * @param user The {@link GameDTO} given
@@ -66,9 +66,22 @@ public class Game {
 		this.price = game.getPrice();
 		this.description = game.getDescription();
 		this.PEGI = game.getPEGI();
+		if(!game.getCategoriesString().isEmpty()){
+			for (String category : game.getCategoriesString()) {
+				addCategory(new Category(category));
+			}
+		}else if(!game.getDesignersString().isEmpty()){
+			for (String designer : game.getDesignersString()) {
+				addDesigner(new Designer(designer));
+			}
+		}else{
+			this.categories = game.getCategories();
+			this.designers = game.getDesigners();
+		}
+
 	}
 
-	
+
 	/**
 	 * @return the name
 	 */
@@ -172,7 +185,7 @@ public class Game {
 	public void addDesigner(Designer designer){
 		this.designers.add(designer);
 	}
-	
+
 	/**
 	 * Method that adds a category to the game
 	 * @param category the designer to add
@@ -180,7 +193,7 @@ public class Game {
 	public void addCategory(Category category){
 		this.categories.add(category);
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -192,5 +205,5 @@ public class Game {
 		if(!eq.getName().equals(name)) return false;
 		else return true;
 	}
-	
+
 }

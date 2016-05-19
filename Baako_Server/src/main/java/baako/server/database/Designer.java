@@ -26,6 +26,7 @@ public class Designer {
 	 * @param name The name of the designer
 	 */
 	public Designer(String name) {
+		super();
 		this.name = name;
 		games = new HashSet<Game>();
 	}
