@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
-import javax.swing.event.ListDataListener;
 
 import baako.client.controller.BaakoController;
 import baako.client.gui.GUI;
@@ -72,6 +70,11 @@ public class Delegate_GUI extends GUI{
 		owned = controller.getUserGames();
 	}
 
+	public void fillPeople(){
+		logger.info("FILLING People");
+		people = controller.getAllUsers();
+	}
+
 	/* (non-Javadoc)
 	 * @see baako.client.gui.GUI#logIn(java.lang.String, java.lang.String)
 	 */
@@ -114,6 +117,22 @@ public class Delegate_GUI extends GUI{
 		return controller.addNews(n);
 	}
 
+	/* (non-Javadoc)
+	 * @see baako.client.gui.GUI#addFriend(baako.server.dto.PlainUserDTO)
+	 */
+	@Override
+	public void addFriend(PlainUserDTO newFriend) {
+		controller.addFriend(newFriend);
+	}
+	
+	/* (non-Javadoc)
+	 * @see baako.client.gui.GUI#deleteFriend(baako.server.dto.PlainUserDTO)
+	 */
+	@Override
+	public void deleteFriend(PlainUserDTO oldFriend) {
+		controller.deleteFriend(oldFriend);
+	}
+	
 	public boolean buy(){
 		if(!owned.contains(listGames.getSelectedValue()))
 			if(controller.buy(listGames.getSelectedValue())){
@@ -126,5 +145,7 @@ public class Delegate_GUI extends GUI{
 			return false;
 		}
 	}
+	
+	
 
 }

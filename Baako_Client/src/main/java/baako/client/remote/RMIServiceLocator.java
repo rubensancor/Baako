@@ -25,9 +25,8 @@ public class RMIServiceLocator {
 
 		String serverName="//"+ IP +":"+ port +"/"+ name ;
 		try{
-			logger.info("Estoy RMI");
 			this.manager = (IBaakoManager) java.rmi.Naming.lookup(serverName);
-			logger.info("He conectado");
+			logger.info("Conected to "+serverName);
 		}catch(Exception e) {
 			logger.error("- Exception running the client: " + e.getMessage());
 			e.printStackTrace();

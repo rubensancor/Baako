@@ -11,7 +11,6 @@ import baako.server.manager.IBaakoManager;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import baako.server.assemblers.Assembler;
 import baako.server.auth.Auth;
@@ -31,6 +30,7 @@ import org.slf4j.LoggerFactory;
  * @author Baako-Team
  *
  */
+@SuppressWarnings("deprecation")
 public class BaakoApp {
 	static Logger logger = LoggerFactory.getLogger(BaakoApp.class);
 	private Auth auth;
@@ -76,7 +76,6 @@ public class BaakoApp {
 	}
 
 	public boolean addGame(GameDTO game) throws RemoteException{
-		logger.info("ADD GAME FACADE");
 		logger.info(game.getCategories().toString());
 		logger.info(game.getDesigners().toString());
 		dao.addGame(Assembler.getInstance().disassemble(game));
@@ -157,7 +156,6 @@ public class BaakoApp {
 	}
 
 
-	@SuppressWarnings("deprecation")
 	public static void main( String[] args ){
 		if (args.length != 3) {
 			System.out.println("How to invoke: java [policy] [codebase] Server.Server [host] [port] [server]");
@@ -234,15 +232,15 @@ public class BaakoApp {
 	 */
 	public ArrayList<GameDTO> getUserGames(PlainUserDTO user) {
 //		logger.info(user.getName()+" "+user.getEmail());
-//		return new ArrayList<GameDTO>(user.getGames());
-		PlainUser u = Assembler.getInstance().disassemble(user);
-		HashSet<Game> games = (HashSet<Game>) u.getGames();
-		ArrayList<GameDTO> dtoGames = new ArrayList<GameDTO>();
-		for (Game game : games) {
-			logger.info(game.getName()+" "+game.getDescription());
-			dtoGames.add(Assembler.getInstance().assemble(game));
-		}
-		return dtoGames;
+		return new ArrayList<GameDTO>(user.getGames());
+//		PlainUser u = Assembler.getInstance().disassemble(user);
+//		HashSet<Game> games = (HashSet<Game>) u.getGames();
+//		ArrayList<GameDTO> dtoGames = new ArrayList<GameDTO>();
+//		for (Game game : games) {
+//			logger.info(game.getName()+" "+game.getDescription());
+//			dtoGames.add(Assembler.getInstance().assemble(game));
+//		}
+//		return dtoGames;
 	}
 
 	/**
@@ -252,13 +250,40 @@ public class BaakoApp {
 		ArrayList<Game> aux = dao.getAllGames();
 		ArrayList<GameDTO> aux2 = new ArrayList<GameDTO>();
 		for (Game game : aux) {
-			logger.info(game.getName());
-			logger.info(game.getDescription());
-			logger.info(Integer.toString(game.getPEGI()));
-			logger.info(Float.toString(game.getPrice()));
 			aux2.add(Assembler.getInstance().assemble(game));
 		}
-		logger.info(aux.get(0).getName());
+		return aux2;
+	}
+
+	/**
+	 * @param user
+	 * @param newFriend
+	 * @return
+	 */
+	public boolean addFriend(PlainUserDTO user, PlainUserDTO newFriend) {
+		dao.addFriend(Assembler.getInstance().disassemble(user), Assembler.getInstance().disassemble(newFriend));
+		return true;
+	}
+
+	/**
+	 * @param user
+	 * @param oldFriend
+	 * @return
+	 */
+	public boolean deleteFriend(PlainUserDTO user, PlainUserDTO oldFriend) {
+		dao.deleteFriend(Assembler.getInstance().disassemble(user), Assembler.getInstance().disassemble(oldFriend));
+		return true;
+	}
+
+	/**
+	 * @return
+	 */
+	public ArrayList<PlainUserDTO> getAllUsers() {
+		ArrayList<PlainUser> aux = dao.getAllUsers();
+		ArrayList<PlainUserDTO> aux2 = new ArrayList<PlainUserDTO>();
+		for (PlainUser user: aux) {
+			aux2.add(new PlainUserDTO(user));
+		}
 		return aux2;
 	}
 

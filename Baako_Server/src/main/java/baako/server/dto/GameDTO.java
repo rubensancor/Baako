@@ -1,12 +1,9 @@
 package baako.server.dto;
 
 import java.io.Serializable;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.slf4j.Logger;
 
 import baako.server.database.Category;
 import baako.server.database.Designer;

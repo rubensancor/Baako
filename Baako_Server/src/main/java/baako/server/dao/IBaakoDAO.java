@@ -3,7 +3,6 @@
  */
 package baako.server.dao;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import baako.server.database.Category;
@@ -112,6 +111,12 @@ public interface IBaakoDAO {
 		 * @param game
 		 */
 		public void editGame(Game game);
+
+		/**
+		 * @param user
+		 * @param oldFriend
+		 */
+		public void deleteFriend(PlainUser user, PlainUser oldFriend);
 		
 		/**
 		 * @return

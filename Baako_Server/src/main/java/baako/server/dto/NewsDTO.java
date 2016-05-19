@@ -12,17 +12,17 @@ import baako.server.database.News;
  * @author gusy
  *
  */
-public class NewsDTO implements Serializable{
+public class NewsDTO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private String title;
 	private String body;
 	private Date date;
-	
+
 	/**
 	 * 
 	 */
@@ -31,8 +31,8 @@ public class NewsDTO implements Serializable{
 		this.body = body;
 		this.date = date;
 	}
-	
-	public NewsDTO(News n){
+
+	public NewsDTO(News n) {
 		this.title = n.getTitle();
 		this.body = n.getBody();
 		this.date = n.getDate();
@@ -46,7 +46,8 @@ public class NewsDTO implements Serializable{
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param title
+	 *            the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -60,7 +61,8 @@ public class NewsDTO implements Serializable{
 	}
 
 	/**
-	 * @param body the body to set
+	 * @param body
+	 *            the body to set
 	 */
 	public void setBody(String body) {
 		this.body = body;
@@ -74,21 +76,21 @@ public class NewsDTO implements Serializable{
 	}
 
 	/**
-	 * @param date the date to set
+	 * @param date
+	 *            the date to set
 	 */
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
-	@SuppressWarnings("deprecation")
 	@Override
 	public String toString() {
-//		return this.title +" [" ;//*+ this.date.getDay() +"/" + this.date.getMonth() +"/" + this.date.getYear()+"]";*//
-			return this.title;
+		return this.title;
 	}
-	
-	
+
 }

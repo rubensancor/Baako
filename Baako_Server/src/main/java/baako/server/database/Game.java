@@ -1,6 +1,5 @@
 package baako.server.database;
 
-import java.net.URI;
 import java.util.Set;
 
 import javax.jdo.annotations.Element;
@@ -10,7 +9,6 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import baako.server.dto.GameDTO;
-import baako.server.dto.UserDTO;
 
 /**
  * @brief The class for games

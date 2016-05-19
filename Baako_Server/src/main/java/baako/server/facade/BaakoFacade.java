@@ -143,6 +143,27 @@ public class BaakoFacade extends UnicastRemoteObject implements IBaakoManager{
 	public ArrayList<GameDTO> getAllGames() throws RemoteException {
 		return app.getAllGames();
 	}
+
+	/* (non-Javadoc)
+	 * @see baako.server.manager.IBaakoManager#addFriend(baako.server.dto.PlainUserDTO, baako.server.dto.PlainUserDTO)
+	 */
+	public boolean addFriend(PlainUserDTO user, PlainUserDTO newFriend) throws RemoteException {
+		return app.addFriend(user, newFriend);
+	}
+
+	/* (non-Javadoc)
+	 * @see baako.server.manager.IBaakoManager#deleteFriend(baako.server.dto.PlainUserDTO, baako.server.dto.PlainUserDTO)
+	 */
+	public boolean deleteFriend(PlainUserDTO user, PlainUserDTO oldFriend) throws RemoteException {
+		return app.deleteFriend(user, oldFriend);
+	}
+
+	/* (non-Javadoc)
+	 * @see baako.server.manager.IBaakoManager#getAllUsers()
+	 */
+	public ArrayList<PlainUserDTO> getAllUsers() throws RemoteException {
+		return app.getAllUsers();
+	}
 	
 
 
