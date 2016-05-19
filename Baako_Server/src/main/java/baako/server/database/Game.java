@@ -86,11 +86,11 @@ public class Game {
 		this.url = game.getUrl();
 		if(!game.getCategoriesString().isEmpty()){
 			for (String category : game.getCategoriesString()) {
-				addCategory(new Category(category));
+				categories.add(new Category(category));
 			}
 		}else if(!game.getDesignersString().isEmpty()){
 			for (String designer : game.getDesignersString()) {
-				addDesigner(new Designer(designer));
+				designers.add(new Designer(designer));
 			}
 		}else{
 			this.categories = game.getCategories();

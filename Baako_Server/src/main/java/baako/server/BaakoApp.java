@@ -11,6 +11,7 @@ import baako.server.manager.IBaakoManager;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import baako.server.assemblers.Assembler;
 import baako.server.auth.Auth;
@@ -232,15 +233,16 @@ public class BaakoApp {
 	 */
 	public ArrayList<GameDTO> getUserGames(PlainUserDTO user) {
 //		logger.info(user.getName()+" "+user.getEmail());
-		return new ArrayList<GameDTO>(user.getGames());
-//		PlainUser u = Assembler.getInstance().disassemble(user);
-//		HashSet<Game> games = (HashSet<Game>) u.getGames();
-//		ArrayList<GameDTO> dtoGames = new ArrayList<GameDTO>();
-//		for (Game game : games) {
-//			logger.info(game.getName()+" "+game.getDescription());
-//			dtoGames.add(Assembler.getInstance().assemble(game));
-//		}
-//		return dtoGames;
+//		return new ArrayList<GameDTO>(user.getGames());
+		logger.info("Woohoo");
+		PlainUser u = (PlainUser) dao.getUser(user.getName());
+		HashSet<Game> games = (HashSet<Game>) u.getGames();
+		ArrayList<GameDTO> dtoGames = new ArrayList<GameDTO>();
+		for (Game game : games) {
+			logger.info(game.getName()+" "+game.getDescription());
+			dtoGames.add(Assembler.getInstance().assemble(game));
+		}
+		return dtoGames;
 	}
 
 	/**
@@ -285,6 +287,20 @@ public class BaakoApp {
 			aux2.add(new PlainUserDTO(user));
 		}
 		return aux2;
+	}
+
+	/**
+	 * @param name
+	 * @param price
+	 * @param text
+	 * @param pegi
+	 * @param values2
+	 * @param values4
+	 * @return 
+	 */
+	public boolean editGame(String name, int price, String text, int pegi, ArrayList<String> values2,
+			ArrayList<String> values4) {
+		
 	}
 
 

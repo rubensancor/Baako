@@ -225,7 +225,7 @@ public class GUI {
 
 		////SUBMENU OF MARKET THAT ALLOWS US TO SEARCH DESIRED GAMES
 		JMenu mnSearchGames = new JMenu("Search Games");
-		mnMarket.add(mnSearchGames);
+		//mnMarket.add(mnSearchGames);
 
 		/////SUBMENU TO SEARCH BY DESIRED CATEGORY
 		JMenu mnByCategory = new JMenu("By Category");
@@ -357,6 +357,7 @@ public class GUI {
 			fillGames();
 			fillNews();
 			fillPeople();
+			fill();
 			filled = true;
 			logger.info("Filled");
 		}
@@ -867,6 +868,7 @@ public class GUI {
 				public void actionPerformed(ActionEvent e) {
 
 					try {
+						logger.info("Going to "+listOwned.getSelectedValue().getUrl());
 						Desktop.getDesktop().browse(new java.net.URI(/*"http://www.google.com/search?q="+*/listOwned.getSelectedValue().getUrl()));
 					} catch (IOException e1) {
 						e1.printStackTrace();
@@ -1537,7 +1539,6 @@ public class GUI {
 	}
 
 	private void addgameview(){
-		fill();
 		frame.setBounds(200,0,450, 805);
 		frame.getContentPane().setLayout(null);
 		final JPanel panel = new JPanel();
@@ -1760,6 +1761,10 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				int price = Integer.parseInt(priceField.getText());
 				int pegi = Integer.parseInt(pegiCBox.getSelectedItem().toString());
+				for (int i = 0; i < model2.size(); i++)
+					values2.add(model2.get(i));
+				for (int i = 0; i < model4.size(); i++)
+					values4.add(model4.get(i));
 				if (values2.isEmpty()) {
 					JOptionPane.showMessageDialog(frame, "The game needs at least one category.");
 				}else if(values4.isEmpty()){
@@ -1994,13 +1999,16 @@ public class GUI {
 
 			public void actionPerformed(ActionEvent e) {
 				int price = Integer.parseInt(priceField.getText());
-				//				logger.info(pegiCBox.getSelectedItem().toString());
 				int pegi = Integer.parseInt(pegiCBox.getSelectedItem().toString());
+				for (int i = 0; i < model2.size(); i++)
+					values2.add(model2.get(i));
+				for (int i = 0; i < model4.size(); i++)
+					values4.add(model4.get(i));
 				if (values2.isEmpty()) {
-					JOptionPane.showMessageDialog(frame, "The first category field cannot be empty.");
+					JOptionPane.showMessageDialog(frame, "The game needs at least one category.");
 				}else if(values4.isEmpty()){
-					JOptionPane.showMessageDialog(frame, "The first designer field cannot be empty.");
-				}else if(addGame(nameField.getText(), price, descTArea.getText(), pegi)){
+					JOptionPane.showMessageDialog(frame, "The game needs at least one designer.");
+				}else if(editGame(price, descTArea.getText(), pegi)){
 					panel.setVisible(false);
 					mainview();
 				}
@@ -2010,6 +2018,7 @@ public class GUI {
 		frame.repaint();
 		frame.revalidate();
 	}
+
 
 	@SuppressWarnings("unused")
 	private void addwalletview(){
@@ -2352,7 +2361,18 @@ public class GUI {
 	public boolean addGame(String name, int price, String description, int pegi){
 		return true;
 	}
+	
+	/**
+	 * @param price
+	 * @param text
+	 * @param pegi
+	 * @return
+	 */
+	protected boolean editGame(int price, String text, int pegi) {
+		return false;
+	}
 
+	
 	public void fill(){
 	}
 
