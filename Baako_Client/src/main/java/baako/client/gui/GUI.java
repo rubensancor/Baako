@@ -99,7 +99,10 @@ public class GUI {
 	protected JList<NewsDTO> listNews;
 	protected JList<GameDTO> listGames;
 	protected JList<GameDTO> listOwned;
-
+	private JList listcat;
+	private JList listselectedcat;
+	private JList listdes;
+	private JList listselectedes ;
 
 	/**
 	 * Create the application.
@@ -120,7 +123,7 @@ public class GUI {
 		filled = false;
 		//frame.setBounds(100, 100, 450, 300);
 		//frame.setResizable(false);
-		loginview();
+		addgameview();
 		frame.repaint();
 		frame.revalidate();
 	}
@@ -1510,12 +1513,13 @@ public class GUI {
 		frame.revalidate();
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked", "unchecked", "unchecked", "unused", "unchecked" })
 	private void addgameview(){
-		frame.setSize(450, 600);
+		frame.setBounds(200,0,450, 805);
 		frame.getContentPane().setLayout(null);
 		final JPanel panel = new JPanel();
 		panel.setBackground(new Color(105, 105, 105));
-		panel.setBounds(0, 0, 434, 561);
+		panel.setBounds(0, 0, 434, 741);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -1558,7 +1562,7 @@ public class GUI {
 		lblDesigner.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDesigner.setForeground(new Color(255, 255, 255));
 		lblDesigner.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblDesigner.setBounds(62, 393, 77, 22);
+		lblDesigner.setBounds(62, 468, 77, 22);
 		panel.add(lblDesigner);
 
 		nameField = new JTextField();
@@ -1580,63 +1584,142 @@ public class GUI {
 		pegiCBox.setBounds(164, 120, 100, 20);
 		panel.add(pegiCBox);
 
-		categoryCBox = new JComboBox<String>();
-		categoryCBox.insertItemAt("", 0);
-		categoryCBox.setBounds(164, 285, 100, 20);
-		panel.add(categoryCBox);
+		//VALUES FOR POSSIBLE CATEGORIES
+		ArrayList<String> values1 = new ArrayList<String>();
+		values1.add("category1");
+		values1.add("category2");
+		values1.add("category3");
+		values1.add("category4");
+		
+		//ARRAYLIST FOR SELECTEDCAT
+		ArrayList<String> values2 = new ArrayList<String>();
+		
+		
+		//LIST INIZIALIZATION
+		listcat= new JList();
+		listdes= new JList();
+		listselectedcat= new JList();
+		listselectedes= new JList();
+		
+		//MODEL FOR LISTCAT
+		final DefaultListModel model1 = new DefaultListModel();
+		for(int i=0;i<values1.size();i++){
+			model1.addElement(values1.get(i));
+		}
+		listcat = new JList(model1);
+		listcat.setBounds(10, 310, 195, 151);
+		listcat.setToolTipText("");
+		
+		GridBagConstraints gbc_listcat = new GridBagConstraints();
+		gbc_listcat.insets = new Insets(0, 0, 5, 5);
+		gbc_listcat.fill = GridBagConstraints.BOTH;
+		gbc_listcat.gridx = 2;
+		gbc_listcat.gridy = 2;
+		panel.add(listcat, gbc_listcat);
+		
+		//MODEL FOR SELECTEDCAT
+		final DefaultListModel model2 = new DefaultListModel();
+		listselectedcat= new JList(model2);
+		listselectedcat.setBounds(215, 310, 203, 151);
+		
+		GridBagConstraints gbc_listselectedcat = new GridBagConstraints();
+		gbc_listselectedcat.insets = new Insets(0, 0, 5, 0);
+		gbc_listselectedcat.fill = GridBagConstraints.BOTH;
+		gbc_listselectedcat.gridx = 5;
+		gbc_listselectedcat.gridy = 2;
+		panel.add(listselectedcat, gbc_listselectedcat);
+		
+		
+		//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
+		listcat.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(listcat.getSelectedIndex());
+				model2.addElement(model1.getElementAt(listcat.getSelectedIndex()));
+				model1.remove(listcat.getSelectedIndex());
 
-		designerCBox = new JComboBox<String>();
-		designerCBox.insertItemAt("", 0);
-		designerCBox.setBounds(164, 393, 100, 20);
-		panel.add(designerCBox);
+				frame.repaint();
+				
+			}
+		});
+		
+		//VALUES FOR POSSIBLE DESIGNERS
+				ArrayList<String> values3 = new ArrayList<String>();
+				values3.add("designer1");
+				values3.add("designer2");
+				values3.add("designer3");
+				values3.add("designer4");
+				
+				//LIST FOR SELECTEDDES
+				ArrayList<String> values4 = new ArrayList<String>();
+		
+		//MODEL FOR LISTDES
+				final DefaultListModel model3 = new DefaultListModel();
+				for(int i=0;i<values3.size();i++){
+					model3.addElement(values3.get(i));
+				}
+				listdes = new JList(model3);
+				listdes.setBounds(10, 501, 195, 160);
+				listdes.setToolTipText("");
+				listdes.setVisible(true);
+				
+				GridBagConstraints gbc_listdes = new GridBagConstraints();
+				gbc_listdes.insets = new Insets(0, 0, 5, 5);
+				gbc_listdes.fill = GridBagConstraints.BOTH;
+				gbc_listdes.gridx = 2;
+				gbc_listdes.gridy = 2;
+				panel.add(listdes, gbc_listdes);
+				
 
-		categoryCBoxOpt1 = new JComboBox<String>();
-		categoryCBoxOpt1.insertItemAt("", 0);
-		categoryCBoxOpt1.setBounds(294, 320, 100, 20);
-		panel.add(categoryCBoxOpt1);
+				
+				//MODEL FOR SELECTEDCAT
+				final DefaultListModel model4 = new DefaultListModel();
+				listselectedes = new JList(model4);
+				listselectedes.setBounds(215, 501, 202, 160);
+				
+				GridBagConstraints gbc_listselectedes= new GridBagConstraints();
+				gbc_listselectedes.insets = new Insets(0, 0, 5, 0);
+				gbc_listselectedes.fill = GridBagConstraints.BOTH;
+				gbc_listselectedes.gridx = 5;
+				gbc_listselectedes.gridy = 2;
+				panel.add(listselectedes, gbc_listselectedes);
+				
+				//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
+				listdes.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						System.out.println(listdes.getSelectedIndex());
+						model4.addElement(model3.getElementAt(listdes.getSelectedIndex()));
+						model3.remove(listdes.getSelectedIndex());
 
-		categoryCBoxOpt2 = new JComboBox<String>();
-		categoryCBoxOpt2.insertItemAt("", 0);
-		categoryCBoxOpt2.setBounds(164, 320, 100, 22);
-		panel.add(categoryCBoxOpt2);
+						frame.repaint();
+						
+					}
+				});
+		
+		//AND VICEVERSA
+		listselectedes.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			
+			System.out.println(listdes.getSelectedIndex());
+			model3.addElement(model4.getElementAt(listselectedes.getSelectedIndex()));
+			model4.remove(listselectedes.getSelectedIndex());
 
-		categoryCBoxOpt3 = new JComboBox<String>();
-		categoryCBoxOpt3.insertItemAt("", 0);
-		categoryCBoxOpt3.setBounds(164, 355, 100, 24);
-		panel.add(categoryCBoxOpt3);
+			frame.repaint();
 
-		categoryCBoxOpt4 = new JComboBox<String>();
-		categoryCBoxOpt4.insertItemAt("", 0);
-		categoryCBoxOpt4.setBounds(294, 285, 100, 22);
-		panel.add(categoryCBoxOpt4);
+			
+		}
+	});
 
-		categoryCBoxOpt5 = new JComboBox<String>();
-		categoryCBoxOpt5.insertItemAt("", 0);
-		categoryCBoxOpt5.setBounds(294, 355, 100, 20);
-		panel.add(categoryCBoxOpt5);
-
-		designerCBoxOpt1 = new JComboBox<String>();
-		designerCBoxOpt1.insertItemAt("", 0);
-		designerCBoxOpt1.setBounds(294, 393, 100, 20);
-		panel.add(designerCBoxOpt1);
-
-		designerCBoxOpt2 = new JComboBox<String>();
-		designerCBoxOpt2.insertItemAt("", 0);
-		designerCBoxOpt2.setBounds(164, 420, 100, 20);
-		panel.add(designerCBoxOpt2);
-
-		designerCBoxOpt3 = new JComboBox<String>();
-		designerCBoxOpt3.insertItemAt("", 0);
-		designerCBoxOpt3.setBounds(294, 420, 100, 20);
-		panel.add(designerCBoxOpt3);
-
+		
 		final JTextArea descTArea = new JTextArea();
 		descTArea.setBounds(164, 150, 230, 122);
 		panel.add(descTArea);
 
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBackground(new Color(255, 51, 0));
-		btnCancel.setBounds(100, 520, 95, 28);
+		btnCancel.setBounds(93, 702, 95, 28);
 		panel.add(btnCancel);
 
 		btnCancel.addActionListener(new ActionListener() {
@@ -1648,7 +1731,8 @@ public class GUI {
 		});
 
 		JButton btnSend = new JButton("Send");
-		btnSend.setBounds(300, 520, 95, 28);
+		btnSend.setBounds(291, 702, 95, 28);
+		btnSend.setBackground(new Color(50, 205, 50));
 		panel.add(btnSend);
 
 		btnSend.addActionListener(new ActionListener() {
@@ -1675,11 +1759,11 @@ public class GUI {
 	}
 
 	private void editgameview(){
-		frame.setSize(450, 600);
+		frame.setSize(450, 805);
 		frame.getContentPane().setLayout(null);
 		final JPanel panel = new JPanel();
 		panel.setBackground(new Color(105, 105, 105));
-		panel.setBounds(0, 0, 434, 561);
+		panel.setBounds(0, 0, 434, 741);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -1722,7 +1806,7 @@ public class GUI {
 		lblDesigner.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDesigner.setForeground(new Color(255, 255, 255));
 		lblDesigner.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblDesigner.setBounds(62, 393, 77, 22);
+		lblDesigner.setBounds(62, 468, 77, 22);
 		panel.add(lblDesigner);
 
 		nameField = new JTextField();
@@ -1744,63 +1828,142 @@ public class GUI {
 		pegiCBox.setBounds(164, 120, 100, 20);
 		panel.add(pegiCBox);
 
-		categoryCBox = new JComboBox<String>();
-		categoryCBox.insertItemAt("", 0);
-		categoryCBox.setBounds(164, 285, 100, 20);
-		panel.add(categoryCBox);
+		//VALUES FOR POSSIBLE CATEGORIES
+		ArrayList<String> values1 = new ArrayList<String>();
+		values1.add("category1");
+		values1.add("category2");
+		values1.add("category3");
+		values1.add("category4");
+		
+		//ARRAYLIST FOR SELECTEDCAT
+		ArrayList<String> values2 = new ArrayList<String>();
+		
+		
+		//LIST INIZIALIZATION
+		listcat= new JList();
+		listdes= new JList();
+		listselectedcat= new JList();
+		listselectedes= new JList();
+		
+		//MODEL FOR LISTCAT
+		final DefaultListModel model1 = new DefaultListModel();
+		for(int i=0;i<values1.size();i++){
+			model1.addElement(values1.get(i));
+		}
+		listcat = new JList(model1);
+		listcat.setBounds(10, 310, 195, 151);
+		listcat.setToolTipText("");
+		
+		GridBagConstraints gbc_listcat = new GridBagConstraints();
+		gbc_listcat.insets = new Insets(0, 0, 5, 5);
+		gbc_listcat.fill = GridBagConstraints.BOTH;
+		gbc_listcat.gridx = 2;
+		gbc_listcat.gridy = 2;
+		panel.add(listcat, gbc_listcat);
+		
+		//MODEL FOR SELECTEDCAT
+		final DefaultListModel model2 = new DefaultListModel();
+		listselectedcat= new JList(model2);
+		listselectedcat.setBounds(215, 310, 203, 151);
+		
+		GridBagConstraints gbc_listselectedcat = new GridBagConstraints();
+		gbc_listselectedcat.insets = new Insets(0, 0, 5, 0);
+		gbc_listselectedcat.fill = GridBagConstraints.BOTH;
+		gbc_listselectedcat.gridx = 5;
+		gbc_listselectedcat.gridy = 2;
+		panel.add(listselectedcat, gbc_listselectedcat);
+		
+		
+		//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
+		listcat.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(listcat.getSelectedIndex());
+				model2.addElement(model1.getElementAt(listcat.getSelectedIndex()));
+				model1.remove(listcat.getSelectedIndex());
 
-		designerCBox = new JComboBox<String>();
-		designerCBox.insertItemAt("", 0);
-		designerCBox.setBounds(164, 393, 100, 20);
-		panel.add(designerCBox);
+				frame.repaint();
+				
+			}
+		});
+		
+		//VALUES FOR POSSIBLE DESIGNERS
+				ArrayList<String> values3 = new ArrayList<String>();
+				values3.add("designer1");
+				values3.add("designer2");
+				values3.add("designer3");
+				values3.add("designer4");
+				
+				//LIST FOR SELECTEDDES
+				ArrayList<String> values4 = new ArrayList<String>();
+		
+		//MODEL FOR LISTDES
+				final DefaultListModel model3 = new DefaultListModel();
+				for(int i=0;i<values3.size();i++){
+					model3.addElement(values3.get(i));
+				}
+				listdes = new JList(model3);
+				listdes.setBounds(10, 501, 195, 160);
+				listdes.setToolTipText("");
+				listdes.setVisible(true);
+				
+				GridBagConstraints gbc_listdes = new GridBagConstraints();
+				gbc_listdes.insets = new Insets(0, 0, 5, 5);
+				gbc_listdes.fill = GridBagConstraints.BOTH;
+				gbc_listdes.gridx = 2;
+				gbc_listdes.gridy = 2;
+				panel.add(listdes, gbc_listdes);
+				
 
-		categoryCBoxOpt1 = new JComboBox<String>();
-		categoryCBoxOpt1.insertItemAt("", 0);
-		categoryCBoxOpt1.setBounds(294, 320, 100, 20);
-		panel.add(categoryCBoxOpt1);
+				
+				//MODEL FOR SELECTEDCAT
+				final DefaultListModel model4 = new DefaultListModel();
+				listselectedes = new JList(model4);
+				listselectedes.setBounds(215, 501, 202, 160);
+				
+				GridBagConstraints gbc_listselectedes= new GridBagConstraints();
+				gbc_listselectedes.insets = new Insets(0, 0, 5, 0);
+				gbc_listselectedes.fill = GridBagConstraints.BOTH;
+				gbc_listselectedes.gridx = 5;
+				gbc_listselectedes.gridy = 2;
+				panel.add(listselectedes, gbc_listselectedes);
+				
+				//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
+				listdes.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						System.out.println(listdes.getSelectedIndex());
+						model4.addElement(model3.getElementAt(listdes.getSelectedIndex()));
+						model3.remove(listdes.getSelectedIndex());
 
-		categoryCBoxOpt2 = new JComboBox<String>();
-		categoryCBoxOpt2.insertItemAt("", 0);
-		categoryCBoxOpt2.setBounds(164, 320, 100, 22);
-		panel.add(categoryCBoxOpt2);
+						frame.repaint();
+						
+					}
+				});
+		
+		//AND VICEVERSA
+		listselectedes.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			
+			System.out.println(listdes.getSelectedIndex());
+			model3.addElement(model4.getElementAt(listselectedes.getSelectedIndex()));
+			model4.remove(listselectedes.getSelectedIndex());
 
-		categoryCBoxOpt3 = new JComboBox<String>();
-		categoryCBoxOpt3.insertItemAt("", 0);
-		categoryCBoxOpt3.setBounds(164, 355, 100, 24);
-		panel.add(categoryCBoxOpt3);
+			frame.repaint();
 
-		categoryCBoxOpt4 = new JComboBox<String>();
-		categoryCBoxOpt4.insertItemAt("", 0);
-		categoryCBoxOpt4.setBounds(294, 285, 100, 22);
-		panel.add(categoryCBoxOpt4);
+			
+		}
+	});
 
-		categoryCBoxOpt5 = new JComboBox<String>();
-		categoryCBoxOpt5.insertItemAt("", 0);
-		categoryCBoxOpt5.setBounds(294, 355, 100, 20);
-		panel.add(categoryCBoxOpt5);
-
-		designerCBoxOpt1 = new JComboBox<String>();
-		designerCBoxOpt1.insertItemAt("", 0);
-		designerCBoxOpt1.setBounds(294, 393, 100, 20);
-		panel.add(designerCBoxOpt1);
-
-		designerCBoxOpt2 = new JComboBox<String>();
-		designerCBoxOpt2.insertItemAt("", 0);
-		designerCBoxOpt2.setBounds(164, 420, 100, 20);
-		panel.add(designerCBoxOpt2);
-
-		designerCBoxOpt3 = new JComboBox<String>();
-		designerCBoxOpt3.insertItemAt("", 0);
-		designerCBoxOpt3.setBounds(294, 420, 100, 20);
-		panel.add(designerCBoxOpt3);
-
+		
 		final JTextArea descTArea = new JTextArea();
 		descTArea.setBounds(164, 150, 230, 122);
 		panel.add(descTArea);
 
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBackground(new Color(255, 51, 0));
-		btnCancel.setBounds(100, 520, 95, 28);
+		btnCancel.setBounds(93, 702, 95, 28);
 		panel.add(btnCancel);
 
 		btnCancel.addActionListener(new ActionListener() {
@@ -1812,16 +1975,23 @@ public class GUI {
 		});
 
 		JButton btnSend = new JButton("Send");
-		btnSend.setBounds(300, 520, 95, 28);
+		btnSend.setBounds(291, 702, 95, 28);
+		btnSend.setBackground(new Color(50, 205, 50));
 		panel.add(btnSend);
 
 		btnSend.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				int price = Integer.parseInt(priceField.getText());
-				logger.info(pegiCBox.getSelectedItem().toString());
+//				logger.info(pegiCBox.getSelectedItem().toString());
 				int pegi = Integer.parseInt(pegiCBox.getSelectedItem().toString());
-				if(addGame(nameField.getText(), price, descTArea.getText(), pegi)){
+				if (categoryCBox.getSelectedItem() == null) {
+					JOptionPane.showMessageDialog(frame, "The first category field cannot be empty.");
+					categoryCBox.requestFocus();
+				}else if(designerCBox.getSelectedItem() == null){
+					JOptionPane.showMessageDialog(frame, "The first designer field cannot be empty.");
+					designerCBox.requestFocus();
+				}else if(addGame(nameField.getText(), price, descTArea.getText(), pegi)){
 					panel.setVisible(false);
 					mainview();
 				}
