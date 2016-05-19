@@ -215,9 +215,13 @@ public class BaakoController {
 	 * @param values4
 	 * @return 
 	 */
-	public boolean editGame(String name, int price, String text, int pegi, ArrayList<String> values2,
-			ArrayList<String> values4) {
-		return rmi.getService().editGame(name, price, text, pegi, values2, values4);
+	public boolean editGame(GameDTO g) {
+		try {
+			return rmi.getService().editGame(g);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 }

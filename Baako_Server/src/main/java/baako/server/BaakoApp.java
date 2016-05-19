@@ -299,9 +299,8 @@ public class BaakoApp {
 	 * @param values4
 	 * @return 
 	 */
-	public boolean editGame(String name, int price, String text, int pegi, ArrayList<String> values2,ArrayList<String> values4) {
-			Game game = new Game(name, price, text, pegi, "http://www.google.com/search?q="+name);
-			return dao.editGame(game);
+	public boolean editGame(GameDTO g) {
+			return dao.editGame(Assembler.getInstance().disassemble(g));
 	}
 
 

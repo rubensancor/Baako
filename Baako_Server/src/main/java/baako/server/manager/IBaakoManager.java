@@ -137,7 +137,6 @@ public interface IBaakoManager extends Remote{
 	 * @param values4
 	 * @return 
 	 */
-	public boolean editGame(String name, int price, String text, int pegi, ArrayList<String> values2,
-			ArrayList<String> values4);
+	public boolean editGame(GameDTO g) throws RemoteException;
 
 }
