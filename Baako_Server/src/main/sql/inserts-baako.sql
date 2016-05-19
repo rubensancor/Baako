@@ -26,6 +26,6 @@ INSERT INTO `BAAKO`.`NEWS` (`NEWS_ID`, `BODY`, `DATE`, `TITLE`) VALUES ('1', 'As
 INSERT INTO `BAAKO`.`NEWS` (`NEWS_ID`, `BODY`, `DATE`, `TITLE`) VALUES ('2', 'Elated Games?', '2013-03-16', 'New company arises');
 INSERT INTO `BAAKO`.`NEWS` (`NEWS_ID`, `BODY`, `DATE`, `TITLE`) VALUES ('3', 'Chaly is the new GUI Master of BaakoTeam', '2013-03-17', 'Change in BaakoTeam');
 
-INSERT INTO `BAAKO`.`GAME` (`NAME`,`PEGI`,`DESCRIPTION`,`PRICE`) VALUES ('CS', '18', 'Counter Strike triguapo motxas eveyday', '10');
-INSERT INTO `BAAKO`.`GAME` (`NAME`,`PEGI`,`DESCRIPTION`,`PRICE`) VALUES ('Topetes', '18', 'TOPETES JARCODED GAMERINO', '100');
-INSERT INTO `BAAKO`.`GAME` (`NAME`,`PEGI`,`DESCRIPTION`,`PRICE`) VALUES ('Tetris', '7', 'le tipic', '0');
+INSERT INTO `BAAKO`.`GAME` (`NAME`,`PEGI`,`DESCRIPTION`,`PRICE`,`URL`) VALUES ('CS', '18', 'Counter Strike triguapo motxas eveyday', '10', 'www.counter-strike.net');
+INSERT INTO `BAAKO`.`GAME` (`NAME`,`PEGI`,`DESCRIPTION`,`PRICE`,`URL`) VALUES ('Topetes', '18', 'TOPETES JARCODED GAMERINO', '100', 'https://github.com/virum95/Topetes');
+INSERT INTO `BAAKO`.`GAME` (`NAME`,`PEGI`,`DESCRIPTION`,`PRICE`,`URL`) VALUES ('Tetris', '7', 'le tipic', '0', 'www.tetrisfriends.com');

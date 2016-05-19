@@ -24,7 +24,7 @@ public class AssemblerTest {
 	
 	@BeforeClass 
     public static void setUp() throws Exception { 
-        game = new Game("El juego", 20, "Mejor juego del mundo", 18);
+        game = new Game("El juego", 20, "Mejor juego del mundo",18, "www.google.es");
         gamedto = new GameDTO("El juego", 20, "Mejor juego del mundo", 18);
         u = new PlainUser("gvirum@gmail.com", "Gaizka", "Tere", new Date(System.currentTimeMillis()));
         userdto = new PlainUserDTO("gvirum@gmail.com", "Gaizka", "Tere", new Date(System.currentTimeMillis()));

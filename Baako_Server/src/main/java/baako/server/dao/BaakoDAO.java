@@ -117,7 +117,7 @@ public class BaakoDAO implements IBaakoDAO {
 		//DAO magic
 		pm = pmf.getPersistenceManager();
 		try{
-			Game g1 = new Game(game.getName(), game.getPrice(), game.getDescription(), game.getPEGI());
+			Game g1 = new Game(game.getName(), game.getPrice(), game.getDescription(), game.getPEGI(), game.getUrl());
 			pm.makePersistent(g1);
 		}finally{
 			//No hay que cerrar el pm
@@ -224,6 +224,14 @@ public class BaakoDAO implements IBaakoDAO {
 				games.add(aux);
 			}
 			tx.commit();
+			for (Game game : games) {
+				game.getName();
+				game.getCategories();
+				game.getDescription();
+				game.getDesigners();
+				game.getPEGI();
+				game.getPrice();
+			}
 			return games;
 
 		}finally{

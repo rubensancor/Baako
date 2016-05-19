@@ -115,7 +115,7 @@ public class Delegate_GUI extends GUI{
 		designers2.add(designerCBox.getSelectedItem().toString());
 		categoriesToArray();
 		designersToArray();
-		GameDTO g = new GameDTO(name, price, description, pegi,categories2, designers2);
+		GameDTO g = new GameDTO(name, price, description, pegi, "www.google.com", categories2, designers2);
 		games.add(g);
 		return controller.addGame(g);
 	}

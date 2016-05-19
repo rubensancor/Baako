@@ -1,6 +1,7 @@
 package baako.server.dto;
 
 import java.io.Serializable;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +25,20 @@ public class GameDTO implements Serializable{
 	private float price;
 	private String description;
 	private int PEGI;
+	private String url;
 
+	/**
+	 * @return the url
+	 */
+	public String getUrl() {
+		return url;
+	}
+	/**
+	 * @param url the url to set
+	 */
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	private Set<Category> categories = new HashSet<Category>();
 	private Set<Designer> designers = new HashSet<Designer>();
 	private ArrayList<String> categoriesString = new ArrayList<String>();
@@ -34,12 +48,13 @@ public class GameDTO implements Serializable{
 	public GameDTO() {
 		super();
 	}
-	public GameDTO(String name, float price, String description, int pegi, Set<Category> categories, Set<Designer> designers) {
+	public GameDTO(String name, float price, String description, int pegi, String url ,Set<Category> categories, Set<Designer> designers) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.description = description;
 		this.PEGI = pegi;
+		this.url = url;
 		this.setCategories(categories);
 		this.setDesigners(designers);
 	}
@@ -48,15 +63,17 @@ public class GameDTO implements Serializable{
 		this.price = game.getPrice();
 		this.description = game.getDescription();
 		this.PEGI = game.getPEGI();
+		this.url = game.getUrl();
 		this.setCategories(game.getCategories());
 		this.setDesigners(game.getDesigners());
 	}
 
-	public GameDTO(String name, float price, String description, int pegi, ArrayList<String> categories, ArrayList<String> designers) {
+	public GameDTO(String name, float price, String description, int pegi, String url ,ArrayList<String> categories, ArrayList<String> designers) {
 		this.name = name;
 		this.price = price;
 		this.description = description;
 		this.PEGI = pegi;
+		this.url = url;
 		this.categoriesString = categories;
 		this.designersString = designers;
 	}
@@ -66,6 +83,7 @@ public class GameDTO implements Serializable{
 		this.price = game.getPrice();
 		this.description = game.getDescription();
 		this.PEGI = game.getPEGI();
+		this.url  = game.getUrl();
 		for (String string : game.getCategoriesString()) {
 			Category aux = new Category(string);
 			this.categories.add(aux);
@@ -172,7 +190,7 @@ public class GameDTO implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return name +"[+"+PEGI+"]";
+		return name;
 	}
 
 }
