@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,6 +47,7 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.GridLayout;
 import javax.swing.SpringLayout; 
 
@@ -353,14 +356,12 @@ public class GUI {
 			}
 		});
 		logoutPanel.add(btnLogOut);
-		logger.info("Pre-"+Boolean.toString(filled));
 		if (!filled) {
 			fillGames();
 			fillNews();
-			fillOwned();
 			filled = true;
 		}
-		logger.info("Post"+Boolean.toString(filled));
+		if (!admin)	fillOwned();
 		frame.repaint();
 		//
 		
@@ -860,9 +861,13 @@ public class GUI {
 
 				public void actionPerformed(ActionEvent e) {
 
-					//ACTION TO PERFORM
-					
-					//				
+					try {
+						Desktop.getDesktop().browse(new java.net.URI(/*"http://www.google.com/search?q="+*/listOwned.getSelectedValue().getUrl()));
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					} catch (URISyntaxException e1) {
+						e1.printStackTrace();
+					}	
 				}
 			});
 			//
@@ -910,29 +915,6 @@ public class GUI {
 			});
 			btnBuy.setEnabled(false);
 			btnBuy.setBackground(new Color(204, 204, 204));
-			//
-			
-			//RENT BUTTON AND HIS ACTION
-			final JButton btnRent = new JButton("RENT GAME");
-			btnRent.setBackground(new Color(255, 204, 51));
-			GridBagConstraints gbc_btnRent = new GridBagConstraints();
-			gbc_btnRent.fill = GridBagConstraints.BOTH;
-			gbc_btnRent.insets = new Insets(0, 25, 5, 0);
-			gbc_btnRent.gridx = 1;
-			gbc_btnRent.gridy = 2;
-			optionPanel.add(btnRent, gbc_btnRent);
-			btnRent.addActionListener(new ActionListener() {
-
-				public void actionPerformed(ActionEvent e) {
-
-					//ACTION TO PERFORM
-					
-					//
-				}
-			});
-			btnRent.setEnabled(false);			
-			btnRent.setBackground(new Color(204, 204, 204));
-			//
 			
 			//+INFO BUTTON AND HIS ACTION
 			gbc_btninfo.insets = new Insets(40, 35, 5, 0);
@@ -943,7 +925,7 @@ public class GUI {
 
 				public void actionPerformed(ActionEvent e) {
 					btnBuy.setEnabled(true);
-					btnRent.setEnabled(true);
+//					btnRent.setEnabled(true);
 					btninfo.setEnabled(false);
 					btninfo.setBackground(new Color(204, 204, 204));
 					btnBack.setEnabled(true);
@@ -953,7 +935,7 @@ public class GUI {
 
 					//HERE WE SET BODY OF THE GAME
 					JTextArea txtbody = new JTextArea();
-					txtbody.setText(listGames.getSelectedValue().getDescription());
+					txtbody.setText(listGames.getSelectedValue().getDescription()+"\nPEGI: +"+listGames.getSelectedValue().getPEGI());
 
 					final JScrollPane mainPanel = new JScrollPane(txtbody);
 					mainPanel.setBounds(0, 48, 574, 494);
@@ -986,8 +968,8 @@ public class GUI {
 				public void actionPerformed(ActionEvent e) {
 					btnBuy.setEnabled(false);
 					btnBuy.setBackground(new Color(204, 204, 204));
-					btnRent.setEnabled(false);
-					btnRent.setBackground(new Color(204, 204, 204));
+//					btnRent.setEnabled(false);
+//					btnRent.setBackground(new Color(204, 204, 204));
 					btninfo.setEnabled(true);
 					btninfo.setBackground(new Color(153, 204, 204));
 					btnBack.setEnabled(false);

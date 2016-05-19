@@ -1,5 +1,6 @@
 package baako.server.database;
 
+import java.net.URI;
 import java.util.Set;
 
 import javax.jdo.annotations.Element;
@@ -26,6 +27,7 @@ public class Game {
 	private float price;
 	private String description;
 	private int PEGI;
+	private String url;
 
 
 
@@ -47,13 +49,30 @@ public class Game {
 	 * @param description	The description of the game
 	 * @param PEGI	The PEGI of the game
 	 */
-	public Game(String name, float price, String description, int PEGI) {
+	public Game(String name, float price, String description, int PEGI, String url) {
 		this.name = name;
 		this.price = price;
 		this.description = description;
 		this.PEGI = PEGI;
+		this.url = url;
 		this.categories = null;
 		this.designers = null;
+	}
+
+
+	/**
+	 * @return the url
+	 */
+	public String getUrl() {
+		return url;
+	}
+
+
+	/**
+	 * @param url the url to set
+	 */
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 
@@ -66,6 +85,7 @@ public class Game {
 		this.price = game.getPrice();
 		this.description = game.getDescription();
 		this.PEGI = game.getPEGI();
+		this.url = game.getUrl();
 		if(!game.getCategoriesString().isEmpty()){
 			for (String category : game.getCategoriesString()) {
 				addCategory(new Category(category));

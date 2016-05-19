@@ -38,8 +38,8 @@ public class DataTest {
 		wallet = new Wallet(1);
 		cat = new Category("Accion");
 		desig = new Designer("El numi");
-		game = new Game("Juego", 10, "Juego", 18);	
-		game = new Game("Game", 18, "Game", 7);	
+		game = new Game("Juego", 10, "Juego", 18, "www.google.es");	
+		game = new Game("Game", 18, "Game", 7, "www.google.es");	
 		userdto = new PlainUserDTO("rubensancor@gmail.com", "Ruben", "asd", new Date());
 		
 
@@ -95,7 +95,7 @@ public class DataTest {
 	public void testUser(){
 		PlainUser p = new PlainUser(userdto);
 		HashSet<Game> games = new HashSet<Game>();
-		games.add( new Game("LOL", 0, "MOBA", 10));
+		games.add( new Game("LOL", 0, "MOBA", 10, "www.google.es"));
 		HashSet<PlainUser> friends = new HashSet<PlainUser>();
 		friends.add(u);
 		p.setGames(games);
