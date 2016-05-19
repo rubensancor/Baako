@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -83,21 +84,19 @@ public class GUI {
 	3 = userLibrary 
 	4 = userGames 
 	5 = userFriends*/
-	protected JComboBox<String> categoryCBox;
-	protected JComboBox<String> categoryCBoxOpt1;
-	protected JComboBox<String> categoryCBoxOpt2;
-	protected JComboBox<String> categoryCBoxOpt3;
-	protected JComboBox<String> categoryCBoxOpt4;
-	protected JComboBox<String> categoryCBoxOpt5;
-	protected JComboBox<String> designerCBox; 
-	protected JComboBox<String> designerCBoxOpt1; 
-	protected JComboBox<String> designerCBoxOpt2; 
-	protected JComboBox<String> designerCBoxOpt3; 
+	protected ArrayList<String> values1 = new ArrayList<String>();
+	protected ArrayList<String> values2 = new ArrayList<String>();
+	protected ArrayList<String> values3 = new ArrayList<String>();
+	protected ArrayList<String> values4 = new ArrayList<String>();
+
 	protected JList<NewsDTO> listNews;
 	protected JList<GameDTO> listGames;
 	protected JList<GameDTO> listOwned;
 	protected JList<PlainUserDTO> listPeople;
-
+	private JList<String> listcat;
+	private JList<String> listselectedcat;
+	private JList<String> listdes;
+	private JList<String> listselectedes ;
 
 	/**
 	 * Create the application.
@@ -124,9 +123,9 @@ public class GUI {
 	}
 
 	private void mainview() {
-
 		frame.setSize(741, 581);
 		frame.getContentPane().setLayout(null);
+		frame.setTitle("Baako");
 
 		//CREATING MAIN PANEL
 		final JPanel mainPanel_1 = new JPanel();
@@ -159,7 +158,7 @@ public class GUI {
 		optionPanel.add(iconlabel, gbc_iconlabel);
 		///
 		//
-		
+
 		//CREATING THE MENU BAR
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -205,7 +204,7 @@ public class GUI {
 				///The list of all market games in which he/she will be able:
 				////Add and edit game entries in the database 
 				////Viewing each game's details	
-				
+
 				//If the user is plain he will see the same list as admins 
 				///but he will have the following options:
 				////Buy a game or rent a game
@@ -214,16 +213,16 @@ public class GUI {
 				if(admin){
 					state=2;
 					menuchange(state, mainPanel_1);
-					}else{
-						state=4;
-						menuchange(state, mainPanel_1);
-						}
+				}else{
+					state=4;
+					menuchange(state, mainPanel_1);
+				}
 				frame.repaint();
 				frame.revalidate();
 				mainPanel_1.findComponentAt(574, 49).repaint();
 			}
 		});
-		
+
 		////SUBMENU OF MARKET THAT ALLOWS US TO SEARCH DESIRED GAMES
 		JMenu mnSearchGames = new JMenu("Search Games");
 		mnMarket.add(mnSearchGames);
@@ -237,9 +236,9 @@ public class GUI {
 				state=6;
 				if(admin){
 					searchviews(state, mainPanel_1);
-					}else{
-						searchviews(state, mainPanel_1);
-						}
+				}else{
+					searchviews(state, mainPanel_1);
+				}
 				frame.repaint();
 				frame.revalidate();
 				mainPanel_1.findComponentAt(574, 49).repaint();				
@@ -247,7 +246,7 @@ public class GUI {
 		});
 		mnSearchGames.add(mnByCategory);
 		/////
-		
+
 		/////SUBMENU TO SEARCH BY DESIRED DESIGNER
 		JMenu mnByDesigner = new JMenu("By Designer");
 		mnByDesigner.addMouseListener(new MouseAdapter() {
@@ -257,9 +256,9 @@ public class GUI {
 				state=7;
 				if(admin){
 					searchviews(state, mainPanel_1);
-					}else{
-						searchviews(state, mainPanel_1);
-						}
+				}else{
+					searchviews(state, mainPanel_1);
+				}
 				frame.repaint();
 				frame.revalidate();
 				mainPanel_1.findComponentAt(574, 49).repaint();
@@ -282,19 +281,19 @@ public class GUI {
 				///The list of all news about games in which he/she will be able:
 				////Add and edit pieces of news in the database 
 				/////Viewing each entry in detail	
-				
+
 				//If the user is plain he will see the same list as admins 
 				///but he will have the following options:
 				////View each entry ion detail
-				
+
 				mainPanel_1.remove(mainPanel_1.findComponentAt(574, 49));
 				if(admin){
 					state=0;
 					menuchange(state, mainPanel_1);
-					}else{
-						state=1;
-						menuchange(state, mainPanel_1);
-						}
+				}else{
+					state=1;
+					menuchange(state, mainPanel_1);
+				}
 				frame.repaint();
 				frame.revalidate();
 				mainPanel_1.findComponentAt(574, 49).repaint();
@@ -311,7 +310,7 @@ public class GUI {
 			public void mouseClicked(MouseEvent arg0) {
 				//If user is admin he can't access to the community 
 				///since member add themselves when they register
-				
+
 				//If the user is plain he will see the list of users 
 				///and he will have the following options:
 				////Add a friend to his friendlist
@@ -347,7 +346,7 @@ public class GUI {
 		btnLogOut.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-							//Hides the panel and changes the view to the initial login.
+				//Hides the panel and changes the view to the initial login.
 
 				mainPanel_1.setVisible(false);
 				loginview();
@@ -359,21 +358,22 @@ public class GUI {
 			fillNews();
 			fillPeople();
 			filled = true;
+			logger.info("Filled");
 		}
 		if (!admin)	fillOwned();
 		frame.repaint();
 		//
-		
+
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void menuchange(int state, final JPanel p){
 
 		//LIST OF ELEMENTS IN MAINVIEW
-		
+
 		//This is the JList that has to be updated 
 		///everytime we need to show a list of something.
-		
+
 		switch (state) {
 		///NEWS LIST CASES
 		case 0:case 1:
@@ -382,18 +382,18 @@ public class GUI {
 			listNews.setVisibleRowCount(20);
 			listNews.setFont(new Font("Tahoma", Font.PLAIN, 32));
 			break;
-		///
-		
-		///GAMES LIST CASES
+			///
+
+			///GAMES LIST CASES
 		case 2:case 4:
 			listGames = new JList(games.toArray());
 			listGames.setBackground(Color.LIGHT_GRAY);
 			listGames.setVisibleRowCount(20);
 			listGames.setFont(new Font("Tahoma", Font.PLAIN, 32));
 			break;
-		///
-		
-		///OWNEDGAMES LIST CASES
+			///
+
+			///OWNEDGAMES LIST CASES
 		case 3: 
 			listOwned = new JList(owned.toArray());
 			listOwned.setBackground(Color.LIGHT_GRAY);
@@ -412,7 +412,7 @@ public class GUI {
 			break;
 		}
 		//
-		
+
 		//DECLARING OPTIONPANEL THIS PANEL WILL SHOW 
 		//DIFFERENT OPTIONS FOR USER AND ADMINS DEPENDING OF WHAT MAINVIEW THEY'RE IN
 		final JPanel optionPanel = new JPanel();
@@ -430,7 +430,7 @@ public class GUI {
 
 		//AS BTNINFO AND BTNBACK WILL BE USED IN DIFFERENT OPTIONPANELS
 		//WE INITIALIZE THEM HERE AND THEN WE CHANGE THEM DEPENDING ON THE VIEW
-		
+
 		//+INFO BUTTON
 		final JButton btninfo = new JButton("+INFO");
 		btninfo.setBackground(new Color(153, 204, 204));
@@ -441,13 +441,13 @@ public class GUI {
 		btnBack.setBackground(new Color(255, 51, 0));
 		GridBagConstraints gbc_btnBack = new GridBagConstraints();
 		//
-		
+
 		//CASES FOR THE OPTIONPANEL
 		switch(state){
 
 		//ADMINISTRATOR NEWS OPTIONPANEL
 		case 0:
-		
+
 			//ADDNEWS BUTTON AND HIS ACTION
 			final JButton btnAddNews = new JButton("ADD NEWS");
 			btnAddNews.setBackground(new Color(50, 205, 50));
@@ -486,7 +486,7 @@ public class GUI {
 				}
 			});
 			//
-			
+
 			//INFO BUTTON AND HIS ACTION
 			gbc_btninfo.insets = new Insets(40, 25, 5, 0);
 			gbc_btninfo.gridx = 1;
@@ -520,7 +520,7 @@ public class GUI {
 					lblEntryTitle.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setColumnHeaderView(lblEntryTitle);
 					//
-					
+
 					//WE REPAINT THE WINDOW
 					frame.revalidate();
 					p.repaint();
@@ -529,7 +529,7 @@ public class GUI {
 				}
 			});
 			//
-			
+
 			//BACK BUTTON AND HIS ACTION	
 			gbc_btnBack.insets = new Insets(0, 25, 5, 0);
 			gbc_btnBack.gridx = 1;
@@ -559,7 +559,7 @@ public class GUI {
 					renderer.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setViewportView(listNews);
 					//
-					
+
 					//WE REPAINT THE FRAME
 					frame.revalidate();
 					p.repaint();
@@ -574,20 +574,20 @@ public class GUI {
 			//AS DEFALUT WE WANT TO SHOW THE LIST OF NEWS, SO WE DECLARE IT 
 			p.remove(p.findComponentAt(0,50));
 			//
-			
+
 			//ADDING THE CURRENT MAINPANEL
 			final JScrollPane mainPanel = new JScrollPane();
 			mainPanel.setBounds(0, 48, 574, 494);
 			p.add(mainPanel);
 			//
-			
+
 			//WE ADD THE LIST TO THE MAINPANEL
 			DefaultListCellRenderer renderer = (DefaultListCellRenderer) listNews.getCellRenderer();
 			renderer.setHorizontalAlignment(SwingConstants.CENTER);
 			mainPanel.setViewportView(listNews);
 			//
 			//
-			
+
 			//WE REPAINT THE FRAME
 			frame.revalidate();
 			p.repaint();
@@ -598,7 +598,7 @@ public class GUI {
 
 			//USER NEWS OPTIONPANEL
 		case 1:
-		
+
 			//INFO BUTTON AND HIS ACTION
 			gbc_btninfo.fill = GridBagConstraints.BOTH;
 			gbc_btninfo.insets = new Insets(0, 45, 5, 0);
@@ -630,7 +630,7 @@ public class GUI {
 					lblEntryTitle.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setColumnHeaderView(lblEntryTitle);
 					//
-					
+
 					//WE REPAINT THE FRAME
 					frame.revalidate();
 					p.repaint();
@@ -639,7 +639,7 @@ public class GUI {
 				}
 			});
 			//
-			
+
 			//BACK BUTTON AND HIS ACTION
 			gbc_btnBack.fill = GridBagConstraints.BOTH;
 			gbc_btnBack.insets = new Insets(0, 45, 5, 0);
@@ -665,7 +665,7 @@ public class GUI {
 					renderer.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setViewportView(listNews);
 					//
-					
+
 					//REPAINT THE FRAME
 					frame.revalidate();
 					p.repaint();
@@ -721,7 +721,7 @@ public class GUI {
 				}
 			});
 			//
-			
+
 			//EDITGAME BUTTON AND HIS ACTION
 			final JButton btnEditGame = new JButton("EDIT GAME");
 			btnEditGame.setBackground(new Color(255, 204, 51));
@@ -741,7 +741,7 @@ public class GUI {
 			btnEditGame.setEnabled(false);
 			btnEditGame.setBackground(new Color(204, 204, 204));
 			//
-			
+
 			//INFO BUTTON AND HIS ACTION
 			gbc_btninfo.insets = new Insets(40, 45, 5, 0);
 			gbc_btninfo.gridx = 1;
@@ -814,7 +814,7 @@ public class GUI {
 					renderer.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setViewportView(listGames);
 					//
-					
+
 					//WE REPAINT THE FRAME
 					frame.revalidate();
 					p.repaint();
@@ -834,13 +834,13 @@ public class GUI {
 			mainPanel5.setBounds(0, 48, 574, 494);
 			p.add(mainPanel5);
 			//
-			
+
 			//WE ADD THE LIST TO THE MAINPANEL
 			DefaultListCellRenderer renderer5 = (DefaultListCellRenderer) listGames.getCellRenderer();
 			renderer5.setHorizontalAlignment(SwingConstants.CENTER);
 			mainPanel5.setViewportView(listGames);
 			//
-			
+
 			//REPAINTING THE FRAME
 			frame.revalidate();
 			p.repaint();
@@ -849,10 +849,10 @@ public class GUI {
 			//
 			break;
 			//
-			
+
 			//USER'S GAME LIBRARY OPTIONPANEL
 		case 3:
-		
+
 			//LAUNCH BUTTON AND HIS ACTION
 			JButton btnLaunch = new JButton("LAUNCH");
 			btnLaunch.setBackground(new Color(50, 205, 50));
@@ -876,7 +876,7 @@ public class GUI {
 				}
 			});
 			//
-			
+
 			//AS DEFALUT WE WANT TO SHOW THE LIST OF NEWS, SO WE DECLARE IT 
 			p.remove(p.findComponentAt(0,50));
 
@@ -903,7 +903,7 @@ public class GUI {
 
 			//USER GAMESTORE OPTIONPANEL
 		case 4:
-		
+
 			//BUY BUTTON AND HIS ACTION
 			final JButton btnBuy = new JButton("BUY GAME");
 			GridBagConstraints gbc_btnBuy = new GridBagConstraints();
@@ -920,7 +920,29 @@ public class GUI {
 			});
 			btnBuy.setEnabled(false);
 			btnBuy.setBackground(new Color(204, 204, 204));
-			
+
+			//RENT BUTTON AND HIS ACTION
+			final JButton btnRent = new JButton("RENT GAME");
+			btnRent.setBackground(new Color(255, 204, 51));
+			GridBagConstraints gbc_btnRent = new GridBagConstraints();
+			gbc_btnRent.fill = GridBagConstraints.BOTH;
+			gbc_btnRent.insets = new Insets(0, 25, 5, 0);
+			gbc_btnRent.gridx = 1;
+			gbc_btnRent.gridy = 2;
+			optionPanel.add(btnRent, gbc_btnRent);
+			btnRent.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+
+					//ACTION TO PERFORM
+
+					//
+				}
+			});
+			btnRent.setEnabled(false);			
+			btnRent.setBackground(new Color(204, 204, 204));
+			//
+
 			//+INFO BUTTON AND HIS ACTION
 			gbc_btninfo.insets = new Insets(40, 35, 5, 0);
 			gbc_btninfo.gridx = 1;
@@ -930,7 +952,7 @@ public class GUI {
 
 				public void actionPerformed(ActionEvent e) {
 					btnBuy.setEnabled(true);
-//					btnRent.setEnabled(true);
+					//					btnRent.setEnabled(true);
 					btninfo.setEnabled(false);
 					btninfo.setBackground(new Color(204, 204, 204));
 					btnBack.setEnabled(true);
@@ -953,7 +975,7 @@ public class GUI {
 					lblEntryTitle.setHorizontalAlignment(SwingConstants.CENTER);
 					mainPanel.setColumnHeaderView(lblEntryTitle);
 					//
-					
+
 					//REPAINTING THE FRAME
 					frame.revalidate();
 					p.repaint();
@@ -962,7 +984,7 @@ public class GUI {
 				}
 			});
 			//
-			
+
 			//BACK BUTTON AND HIS ACTION
 			gbc_btnBack.insets = new Insets(0, 35, 5, 0);
 			gbc_btnBack.gridx = 1;
@@ -973,8 +995,8 @@ public class GUI {
 				public void actionPerformed(ActionEvent e) {
 					btnBuy.setEnabled(false);
 					btnBuy.setBackground(new Color(204, 204, 204));
-//					btnRent.setEnabled(false);
-//					btnRent.setBackground(new Color(204, 204, 204));
+					//					btnRent.setEnabled(false);
+					//					btnRent.setBackground(new Color(204, 204, 204));
 					btninfo.setEnabled(true);
 					btninfo.setBackground(new Color(153, 204, 204));
 					btnBack.setEnabled(false);
@@ -996,7 +1018,7 @@ public class GUI {
 			btnBack.setEnabled(false);
 			btnBack.setBackground(new Color(204, 204, 204));
 			//
-			
+
 			//AS DEFALUT WE WANT TO SHOW THE LIST OF NEWS, SO WE DECLARE IT 
 			p.remove(p.findComponentAt(0,50));
 
@@ -1011,7 +1033,7 @@ public class GUI {
 			renderer2.setHorizontalAlignment(SwingConstants.CENTER);
 			mainPanel2.setViewportView(listGames);
 			//
-			
+
 			//REPAINTING THE FRAME
 			frame.revalidate();
 			p.repaint();
@@ -1020,10 +1042,10 @@ public class GUI {
 			//
 			break;
 			//
-			
+
 			//USER FRIEND OPTIONPANEL
 		case 5:
-		
+
 			//ADDFRIEND BUTTON AND HIS ACTION
 			JButton btnAddFriend = new JButton("ADD FRIEND");
 			btnAddFriend.setBackground(new Color(50, 205, 50));
@@ -1043,7 +1065,7 @@ public class GUI {
 				}
 			});
 			//
-			
+
 			//DELETEFRIEND BUTTON AND HIS ACTION
 			JButton btnDeleteFriend = new JButton("DELETE FRIEND");
 			btnDeleteFriend.setBackground(new Color(255, 51, 0));
@@ -1056,14 +1078,14 @@ public class GUI {
 			btnDeleteFriend.addActionListener(new ActionListener() {
 
 				public void actionPerformed(ActionEvent e) {
-				
+
 					//ACTION TO PERFORM
 					deleteFriend(listPeople.getSelectedValue());
 					//
 				}
 			});
 			//
-			
+
 			//AS DEFALUT WE WANT TO SHOW THE LIST OF NEWS, SO WE DECLARE IT 
 			p.remove(p.findComponentAt(0,50));
 
@@ -1072,13 +1094,13 @@ public class GUI {
 			mainPanel3.setBounds(0, 48, 574, 494);
 			p.add(mainPanel3);
 			//
-			
+
 			//WE ADD THE LIST TO THE MAINPANEL
-			DefaultListCellRenderer renderer3 = (DefaultListCellRenderer) listNews.getCellRenderer();
+			DefaultListCellRenderer renderer3 = (DefaultListCellRenderer) listPeople.getCellRenderer();
 			renderer3.setHorizontalAlignment(SwingConstants.CENTER);
-			mainPanel3.setViewportView(listNews);
+			mainPanel3.setViewportView(listPeople);
 			//
-			
+
 			//REPAINTING THE FRAME
 			frame.revalidate();
 			p.repaint();
@@ -1091,12 +1113,12 @@ public class GUI {
 		frame.revalidate();
 		p.repaint();
 		frame.repaint();
-		}
+	}
 
 	private void searchviews( final int state,final JPanel p){
-		
+
 		//TWO STATES FOR SEARCH VIEW
-		
+
 		switch(state){
 		//SEARCH BY CATEGORY MAINPANEL
 		case 6:	
@@ -1108,7 +1130,7 @@ public class GUI {
 			mainPanel7.setBounds(0, 48, 574, 494);
 			p.add(mainPanel7);
 			//
-			
+
 			//ADDING OUR SEARCHPANEL
 			JPanel searchpanel = new JPanel();
 			mainPanel7.setViewportView(searchpanel);
@@ -1147,7 +1169,7 @@ public class GUI {
 			searchButton.setBounds(438, 172, 89, 61);
 			searchpanel.add(searchButton);
 			//
-			
+
 			//REPAINTING THE FRAME
 			frame.revalidate();
 			p.repaint();
@@ -1171,7 +1193,7 @@ public class GUI {
 			mainPanel8.setViewportView(searchpanel2);
 			searchpanel2.setLayout(null);
 			//
-			
+
 			//TEXTFIELD TO WRITE THE CATEGORY
 			searchfield = new JTextField();
 			searchfield.setBounds(51, 172, 353, 61);
@@ -1179,7 +1201,7 @@ public class GUI {
 			searchpanel2.add(searchfield);
 			searchfield.setColumns(10);
 			//
-			
+
 			//TITLE IN THE MAINVIEW
 			JLabel lblSearch2 = new JLabel("SEARCH BY DESIGNER");
 			lblSearch2.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -1187,7 +1209,7 @@ public class GUI {
 			lblSearch2.setBounds(62, 77, 367, 44);
 			searchpanel2.add(lblSearch2);
 			//
-			
+
 			//SEARCH BUTTON AND HIS ACTION
 			JButton searchButton2 = new JButton("");
 			searchButton2.setIcon(new ImageIcon(this.getClass().getResource("/images/lup.png")));
@@ -1205,7 +1227,7 @@ public class GUI {
 			searchButton2.setBounds(438, 172, 89, 61);
 			searchpanel2.add(searchButton2);
 			//
-			
+
 			//REPAINTING THE MAINPANEL
 			frame.revalidate();
 			p.repaint();
@@ -1515,11 +1537,12 @@ public class GUI {
 	}
 
 	private void addgameview(){
-		frame.setSize(450, 600);
+		fill();
+		frame.setBounds(200,0,450, 805);
 		frame.getContentPane().setLayout(null);
 		final JPanel panel = new JPanel();
 		panel.setBackground(new Color(105, 105, 105));
-		panel.setBounds(0, 0, 434, 561);
+		panel.setBounds(0, 0, 434, 741);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -1562,7 +1585,7 @@ public class GUI {
 		lblDesigner.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDesigner.setForeground(new Color(255, 255, 255));
 		lblDesigner.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblDesigner.setBounds(62, 393, 77, 22);
+		lblDesigner.setBounds(62, 468, 77, 22);
 		panel.add(lblDesigner);
 
 		nameField = new JTextField();
@@ -1584,55 +1607,131 @@ public class GUI {
 		pegiCBox.setBounds(164, 120, 100, 20);
 		panel.add(pegiCBox);
 
-		categoryCBox = new JComboBox<String>();
-		categoryCBox.insertItemAt("", 0);
-		categoryCBox.setBounds(164, 285, 100, 20);
-		panel.add(categoryCBox);
 
-		designerCBox = new JComboBox<String>();
-		designerCBox.insertItemAt("", 0);
-		designerCBox.setBounds(164, 393, 100, 20);
-		panel.add(designerCBox);
 
-		categoryCBoxOpt1 = new JComboBox<String>();
-		categoryCBoxOpt1.insertItemAt("", 0);
-		categoryCBoxOpt1.setBounds(294, 320, 100, 20);
-		panel.add(categoryCBoxOpt1);
+		//LIST INIZIALIZATION
+		listcat= new JList<String>();
+		listdes= new JList<String>();
+		listselectedcat= new JList<String>();
+		listselectedes= new JList<String>();
 
-		categoryCBoxOpt2 = new JComboBox<String>();
-		categoryCBoxOpt2.insertItemAt("", 0);
-		categoryCBoxOpt2.setBounds(164, 320, 100, 22);
-		panel.add(categoryCBoxOpt2);
+		//MODEL FOR LISTCAT
+		final DefaultListModel<String> model1 = new DefaultListModel<String>();
+		for(int i=0;i<values1.size();i++){
+			model1.addElement(values1.get(i));
+		}
+		listcat = new JList<String>(model1);
+		listcat.setBounds(10, 310, 195, 151);
+		listcat.setToolTipText("");
 
-		categoryCBoxOpt3 = new JComboBox<String>();
-		categoryCBoxOpt3.insertItemAt("", 0);
-		categoryCBoxOpt3.setBounds(164, 355, 100, 24);
-		panel.add(categoryCBoxOpt3);
+		GridBagConstraints gbc_listcat = new GridBagConstraints();
+		gbc_listcat.insets = new Insets(0, 0, 5, 5);
+		gbc_listcat.fill = GridBagConstraints.BOTH;
+		gbc_listcat.gridx = 2;
+		gbc_listcat.gridy = 2;
+		panel.add(listcat, gbc_listcat);
 
-		categoryCBoxOpt4 = new JComboBox<String>();
-		categoryCBoxOpt4.insertItemAt("", 0);
-		categoryCBoxOpt4.setBounds(294, 285, 100, 22);
-		panel.add(categoryCBoxOpt4);
+		//MODEL FOR SELECTEDCAT
+		final DefaultListModel<String> model2 = new DefaultListModel<String>();
+		listselectedcat= new JList<String>(model2);
+		listselectedcat.setBounds(215, 310, 203, 151);
 
-		categoryCBoxOpt5 = new JComboBox<String>();
-		categoryCBoxOpt5.insertItemAt("", 0);
-		categoryCBoxOpt5.setBounds(294, 355, 100, 20);
-		panel.add(categoryCBoxOpt5);
+		GridBagConstraints gbc_listselectedcat = new GridBagConstraints();
+		gbc_listselectedcat.insets = new Insets(0, 0, 5, 0);
+		gbc_listselectedcat.fill = GridBagConstraints.BOTH;
+		gbc_listselectedcat.gridx = 5;
+		gbc_listselectedcat.gridy = 2;
+		panel.add(listselectedcat, gbc_listselectedcat);
 
-		designerCBoxOpt1 = new JComboBox<String>();
-		designerCBoxOpt1.insertItemAt("", 0);
-		designerCBoxOpt1.setBounds(294, 393, 100, 20);
-		panel.add(designerCBoxOpt1);
 
-		designerCBoxOpt2 = new JComboBox<String>();
-		designerCBoxOpt2.insertItemAt("", 0);
-		designerCBoxOpt2.setBounds(164, 420, 100, 20);
-		panel.add(designerCBoxOpt2);
+		//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
+		listcat.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				model2.addElement(model1.getElementAt(listcat.getSelectedIndex()));
+				model1.remove(listcat.getSelectedIndex());
 
-		designerCBoxOpt3 = new JComboBox<String>();
-		designerCBoxOpt3.insertItemAt("", 0);
-		designerCBoxOpt3.setBounds(294, 420, 100, 20);
-		panel.add(designerCBoxOpt3);
+				frame.repaint();
+
+			}
+		});
+		
+		//AND VICEVERSA
+		listselectedcat.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				model1.addElement(model2.getElementAt(listselectedcat.getSelectedIndex()));
+				model2.remove(listselectedcat.getSelectedIndex());
+
+				frame.repaint();
+
+
+			}
+		});
+
+
+
+
+		//MODEL FOR LISTDES
+		final DefaultListModel<String> model3 = new DefaultListModel<String>();
+		for(int i=0;i<values3.size();i++){
+			model3.addElement(values3.get(i));
+		}
+		listdes = new JList<String>(model3);
+		listdes.setBounds(10, 501, 195, 160);
+		listdes.setToolTipText("");
+		listdes.setVisible(true);
+
+		GridBagConstraints gbc_listdes = new GridBagConstraints();
+		gbc_listdes.insets = new Insets(0, 0, 5, 5);
+		gbc_listdes.fill = GridBagConstraints.BOTH;
+		gbc_listdes.gridx = 2;
+		gbc_listdes.gridy = 2;
+		panel.add(listdes, gbc_listdes);
+
+
+
+		//MODEL FOR SELECTEDCAT
+		final DefaultListModel<String> model4 = new DefaultListModel<String>();
+		listselectedes = new JList<String>(model4);
+		listselectedes.setBounds(215, 501, 202, 160);
+
+		GridBagConstraints gbc_listselectedes= new GridBagConstraints();
+		gbc_listselectedes.insets = new Insets(0, 0, 5, 0);
+		gbc_listselectedes.fill = GridBagConstraints.BOTH;
+		gbc_listselectedes.gridx = 5;
+		gbc_listselectedes.gridy = 2;
+		panel.add(listselectedes, gbc_listselectedes);
+
+		//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
+		listdes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(listdes.getSelectedIndex());
+				model4.addElement(model3.getElementAt(listdes.getSelectedIndex()));
+				model3.remove(listdes.getSelectedIndex());
+
+				frame.repaint();
+
+			}
+		});
+
+		//AND VICEVERSA
+		listselectedes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				System.out.println(listdes.getSelectedIndex());
+				model3.addElement(model4.getElementAt(listselectedes.getSelectedIndex()));
+				model4.remove(listselectedes.getSelectedIndex());
+
+				frame.repaint();
+
+
+			}
+		});
+
 
 		final JTextArea descTArea = new JTextArea();
 		descTArea.setBounds(164, 150, 230, 122);
@@ -1640,7 +1739,7 @@ public class GUI {
 
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBackground(new Color(255, 51, 0));
-		btnCancel.setBounds(100, 520, 95, 28);
+		btnCancel.setBounds(93, 702, 95, 28);
 		panel.add(btnCancel);
 
 		btnCancel.addActionListener(new ActionListener() {
@@ -1652,38 +1751,37 @@ public class GUI {
 		});
 
 		JButton btnSend = new JButton("Send");
-		btnSend.setBounds(300, 520, 95, 28);
+		btnSend.setBounds(291, 702, 95, 28);
+		btnSend.setBackground(new Color(50, 205, 50));
 		panel.add(btnSend);
 
 		btnSend.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				int price = Integer.parseInt(priceField.getText());
-//				logger.info(pegiCBox.getSelectedItem().toString());
+				//				logger.info(pegiCBox.getSelectedItem().toString());
 				int pegi = Integer.parseInt(pegiCBox.getSelectedItem().toString());
-				if (categoryCBox.getSelectedItem() == null) {
+				if (values2.isEmpty()) {
 					JOptionPane.showMessageDialog(frame, "The first category field cannot be empty.");
-					categoryCBox.requestFocus();
-				}else if(designerCBox.getSelectedItem() == null){
+				}else if(values4.isEmpty()){
 					JOptionPane.showMessageDialog(frame, "The first designer field cannot be empty.");
-					designerCBox.requestFocus();
 				}else if(addGame(nameField.getText(), price, descTArea.getText(), pegi)){
 					panel.setVisible(false);
 					mainview();
 				}
 			}
 		});
-		fill();
+
 		frame.repaint();
 		frame.revalidate();
 	}
 
 	private void editgameview(){
-		frame.setSize(450, 600);
+		frame.setSize(450, 805);
 		frame.getContentPane().setLayout(null);
 		final JPanel panel = new JPanel();
 		panel.setBackground(new Color(105, 105, 105));
-		panel.setBounds(0, 0, 434, 561);
+		panel.setBounds(0, 0, 434, 741);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -1726,15 +1824,16 @@ public class GUI {
 		lblDesigner.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDesigner.setForeground(new Color(255, 255, 255));
 		lblDesigner.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblDesigner.setBounds(62, 393, 77, 22);
+		lblDesigner.setBounds(62, 468, 77, 22);
 		panel.add(lblDesigner);
 
-		nameField = new JTextField();
+		nameField = new JTextField(listGames.getSelectedValue().getName());
 		nameField.setBounds(164, 22, 134, 17);
 		panel.add(nameField);
+		nameField.setEditable(false);
 		nameField.setColumns(10);
 
-		priceField = new JTextField();
+		priceField = new JTextField(String.valueOf(listGames.getSelectedValue().getPrice()));
 		priceField.setBounds(164, 73, 134, 20);
 		panel.add(priceField);
 		priceField.setColumns(10);
@@ -1745,58 +1844,130 @@ public class GUI {
 		pegiCBox.addItem("12");
 		pegiCBox.addItem("16");
 		pegiCBox.addItem("18");
+		if(listGames.getSelectedValue().getPEGI() == 3){
+			pegiCBox.setSelectedIndex(0);			
+		}else if(listGames.getSelectedValue().getPEGI() == 7){
+			pegiCBox.setSelectedIndex(1);			
+		}else if(listGames.getSelectedValue().getPEGI() == 12){
+			pegiCBox.setSelectedIndex(2);			
+		}else if(listGames.getSelectedValue().getPEGI() == 16){
+			pegiCBox.setSelectedIndex(3);			
+		}else if(listGames.getSelectedValue().getPEGI() == 18){
+			pegiCBox.setSelectedIndex(4);			
+		}
+
 		pegiCBox.setBounds(164, 120, 100, 20);
 		panel.add(pegiCBox);
 
-		categoryCBox = new JComboBox<String>();
-		categoryCBox.insertItemAt("", 0);
-		categoryCBox.setBounds(164, 285, 100, 20);
-		panel.add(categoryCBox);
 
-		designerCBox = new JComboBox<String>();
-		designerCBox.insertItemAt("", 0);
-		designerCBox.setBounds(164, 393, 100, 20);
-		panel.add(designerCBox);
+		//LIST INIZIALIZATION
+		listcat= new JList<String>();
+		listdes= new JList<String>();
+		listselectedcat= new JList<String>();
+		listselectedes= new JList<String>();
 
-		categoryCBoxOpt1 = new JComboBox<String>();
-		categoryCBoxOpt1.insertItemAt("", 0);
-		categoryCBoxOpt1.setBounds(294, 320, 100, 20);
-		panel.add(categoryCBoxOpt1);
+		//MODEL FOR LISTCAT
+		final DefaultListModel<String> model1 = new DefaultListModel<String>();
+		for(int i=0;i<values1.size();i++){
+			model1.addElement(values1.get(i));
+		}
+		listcat = new JList<String>(model1);
+		listcat.setBounds(10, 310, 195, 151);
+		listcat.setToolTipText("");
 
-		categoryCBoxOpt2 = new JComboBox<String>();
-		categoryCBoxOpt2.insertItemAt("", 0);
-		categoryCBoxOpt2.setBounds(164, 320, 100, 22);
-		panel.add(categoryCBoxOpt2);
+		GridBagConstraints gbc_listcat = new GridBagConstraints();
+		gbc_listcat.insets = new Insets(0, 0, 5, 5);
+		gbc_listcat.fill = GridBagConstraints.BOTH;
+		gbc_listcat.gridx = 2;
+		gbc_listcat.gridy = 2;
+		panel.add(listcat, gbc_listcat);
 
-		categoryCBoxOpt3 = new JComboBox<String>();
-		categoryCBoxOpt3.insertItemAt("", 0);
-		categoryCBoxOpt3.setBounds(164, 355, 100, 24);
-		panel.add(categoryCBoxOpt3);
+		//MODEL FOR SELECTEDCAT
+		final DefaultListModel<String> model2 = new DefaultListModel<String>();
+		listselectedcat= new JList<String>(model2);
+		listselectedcat.setBounds(215, 310, 203, 151);
 
-		categoryCBoxOpt4 = new JComboBox<String>();
-		categoryCBoxOpt4.insertItemAt("", 0);
-		categoryCBoxOpt4.setBounds(294, 285, 100, 22);
-		panel.add(categoryCBoxOpt4);
+		GridBagConstraints gbc_listselectedcat = new GridBagConstraints();
+		gbc_listselectedcat.insets = new Insets(0, 0, 5, 0);
+		gbc_listselectedcat.fill = GridBagConstraints.BOTH;
+		gbc_listselectedcat.gridx = 5;
+		gbc_listselectedcat.gridy = 2;
+		panel.add(listselectedcat, gbc_listselectedcat);
 
-		categoryCBoxOpt5 = new JComboBox<String>();
-		categoryCBoxOpt5.insertItemAt("", 0);
-		categoryCBoxOpt5.setBounds(294, 355, 100, 20);
-		panel.add(categoryCBoxOpt5);
 
-		designerCBoxOpt1 = new JComboBox<String>();
-		designerCBoxOpt1.insertItemAt("", 0);
-		designerCBoxOpt1.setBounds(294, 393, 100, 20);
-		panel.add(designerCBoxOpt1);
+		//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
+		listcat.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(listcat.getSelectedIndex());
+				model2.addElement(model1.getElementAt(listcat.getSelectedIndex()));
+				model1.remove(listcat.getSelectedIndex());
 
-		designerCBoxOpt2 = new JComboBox<String>();
-		designerCBoxOpt2.insertItemAt("", 0);
-		designerCBoxOpt2.setBounds(164, 420, 100, 20);
-		panel.add(designerCBoxOpt2);
+				frame.repaint();
 
-		designerCBoxOpt3 = new JComboBox<String>();
-		designerCBoxOpt3.insertItemAt("", 0);
-		designerCBoxOpt3.setBounds(294, 420, 100, 20);
-		panel.add(designerCBoxOpt3);
+			}
+		});
+
+
+		//MODEL FOR LISTDES
+		final DefaultListModel<String> model3 = new DefaultListModel<String>();
+		for(int i=0;i<values3.size();i++){
+			model3.addElement(values3.get(i));
+		}
+		listdes = new JList<String>(model3);
+		listdes.setBounds(10, 501, 195, 160);
+		listdes.setToolTipText("");
+		listdes.setVisible(true);
+
+		GridBagConstraints gbc_listdes = new GridBagConstraints();
+		gbc_listdes.insets = new Insets(0, 0, 5, 5);
+		gbc_listdes.fill = GridBagConstraints.BOTH;
+		gbc_listdes.gridx = 2;
+		gbc_listdes.gridy = 2;
+		panel.add(listdes, gbc_listdes);
+
+
+
+		//MODEL FOR SELECTEDCAT
+		final DefaultListModel<String> model4 = new DefaultListModel<String>();
+		listselectedes = new JList<String>(model4);
+		listselectedes.setBounds(215, 501, 202, 160);
+
+		GridBagConstraints gbc_listselectedes= new GridBagConstraints();
+		gbc_listselectedes.insets = new Insets(0, 0, 5, 0);
+		gbc_listselectedes.fill = GridBagConstraints.BOTH;
+		gbc_listselectedes.gridx = 5;
+		gbc_listselectedes.gridy = 2;
+		panel.add(listselectedes, gbc_listselectedes);
+
+		//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
+		listdes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(listdes.getSelectedIndex());
+				model4.addElement(model3.getElementAt(listdes.getSelectedIndex()));
+				model3.remove(listdes.getSelectedIndex());
+
+				frame.repaint();
+
+			}
+		});
+
+		//AND VICEVERSA
+		listselectedes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				System.out.println(listdes.getSelectedIndex());
+				model3.addElement(model4.getElementAt(listselectedes.getSelectedIndex()));
+				model4.remove(listselectedes.getSelectedIndex());
+
+				frame.repaint();
+
+
+			}
+		});
+
 
 		final JTextArea descTArea = new JTextArea();
 		descTArea.setBounds(164, 150, 230, 122);
@@ -1804,7 +1975,7 @@ public class GUI {
 
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBackground(new Color(255, 51, 0));
-		btnCancel.setBounds(100, 520, 95, 28);
+		btnCancel.setBounds(93, 702, 95, 28);
 		panel.add(btnCancel);
 
 		btnCancel.addActionListener(new ActionListener() {
@@ -1816,22 +1987,27 @@ public class GUI {
 		});
 
 		JButton btnSend = new JButton("Send");
-		btnSend.setBounds(300, 520, 95, 28);
+		btnSend.setBounds(291, 702, 95, 28);
+		btnSend.setBackground(new Color(50, 205, 50));
 		panel.add(btnSend);
 
 		btnSend.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				int price = Integer.parseInt(priceField.getText());
-				logger.info(pegiCBox.getSelectedItem().toString());
+				//				logger.info(pegiCBox.getSelectedItem().toString());
 				int pegi = Integer.parseInt(pegiCBox.getSelectedItem().toString());
-				if(addGame(nameField.getText(), price, descTArea.getText(), pegi)){
+				if (values2.isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "The first category field cannot be empty.");
+				}else if(values4.isEmpty()){
+					JOptionPane.showMessageDialog(frame, "The first designer field cannot be empty.");
+				}else if(addGame(nameField.getText(), price, descTArea.getText(), pegi)){
 					panel.setVisible(false);
 					mainview();
 				}
 			}
 		});
-		fill();
+		
 		frame.repaint();
 		frame.revalidate();
 	}
@@ -2192,13 +2368,12 @@ public class GUI {
 	}
 	public void fillOwned(){
 	}
-	
 	public void fillPeople(){ }
 
 	public void addFriend(PlainUserDTO newFriend){}
 	
 	public void deleteFriend(PlainUserDTO oldFriend){}
-	
+
 	public boolean buy(){
 		return true;}
 

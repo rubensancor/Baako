@@ -180,8 +180,12 @@ public class BaakoController {
 	 * @return
 	 */
 	public ArrayList<PlainUserDTO> getAllUsers() {
-//		return rmi.getService().getAllUsers();;
-	return null;
+		try {
+			return rmi.getService().getAllUsers();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public boolean addFriend(PlainUserDTO newFriend){

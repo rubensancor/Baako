@@ -76,7 +76,6 @@ public class BaakoApp {
 	}
 
 	public boolean addGame(GameDTO game) throws RemoteException{
-		logger.info("ADD GAME FACADE");
 		logger.info(game.getCategories().toString());
 		logger.info(game.getDesigners().toString());
 		dao.addGame(Assembler.getInstance().disassemble(game));
@@ -251,13 +250,8 @@ public class BaakoApp {
 		ArrayList<Game> aux = dao.getAllGames();
 		ArrayList<GameDTO> aux2 = new ArrayList<GameDTO>();
 		for (Game game : aux) {
-			logger.info(game.getName());
-			logger.info(game.getDescription());
-			logger.info(Integer.toString(game.getPEGI()));
-			logger.info(Float.toString(game.getPrice()));
 			aux2.add(Assembler.getInstance().assemble(game));
 		}
-		logger.info(aux.get(0).getName());
 		return aux2;
 	}
 
@@ -279,6 +273,18 @@ public class BaakoApp {
 	public boolean deleteFriend(PlainUserDTO user, PlainUserDTO oldFriend) {
 		dao.deleteFriend(Assembler.getInstance().disassemble(user), Assembler.getInstance().disassemble(oldFriend));
 		return true;
+	}
+
+	/**
+	 * @return
+	 */
+	public ArrayList<PlainUserDTO> getAllUsers() {
+		ArrayList<PlainUser> aux = dao.getAllUsers();
+		ArrayList<PlainUserDTO> aux2 = new ArrayList<PlainUserDTO>();
+		for (PlainUser user: aux) {
+			aux2.add(new PlainUserDTO(user));
+		}
+		return aux2;
 	}
 
 

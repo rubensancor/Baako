@@ -102,7 +102,7 @@ public interface IBaakoManager extends Remote{
 	
 	/**
 	 * Retrieves all the games of the user
-	 * @param user The user that wants to retrieve the games
+	 * @param user The {@link PlainUser} that wants to retrieve the games
 	 * @return An Arraylist of games
 	 * @throws RemoteException
 	 */
@@ -110,14 +110,14 @@ public interface IBaakoManager extends Remote{
 	
 	/**
 	 * Retrieves the latest news
-	 * @return The latest news
+	 * @return An ArrayList of {@link News} with all the News
 	 * @throws RemoteException
 	 */
 	public ArrayList<NewsDTO> getAllNews() throws RemoteException;
 
 	/**
 	 * Retrieves the latest games
-	 * @return The latest games
+	 * @return An ArrayList of {@link Game} with all the games
 	 * @throws RemoteException
 	 */
 	public ArrayList<GameDTO> getAllGames() throws RemoteException;
@@ -125,5 +125,7 @@ public interface IBaakoManager extends Remote{
 	public boolean addFriend(PlainUserDTO user, PlainUserDTO newFriend) throws RemoteException;
 
 	public boolean deleteFriend(PlainUserDTO user, PlainUserDTO oldFriend) throws RemoteException;
+	
+	public ArrayList<PlainUserDTO> getAllUsers() throws RemoteException;
 
 }

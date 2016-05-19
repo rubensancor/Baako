@@ -42,24 +42,14 @@ public class Delegate_GUI extends GUI{
 	public void fill(){
 		logger.info("FILL");
 
-		//		logger.info(controller.getAllCategories().get(0));
 		categories.addAll(controller.getAllCategories());
 		for (String string : categories) {
-			categoryCBox.addItem(string);
-			categoryCBoxOpt1.addItem(string);
-			categoryCBoxOpt2.addItem(string);
-			categoryCBoxOpt3.addItem(string);
-			categoryCBoxOpt4.addItem(string);
-			categoryCBoxOpt5.addItem(string);
+			values1.add(string);
 		}
 
-		//		logger.info(controller.getAllDesigners().get(0));
 		designers.addAll(controller.getAllDesigners());
 		for (String string : designers) {
-			designerCBox.addItem(string);
-			designerCBoxOpt1.addItem(string);
-			designerCBoxOpt2.addItem(string);
-			designerCBoxOpt3.addItem(string);
+			values3.add(string);
 		}
 
 		logger.info("Out of fill");
@@ -114,10 +104,8 @@ public class Delegate_GUI extends GUI{
 	 * @see baako.client.gui.GUI#addGame(java.lang.String, int, java.lang.String, int)
 	 */
 	public boolean addGame(String name, int price, String description, int pegi){
-		categories2.add(categoryCBox.getSelectedItem().toString());
-		designers2.add(designerCBox.getSelectedItem().toString());
-		categoriesToArray();
-		designersToArray();
+		categories2.addAll(values2);
+		designers2.addAll(values4);
 		GameDTO g = new GameDTO(name, price, description, pegi, "www.google.com", categories2, designers2);
 		games.add(g);
 		return controller.addGame(g);
@@ -145,44 +133,6 @@ public class Delegate_GUI extends GUI{
 		controller.deleteFriend(oldFriend);
 	}
 	
-	/**
-	 * 
-	 */
-	public void categoriesToArray(){
-		if(categoryCBoxOpt1.getSelectedItem()!=null){
-			categories2.add(categoryCBoxOpt1.getSelectedItem().toString());
-			logger.info("2");
-		} else if(categoryCBoxOpt2.getSelectedItem()!=null){
-			categories2.add(categoryCBoxOpt2.getSelectedItem().toString());
-			logger.info("3");
-		}else if(categoryCBoxOpt3.getSelectedItem()!=null){
-			categories2.add(categoryCBoxOpt3.getSelectedItem().toString());
-			logger.info("4");
-		}else if(categoryCBoxOpt4.getSelectedItem()!=null){
-			categories2.add(categoryCBoxOpt4.getSelectedItem().toString());
-			logger.info("5");
-		}else if(categoryCBoxOpt5.getSelectedItem()!=null){
-			categories2.add(categoryCBoxOpt5.getSelectedItem().toString());
-			logger.info("6");
-		}
-	}
-
-	/**
-	 * 
-	 */
-	public void designersToArray(){
-		if(designerCBoxOpt1.getSelectedItem()!=null){
-			designers2.add(designerCBoxOpt1.getSelectedItem().toString());
-			logger.info("2");
-		} else if(designerCBoxOpt2.getSelectedItem()!=null){
-			designers2.add(designerCBoxOpt2.getSelectedItem().toString());
-			logger.info("3");
-		}else if(designerCBoxOpt3.getSelectedItem()!=null){
-			designers2.add(designerCBoxOpt3.getSelectedItem().toString());
-			logger.info("4");
-		}
-	}
-
 	public boolean buy(){
 		if(!owned.contains(listGames.getSelectedValue()))
 			if(controller.buy(listGames.getSelectedValue())){

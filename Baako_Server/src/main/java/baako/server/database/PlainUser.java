@@ -76,13 +76,15 @@ public class PlainUser extends User {
 	public PlainUser(PlainUserDTO u) {
 		super(u.getEmail(), u.getName(), u.getPassword(), u.getBirthdate());
 		friends = new HashSet<PlainUser>();
-		for (PlainUserDTO friend : u.getFriends()) {
-			this.friends.add(Assembler.getInstance().disassemble(friend));
-		}
+//		if(!u.getFriends().isEmpty())
+//		for (PlainUserDTO friend : u.getFriends()) {
+//			this.friends.add(Assembler.getInstance().disassemble(friend));
+//		}
 		games = new HashSet<Game>();
-		for (GameDTO game: u.getGames()) {
-			this.games.add(Assembler.getInstance().disassemble(game));
-		}
+//		if(!u.getGames().isEmpty())
+//		for (GameDTO game: u.getGames()) {
+//			this.games.add(Assembler.getInstance().disassemble(game));
+//		}
 	}
 
 	/**

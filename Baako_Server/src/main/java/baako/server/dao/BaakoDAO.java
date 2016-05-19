@@ -23,6 +23,7 @@ import baako.server.database.Designer;
 import baako.server.database.Game;
 import baako.server.database.News;
 import baako.server.database.PlainUser;
+import baako.server.database.User;
 import baako.server.database.Wallet;
 import baako.server.dao.IBaakoDAO;
 /**
@@ -595,6 +596,32 @@ public class BaakoDAO implements IBaakoDAO {
 			logger.info("SI");
 			tx.commit();
 			//			pm.makePersistent(u2);
+		}finally{
+			if(tx.isActive()){
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	public ArrayList<PlainUser> getAllUsers(){
+		pm = pmf.getPersistenceManager();
+		tx = pm.currentTransaction();
+		ArrayList<PlainUser> users = new ArrayList<PlainUser>();
+		try{
+			tx.begin();
+			Extent<PlainUser> e = pm.getExtent(PlainUser.class,true);
+			Iterator<PlainUser> iter = e.iterator();
+			while (iter.hasNext())
+			{
+				PlainUser aux = (PlainUser) iter.next();
+				users.add(aux);
+			}
+			tx.commit();
+			// Esto tiene que estar aqui, porque sino por alguna fuerza que desconozco, casca
+			for (PlainUser user : users) user.getName();
+			return users;
+
 		}finally{
 			if(tx.isActive()){
 				tx.rollback();

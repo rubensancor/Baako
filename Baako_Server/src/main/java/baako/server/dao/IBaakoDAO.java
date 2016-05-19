@@ -113,8 +113,13 @@ public interface IBaakoDAO {
 		public void editGame(Game game);
 
 		/**
-		 * @param disassemble
-		 * @param disassemble2
+		 * @param user
+		 * @param oldFriend
 		 */
 		public void deleteFriend(PlainUser user, PlainUser oldFriend);
+		
+		/**
+		 * @return
+		 */
+		public ArrayList<PlainUser> getAllUsers();
 }
