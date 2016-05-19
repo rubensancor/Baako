@@ -102,8 +102,6 @@ public class GUI {
 		frame.setVisible(true);
 		frame.setLocation(200, 100);
 		admin=false;
-		//frame.setBounds(100, 100, 450, 300);
-		//frame.setResizable(false);
 		mainview();
 		frame.repaint();
 		frame.revalidate();
@@ -143,10 +141,7 @@ public class GUI {
 		optionPanel.add(iconlabel, gbc_iconlabel);
 
 
-
-
 		//MENU BAR 		
-
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Segoe UI", Font.PLAIN, 14));
