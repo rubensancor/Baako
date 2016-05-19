@@ -110,7 +110,7 @@ public interface IBaakoDAO {
 		/** Edit the parameters of a Game
 		 * @param game
 		 */
-		public void editGame(Game game);
+		public boolean editGame(Game game);
 
 		/**
 		 * @param user

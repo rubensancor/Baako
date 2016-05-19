@@ -107,7 +107,7 @@ public class BaakoApp {
 		}
 		return aux2;
 	}
-	
+
 	public ArrayList<NewsDTO> getAllNews() throws RemoteException{
 		ArrayList<News> aux = dao.getAllNews();
 		ArrayList<NewsDTO> aux2 = new ArrayList<NewsDTO>();
@@ -181,7 +181,7 @@ public class BaakoApp {
 			//			PlainUser a = new PlainUser("a","a","a",new Date(95, 0, 19));
 			//			PlainUser b = new PlainUser("a","b","a",new Date(95, 0, 19));
 			//			PlainUser c = new PlainUser("a","c","a",new Date(95, 0, 19));
-			//			Game g = new Game("asdf", 2, "asdf", 3);
+			//						Game g = new Game("asdf", 2, "asdf", 3);
 
 
 			//			dao.addGame(g);
@@ -196,17 +196,17 @@ public class BaakoApp {
 			//			HashSet<Designer> designers = new HashSet<Designer>();
 			//			designers.add(d);
 			//			designers.add(d2);
-			//
+			//			
 			//			Category c = new Category("Shooter");
 			//			Category c2 = new Category("MMORPG");
 			//			HashSet<Category> categories = new HashSet<Category>();
 			//			categories.add(c);
 			//			categories.add(c2);
 			//
-			//			Game g = new Game("asdf", 2, "asdf", 3);
-			//			g.setCategories(categories);
-			//			g.setDesigners(designers);
-
+			//			HashSet<Category> categories2 = new HashSet<Category>();
+			//			categories.add(c);
+			//
+			//			Game g2 = new Game("asdf", 10, "Counter petas triguapo motxas eveyday", 18, "www.counter-strike.net");
 
 			//			News n = new News("tere", new Date(90, 3, 12), "asdf");
 			//			News n2 = new News("tere", new Date(90, 3, 12), "asdf");
@@ -217,6 +217,8 @@ public class BaakoApp {
 			//			dao.addGame(g);
 
 			//			dao.buyGame(g, a);
+			//			dao.addGame(g);
+			//			dao.editGame(g2);
 			Naming.rebind(serverName, manager);
 			logger.info(serverName+ " active and waiting...");
 			java.io.InputStreamReader inputStreamReader = new java.io.InputStreamReader ( System.in );
@@ -232,10 +234,9 @@ public class BaakoApp {
 	 * @return
 	 */
 	public ArrayList<GameDTO> getUserGames(PlainUserDTO user) {
-//		logger.info(user.getName()+" "+user.getEmail());
-//		return new ArrayList<GameDTO>(user.getGames());
-		logger.info("Woohoo");
-		PlainUser u = (PlainUser) dao.getUser(user.getName());
+		//		logger.info(user.getName()+" "+user.getEmail());
+		//		return new ArrayList<GameDTO>(user.getGames());
+		PlainUser u =	(PlainUser) dao.getUser(user.getName());
 		HashSet<Game> games = (HashSet<Game>) u.getGames();
 		ArrayList<GameDTO> dtoGames = new ArrayList<GameDTO>();
 		for (Game game : games) {
@@ -298,9 +299,9 @@ public class BaakoApp {
 	 * @param values4
 	 * @return 
 	 */
-	public boolean editGame(String name, int price, String text, int pegi, ArrayList<String> values2,
-			ArrayList<String> values4) {
-		
+	public boolean editGame(String name, int price, String text, int pegi, ArrayList<String> values2,ArrayList<String> values4) {
+			Game game = new Game(name, price, text, pegi, "http://www.google.com/search?q="+name);
+			return dao.editGame(game);
 	}
 
 
