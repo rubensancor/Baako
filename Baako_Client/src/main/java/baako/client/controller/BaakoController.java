@@ -205,5 +205,19 @@ public class BaakoController {
 			return false;
 		}
 	}
+
+	/**
+	 * @param name
+	 * @param price
+	 * @param text
+	 * @param pegi
+	 * @param values2
+	 * @param values4
+	 * @return 
+	 */
+	public boolean editGame(String name, int price, String text, int pegi, ArrayList<String> values2,
+			ArrayList<String> values4) {
+		return rmi.getService().editGame(name, price, text, pegi, values2, values4);
+	}
 	
 }

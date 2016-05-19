@@ -66,8 +66,13 @@ public class Delegate_GUI extends GUI{
 	}
 
 	public void fillOwned(){
+//		if (!owned.isEmpty()) owned.clear();
 		logger.info("FILLING Owned");
 		owned = controller.getUserGames();
+		for (GameDTO gameDTO : owned) {
+			logger.info(gameDTO.getName());
+		}
+		logger.info("All games retrieved");
 	}
 
 	public void fillPeople(){
@@ -106,10 +111,21 @@ public class Delegate_GUI extends GUI{
 	public boolean addGame(String name, int price, String description, int pegi){
 		categories2.addAll(values2);
 		designers2.addAll(values4);
-		GameDTO g = new GameDTO(name, price, description, pegi, "www.google.com", categories2, designers2);
+		GameDTO g = new GameDTO(name, price, description, pegi, "http://www.google.com/search?q="+name, categories2, designers2);
 		games.add(g);
 		return controller.addGame(g);
 	}
+	
+	protected boolean editGame(int price, String text, int pegi) {
+		String name = listGames.getSelectedValue().getName();
+		categories2.addAll(values2);
+		designers2.addAll(values4);
+		for (GameDTO gameDTO : games) 
+			if(gameDTO.getName().equals(listGames.getSelectedValue().getName())) games.remove(gameDTO);
+		games.add( new GameDTO(name, price, text, pegi, "http://www.google.com/search?q="+name,values2, values4));
+		return controller.editGame(name, price, text, pegi, values2, values4);
+	}
+
 
 	public boolean addNews(String title, String body, Date date){
 		NewsDTO n = new NewsDTO(title, body, date);
