@@ -475,7 +475,7 @@ public class GUI {
 			gbc_btnEditNews.insets = new Insets(0, 25, 5, 0);
 			gbc_btnEditNews.gridx = 1;
 			gbc_btnEditNews.gridy = 2;
-			optionPanel.add(btnEditNews, gbc_btnEditNews);
+//			optionPanel.add(btnEditNews, gbc_btnEditNews);
 			btnEditNews.setEnabled(false);
 			btnEditNews.setBackground(new Color(204, 204, 204));
 
@@ -869,7 +869,7 @@ public class GUI {
 
 					try {
 						logger.info("Going to "+listOwned.getSelectedValue().getUrl());
-						Desktop.getDesktop().browse(new java.net.URI(/*"http://www.google.com/search?q="+*/listOwned.getSelectedValue().getUrl()));
+						Desktop.getDesktop().browse(new java.net.URI("http://www.google.com"/*search?q="+listOwned.getSelectedValue().getUrl())*/));
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					} catch (URISyntaxException e1) {
@@ -931,7 +931,7 @@ public class GUI {
 			gbc_btnRent.insets = new Insets(0, 25, 5, 0);
 			gbc_btnRent.gridx = 1;
 			gbc_btnRent.gridy = 2;
-			optionPanel.add(btnRent, gbc_btnRent);
+//			optionPanel.add(btnRent, gbc_btnRent);
 			btnRent.addActionListener(new ActionListener() {
 
 				public void actionPerformed(ActionEvent e) {
@@ -1781,7 +1781,7 @@ public class GUI {
 	}
 
 	private void editgameview(){
-		frame.setSize(450, 805);
+		frame.setSize(450, 600);
 		frame.getContentPane().setLayout(null);
 		final JPanel panel = new JPanel();
 		panel.setBackground(new Color(105, 105, 105));
@@ -1817,19 +1817,19 @@ public class GUI {
 		lblDescription.setBounds(39, 150, 100, 14);
 		panel.add(lblDescription);
 
-		JLabel lblCategory = new JLabel("CATEGORY");
-		lblCategory.setForeground(new Color(255, 255, 255));
-		lblCategory.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblCategory.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCategory.setBounds(62, 285, 77, 14);
-		panel.add(lblCategory);
-
-		JLabel lblDesigner = new JLabel("DESIGNER");
-		lblDesigner.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDesigner.setForeground(new Color(255, 255, 255));
-		lblDesigner.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblDesigner.setBounds(62, 468, 77, 22);
-		panel.add(lblDesigner);
+//		JLabel lblCategory = new JLabel("CATEGORY");
+//		lblCategory.setForeground(new Color(255, 255, 255));
+//		lblCategory.setFont(new Font("Tahoma", Font.BOLD, 13));
+//		lblCategory.setHorizontalAlignment(SwingConstants.RIGHT);
+//		lblCategory.setBounds(62, 285, 77, 14);
+//		panel.add(lblCategory);
+//
+//		JLabel lblDesigner = new JLabel("DESIGNER");
+//		lblDesigner.setHorizontalAlignment(SwingConstants.RIGHT);
+//		lblDesigner.setForeground(new Color(255, 255, 255));
+//		lblDesigner.setFont(new Font("Tahoma", Font.BOLD, 13));
+//		lblDesigner.setBounds(62, 468, 77, 22);
+//		panel.add(lblDesigner);
 
 		nameField = new JTextField(listGames.getSelectedValue().getName());
 		nameField.setBounds(164, 22, 134, 17);
@@ -1863,123 +1863,14 @@ public class GUI {
 		pegiCBox.setBounds(164, 120, 100, 20);
 		panel.add(pegiCBox);
 
-
-		//LIST INIZIALIZATION
-		listcat= new JList<String>();
-		listdes= new JList<String>();
-		listselectedcat= new JList<String>();
-		listselectedes= new JList<String>();
-
-		//MODEL FOR LISTCAT
-		final DefaultListModel<String> model1 = new DefaultListModel<String>();
-		for(int i=0;i<values1.size();i++){
-			model1.addElement(values1.get(i));
-		}
-		listcat = new JList<String>(model1);
-		listcat.setBounds(10, 310, 195, 151);
-		listcat.setToolTipText("");
-
-		GridBagConstraints gbc_listcat = new GridBagConstraints();
-		gbc_listcat.insets = new Insets(0, 0, 5, 5);
-		gbc_listcat.fill = GridBagConstraints.BOTH;
-		gbc_listcat.gridx = 2;
-		gbc_listcat.gridy = 2;
-		panel.add(listcat, gbc_listcat);
-
-		//MODEL FOR SELECTEDCAT
-		final DefaultListModel<String> model2 = new DefaultListModel<String>();
-		listselectedcat= new JList<String>(model2);
-		listselectedcat.setBounds(215, 310, 203, 151);
-
-		GridBagConstraints gbc_listselectedcat = new GridBagConstraints();
-		gbc_listselectedcat.insets = new Insets(0, 0, 5, 0);
-		gbc_listselectedcat.fill = GridBagConstraints.BOTH;
-		gbc_listselectedcat.gridx = 5;
-		gbc_listselectedcat.gridy = 2;
-		panel.add(listselectedcat, gbc_listselectedcat);
-
-
-		//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
-		listcat.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println(listcat.getSelectedIndex());
-				model2.addElement(model1.getElementAt(listcat.getSelectedIndex()));
-				model1.remove(listcat.getSelectedIndex());
-
-				frame.repaint();
-
-			}
-		});
-
-
-		//MODEL FOR LISTDES
-		final DefaultListModel<String> model3 = new DefaultListModel<String>();
-		for(int i=0;i<values3.size();i++){
-			model3.addElement(values3.get(i));
-		}
-		listdes = new JList<String>(model3);
-		listdes.setBounds(10, 501, 195, 160);
-		listdes.setToolTipText("");
-		listdes.setVisible(true);
-
-		GridBagConstraints gbc_listdes = new GridBagConstraints();
-		gbc_listdes.insets = new Insets(0, 0, 5, 5);
-		gbc_listdes.fill = GridBagConstraints.BOTH;
-		gbc_listdes.gridx = 2;
-		gbc_listdes.gridy = 2;
-		panel.add(listdes, gbc_listdes);
-
-
-
-		//MODEL FOR SELECTEDCAT
-		final DefaultListModel<String> model4 = new DefaultListModel<String>();
-		listselectedes = new JList<String>(model4);
-		listselectedes.setBounds(215, 501, 202, 160);
-
-		GridBagConstraints gbc_listselectedes= new GridBagConstraints();
-		gbc_listselectedes.insets = new Insets(0, 0, 5, 0);
-		gbc_listselectedes.fill = GridBagConstraints.BOTH;
-		gbc_listselectedes.gridx = 5;
-		gbc_listselectedes.gridy = 2;
-		panel.add(listselectedes, gbc_listselectedes);
-
-		//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
-		listdes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println(listdes.getSelectedIndex());
-				model4.addElement(model3.getElementAt(listdes.getSelectedIndex()));
-				model3.remove(listdes.getSelectedIndex());
-
-				frame.repaint();
-
-			}
-		});
-
-		//AND VICEVERSA
-		listselectedes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				System.out.println(listdes.getSelectedIndex());
-				model3.addElement(model4.getElementAt(listselectedes.getSelectedIndex()));
-				model4.remove(listselectedes.getSelectedIndex());
-
-				frame.repaint();
-
-
-			}
-		});
-
-
 		final JTextArea descTArea = new JTextArea();
+		descTArea.setText(listGames.getSelectedValue().getDescription() );
 		descTArea.setBounds(164, 150, 230, 122);
 		panel.add(descTArea);
 
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBackground(new Color(255, 51, 0));
-		btnCancel.setBounds(93, 702, 95, 28);
+		btnCancel.setBounds(93, 502, 95, 28);
 		panel.add(btnCancel);
 
 		btnCancel.addActionListener(new ActionListener() {
@@ -1991,7 +1882,7 @@ public class GUI {
 		});
 
 		JButton btnSend = new JButton("Send");
-		btnSend.setBounds(291, 702, 95, 28);
+		btnSend.setBounds(291, 502, 95, 28);
 		btnSend.setBackground(new Color(50, 205, 50));
 		panel.add(btnSend);
 
@@ -2000,15 +1891,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				int price = Integer.parseInt(priceField.getText());
 				int pegi = Integer.parseInt(pegiCBox.getSelectedItem().toString());
-				for (int i = 0; i < model2.size(); i++)
-					values2.add(model2.get(i));
-				for (int i = 0; i < model4.size(); i++)
-					values4.add(model4.get(i));
-				if (values2.isEmpty()) {
-					JOptionPane.showMessageDialog(frame, "The game needs at least one category.");
-				}else if(values4.isEmpty()){
-					JOptionPane.showMessageDialog(frame, "The game needs at least one designer.");
-				}else if(editGame(price, descTArea.getText(), pegi)){
+				if(editGame(price, descTArea.getText(), pegi)){
 					panel.setVisible(false);
 					mainview();
 				}

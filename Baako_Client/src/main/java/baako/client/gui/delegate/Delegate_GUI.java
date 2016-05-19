@@ -66,7 +66,7 @@ public class Delegate_GUI extends GUI{
 	}
 
 	public void fillOwned(){
-//		if (!owned.isEmpty()) owned.clear();
+		//		if (!owned.isEmpty()) owned.clear();
 		logger.info("FILLING Owned");
 		owned = controller.getUserGames();
 		for (GameDTO gameDTO : owned) {
@@ -115,15 +115,18 @@ public class Delegate_GUI extends GUI{
 		games.add(g);
 		return controller.addGame(g);
 	}
-	
+
 	protected boolean editGame(int price, String text, int pegi) {
 		String name = listGames.getSelectedValue().getName();
-		categories2.addAll(values2);
-		designers2.addAll(values4);
+
+		GameDTO g = null;
+		GameDTO g2 = null;
 		for (GameDTO gameDTO : games) 
-			if(gameDTO.getName().equals(listGames.getSelectedValue().getName())) games.remove(gameDTO);
-		games.add( new GameDTO(name, price, text, pegi, "http://www.google.com/search?q="+name,values2, values4));
-		return controller.editGame(name, price, text, pegi, values2, values4);
+			if(gameDTO.getName().equals(listGames.getSelectedValue().getName())) g2 = gameDTO;
+		g = new GameDTO(name, price, text, pegi, "http://www.google.com/search?q="+name,g2.getCategoriesString(), g2.getDesignersString());
+		games.add( g);
+		games.remove(g2);
+		return controller.editGame(g);
 	}
 
 
@@ -140,7 +143,7 @@ public class Delegate_GUI extends GUI{
 	public void addFriend(PlainUserDTO newFriend) {
 		controller.addFriend(newFriend);
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see baako.client.gui.GUI#deleteFriend(baako.server.dto.PlainUserDTO)
 	 */
@@ -148,7 +151,7 @@ public class Delegate_GUI extends GUI{
 	public void deleteFriend(PlainUserDTO oldFriend) {
 		controller.deleteFriend(oldFriend);
 	}
-	
+
 	public boolean buy(){
 		if(!owned.contains(listGames.getSelectedValue()))
 			if(controller.buy(listGames.getSelectedValue())){
@@ -161,7 +164,7 @@ public class Delegate_GUI extends GUI{
 			return false;
 		}
 	}
-	
-	
+
+
 
 }
