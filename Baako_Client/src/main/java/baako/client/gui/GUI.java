@@ -1759,12 +1759,11 @@ public class GUI {
 
 			public void actionPerformed(ActionEvent e) {
 				int price = Integer.parseInt(priceField.getText());
-				//				logger.info(pegiCBox.getSelectedItem().toString());
 				int pegi = Integer.parseInt(pegiCBox.getSelectedItem().toString());
 				if (values2.isEmpty()) {
-					JOptionPane.showMessageDialog(frame, "The first category field cannot be empty.");
+					JOptionPane.showMessageDialog(frame, "The game needs at least one category.");
 				}else if(values4.isEmpty()){
-					JOptionPane.showMessageDialog(frame, "The first designer field cannot be empty.");
+					JOptionPane.showMessageDialog(frame, "The game needs at least one designer.");
 				}else if(addGame(nameField.getText(), price, descTArea.getText(), pegi)){
 					panel.setVisible(false);
 					mainview();
