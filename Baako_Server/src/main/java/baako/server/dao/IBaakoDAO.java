@@ -112,4 +112,9 @@ public interface IBaakoDAO {
 		 * @param game
 		 */
 		public void editGame(Game game);
+		
+		/**
+		 * @return
+		 */
+		public ArrayList<PlainUser> getAllUsers();
 }
