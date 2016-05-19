@@ -744,24 +744,6 @@ public class GUI {
 					btnBuy.setEnabled(false);
 					btnBuy.setBackground(new Color(204, 204, 204));
 
-					final JButton btnRent = new JButton("RENT GAME");
-					btnRent.setBackground(new Color(255, 204, 51));
-					GridBagConstraints gbc_btnRent = new GridBagConstraints();
-					gbc_btnRent.fill = GridBagConstraints.BOTH;
-					gbc_btnRent.insets = new Insets(0, 25, 5, 0);
-					gbc_btnRent.gridx = 1;
-					gbc_btnRent.gridy = 2;
-					optionPanel.add(btnRent, gbc_btnRent);
-					btnRent.addActionListener(new ActionListener() {
-
-						public void actionPerformed(ActionEvent e) {
-
-							//addnewsview();
-						}
-					});
-					btnRent.setEnabled(false);			
-					btnRent.setBackground(new Color(204, 204, 204));
-
 					gbc_btninfo.insets = new Insets(40, 35, 5, 0);
 					gbc_btninfo.gridx = 1;
 					gbc_btninfo.gridy = 4;
@@ -808,8 +790,6 @@ public class GUI {
 						public void actionPerformed(ActionEvent e) {
 							btnBuy.setEnabled(false);
 							btnBuy.setBackground(new Color(204, 204, 204));
-							btnRent.setEnabled(false);
-							btnRent.setBackground(new Color(204, 204, 204));
 							btninfo.setEnabled(true);
 							btninfo.setBackground(new Color(153, 204, 204));
 							btnBack.setEnabled(false);
@@ -830,7 +810,7 @@ public class GUI {
 							p.repaint();
 							frame.repaint();
 
-							//addnewsview();
+							//
 						}
 					});
 					btnBack.setEnabled(false);
