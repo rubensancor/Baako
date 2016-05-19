@@ -234,7 +234,16 @@ public class BaakoApp {
 		/*
 		 * TODO: esto da fallo, cuando viene de fillOwned() se queda atascado y no vuelve :(
 		 */
-		return new ArrayList<GameDTO>(user.getGames());
+//		return new ArrayList<GameDTO>(user.getGames());
+		PlainUser u = Assembler.getInstance().disassemble(user);
+		HashSet<Game> games = (HashSet<Game>) u.getGames();
+		ArrayList<GameDTO> dtoGames = new ArrayList<GameDTO>();
+		logger.info("Pre: get games");
+		for (Game game : games) {
+			dtoGames.add(Assembler.getInstance().assemble(game));
+		}
+		logger.info("Post: get games");
+		return dtoGames;
 	}
 
 	/**

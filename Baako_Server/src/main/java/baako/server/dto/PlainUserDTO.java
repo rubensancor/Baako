@@ -29,9 +29,11 @@ public class PlainUserDTO extends UserDTO implements Serializable{
 	
 	public PlainUserDTO(PlainUser u) {
 		super(u);
+		friends = new HashSet<PlainUserDTO>();
 		for (PlainUser friend : u.getFriends()) {
 			this.friends.add(Assembler.getInstance().assemble(friend));
 		}
+		games = new HashSet<GameDTO>();
 		for (Game game: u.getGames()) {
 			this.games.add(Assembler.getInstance().assemble(game));
 		}
