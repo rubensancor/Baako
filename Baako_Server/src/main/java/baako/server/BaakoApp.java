@@ -77,6 +77,8 @@ public class BaakoApp {
 
 	public boolean addGame(GameDTO game) throws RemoteException{
 		logger.info("ADD GAME FACADE");
+		logger.info(game.getCategories().toString());
+		logger.info(game.getDesigners().toString());
 		dao.addGame(Assembler.getInstance().disassemble(game));
 		return true;
 	}

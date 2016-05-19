@@ -67,7 +67,11 @@ public class BaakoFacade extends UnicastRemoteObject implements IBaakoManager{
 	 * @see baako.server.manager.IBaakoManager#addGame(baako.server.dto.GameDTO)
 	 */
 	public boolean addGame(GameDTO game) throws RemoteException{
-		return app.addGame(game);
+		logger.info(""+game.getDesignersString().toString());
+		GameDTO gaux = new GameDTO(game);
+		logger.info(""+gaux.getCategories().toString());
+		logger.info(""+gaux.getDesigners().toString());
+		return app.addGame(gaux);
 	}
 
 	/* (non-Javadoc)

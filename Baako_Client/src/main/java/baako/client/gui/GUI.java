@@ -1327,10 +1327,10 @@ public class GUI {
 				int price = Integer.parseInt(priceField.getText());
 //				logger.info(pegiCBox.getSelectedItem().toString());
 				int pegi = Integer.parseInt(pegiCBox.getSelectedItem().toString());
-				if (categoryCBox.getSelectedItem().toString() == "") {
+				if (categoryCBox.getSelectedItem() == null) {
 					JOptionPane.showMessageDialog(frame, "The first category field cannot be empty.");
 					categoryCBox.requestFocus();
-				}else if(designerCBox.getSelectedItem().toString() == ""){
+				}else if(designerCBox.getSelectedItem() == null){
 					JOptionPane.showMessageDialog(frame, "The first designer field cannot be empty.");
 					designerCBox.requestFocus();
 				}else if(addGame(nameField.getText(), price, descTArea.getText(), pegi)){
@@ -1339,6 +1339,7 @@ public class GUI {
 				}
 			}
 		});
+		fill();
 		frame.repaint();
 		frame.revalidate();
 	}

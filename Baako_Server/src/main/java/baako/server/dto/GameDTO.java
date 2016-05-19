@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.slf4j.Logger;
+
 import baako.server.database.Category;
 import baako.server.database.Designer;
 import baako.server.database.Game;
@@ -13,7 +15,7 @@ import baako.server.database.Game;
  *
  */
 public class GameDTO implements Serializable{
-	
+
 	/**
 	 * 
 	 */
@@ -22,11 +24,13 @@ public class GameDTO implements Serializable{
 	private float price;
 	private String description;
 	private int PEGI;
-	
+
 	private Set<Category> categories = new HashSet<Category>();
 	private Set<Designer> designers = new HashSet<Designer>();
-	
-	
+	private ArrayList<String> categoriesString = new ArrayList<String>();
+	private ArrayList<String> designersString = new ArrayList<String>();
+
+
 	public GameDTO() {
 		super();
 	}
@@ -47,18 +51,29 @@ public class GameDTO implements Serializable{
 		this.setCategories(game.getCategories());
 		this.setDesigners(game.getDesigners());
 	}
+
 	public GameDTO(String name, float price, String description, int pegi, ArrayList<String> categories, ArrayList<String> designers) {
 		this.name = name;
 		this.price = price;
 		this.description = description;
 		this.PEGI = pegi;
-		for (String string : categories) {
+		this.categoriesString = categories;
+		this.designersString = designers;
+	}
+
+	public GameDTO(GameDTO game) {
+		this.name = game.getName();
+		this.price = game.getPrice();
+		this.description = game.getDescription();
+		this.PEGI = game.getPEGI();
+		for (String string : game.getCategoriesString()) {
 			Category aux = new Category(string);
 			this.categories.add(aux);
 		}
-		for (String string : categories) {
+		for (String string : game.getDesignersString()) {
 			Designer aux = new Designer(string);
 			this.designers.add(aux);
+			System.out.println("Diseñadores"+this.designers.toString());
 		}
 	}
 
@@ -92,7 +107,7 @@ public class GameDTO implements Serializable{
 	public void setPEGI(int pegi) {
 		PEGI = pegi;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		GameDTO eq;
@@ -126,6 +141,32 @@ public class GameDTO implements Serializable{
 		this.designers = designers;
 	}
 	
+	
+
+	/**
+	 * @return the categoriesString
+	 */
+	public ArrayList<String> getCategoriesString() {
+		return categoriesString;
+	}
+	/**
+	 * @param categoriesString the categoriesString to set
+	 */
+	public void setCategoriesString(ArrayList<String> categoriesString) {
+		this.categoriesString = categoriesString;
+	}
+	/**
+	 * @return the designersString
+	 */
+	public ArrayList<String> getDesignersString() {
+		return designersString;
+	}
+	/**
+	 * @param designersString the designersString to set
+	 */
+	public void setDesignersString(ArrayList<String> designersString) {
+		this.designersString = designersString;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
