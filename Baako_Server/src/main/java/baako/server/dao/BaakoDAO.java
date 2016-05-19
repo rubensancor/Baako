@@ -167,8 +167,9 @@ public class BaakoDAO implements IBaakoDAO {
 		}
 	}
 
+	
 	/* (non-Javadoc)
-	 * @see baako.server.dao.IBaakoDAO#editGame(baako.server.database.Game)
+	 * @see baako.server.dao.IBaakoDAO#deleteGame(java.lang.String)
 	 */
 	public void deleteGame(String game) {
 		//DAOmagic
@@ -496,7 +497,7 @@ public class BaakoDAO implements IBaakoDAO {
 	/* (non-Javadoc)
 	 * @see baako.server.dao.IBaakoDAO#editGame(java.lang.String)
 	 */
-	public void editGame(Game game) {
+	public boolean editGame(Game game) {
 		//TODO
 		//DAO magic
 		pm = pmf.getPersistenceManager();
@@ -510,7 +511,26 @@ public class BaakoDAO implements IBaakoDAO {
 			det.setPrice(game.getPrice());
 			det.setPEGI(game.getPEGI());
 			det.setDescription(game.getDescription());
-
+			pm.makePersistent(det);
+//			gaux.setCategories(new HashSet<Category>());
+//			gaux.setDesigners(new HashSet<Designer>());
+//			for (Designer designer : game.getDesigners()) {
+//				logger.info(designer.getName());
+//				Query query2 = pm.newQuery("SELECT FROM "+Designer.class.getName()+" WHERE name=='"+designer.getName()+"'");
+//				query2.setUnique(true);
+//				Designer aux = (Designer) query2.execute();
+//				Designer detd = pm.detachCopy(aux);
+//				gaux.addDesigner(detd);
+//			}
+//			for (Category category : game.getCategories()) {
+//				Query query3 = pm.newQuery("SELECT FROM "+Category.class.getName()+" WHERE name=='"+category.getName()+"'");
+//				query3.setUnique(true);
+//				Category aux = (Category) query3.execute();
+//				Category detc = pm.detachCopy(aux);
+//				gaux.addCategory(detc);
+//			}
+			tx.commit();
+			return true;
 		}finally{
 			if(tx.isActive()){
 				tx.rollback();
