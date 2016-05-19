@@ -16,7 +16,7 @@
 		<policy.file>${basedir}/src/main/resources/security/java.policy</policy.file>
 		<!-- <server.IP>127.0.0.1</server.IP> -->
 		<!-- <server.IP>192.168.43.26</server.IP> -->
-		<server.IP>127.0.0.1</server.IP>
+		<server.IP>192.168.1.42</server.IP>
 		<server.port>1099</server.port>
 		<server.Name>BaakoServer</server.Name>
 		<doxygen.config.file>${basedir}/src/main/resources/Doxyfile</doxygen.config.file>
