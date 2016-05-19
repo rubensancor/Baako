@@ -10,8 +10,6 @@ import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
-import baako.server.assemblers.Assembler;
-import baako.server.dto.GameDTO;
 import baako.server.dto.PlainUserDTO;
 
 /**

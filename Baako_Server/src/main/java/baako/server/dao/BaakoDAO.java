@@ -23,7 +23,6 @@ import baako.server.database.Designer;
 import baako.server.database.Game;
 import baako.server.database.News;
 import baako.server.database.PlainUser;
-import baako.server.database.User;
 import baako.server.database.Wallet;
 import baako.server.dao.IBaakoDAO;
 /**

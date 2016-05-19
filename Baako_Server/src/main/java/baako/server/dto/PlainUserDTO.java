@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import baako.server.assemblers.Assembler;
-import baako.server.database.Game;
 import baako.server.database.PlainUser;
 /**
  * @author Baako-Team
