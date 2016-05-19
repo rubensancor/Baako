@@ -86,16 +86,11 @@ public class GUI {
 	3 = userLibrary 
 	4 = userGames 
 	5 = userFriends*/
-	protected JComboBox<String> categoryCBox;
-	protected JComboBox<String> categoryCBoxOpt1;
-	protected JComboBox<String> categoryCBoxOpt2;
-	protected JComboBox<String> categoryCBoxOpt3;
-	protected JComboBox<String> categoryCBoxOpt4;
-	protected JComboBox<String> categoryCBoxOpt5;
-	protected JComboBox<String> designerCBox; 
-	protected JComboBox<String> designerCBoxOpt1; 
-	protected JComboBox<String> designerCBoxOpt2; 
-	protected JComboBox<String> designerCBoxOpt3; 
+	protected ArrayList<String> values1 = new ArrayList<String>();
+	protected ArrayList<String> values2 = new ArrayList<String>();
+	protected ArrayList<String> values3 = new ArrayList<String>();
+	protected ArrayList<String> values4 = new ArrayList<String>();
+
 	protected JList<NewsDTO> listNews;
 	protected JList<GameDTO> listGames;
 	protected JList<GameDTO> listOwned;
@@ -123,15 +118,15 @@ public class GUI {
 		filled = false;
 		//frame.setBounds(100, 100, 450, 300);
 		//frame.setResizable(false);
-		addgameview();
+		loginview();
 		frame.repaint();
 		frame.revalidate();
 	}
 
 	private void mainview() {
-
 		frame.setSize(741, 581);
 		frame.getContentPane().setLayout(null);
+		frame.setTitle("Baako");
 
 		//CREATING MAIN PANEL
 		final JPanel mainPanel_1 = new JPanel();
@@ -950,7 +945,7 @@ public class GUI {
 
 				public void actionPerformed(ActionEvent e) {
 					btnBuy.setEnabled(true);
-//					btnRent.setEnabled(true);
+					//					btnRent.setEnabled(true);
 					btninfo.setEnabled(false);
 					btninfo.setBackground(new Color(204, 204, 204));
 					btnBack.setEnabled(true);
@@ -993,8 +988,8 @@ public class GUI {
 				public void actionPerformed(ActionEvent e) {
 					btnBuy.setEnabled(false);
 					btnBuy.setBackground(new Color(204, 204, 204));
-//					btnRent.setEnabled(false);
-//					btnRent.setBackground(new Color(204, 204, 204));
+					//					btnRent.setEnabled(false);
+					//					btnRent.setBackground(new Color(204, 204, 204));
 					btninfo.setEnabled(true);
 					btninfo.setBackground(new Color(153, 204, 204));
 					btnBack.setEnabled(false);
@@ -1533,8 +1528,9 @@ public class GUI {
 		frame.revalidate();
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked", "unchecked", "unchecked", "unused", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void addgameview(){
+		fill();
 		frame.setBounds(200,0,450, 805);
 		frame.getContentPane().setLayout(null);
 		final JPanel panel = new JPanel();
@@ -1604,23 +1600,14 @@ public class GUI {
 		pegiCBox.setBounds(164, 120, 100, 20);
 		panel.add(pegiCBox);
 
-		//VALUES FOR POSSIBLE CATEGORIES
-		ArrayList<String> values1 = new ArrayList<String>();
-		values1.add("category1");
-		values1.add("category2");
-		values1.add("category3");
-		values1.add("category4");
-		
-		//ARRAYLIST FOR SELECTEDCAT
-		ArrayList<String> values2 = new ArrayList<String>();
-		
-		
+
+
 		//LIST INIZIALIZATION
 		listcat= new JList();
 		listdes= new JList();
 		listselectedcat= new JList();
 		listselectedes= new JList();
-		
+
 		//MODEL FOR LISTCAT
 		final DefaultListModel model1 = new DefaultListModel();
 		for(int i=0;i<values1.size();i++){
@@ -1629,110 +1616,116 @@ public class GUI {
 		listcat = new JList(model1);
 		listcat.setBounds(10, 310, 195, 151);
 		listcat.setToolTipText("");
-		
+
 		GridBagConstraints gbc_listcat = new GridBagConstraints();
 		gbc_listcat.insets = new Insets(0, 0, 5, 5);
 		gbc_listcat.fill = GridBagConstraints.BOTH;
 		gbc_listcat.gridx = 2;
 		gbc_listcat.gridy = 2;
 		panel.add(listcat, gbc_listcat);
-		
+
 		//MODEL FOR SELECTEDCAT
 		final DefaultListModel model2 = new DefaultListModel();
 		listselectedcat= new JList(model2);
 		listselectedcat.setBounds(215, 310, 203, 151);
-		
+
 		GridBagConstraints gbc_listselectedcat = new GridBagConstraints();
 		gbc_listselectedcat.insets = new Insets(0, 0, 5, 0);
 		gbc_listselectedcat.fill = GridBagConstraints.BOTH;
 		gbc_listselectedcat.gridx = 5;
 		gbc_listselectedcat.gridy = 2;
 		panel.add(listselectedcat, gbc_listselectedcat);
-		
-		
+
+
 		//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
 		listcat.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println(listcat.getSelectedIndex());
 				model2.addElement(model1.getElementAt(listcat.getSelectedIndex()));
 				model1.remove(listcat.getSelectedIndex());
 
 				frame.repaint();
-				
+
 			}
 		});
 		
-		//VALUES FOR POSSIBLE DESIGNERS
-				ArrayList<String> values3 = new ArrayList<String>();
-				values3.add("designer1");
-				values3.add("designer2");
-				values3.add("designer3");
-				values3.add("designer4");
-				
-				//LIST FOR SELECTEDDES
-				ArrayList<String> values4 = new ArrayList<String>();
-		
+		//AND VICEVERSA
+		listselectedcat.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				model1.addElement(model2.getElementAt(listselectedcat.getSelectedIndex()));
+				model2.remove(listselectedcat.getSelectedIndex());
+
+				frame.repaint();
+
+
+			}
+		});
+
+
+
+
 		//MODEL FOR LISTDES
-				final DefaultListModel model3 = new DefaultListModel();
-				for(int i=0;i<values3.size();i++){
-					model3.addElement(values3.get(i));
-				}
-				listdes = new JList(model3);
-				listdes.setBounds(10, 501, 195, 160);
-				listdes.setToolTipText("");
-				listdes.setVisible(true);
-				
-				GridBagConstraints gbc_listdes = new GridBagConstraints();
-				gbc_listdes.insets = new Insets(0, 0, 5, 5);
-				gbc_listdes.fill = GridBagConstraints.BOTH;
-				gbc_listdes.gridx = 2;
-				gbc_listdes.gridy = 2;
-				panel.add(listdes, gbc_listdes);
-				
+		final DefaultListModel model3 = new DefaultListModel();
+		for(int i=0;i<values3.size();i++){
+			model3.addElement(values3.get(i));
+		}
+		listdes = new JList(model3);
+		listdes.setBounds(10, 501, 195, 160);
+		listdes.setToolTipText("");
+		listdes.setVisible(true);
 
-				
-				//MODEL FOR SELECTEDCAT
-				final DefaultListModel model4 = new DefaultListModel();
-				listselectedes = new JList(model4);
-				listselectedes.setBounds(215, 501, 202, 160);
-				
-				GridBagConstraints gbc_listselectedes= new GridBagConstraints();
-				gbc_listselectedes.insets = new Insets(0, 0, 5, 0);
-				gbc_listselectedes.fill = GridBagConstraints.BOTH;
-				gbc_listselectedes.gridx = 5;
-				gbc_listselectedes.gridy = 2;
-				panel.add(listselectedes, gbc_listselectedes);
-				
-				//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
-				listdes.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						System.out.println(listdes.getSelectedIndex());
-						model4.addElement(model3.getElementAt(listdes.getSelectedIndex()));
-						model3.remove(listdes.getSelectedIndex());
+		GridBagConstraints gbc_listdes = new GridBagConstraints();
+		gbc_listdes.insets = new Insets(0, 0, 5, 5);
+		gbc_listdes.fill = GridBagConstraints.BOTH;
+		gbc_listdes.gridx = 2;
+		gbc_listdes.gridy = 2;
+		panel.add(listdes, gbc_listdes);
 
-						frame.repaint();
-						
-					}
-				});
-		
+
+
+		//MODEL FOR SELECTEDCAT
+		final DefaultListModel model4 = new DefaultListModel();
+		listselectedes = new JList(model4);
+		listselectedes.setBounds(215, 501, 202, 160);
+
+		GridBagConstraints gbc_listselectedes= new GridBagConstraints();
+		gbc_listselectedes.insets = new Insets(0, 0, 5, 0);
+		gbc_listselectedes.fill = GridBagConstraints.BOTH;
+		gbc_listselectedes.gridx = 5;
+		gbc_listselectedes.gridy = 2;
+		panel.add(listselectedes, gbc_listselectedes);
+
+		//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
+		listdes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(listdes.getSelectedIndex());
+				model4.addElement(model3.getElementAt(listdes.getSelectedIndex()));
+				model3.remove(listdes.getSelectedIndex());
+
+				frame.repaint();
+
+			}
+		});
+
 		//AND VICEVERSA
 		listselectedes.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			
-			System.out.println(listdes.getSelectedIndex());
-			model3.addElement(model4.getElementAt(listselectedes.getSelectedIndex()));
-			model4.remove(listselectedes.getSelectedIndex());
+			@Override
+			public void mouseClicked(MouseEvent e) {
 
-			frame.repaint();
+				System.out.println(listdes.getSelectedIndex());
+				model3.addElement(model4.getElementAt(listselectedes.getSelectedIndex()));
+				model4.remove(listselectedes.getSelectedIndex());
 
-			
-		}
-	});
+				frame.repaint();
 
-		
+
+			}
+		});
+
+
 		final JTextArea descTArea = new JTextArea();
 		descTArea.setBounds(164, 150, 230, 122);
 		panel.add(descTArea);
@@ -1761,19 +1754,17 @@ public class GUI {
 				int price = Integer.parseInt(priceField.getText());
 				//				logger.info(pegiCBox.getSelectedItem().toString());
 				int pegi = Integer.parseInt(pegiCBox.getSelectedItem().toString());
-				if (categoryCBox.getSelectedItem() == null) {
+				if (values2.isEmpty()) {
 					JOptionPane.showMessageDialog(frame, "The first category field cannot be empty.");
-					categoryCBox.requestFocus();
-				}else if(designerCBox.getSelectedItem() == null){
+				}else if(values4.isEmpty()){
 					JOptionPane.showMessageDialog(frame, "The first designer field cannot be empty.");
-					designerCBox.requestFocus();
 				}else if(addGame(nameField.getText(), price, descTArea.getText(), pegi)){
 					panel.setVisible(false);
 					mainview();
 				}
 			}
 		});
-		fill();
+
 		frame.repaint();
 		frame.revalidate();
 	}
@@ -1857,27 +1848,17 @@ public class GUI {
 		}else if(listGames.getSelectedValue().getPEGI() == 18){
 			pegiCBox.setSelectedIndex(4);			
 		}
-			
+
 		pegiCBox.setBounds(164, 120, 100, 20);
 		panel.add(pegiCBox);
 
-		//VALUES FOR POSSIBLE CATEGORIES
-		ArrayList<String> values1 = new ArrayList<String>();
-		values1.add("category1");
-		values1.add("category2");
-		values1.add("category3");
-		values1.add("category4");
-		
-		//ARRAYLIST FOR SELECTEDCAT
-		ArrayList<String> values2 = new ArrayList<String>();
-		
-		
+
 		//LIST INIZIALIZATION
 		listcat= new JList();
 		listdes= new JList();
 		listselectedcat= new JList();
 		listselectedes= new JList();
-		
+
 		//MODEL FOR LISTCAT
 		final DefaultListModel model1 = new DefaultListModel();
 		for(int i=0;i<values1.size();i++){
@@ -1886,27 +1867,27 @@ public class GUI {
 		listcat = new JList(model1);
 		listcat.setBounds(10, 310, 195, 151);
 		listcat.setToolTipText("");
-		
+
 		GridBagConstraints gbc_listcat = new GridBagConstraints();
 		gbc_listcat.insets = new Insets(0, 0, 5, 5);
 		gbc_listcat.fill = GridBagConstraints.BOTH;
 		gbc_listcat.gridx = 2;
 		gbc_listcat.gridy = 2;
 		panel.add(listcat, gbc_listcat);
-		
+
 		//MODEL FOR SELECTEDCAT
 		final DefaultListModel model2 = new DefaultListModel();
 		listselectedcat= new JList(model2);
 		listselectedcat.setBounds(215, 310, 203, 151);
-		
+
 		GridBagConstraints gbc_listselectedcat = new GridBagConstraints();
 		gbc_listselectedcat.insets = new Insets(0, 0, 5, 0);
 		gbc_listselectedcat.fill = GridBagConstraints.BOTH;
 		gbc_listselectedcat.gridx = 5;
 		gbc_listselectedcat.gridy = 2;
 		panel.add(listselectedcat, gbc_listselectedcat);
-		
-		
+
+
 		//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
 		listcat.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1916,80 +1897,71 @@ public class GUI {
 				model1.remove(listcat.getSelectedIndex());
 
 				frame.repaint();
-				
+
 			}
 		});
-		
-		//VALUES FOR POSSIBLE DESIGNERS
-				ArrayList<String> values3 = new ArrayList<String>();
-				values3.add("designer1");
-				values3.add("designer2");
-				values3.add("designer3");
-				values3.add("designer4");
-				
-				//LIST FOR SELECTEDDES
-				ArrayList<String> values4 = new ArrayList<String>();
-		
+
+
 		//MODEL FOR LISTDES
-				final DefaultListModel model3 = new DefaultListModel();
-				for(int i=0;i<values3.size();i++){
-					model3.addElement(values3.get(i));
-				}
-				listdes = new JList(model3);
-				listdes.setBounds(10, 501, 195, 160);
-				listdes.setToolTipText("");
-				listdes.setVisible(true);
-				
-				GridBagConstraints gbc_listdes = new GridBagConstraints();
-				gbc_listdes.insets = new Insets(0, 0, 5, 5);
-				gbc_listdes.fill = GridBagConstraints.BOTH;
-				gbc_listdes.gridx = 2;
-				gbc_listdes.gridy = 2;
-				panel.add(listdes, gbc_listdes);
-				
+		final DefaultListModel model3 = new DefaultListModel();
+		for(int i=0;i<values3.size();i++){
+			model3.addElement(values3.get(i));
+		}
+		listdes = new JList(model3);
+		listdes.setBounds(10, 501, 195, 160);
+		listdes.setToolTipText("");
+		listdes.setVisible(true);
 
-				
-				//MODEL FOR SELECTEDCAT
-				final DefaultListModel model4 = new DefaultListModel();
-				listselectedes = new JList(model4);
-				listselectedes.setBounds(215, 501, 202, 160);
-				
-				GridBagConstraints gbc_listselectedes= new GridBagConstraints();
-				gbc_listselectedes.insets = new Insets(0, 0, 5, 0);
-				gbc_listselectedes.fill = GridBagConstraints.BOTH;
-				gbc_listselectedes.gridx = 5;
-				gbc_listselectedes.gridy = 2;
-				panel.add(listselectedes, gbc_listselectedes);
-				
-				//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
-				listdes.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						System.out.println(listdes.getSelectedIndex());
-						model4.addElement(model3.getElementAt(listdes.getSelectedIndex()));
-						model3.remove(listdes.getSelectedIndex());
+		GridBagConstraints gbc_listdes = new GridBagConstraints();
+		gbc_listdes.insets = new Insets(0, 0, 5, 5);
+		gbc_listdes.fill = GridBagConstraints.BOTH;
+		gbc_listdes.gridx = 2;
+		gbc_listdes.gridy = 2;
+		panel.add(listdes, gbc_listdes);
 
-						frame.repaint();
-						
-					}
-				});
-		
+
+
+		//MODEL FOR SELECTEDCAT
+		final DefaultListModel model4 = new DefaultListModel();
+		listselectedes = new JList(model4);
+		listselectedes.setBounds(215, 501, 202, 160);
+
+		GridBagConstraints gbc_listselectedes= new GridBagConstraints();
+		gbc_listselectedes.insets = new Insets(0, 0, 5, 0);
+		gbc_listselectedes.fill = GridBagConstraints.BOTH;
+		gbc_listselectedes.gridx = 5;
+		gbc_listselectedes.gridy = 2;
+		panel.add(listselectedes, gbc_listselectedes);
+
+		//WHEN WE CLICK THE SELECTDE ENTRY CHANGES TO THE OTHER LIST
+		listdes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(listdes.getSelectedIndex());
+				model4.addElement(model3.getElementAt(listdes.getSelectedIndex()));
+				model3.remove(listdes.getSelectedIndex());
+
+				frame.repaint();
+
+			}
+		});
+
 		//AND VICEVERSA
 		listselectedes.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			
-			System.out.println(listdes.getSelectedIndex());
-			model3.addElement(model4.getElementAt(listselectedes.getSelectedIndex()));
-			model4.remove(listselectedes.getSelectedIndex());
+			@Override
+			public void mouseClicked(MouseEvent e) {
 
-			frame.repaint();
+				System.out.println(listdes.getSelectedIndex());
+				model3.addElement(model4.getElementAt(listselectedes.getSelectedIndex()));
+				model4.remove(listselectedes.getSelectedIndex());
 
-			
-		}
-	});
+				frame.repaint();
 
-		
+
+			}
+		});
+
+
 		final JTextArea descTArea = new JTextArea();
 		descTArea.setBounds(164, 150, 230, 122);
 		panel.add(descTArea);
@@ -2016,21 +1988,19 @@ public class GUI {
 
 			public void actionPerformed(ActionEvent e) {
 				int price = Integer.parseInt(priceField.getText());
-//				logger.info(pegiCBox.getSelectedItem().toString());
+				//				logger.info(pegiCBox.getSelectedItem().toString());
 				int pegi = Integer.parseInt(pegiCBox.getSelectedItem().toString());
-				if (categoryCBox.getSelectedItem() == null) {
+				if (values2.isEmpty()) {
 					JOptionPane.showMessageDialog(frame, "The first category field cannot be empty.");
-					categoryCBox.requestFocus();
-				}else if(designerCBox.getSelectedItem() == null){
+				}else if(values4.isEmpty()){
 					JOptionPane.showMessageDialog(frame, "The first designer field cannot be empty.");
-					designerCBox.requestFocus();
 				}else if(addGame(nameField.getText(), price, descTArea.getText(), pegi)){
 					panel.setVisible(false);
 					mainview();
 				}
 			}
 		});
-		fill();
+		
 		frame.repaint();
 		frame.revalidate();
 	}
