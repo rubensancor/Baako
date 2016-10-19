@@ -1,5 +1,6 @@
 package baako.server;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -12,18 +13,24 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
+import baako.client.remote.RMIServiceLocator;
+import baako.server.auth.Auth;
+import baako.server.dao.IBaakoDAO;
 import baako.server.database.CardType;
 import baako.server.database.Category;
 import baako.server.database.Designer;
 import baako.server.database.Game;
+import baako.server.database.News;
 import baako.server.database.PlainUser;
+import baako.server.database.User;
 import baako.server.database.Wallet;
 import baako.server.dto.GameDTO;
 import baako.server.dto.PlainUserDTO;
+import baako.server.dto.UserDTO;
 
 public class DataTest {
-	@Rule 
-	public ContiPerfRule i = new ContiPerfRule(); 
+	@Rule
+	public ContiPerfRule i = new ContiPerfRule();
 	private static Category cat;
 	private static Designer desig;
 	private static Game game;
@@ -31,42 +38,55 @@ public class DataTest {
 	private static Wallet wallet;
 	private static GameDTO gamedto;
 	private static PlainUserDTO userdto;
+	private static UserDTO user;
 
-	@BeforeClass 
-	public static void setUpClass() throws Exception { 
+	@BeforeClass
+	public static void setUpClass() throws Exception {
 		u = new PlainUser("gvirum@gmail.com", "Gaizka", "asd", new Date());
 		wallet = new Wallet(1);
 		cat = new Category("Accion");
 		desig = new Designer("El numi");
-		game = new Game("Juego", 10, "Juego", 18, "www.google.es");	
-		game = new Game("Game", 18, "Game", 7, "www.google.es");	
-		userdto = new PlainUserDTO("rubensancor@gmail.com", "Ruben", "asd", new Date());
-		
+		game = new Game("Juego", 10, "Juego", 18, "www.google.es");
+		game = new Game("Game", 18, "Game", 7, "www.google.es");
+		userdto = new PlainUserDTO("rubensancor@gmail.com", "Ruben", "asd",
+				new Date());
 
-	} 
 
-	@Test 
-	public void testCategory() { 
+	}
+
+	@Test
+	public void testCategory() {
 		int before = cat.getNumbGames();
 		cat.addGame(game);
 		String s = cat.getName();
-		assertEquals(before+1, cat.getNumbGames());
+		assertEquals(before + 1, cat.getNumbGames());
 		assertEquals("Accion", s);
-	} 
-
-	
-	@Test 
-	public void testDesigner() { 
+	}
+	/*
+	 * you can only use one assert per Junit test, if you use more than 1, it does not be a correct test
+	 * As we can see here, in testDesigner() and testDesigner2(), in with i only change one of the assert cases
+	 * it should be a fail testt because i put  assertEquals("Numi", "JonBilbaoOulu")
+	 * 
+	*/
+	@Test
+	public void testDesigner() {
 		int before = desig.getNumbGames();
 		desig.addGame(game);
-		assertEquals(before+1, desig.getNumbGames());
+		assertEquals(before + 1, desig.getNumbGames());
+		assertEquals("JonBilbaoOulu", desig.getName());
+	}
+	@Test
+	public void testDesigner2() {
+		int before = desig.getNumbGames();
+		desig.addGame(game);
+		assertEquals(before + 1, desig.getNumbGames());
 		assertEquals("El numi", desig.getName());
-	} 
-	
-//	@Test(expected = NullPointerException.class)
-	@PerfTest(invocations = 10000, threads = 20) 
-	@Required(max = 1200, average = 250, throughput = 20) 
-	public void testGame(){ 
+	}
+
+	// @Test(expected = NullPointerException.class)
+	@PerfTest(invocations = 10000, threads = 20)
+	@Required(max = 1200, average = 250, throughput = 20)
+	public void testGame() {
 		Game g = new Game(gamedto);
 		assertEquals(g.getName(), gamedto.getName());
 		g.setName("Numi");
@@ -79,49 +99,60 @@ public class DataTest {
 		assertEquals(20, g.getPEGI());
 		assertEquals(null, g.getCategories());
 		assertEquals(null, g.getDesigners());
-	} 
+	}
+	
 	
 	@Test
-	@PerfTest(invocations = 1000, threads = 20) 
-	@Required(max = 1200, average = 250) 
-	public void testWallet(){
+	@PerfTest(invocations = 1000, threads = 20)
+	@Required(max = 1200, average = 250)
+	public void testWallet() {
 		assertEquals(1, wallet.getCardNumb());
 		assertEquals(CardType.MASTERCARD, wallet.getType());
 	}
-	
+
 	@Test
-//	@PerfTest(invocations = 1000, threads = 20) 
-//	@Required(max = 1200, average = 250) 
-	public void testUser(){
+	// @PerfTest(invocations = 1000, threads = 20)
+	// @Required(max = 1200, average = 250)
+	public void testUser() {
 		PlainUser p = new PlainUser(userdto);
 		HashSet<Game> games = new HashSet<Game>();
-		games.add( new Game("LOL", 0, "MOBA", 10, "www.google.es"));
+		games.add(new Game("LOL", 0, "MOBA", 10, "www.google.es"));
 		HashSet<PlainUser> friends = new HashSet<PlainUser>();
 		friends.add(u);
 		p.setGames(games);
 		p.setFriends(friends);
 		p.addGame(game);
-		p.addFriend( new PlainUser("txali@gmail.com", "TXAHLI", "ISUCK", new Date()));
+		p.addFriend(new PlainUser("txali@gmail.com", "TXAHLI", "ISUCK",
+				new Date()));
 		assertEquals(2, p.getFriends().size());
 		assertEquals(2, p.getGames().size());
 	}
-		
-	
-	//  @Test 
-	//  public void testAnotherThing() { 
-	//      // Code that tests another thing 
-	//  } 
-	//  @Test 
-	//  public void testSomethingElse() { 
-	//      // Code that tests something else 
-	//  } 
-	//  @After 
-	//  public void tearDown() throws Exception { 
-	//      // Code executed after each test    
-	//  } 
-	//  @AfterClass 
-	//  public static void tearDownClass() throws Exception { 
-	//      // Code executed after the last test method
-	//  } 
+
+	public void testUserDTO() {
+	}
+
+	public void testNewsDTO() {
+
+	}
+
+	public void testPlainUserDTO() {
+
+	}
+	// @Test
+	// public void testAnotherThing() {
+	// // Code that tests another thing
+	// }
+	// @Test
+	// public void testSomethingElse() {
+	// // Code that tests something else
+	// }
+	// @After
+	// public void tearDown() throws Exception {
+	// // Code executed after each test
+	// }
+	// @AfterClass
+	// public static void tearDownClass() throws Exception {
+	// // Code executed after the last test method
+	// }
 
 }
