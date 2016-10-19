@@ -1,4 +1,4 @@
-package baako.server.dto;
+	package baako.server.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
