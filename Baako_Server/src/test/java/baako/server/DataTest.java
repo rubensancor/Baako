@@ -62,9 +62,21 @@ public class DataTest {
 		assertEquals(before + 1, cat.getNumbGames());
 		assertEquals("Accion", s);
 	}
-
+	/*
+	 * you can only use one assert per Junit test, if you use more than 1, it does not be a correct test
+	 * As we can see here, in testDesigner() and testDesigner2(), in with i only change one of the assert cases
+	 * it should be a fail testt because i put  assertEquals("Numi", "JonBilbaoOulu")
+	 * 
+	*/
 	@Test
 	public void testDesigner() {
+		int before = desig.getNumbGames();
+		desig.addGame(game);
+		assertEquals(before + 1, desig.getNumbGames());
+		assertEquals("JonBilbaoOulu", desig.getName());
+	}
+	@Test
+	public void testDesigner2() {
 		int before = desig.getNumbGames();
 		desig.addGame(game);
 		assertEquals(before + 1, desig.getNumbGames());
@@ -85,10 +97,11 @@ public class DataTest {
 		assertEquals(8, g.getPEGI());
 		assertEquals("Numi", g.getDescription());
 		assertEquals(20, g.getPEGI());
-//		assertEquals(null, g.getCategories());
-//		assertEquals(null, g.getDesigners());
+		assertEquals(null, g.getCategories());
+		assertEquals(null, g.getDesigners());
 	}
-
+	
+	
 	@Test
 	@PerfTest(invocations = 1000, threads = 20)
 	@Required(max = 1200, average = 250)
@@ -111,7 +124,7 @@ public class DataTest {
 		p.addGame(game);
 		p.addFriend(new PlainUser("txali@gmail.com", "TXAHLI", "ISUCK",
 				new Date()));
-//		assertEquals(2, p.getFriends().size());
+		assertEquals(2, p.getFriends().size());
 		assertEquals(2, p.getGames().size());
 	}
 
